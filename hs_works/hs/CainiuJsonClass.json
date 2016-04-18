@@ -1,0 +1,33 @@
+{
+    "appDetail":{
+        "appName":"财牛投资",
+        "appShortName":"财牛",
+        "showUrl":"www.cainiu.com",
+        "officialWeb":"http://www.cainiu.com",
+        "officialDownLoadAddress":"http://www.cainiu.com",
+        "domainName":"121.40.205.175",
+        "umengAppkey":"556ff33167e58e3c87001727",
+        "shareSDKAppkey":"4ccc07d2ec38",
+        "qZoneAppkey":"1104595606",
+        "qZoneSecret":"bz3YlVfLat8H4Out",
+        "weChatAppkey":"wxf1ce8ed43bb09f5d",
+        "weChatSecret":"68bd0608b8622af3f9c47f3ed42607c0",
+        "sinaWeiboAppkey":"796277365",
+        "sinaWeiboSecret":"5229bb77d433048115b1af7296b5aa0e",
+        "sinaWeiboRedirectUri":"http://sns.whalecloud.com/sina2/callback",
+        "shareIconName":"cainiuIcon",
+        "zfbAccount":"zfb@cainiu.com",
+        "zfbName":"浙江来客赢信息科技有限公司",
+        "pkgtype":"cainiu",
+        "regSource":"20000",
+        "payBankName":"招商银行-宁波鄞州支行",
+        "payCompanyName":"浙江来客赢信息科技有限公司",
+        "payBankShowNumber":"5749 0535 8210 301",
+        "payBankNumber":"574905358210301",
+        "aliyunDomainAddress":"http://cainiu.oss-cn-hangzhou.aliyuncs.com/cainiudomain.txt"
+        "HTTP_IP_ONLINE":"121.40.205.175"
+        "HTTP_IP_TEST":"stock.luckin.cn"
+        "HTTP_IP_SIMULATE":"m.luckin.cn"
+
+    },
+    "appStyle":"0" }

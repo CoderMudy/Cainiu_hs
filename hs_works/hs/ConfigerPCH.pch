@@ -1,0 +1,86 @@
+//
+//  ConfigerPCH.pch
+//  hs
+//
+//  Created by RGZ on 15/7/28.
+//  Copyright (c) 2015年 luckin. All rights reserved.
+//
+
+#ifndef hs_ConfigerPCH_pch
+#define hs_ConfigerPCH_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+//金色
+#define Color_Gold [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1]
+
+//黑色
+#define Color_black [UIColor colorWithRed:22/255.0 green:22/255.0 blue:24/255.0 alpha:1]
+
+//深空灰
+#define Color_grayDeep [UIColor colorWithRed:38/255.0 green:37/255.0 blue:42/255.0 alpha:1]
+
+//绿色
+#define Color_green [UIColor colorWithRed:0/255.0 green:166/255.0 blue:120/255.0 alpha:1]
+
+//红色
+//导航红
+#define Color_red [UIColor colorWithRed:200/255.0 green:50/255.0 blue:30/255.0 alpha:1]
+//普通红
+#define Color_subRed [UIColor colorWithRed:232/255.0 green:43/255.0 blue:0/255.0 alpha:1]
+
+//灰色
+#define Color_gray [UIColor colorWithRed:114/255.0 green:114/255.0 blue:114/255.0 alpha:1]
+#define Color_lightGray [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
+
+//持仓内页偏粉红
+#define Color_red_pink [UIColor colorWithRed:236/255.0 green:10/255.0 blue:45/255.0 alpha:1]
+
+//白色
+#define Color_white [UIColor colorWithRed:211/255.0 green:211/255.0 blue:211/255.0 alpha:1]
+
+//行情改版 line
+#define Color_line [UIColor colorWithRed:55/255.0 green:54/255.0 blue:59/255.0 alpha:1]
+
+//登录黄
+#define Color_loginYellow [UIColor colorWithRed:255.0/255.0 green:157.0/255.0 blue:0/255.0 alpha:1]
+
+//注册红
+#define Color_registeRed   [UIColor colorWithRed:255.0/255.0 green:8.0/255.0 blue:27.0/255.0 alpha:1]
+
+
+//闪电下单暗红
+#define Image_Color_Green_Black @"color_Green_Black"
+//闪电下单暗绿
+#define Image_Color_Red_Black @"color_Red_Black"
+#define Image_Color_Red @"color_Red"
+#define Image_Color_Gray @"color_gray"
+#define Image_Color_Green @"color_Green"
+#define Image_Color_Red_Pink @"color_Red_pink"
+#define Image_Color_Black @"color_Black"
+
+#import "IndexBuyModel.h"
+#import "UUID.h"
+
+#define kOrderSuccess       @"kOrderSuccess"
+#define kSegValueChange     @"kSegValueChange"
+#define kSocket_Buy         @"kSocketBuyNotification"
+#define kSocket_Positon     @"kSocketPositionNotification"
+#define kDisConToConnection @"kDisConToConnection"
+#define kCloseConnection    @"kCloseConnection"
+#define kPositionBosomPage  @"kPositionBosomPage"
+#define kOrderQuickDic      @"kOrderQuickDic"
+#define kOrderQuickIsOpen   @"kOrderQuickIsOpen"
+
+#define TIME_INDEXBUY  @"time"
+#define NUM_INDEXBUY   @"num"
+#define DAY_INDEXBUY   @"day"
+#define NIGHT_INDEXBUY @"night"
+
+#import "FoyerProductModel.h"
+#import "IndexBuyTacticsModel.h"
+#import "SpotgoodsAccount.h"
+
+
+#endif

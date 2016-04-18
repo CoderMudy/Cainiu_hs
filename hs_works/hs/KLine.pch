@@ -1,0 +1,52 @@
+//
+//  Test.pch
+//  CurveTest
+//
+//  Created by RGZ on 15/11/4.
+//  Copyright © 2015年 cainiu. All rights reserved.
+//
+
+#ifndef Test_pch
+#define Test_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "KLineDataModel.h"
+#import "FMDB.h"
+#import "DataBaseManager.h"
+#import "KLineDao.h"
+#import "KMainView.h"
+#import "KlineView.h"
+#import "KlineDataEngine.h"
+#import "KLineShowNum.h"
+#import "IndexSingleControl.h"
+
+//蜡烛颜色
+#define Color_Red [UIColor redColor]
+#define Color_Green Color_green
+
+//每页默认显示蜡烛条数
+#define DefaultShowNum [KLineShowNum sharedInstance].showNum
+
+//蜡烛图价格线
+#define TopPriceLabelTag 780
+//买卖量数量线
+#define BotPriceLabelTag 790
+//时间轴
+#define KLineTimeTag     795
+//数据库每个品种存储条数
+#define DBSaveNum       1000
+
+#define CrossCurveLabelWidth  33
+
+//几分钟K线
+typedef NS_ENUM(NSInteger,KLineTime) {
+    KLineMinute_1 = 1,
+    KLineMinute_3 = 3,
+    KLineMinute_5 = 5,
+    KLineMinute_15 = 15,
+    KLineMinute_30 = 30,
+    KLineMinute_Day = 1440
+};
+
+#endif /* Test_pch */

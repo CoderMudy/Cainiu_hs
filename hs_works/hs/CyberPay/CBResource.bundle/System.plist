@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>version</key>
+	<string>1.5</string>
+	<key>platform</key>
+	<string>iOS</string>
+	<key>apn</key>
+	<string>net</string>
+	<key>timeout</key>
+	<string>30000</string>
+	<key>list</key>
+	<array>
+		<string>https://wap.bank.ecitic.com/CyberpayFOServer/</string>
+	</array>
+	<key>parameters</key>
+	<dict>
+		<key>sys-client</key>
+		<string>iPhone</string>
+		<key>sys-version</key>
+		<string>1.5</string>
+		<key>sys-screenw</key>
+		<string>1024</string>
+		<key>sys-screenh</key>
+		<string>768</string>
+		<key>var-plattype</key>
+		<string>.hsml</string>
+	</dict>
+</dict>
+</plist>

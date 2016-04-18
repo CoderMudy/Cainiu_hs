@@ -1,0 +1,366 @@
+//
+//  AppDelegate.m
+//  hs
+//
+//  Created by hzl on 15/5/6.
+//  Copyright (c) 2015年 luckin. All rights reserved.
+//
+
+#import "AppDelegate.h"
+#import "PositionViewController.h"
+#import "FinacPage.h"
+#import "UserMainViewController.h"
+#import "h5DataCenterMgr.h"
+
+
+
+#import <ShareSDK/ShareSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WeiboSDK.h"
+#import "WXApi.h"
+
+#import "UMessage.h"
+#define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define _IPHONE80_ 80000
+
+@interface AppDelegate ()
+
+@end
+
+@implementation AppDelegate
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return UIInterfaceOrientationIsPortrait(interfaceOrientation );
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"DeviceToken=%@",[[[[deviceToken description] stringByReplacingOccurrencesOfString: @"<" withString: @""]
+                  stringByReplacingOccurrencesOfString: @">" withString: @""]
+                 stringByReplacingOccurrencesOfString: @" " withString: @""]);
+    
+    [UMessage registerDeviceToken:deviceToken];
+}
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@" , error);
+}
+
+//开着程序时收到处理，还有一种就是点击收到的通知时会执行该事件。接受服务器消息并改变客户端本地状态（如在app图表显示带数字的小红圈）
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [UMessage didReceiveRemoteNotification:userInfo];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self setupViewControllers];
+    [self.window setRootViewController:self.viewController];
+    [self.window makeKeyAndVisible];
+
+    
+    [self customizeInterface];
+
+    if ([getUserDefaults(@"FirstLogin") isEqualToString:@""]||getUserDefaults(@"FirstLogin")==nil) {
+        saveUserDefaults(@"NO", @"FirstLogin");
+    }
+    
+    
+    UIColor *navcolor = RGBACOLOR(238, 42, 7, 1);
+    [[UINavigationBar appearance] setBarTintColor:navcolor];//[UIColor redColor]
+    [[UINavigationBar appearance] setTintColor:RGBACOLOR(238, 42, 7, 1)];
+    [[UINavigationBar appearance] setBackgroundColor:RGBACOLOR(238, 42, 7, 1)];
+    //@{}代表Dictionary
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    
+    [[h5DataCenterMgr sharedInstance] createSession];
+    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+    
+    //umeng message set AppKey and AppSecret
+    NSLog(@"%@",launchOptions);
+    
+    [UMessage startWithAppkey:@"556ff33167e58e3c87001727" launchOptions:launchOptions];
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+    {
+        //register remoteNotification types （iOS 8.0及其以上版本）
+        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+        action1.identifier = @"action1_identifier";
+        action1.title=@"Accept";
+        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+        
+        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+        action2.identifier = @"action2_identifier";
+        action2.title=@"Reject";
+        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+        action2.destructive = YES;
+        
+        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+        categorys.identifier = @"category1";//这组动作的唯一标示
+        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
+        
+        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                     categories:[NSSet setWithObject:categorys]];
+        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+        
+    } else{
+        //register remoteNotification types (iOS 8.0以下)
+        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+         |UIRemoteNotificationTypeSound
+         |UIRemoteNotificationTypeAlert];
+    }
+#else
+    
+    //register remoteNotification types (iOS 8.0以下)
+    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+     |UIRemoteNotificationTypeSound
+     |UIRemoteNotificationTypeAlert];
+    
+#endif
+    //for log
+    [UMessage setLogEnabled:YES];
+    
+    //*******************Share
+    [ShareSDK registerApp:@"4ccc07d2ec38"];
+    
+    
+    //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
+    [ShareSDK connectQZoneWithAppKey:@"1104595606"
+                           appSecret:@"bz3YlVfLat8H4Out"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    
+    //添加QQ应用  注册网址  http://open.qq.com/
+    [ShareSDK connectQQWithQZoneAppKey:@"1104595606"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
+    
+    //添加微信应用（注意：微信分享的初始化，下面是的初始化既支持微信登陆也支持微信分享，只用写其中一个就可以） 注册网址 http://open.weixin.qq.com
+    [ShareSDK connectWeChatWithAppId:@"wxf1ce8ed43bb09f5d"
+                           wechatCls:[WXApi class]];
+    //微信登陆的时候需要初始化
+    [ShareSDK connectWeChatWithAppId:@"wxf1ce8ed43bb09f5d"
+                           appSecret:@"68bd0608b8622af3f9c47f3ed42607c0"
+                           wechatCls:[WXApi class]];
+    
+   // 填写新浪微博的回调地址
+    [ShareSDK connectSinaWeiboWithAppKey:@"796277365"
+                               appSecret:@"5229bb77d433048115b1af7296b5aa0e"
+                             redirectUri:@"http://www.cainiu.com"];
+    //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台 （注意：2个方法只用写其中一个就可以）
+    [ShareSDK  connectSinaWeiboWithAppKey:@"796277365"
+                                appSecret:@"5229bb77d433048115b1af7296b5aa0e"
+                              redirectUri:@"http://www.cainiu.com"
+                              weiboSDKCls:[WeiboSDK class]];
+    
+    //连接邮件
+    [ShareSDK connectMail];
+    
+    
+    //**********************网络
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:nReachabilityChangedNotification object:nil];
+    self.conn = [NetReachability reachabilityForInternetConnection];
+    [self.conn startNotifier];
+    
+    
+    
+    return YES;
+}
+
+- (void)dealloc
+{
+    [self.conn stopNotifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+void UncaughtExceptionHandler(NSException *exception)
+{
+    NSArray *arr = [exception callStackSymbols];//得到当前调用栈信息
+    NSString *reason = [exception reason];//非常重要，就是崩溃的原因
+    NSString *name = [exception name];//异常类型
+    
+    NSLog(@"exception type : %@ \n crash reason : %@ \n call stack info : %@", name, reason, arr);
+}
+#pragma mark - Methods
+
+- (void)setupViewControllers {
+    PositionViewController *positionPage = [[PositionViewController alloc] init];
+    HSNavigationController *positionPageNav = [[HSNavigationController alloc]
+                                                   initWithRootViewController:positionPage];
+    
+    FinacPage *finacPage = [[FinacPage alloc] init];
+    HSNavigationController *finacPageNav = [[HSNavigationController alloc]
+                                                    initWithRootViewController:finacPage];
+    
+    UserMainViewController *userPage = [[UserMainViewController alloc] init];
+    HSNavigationController *userPageNav = [[HSNavigationController alloc]
+                                                   initWithRootViewController:userPage];
+    
+    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
+    [tabBarController setViewControllers:@[positionPageNav, finacPageNav,
+                                           userPageNav]];
+    UIView * backView = [[UIView alloc] init];
+    backView.backgroundColor = [UIColor whiteColor];
+//    backView.frame = tabBarController.tabBarItem;
+    
+    self.viewController = tabBarController;
+    
+    [self customizeTabBarForController:tabBarController];
+}
+
+- (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
+    UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
+    UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
+    NSArray *tabBarItemImages = @[@"viewvontroller_01", @"viewvontroller_02", @"viewvontroller_03"];
+     NSArray *taberTitleStr = @[@"持仓",@"融资购买",@"账户"];
+    
+    NSInteger index = 0;
+    for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
+        [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
+        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_1",
+                                                      [tabBarItemImages objectAtIndex:index]]];
+        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_0",
+                                                        [tabBarItemImages objectAtIndex:index]]];
+        NSDictionary *selectdeAttrubributeDic = @{NSFontAttributeName: [UIFont systemFontOfSize:11.0f],
+                                                  NSForegroundColorAttributeName:[UIColor redColor]};
+        NSDictionary *unSelectedAttrubributeDic = @{NSFontAttributeName: [UIFont systemFontOfSize:11.0f],
+                                                    NSForegroundColorAttributeName:[UIColor grayColor]};
+        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
+        [item setTitle:[taberTitleStr objectAtIndex:index]];
+        item.selectedTitleAttributes = selectdeAttrubributeDic;
+        item.unselectedTitleAttributes = unSelectedAttrubributeDic;
+        
+        index++;
+    }
+}
+
+- (void)customizeInterface {
+
+    UIImage *backgroundImage = nil;
+    NSDictionary *textAttributes = nil;
+    
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
+        backgroundImage = [UIImage imageNamed:@"navigationbar_background_tall"];
+        
+        textAttributes = @{
+                           NSFontAttributeName: [UIFont boldSystemFontOfSize:18],
+                           NSForegroundColorAttributeName: [UIColor blackColor],
+                           };
+    } else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+        backgroundImage = [UIImage imageNamed:@"navigationbar_background"];
+        
+        textAttributes = @{
+                           UITextAttributeFont: [UIFont boldSystemFontOfSize:18],
+                           UITextAttributeTextColor: [UIColor blackColor],
+                           UITextAttributeTextShadowColor: [UIColor clearColor],
+                           UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetZero],
+                           };
+#endif
+    }
+}
+
+#pragma mark Share
+//*****************Share**********************
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
+}
+//*****************Share**********************
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    NSLog(@"applicationWillResignActive");
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+     [[h5DataCenterMgr sharedInstance] destroySession];
+     NSLog(@"applicationDidEnterBackground");
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+     [[h5DataCenterMgr sharedInstance] createSession];
+     NSLog(@"applicationWillEnterForeground");
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+     NSLog(@"applicationDidBecomeActive");
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+     NSLog(@"applicationWillTerminate");
+}
+
+// 禁用旋屏(在Xcode 4.5之后)
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+
+{
+    
+    return (UIInterfaceOrientationMaskPortrait);
+    
+}
+
+#pragma mark 网络
+
+- (void)networkStateChange
+{
+    [self checkNetworkState];
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+}
+
+- (void)checkNetworkState
+{
+    // 1.检测wifi状态
+    NetReachability *wifi = [NetReachability reachabilityForLocalWiFi];
+    
+    // 2.检测手机是否能上网络(WIFI\3G\2.5G)
+    NetReachability *conn = [NetReachability reachabilityForInternetConnection];
+    
+    // 3.判断网络状态
+    if ([wifi currentReachabilityStatus] != NotReachable) { // 有wifi
+        [UIEngine showShadowPrompt:@"您已成功切换到WiFi环境"];
+        
+    } else if ([conn currentReachabilityStatus] != NotReachable) { // 没有使用wifi, 使用手机自带网络进行上网
+        [UIEngine showShadowPrompt:@"您当前使用的是2G/3G/4G网络"];
+        
+    } else { // 没有网络
+        
+        [UIEngine showShadowPrompt:@"! 您当前网络不可用，请检查网络设置"];
+        [[UIEngine sharedInstance] hideProgress];
+    }
+    
+}
+
+@end
