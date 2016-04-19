@@ -85,6 +85,14 @@
     NavView * nav = [[NavView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
     nav.titleLab.text = @"发现";
     [nav hiddenleft];
+    
+    UIButton * leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.frame = CGRectMake(ScreenWidth-70, 20, 60, 44);
+    [leftBtn.titleLabel setFont:FontSize(13)];
+    [leftBtn setTitle:@" 客服" forState:UIControlStateNormal];
+    [leftBtn setImage:[UIImage imageNamed:@"foyer_2"] forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(clickKeFu) forControlEvents:UIControlEventTouchUpInside];
+    [nav addSubview:leftBtn];
     [self.view addSubview:nav];
     
 }
@@ -93,7 +101,7 @@
     _msgCountDictionary = [NSMutableDictionary dictionary];
     _nameArray = @[@"推广赚钱",@"消息中心",@"交易提醒",@"任务中心"];
     _detailArray = @[@"0成本 轻松赚",@"重大消息都在这",@"及时交易时时提醒",@"红包抢不停"];
-    _imageNameArray = @[@"findPage_01",@"findPage_02",@"findPage_04",@"findPage_06"];
+    _imageNameArray = @[@"promotion_share",@"xitongxiaoxi",@"ic_trade_remind",@"ic_task_center"];
     _enableArray = @[@"1",@"1",@"1",@"1"];
 //    if (AppStyle_SAlE) {
 //        _enableArray = @[@"1",@"0",@"0",@"0",@"0",@"0",@"0"];
@@ -198,7 +206,7 @@
     showRedBag = NO;
     
     switch ((int)indexPath.row) {
-        case 0:
+        case 2:
         {
             
             if ([[CMStoreManager sharedInstance]isLogin]) {
@@ -208,7 +216,7 @@
             }
         }
             break;
-        case 1:{
+        case 3:{
             if ([[CMStoreManager sharedInstance]isLogin]) {
                 showRedBag = isShowRedBag;
             }else{
@@ -229,6 +237,12 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [cell setCellDetailWithImageName:_imageNameArray[row] name:_nameArray[row] detailText:_detailArray[row] enableClick:enableClick];
+    if (indexPath.row ==_nameArray.count-1) {
+        cell.line.hidden = YES;
+    }else{
+        cell.line.hidden = NO;
+    }
+    
     return cell;
     
     
@@ -310,7 +324,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ScreenWidth*70/375;
+    return ScreenWidth*85/375;
 }
 #pragma mark 开启财牛账户
 - (void)goOpenCainiuAccount

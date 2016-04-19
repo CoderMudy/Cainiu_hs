@@ -12,7 +12,9 @@
 #import "FoyerProductModel.h"
 #define cellHeight 65
 
-@interface FoyerTableView ()<SDCycleScrollViewDelegate>
+#define headerColor K_COLOR_CUSTEM(55, 54, 59, 1)
+
+@interface FoyerTableView ()
 {
     //大厅广告图点击链接数组
     NSMutableArray * _productDataArray;
@@ -116,10 +118,11 @@
 }
 - (void)initTableHeaderView
 {
-    UIView * tabHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 90*ScreenWidth/375)];
-    UIView * subHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 89*ScreenWidth/375)];
+    UIView * tabHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 105*ScreenWidth/375)];
+    tabHeaderView.backgroundColor = headerColor;
+    UIView * subHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 104*ScreenWidth/375)];
     subHeaderView.tag = 8870;
-    subHeaderView.backgroundColor = K_COLOR_CUSTEM(55, 54, 59, 1);
+    subHeaderView.backgroundColor = headerColor;
     [tabHeaderView addSubview:subHeaderView];
     
     
@@ -129,21 +132,22 @@
     float subLength = (ScreenWidth-20-2)/3;
     for (int i=0; i<3; i++) {
         
-        UIView * subSubView = [[UIView alloc] initWithFrame:CGRectMake(10+(subLength+1)*i, 0, subLength, 89*ScreenWidth/375-1)];
+        UIView * subSubView = [[UIView alloc] initWithFrame:CGRectMake(10+(subLength+1)*i, 0, subLength, 105*ScreenWidth/375-1)];
         subSubView.tag = 8880+i;
-        subSubView.backgroundColor = K_COLOR_CUSTEM(55, 54, 59, 1);
+        subSubView.backgroundColor =headerColor;
         [subHeaderView addSubview:subSubView];
         
 
         
         UIImageView * imgV = [[UIImageView alloc] init];
-        imgV.center = CGPointMake(subLength/2, 20*ScreenWidth/375);
-        imgV.bounds = CGRectMake(0, 0, 40*ScreenWidth/375, 40*ScreenWidth/375);
         imgV.image = [UIImage imageNamed:array[i][@"imgName"]];
+        imgV.center = CGPointMake(subLength/2, 40*ScreenWidth/375);
+//        imgV.bounds = CGRectMake(0, 0, 40*ScreenWidth/375, 40*ScreenWidth/375);
+        imgV.bounds = CGRectMake(0, 0, imgV.image.size.width, imgV.image.size.height);
         [subSubView addSubview:imgV];
         
         UILabel * name = [[UILabel alloc] init];
-        name.center = CGPointMake(subLength/2, 55*ScreenWidth/375);
+        name.center = CGPointMake(subLength/2, 65*ScreenWidth/375);
         name.bounds = CGRectMake(0, 0, subLength, 15);
         name.font = FontSize(13);
         name.text = array[i][@"name"];
@@ -151,7 +155,7 @@
         [subSubView addSubview:name];
         
         UILabel * detail = [[UILabel alloc] init];
-        detail.center = CGPointMake(subLength/2, 69*ScreenWidth/375);
+        detail.center = CGPointMake(subLength/2, 77*ScreenWidth/375);
         detail.bounds = CGRectMake(0, 0, subLength, 12);
         detail.font = FontSize(9);
         detail.text = array[i][@"detail"];
@@ -170,14 +174,14 @@
         }
         
         UIControl * control = [[UIControl alloc] init];
-        control.frame = CGRectMake(0, 0, subLength, 90*ScreenWidth/375-1);
+        control.frame = CGRectMake(0, 0, subLength, 105*ScreenWidth/375-1);
         control.tag = 8888+i;
         [control addTarget:self action:@selector(goPage:) forControlEvents:UIControlEventTouchUpInside];
         [subSubView addSubview:control];
         if (i<2)
         {
-            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(subSubView.frame), 10, 1, 89*ScreenWidth/375-20)];
-            line.backgroundColor = K_color_black;
+            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(subSubView.frame), 10, 1, 104*ScreenWidth/375-20)];
+            line.backgroundColor = [UIColor blackColor];
             [subHeaderView addSubview:line];
         }
     }
@@ -221,7 +225,7 @@
 }
 - (void)clickTabHeaderSubView:(UIView*)subSubView
 {
-    subSubView.backgroundColor = [UIColor whiteColor];
+    subSubView.backgroundColor = headerColor;
 }
 
 #pragma mark 点击模拟。。。
@@ -229,7 +233,7 @@
 {
     UIView * subHeader = [_tableView.tableHeaderView viewWithTag:8870];
     UIView * subSubView = [subHeader viewWithTag:control.tag-8];
-    subSubView.backgroundColor = K_COLOR_CUSTEM(210, 210, 210, 1);
+    subSubView.backgroundColor = [UIColor blackColor];
     [self performSelector:@selector(clickTabHeaderSubView:) withObject:subSubView afterDelay:0.1];
     switch (control.tag)
     {
@@ -276,110 +280,22 @@
            
         
              [_productDataArray removeAllObjects];
-             if ( [EnvironmentConfiger sharedInstance].currentSection==1)
-             {
-//                 NSDictionary * XHdic = @{
-//                                          @"marketName" : @"南方稀贵金属交易所",
-//                                          @"currencyUnit" : @"元",
-//                                          @"marketStatus" : @"1",
-//                                          @"interval" : @"0.16",
-//                                          @"scale" : @"0.5",
-//                                          @"instrumentID" : @"AG",
-//                                          @"timeAndNum" : @"09:00\/1260;06:00",
-//                                          @"nightTimeAndNum" : @"",
-//                                          @"loddyType" : @"1",
-//                                          @"baseline" : @"6",
-//                                          @"imgs" : @"http:\/\/adminstock.oss-cn-hangzhou.aliyuncs.com\/2016-01-14_marketAGXH.png",
-//                                          @"marketId" : @"12",
-//                                          @"commodityName" : @"白银现货",
-//                                          @"vendibility" : @"1",
-//                                          @"tag" : @"2",
-//                                          @"timeline" : @"09:00;06:00;",
-//                                          @"id" : @"101",
-//                                          @"marketCode" : @"SRPME",
-//                                          @"instrumentCode" : @"AGXH",
-//                                          @"currencyName" : @"人民币",
-//                                          @"timeTag" : @"2",
-//                                          @"commodityDesc" : @"09:00-次日06:00",
-//                                          @"currency" : @"CNY",
-//                                          @"advertisement" : @"南交所 | 21小时不间断交易",
-//                                          @"currencySign" : @"￥",
-//                                          @"multiple" : @"15",
-//                                          @"decimalPlaces" : @"2",
-//                                          @"isDoule" : @"0"};
-//                 
-//                 NSDictionary * XHdicCu = @{
-//                                          @"marketName" : @"南方稀贵金属交易所",
-//                                          @"currencyUnit" : @"元",
-//                                          @"marketStatus" : @"1",
-//                                          @"interval" : @"0.16",
-//                                          @"scale" : @"0.5",
-//                                          @"instrumentID" : @"CU",
-//                                          @"timeAndNum" : @"09:00\/1260;06:00",
-//                                          @"nightTimeAndNum" : @"",
-//                                          @"loddyType" : @"1",
-//                                          @"baseline" : @"6",
-//                                          @"imgs" : @"http:\/\/adminstock.oss-cn-hangzhou.aliyuncs.com\/2016-01-14_marketAGXH.png",
-//                                          @"marketId" : @"12",
-//                                          @"commodityName" : @"铜现货",
-//                                          @"vendibility" : @"1",
-//                                          @"tag" : @"2",
-//                                          @"timeline" : @"09:00;06:00;",
-//                                          @"id" : @"102",
-//                                          @"marketCode" : @"SRPME",
-//                                          @"instrumentCode" : @"CUXH",
-//                                          @"currencyName" : @"人民币",
-//                                          @"timeTag" : @"2",
-//                                          @"commodityDesc" : @"09:00-次日06:00",
-//                                          @"currency" : @"CNY",
-//                                          @"advertisement" : @"南交所 | 21小时不间断交易",
-//                                          @"currencySign" : @"￥",
-//                                          @"multiple" : @"15",
-//                                          @"decimalPlaces" : @"2",
-//                                          @"isDoule" : @"0"};
-//                 NSDictionary * XHdicIN = @{
-//                                            @"marketName" : @"南方稀贵金属交易所",
-//                                            @"currencyUnit" : @"元",
-//                                            @"marketStatus" : @"1",
-//                                            @"interval" : @"0.16",
-//                                            @"scale" : @"0.5",
-//                                            @"instrumentID" : @"IN",
-//                                            @"timeAndNum" : @"09:00\/1260;06:00",
-//                                            @"nightTimeAndNum" : @"",
-//                                            @"loddyType" : @"1",
-//                                            @"baseline" : @"6",
-//                                            @"imgs" : @"http:\/\/adminstock.oss-cn-hangzhou.aliyuncs.com\/2016-01-14_marketAGXH.png",
-//                                            @"marketId" : @"12",
-//                                            @"commodityName" : @"铟现货",
-//                                            @"vendibility" : @"1",
-//                                            @"tag" : @"2",
-//                                            @"timeline" : @"09:00;06:00;",
-//                                            @"id" : @"103",
-//                                            @"marketCode" : @"SRPME",
-//                                            @"instrumentCode" : @"INXH",
-//                                            @"currencyName" : @"人民币",
-//                                            @"timeTag" : @"2",
-//                                            @"commodityDesc" : @"09:00-次日06:00",
-//                                            @"currency" : @"CNY",
-//                                            @"advertisement" : @"南交所 | 21小时不间断交易",
-//                                            @"currencySign" : @"￥",
-//                                            @"multiple" : @"15",
-//                                            @"decimalPlaces" : @"2",
-//                                            @"isDoule" : @"0"};
-//                 NSLog(@"%@",[Helper toJSON:XHdicCu]);
-//                 FoyerProductModel * agModel = [FoyerProductModel productModelWithDictionary:XHdic];
-//                 FoyerProductModel * cuModel = [FoyerProductModel productModelWithDictionary:XHdicCu];
-//                 FoyerProductModel * inModel = [FoyerProductModel productModelWithDictionary:XHdicIN];
-//
-//                 [_productDataArray addObject:agModel];
-//                 [_productDataArray addObject:cuModel];
-//                 [_productDataArray addObject:inModel];
-             }
+
+             NSMutableArray * section_1Arr = [NSMutableArray array];
+             NSMutableArray * section_2Arr = [NSMutableArray array];
              for (NSDictionary * dictionary in mutableArray)
              {
+                
                  FoyerProductModel * productModel = [FoyerProductModel productModelWithDictionary:dictionary];
-                 [_productDataArray addObject:productModel];
+                 if([productModel.currency isEqualToString:@"CNY"])
+                 {
+                     [section_2Arr addObject:productModel];
+                 }else {
+                     [section_1Arr addObject:productModel];
+                 }
              }
+             [_productDataArray addObject:section_1Arr];
+             [_productDataArray addObject:section_2Arr];
              _dataTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadTableview) userInfo:nil repeats:YES];
              [_dataTimer fire];
              //获取缓存信息
@@ -403,25 +319,52 @@
 {
     return cellHeight;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (_productDataArray.count>0)
     {
-        return _productDataArray.count;
+        NSArray * array = _productDataArray[section];
+        return array.count;
     }else{
         return 0;
     }
 }
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+    header.backgroundColor = K_color_backView;
+    
+    UILabel * title = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, ScreenWidth-40, 20)];
+    if (section==0) {
+        title.text = @"国外品种";
+    }else{
+        title.text = @"国内品种";
+    }
+    title.font = FontSize(15);
+    title.textColor = K_color_black;
+    title.backgroundColor = K_color_backView;
+    [header addSubview:title];
+    return header;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FoyerTableViewCell * foyerCell      = [tableView dequeueReusableCellWithIdentifier:@"foyerCell" forIndexPath:indexPath];
-    if (_productDataArray.count<=indexPath.row)
+    NSMutableArray * productArray = _productDataArray[indexPath.section];
+    if (productArray.count<=indexPath.row)
     {
         return foyerCell ;
     }
     foyerCell.selectionStyle = UITableViewCellSelectionStyleDefault;
 
-    FoyerProductModel * productModel    = _productDataArray[indexPath.row];
+    FoyerProductModel * productModel    = productArray[indexPath.row];
     
     foyerCell.isPositionNum      = NO;
     if([[CMStoreManager sharedInstance]isLogin]){
@@ -456,7 +399,7 @@
             }
         }
     }
-    if (indexPath.row==_productDataArray.count-1)
+    if (indexPath.row==productArray.count-1&&indexPath.section==1)
     {
         foyerCell.lineView.hidden = YES;
     }else
@@ -470,7 +413,8 @@
 {
     [ManagerHUD showHUD:self  animated:YES andAutoHide:10];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    FoyerProductModel * productModel = _productDataArray[indexPath.row];
+    
+    FoyerProductModel * productModel = _productDataArray[indexPath.section][indexPath.row];
     [self getClickEnableWithProductModel:productModel indexPath:indexPath];
 }
 
@@ -495,7 +439,7 @@
 {
   __block  FoyerTableViewCell * cell = [_tableView cellForRowAtIndexPath:indexPath];
     
-    __block FoyerProductModel * productModel = _productDataArray[indexPath.row];;
+    __block FoyerProductModel * productModel = _productDataArray[indexPath.section][indexPath.row];;
     [DataEngine requestToGetIPAndPortWithBlock:^(BOOL success, NSString * IP, NSString *Port)
      {
          [ManagerHUD hidenHUD];
@@ -510,17 +454,17 @@
      }];
     
 }
-- (void)searchInstrumentCode:(NSString * )code
-{
-    for (int i=0;  i<_productDataArray.count;i++)
-    {
-        FoyerProductModel * productModel = _productDataArray[i];
-        
-        if ([productModel.productID isEqualToString:code])
-        {
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            [self getClickEnableWithProductModel:productModel indexPath:indexPath];
-        }
-    }
-}
+//- (void)searchInstrumentCode:(NSString * )code
+//{
+//    for (int i=0;  i<_productDataArray.count;i++)
+//    {
+//        FoyerProductModel * productModel = _productDataArray[i];
+//        
+//        if ([productModel.productID isEqualToString:code])
+//        {
+//            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+//            [self getClickEnableWithProductModel:productModel indexPath:indexPath];
+//        }
+//    }
+//}
 @end

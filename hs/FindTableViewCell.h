@@ -16,6 +16,7 @@
 @property (nonatomic,strong)UIButton * backButton;
 @property (nonatomic,strong)UIImageView  * arrowsImageV;
 @property (nonatomic,strong)UIImageView * rightShowImgV;
+@property (nonatomic,strong)UIView  * line;
 
 - (void)setCellDetailWithImageName:(NSString*)imageName name:(NSString*)name detailText:(NSString*)detailText enableClick:(BOOL)enableClick;
 - (void)setNewMsgRemind:(BOOL)newRemind redBag:(BOOL)showRedBag;

@@ -11,13 +11,11 @@
 
 @interface FoyerTableViewCell : UITableViewCell
 
-
-@property (nonatomic,strong)UIImageView * iconImgV;
+@property (nonatomic,strong)UILabel * showLab;
 @property (nonatomic,strong)UILabel * productNameL;
 @property (nonatomic,strong)UILabel * productAdL;
 @property (nonatomic,strong)UIImageView * markImg;
 @property (nonatomic,strong)UILabel * priceLab;
-@property (nonatomic,strong)UILabel * percentage;
 @property (nonatomic,strong)UIImageView * hotImg;
 @property (nonatomic,strong)UIView * lineView;
 @property (nonatomic,assign)BOOL  isPositionNum;

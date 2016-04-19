@@ -37,16 +37,9 @@
 }
 - (void)initUI
 {
-
-    float iconbackLength = cellHeight*5/9;
-    _iconImgV                   = [[UIImageView alloc] init];
-    _iconImgV.center =  CGPointMake(20+iconbackLength/2, cellHeight/2);
-    _iconImgV.bounds = CGRectMake(0, 0, iconbackLength, iconbackLength);
-    _iconImgV.layer.cornerRadius= 5;
-    _iconImgV.layer.masksToBounds= YES;
-    [self addSubview:_iconImgV];
     
-    _productNameL               = [[UILabel alloc] initWithFrame:CGRectMake(20+iconbackLength+10,15, iconbackLength*2, 19)];
+    
+    _productNameL               = [[UILabel alloc] initWithFrame:CGRectMake(20,14, cellHeight, 19)];
     _productNameL.textColor     = [UIColor blackColor];
     _productNameL.textAlignment = NSTextAlignmentLeft;
     _productNameL.font          = FontSize(nameFont);
@@ -56,35 +49,37 @@
     _hotImg.bounds              = CGRectMake(0, 0, 33, 14);
     [self addSubview:_hotImg];
     
-    _productAdL                 = [[UILabel alloc] initWithFrame:CGRectMake(_iconImgV.frame.origin.x+iconbackLength+10, CGRectGetMaxY(_productNameL.frame), ScreenWidth/2, 15)];
-    _productAdL.textColor       = [UIColor blackColor];
-    _productAdL.textAlignment   = NSTextAlignmentLeft;
-    _productAdL.font            = FontSize(detailFont);
-    [self addSubview:_productAdL];
-
-    float markLength            = ScreenWidth*6/375;
-    _markImg                    = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-20-markLength,cellHeight/2-markLength*9/10 , markLength, markLength*9/5)];
-    _markImg.image              = [UIImage imageNamed:@"arrow"];
-    [self addSubview:_markImg];
+    _showLab = [[UILabel alloc] init];
     
-    
-    _priceLab                   = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_markImg.frame)-cellHeight -10, cellHeight/4, cellHeight, cellHeight/4)];
-    _priceLab.textAlignment = NSTextAlignmentRight;
-    _priceLab.font              = FontSize(12);
+    _showLab.center = CGPointMake(ScreenWidth-35-20, _productNameL.center.y);
+    _showLab.bounds = CGRectMake(0, 0, 70, 22);
+    _showLab.backgroundColor = K_color_backView;
+    _showLab.font = FontSize(13);
+    _showLab.text = @"立即操盘";
+    _showLab.textAlignment = NSTextAlignmentCenter;
+    _showLab.layer.cornerRadius = 3;
+    _showLab.layer.masksToBounds = YES;
+    _showLab.layer.borderWidth = 0.5;
+    _showLab.layer.borderColor = K_color_line.CGColor;
+    [self addSubview:_showLab];
+   
+    _priceLab                   = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_productNameL.frame), ScreenWidth/2, cellHeight/3)];
+    _priceLab.textAlignment = NSTextAlignmentLeft;
+    _priceLab.font              = FontSize(13);
     _priceLab.text              = @"--";
     _priceLab.textColor         = K_color_grayBlack;
     [self addSubview:_priceLab];
-    
-    _percentage                   = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_markImg.frame)-cellHeight-10, cellHeight/2, cellHeight, cellHeight/4)];
-    _percentage.textAlignment = NSTextAlignmentRight;
-    _percentage.font              = FontSize(12);
-    _percentage.text              = @"-%";
-    _percentage.textColor         = K_color_grayBlack;
-    [self addSubview:_percentage];
+    _productAdL                 = [[UILabel alloc] init];
+    _productAdL.center = CGPointMake(ScreenWidth-ScreenWidth/4-20, _priceLab.center.y);
+    _productAdL.bounds = CGRectMake(0, 0, ScreenWidth-ScreenWidth/2, 20);
+    _productAdL.textColor       = [UIColor blackColor];
+    _productAdL.textAlignment   = NSTextAlignmentRight;
+    _productAdL.font            = FontSize(detailFont);
+    [self addSubview:_productAdL];
     
     
 
-    _lineView                   = [[UIView alloc] initWithFrame:CGRectMake(20, cellHeight-1, ScreenWidth-40, 0.5)];
+    _lineView                   = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, ScreenWidth, 0.5)];
     _lineView.backgroundColor   = K_color_line;
     [self addSubview:_lineView];
 }
@@ -97,17 +92,12 @@
     if ([productModel.vendibility intValue]==1) {
         _productNameL.textColor         =[UIColor blackColor];
         _productAdL.textColor           =K_color_grayBlack;
-        [_iconImgV sd_setImageWithURL:[NSURL URLWithString:productModel.imgs]];
 
         
     }else{
         _productNameL.textColor         =K_COLOR_CUSTEM(186, 186, 186, 1);
         _productAdL.textColor           =K_COLOR_CUSTEM(186, 186, 186, 1);
-        [_iconImgV sd_setImageWithURL:[NSURL URLWithString:productModel.imgs] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-            _iconImgV.image             = [self getGrayImage:image];
-            
-        }];
+        
     }
     _productNameL.text                  = productModel.commodityName;
     _productAdL.text                    = productModel.advertisement;
@@ -136,12 +126,10 @@
             if (dictionary[@"percentage"])
             {
                 percentage = [NSString stringWithFormat:@"%@",dictionary[@"percentage"] ];
-//                _percentage.text = percentage;
             }
             if (dictionary[@"lastPrice"])
             {
                 lastPrice  = [NSString stringWithFormat:@"%.2f",[dictionary[@"lastPrice"] floatValue]];
-//                _priceLab.text = lastPrice;
             }
             if (market==1)
             {
@@ -158,32 +146,14 @@
             }
         }
         [self performSelectorOnMainThread:@selector(loadText:) withObject:@{@"percentage":percentage,@"lastPrice":lastPrice,@"showColor":showColor} waitUntilDone:NO];
-//        _percentage.textColor = _priceLab.textColor  = showColor;
     }];
 }
 - (void)loadText:(NSDictionary*)dic
 {
-    _percentage.text = [NSString stringWithFormat:@"%@",dic[@"percentage"]];
-    _priceLab.text = [NSString stringWithFormat:@"%@",dic[@"lastPrice"]];
-    _percentage.textColor = _priceLab.textColor = (UIColor *)dic[@"showColor"];
-}
--(UIImage*)getGrayImage:(UIImage*)sourceImage
-{
-    
-    int width = sourceImage.size.width;
-    int height = sourceImage.size.height;
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-    CGContextRef context = CGBitmapContextCreate (nil,width,height,8,0,colorSpace,kCGImageAlphaNone);
-    CGColorSpaceRelease(colorSpace);
-    if (context == NULL) {
-        return nil;
-    }
-    CGContextDrawImage(context,CGRectMake(0, 0, width, height), sourceImage.CGImage);
-    UIImage *grayImage = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
-    CGContextRelease(context);
-    return grayImage;   
-}
+    _priceLab.text = [NSString stringWithFormat:@"%@ %@",dic[@"lastPrice"],dic[@"percentage"]];
 
+    _priceLab.textColor = (UIColor *)dic[@"showColor"];
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

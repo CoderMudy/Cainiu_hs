@@ -74,7 +74,7 @@ ShowGestureMethod
     [navView addSubview:navTitle];
 
     UIButton * leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(0, 20, 80, 44);
+    leftBtn.frame = CGRectMake(ScreenWidth-70, 20, 60, 44);
     [leftBtn.titleLabel setFont:FontSize(13)];
     [leftBtn setTitle:@" 客服" forState:UIControlStateNormal];
     [leftBtn setImage:[UIImage imageNamed:@"foyer_2"] forState:UIControlStateNormal];

@@ -20,12 +20,15 @@
 {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        float cellHeight = ScreenWidth*70/375;
+        float cellHeight = ScreenWidth*85/375;
         
         
         float imageLength = ScreenWidth*40/375;
         float arrowsWidth = imageLength/6;
-        _itemImageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, cellHeight/2-imageLength/2, imageLength, imageLength)];
+        _itemImageV = [[UIImageView alloc] init];//WithFrame:CGRectMake(20, cellHeight/2-imageLength/2, imageLength, imageLength)];
+        
+        _itemImageV.center = CGPointMake(20+imageLength/2, cellHeight/2);
+
         [self addSubview:_itemImageV];
         
         CGFloat markLength = 30*ScreenWidth/375;
@@ -36,16 +39,16 @@
         [self addSubview:_redMark];
         
         
-        _nameLab = [[UILabel alloc] initWithFrame:CGRectMake(20+imageLength+5, (cellHeight-35)/2, ScreenWidth-55-imageLength-arrowsWidth, 20)];
+        _nameLab = [[UILabel alloc] initWithFrame:CGRectMake(20+imageLength+15, (cellHeight-35)/2, ScreenWidth-55-imageLength-arrowsWidth, 20)];
         _nameLab.font = nameFont;
         [self addSubview:_nameLab];
         
-        _detailLab = [[UILabel alloc] initWithFrame:CGRectMake(20+imageLength+5, _nameLab.frame.size.height+_nameLab.frame.origin.y, ScreenWidth-55-imageLength-arrowsWidth, 20)];
+        _detailLab = [[UILabel alloc] initWithFrame:CGRectMake(20+imageLength+15, _nameLab.frame.size.height+_nameLab.frame.origin.y, ScreenWidth-55-imageLength-arrowsWidth, 20)];
         _detailLab.font = detailFont;
         
-        UIView  * line = [[UIView alloc] initWithFrame:CGRectMake(20 , cellHeight-0.5, ScreenWidth-40, 0.5)];
-        line.backgroundColor = K_color_line;
-        [self addSubview:line];
+        _line = [[UIView alloc] initWithFrame:CGRectMake(0 , cellHeight-1, ScreenWidth, 1)];
+        _line.backgroundColor = K_color_line;
+        [self addSubview:_line];
         [self addSubview:_detailLab];
         
         
@@ -69,6 +72,7 @@
 {
 
     [_itemImageV setImage:[UIImage imageNamed:imageName]];
+    _itemImageV.bounds = CGRectMake(0, 0, _itemImageV.image.size.width, _itemImageV.image.size.height);
     _nameLab.text = name;
     _detailLab.text =detailText;
     if (enableClick) {
