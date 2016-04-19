@@ -1,0 +1,32 @@
+{
+    "appDetail":{
+        "appName":"盈期宝",
+        "appShortName":"盈期宝",
+        "showUrl":"www.100zjgl.com",
+        "officialWeb":"http://100zjgl.com",
+        "officialDownLoadAddress":"http://100zjgl.com",
+        "domainName":"114.215.207.204",
+        "umengAppkey":"570e121f67e58e9a5c001f7f",
+        "shareSDKAppkey":"11b70d28d2740",
+        "qZoneAppkey":"1105330374",
+        "qZoneSecret":"FeSV34aaVjTdQgVm",
+        "weChatAppkey":"wx3ce491c07fe9861e",
+        "weChatSecret":"09426ca2f9c4cfbcbcf52f052a08d059",
+        "sinaWeiboAppkey":"3810191861",
+        "sinaWeiboSecret":"ca78d807a1010151d6bed3ff69b48d11",
+        "sinaWeiboRedirectUri":"http://sns.whalecloud.com/sina2/callback",
+        "shareIconName":"yqbIcon",
+        "zfbAccount":"market@100zjgl.com",
+        "zfbName":"深圳市壹零零资产管理有限公司",
+        "pkgtype":"100zjgl",
+        "regSource":"20000",
+        "payBankName":"中国银行-上海卢湾支行",
+        "payCompanyName":"深圳市壹零零资产管理有限公司 ",
+        "payBankShowNumber":"4442 6596 6069",
+        "payBankNumber":"444265966069",
+        "aliyunDomainAddress":"http://yllstock.oss-cn-hangzhou.aliyuncs.com/vs_domain.txt"
+        "HTTP_IP_ONLINE":"121.40.205.175"
+        "HTTP_IP_TEST":"stock.luckin.cn"
+        "HTTP_IP_SIMULATE":"m.luckin.cn"
+    },
+    "appStyle":"0" }

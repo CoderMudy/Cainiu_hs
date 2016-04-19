@@ -1,0 +1,46 @@
+10
+
+dir
+1520
+http://simplePXJ@code.taobao.org/svn/dhgs/hs_works/hs/ShareSDK/Connection
+http://simplePXJ@code.taobao.org/svn/dhgs
+
+
+
+2015-09-23T02:00:13.941608Z
+723
+Xse
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+b832e59f-2043-413d-8578-36160be84053
+
+WeChatConnection.framework
+dir
+
+QZoneConnection.framework
+dir
+
+SinaWeiboConnection.framework
+dir
+
+QQConnection.framework
+dir
+
+MailConnection.framework
+dir
+
+SMSConnection.framework
+dir
+

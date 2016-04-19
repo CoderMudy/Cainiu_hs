@@ -1,0 +1,275 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dhgs/!svn/ver/749/hs_works/hs/libQuoteWidget/include/QuoteWidget
+END
+HsKlinePSY.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlinePSY.h
+END
+HsStockTrendItem.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockTrendItem.h
+END
+HsRealtime.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsRealtime.h
+END
+HsFinancialItem.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsFinancialItem.h
+END
+HsTickViewModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsTickViewModel.h
+END
+HsStockRealtime.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockRealtime.h
+END
+HsBlockItem.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsBlockItem.h
+END
+HsKlineOBV.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineOBV.h
+END
+HsKlineVR.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineVR.h
+END
+HsDealDetails.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsDealDetails.h
+END
+HsKlineBOLL.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineBOLL.h
+END
+QwCNIndexInfoView.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwCNIndexInfoView.h
+END
+HsStockTickItem.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockTickItem.h
+END
+HsRealtimeViewModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsRealtimeViewModel.h
+END
+HsQuoteUtils.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsQuoteUtils.h
+END
+QwUSStockInfoView.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwUSStockInfoView.h
+END
+HsStockCategory.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockCategory.h
+END
+HsKlineCCI.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineCCI.h
+END
+HsStock.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStock.h
+END
+QwBidOfferListView.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwBidOfferListView.h
+END
+HsKlineDMA.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineDMA.h
+END
+QwKlineLandscapeView.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwKlineLandscapeView.h
+END
+QwCNStockInfoView.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwCNStockInfoView.h
+END
+HsKlineASI.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineASI.h
+END
+HsKlineBIAS.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineBIAS.h
+END
+QwTickView.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwTickView.h
+END
+HsStockKline.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockKline.h
+END
+HsUSSRealtimeViewModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsUSSRealtimeViewModel.h
+END
+QwKlineView.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/749/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwKlineView.h
+END
+HsStockTrendData.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockTrendData.h
+END
+QwTrendViewTouchable.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwTrendViewTouchable.h
+END
+HsKlineWR.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineWR.h
+END
+QwSearchView.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwSearchView.h
+END
+HsKlineViewModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineViewModel.h
+END
+HsKlineRSI.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineRSI.h
+END
+HsKlineVOL.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineVOL.h
+END
+HsMarket.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsMarket.h
+END
+QwTrendView.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/122/hs_works/hs/libQuoteWidget/include/QuoteWidget/QwTrendView.h
+END
+HsStockKlineItem.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsStockKlineItem.h
+END
+HsKlineMACD.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineMACD.h
+END
+HsQuoteFormatUtils.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsQuoteFormatUtils.h
+END
+HsTrendViewModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsTrendViewModel.h
+END
+HsIndexRealtime.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsIndexRealtime.h
+END
+HsViewModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsViewModel.h
+END
+HsKlineKDJ.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libQuoteWidget/include/QuoteWidget/HsKlineKDJ.h
+END

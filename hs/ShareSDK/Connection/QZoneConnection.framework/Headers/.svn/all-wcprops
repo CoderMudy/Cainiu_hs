@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers
+END
+ISSQZoneApp.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/ISSQZoneApp.h
+END
+QZoneConnection.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/QZoneConnection.h
+END
+SSQZoneCredential.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/SSQZoneCredential.h
+END
+SSQZoneShareContentEntity.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/SSQZoneShareContentEntity.h
+END
+SSQZoneShareInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/SSQZoneShareInfo.h
+END
+SSQZoneUser.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/SSQZoneUser.h
+END
+SSQZoneErrorInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Connection/QZoneConnection.framework/Headers/SSQZoneErrorInfo.h
+END

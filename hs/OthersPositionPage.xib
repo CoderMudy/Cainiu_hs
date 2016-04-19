@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C2043" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OthersPositionPage">
+            <connections>
+                <outlet property="lookBtn" destination="hv4-a7-15U" id="RQI-Ud-36j"/>
+                <outlet property="nickNameLab" destination="wcC-fM-E9K" id="GE6-Gn-Bq0"/>
+                <outlet property="userHeader" destination="2et-8f-4z5" id="aMk-hs-2dG"/>
+                <outlet property="userTextLab" destination="UAH-zf-Tzs" id="J4A-fl-kwt"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2et-8f-4z5">
+                    <rect key="frame" x="0.0" y="400" width="320" height="80"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head_01" translatesAutoresizingMaskIntoConstraints="NO" id="gRb-wl-VkD">
+                            <rect key="frame" x="10" y="10" width="60" height="60"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="天天都有好心情" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UAH-zf-Tzs">
+                            <rect key="frame" x="78" y="44" width="119" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hv4-a7-15U">
+                            <rect key="frame" x="228" y="25" width="71" height="30"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.81371745400990503" blue="0.72129275068648979" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="kgN-8b-ZSE"/>
+                                <constraint firstAttribute="width" constant="71" id="sgJ-l7-Avm"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="查看战绩">
+                                <color key="titleColor" red="0.9799804688" green="0.2600149558" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="userDetail:" destination="-1" eventType="touchUpInside" id="62K-5O-KU7"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nickName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcC-fM-E9K">
+                            <rect key="frame" x="78" y="15" width="77" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="hv4-a7-15U" firstAttribute="top" secondItem="2et-8f-4z5" secondAttribute="top" constant="25" id="J7D-m3-igd"/>
+                        <constraint firstAttribute="trailing" secondItem="hv4-a7-15U" secondAttribute="trailing" constant="21" id="PbT-Yu-kHh"/>
+                        <constraint firstAttribute="height" constant="80" id="YVe-dx-Ism"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="2et-8f-4z5" secondAttribute="bottom" id="Xva-Lz-Nwj"/>
+                <constraint firstItem="2et-8f-4z5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="e63-yI-AV5"/>
+                <constraint firstAttribute="trailing" secondItem="2et-8f-4z5" secondAttribute="trailing" id="tFO-7f-hsj"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ycg-iv-05z">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button">
+                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+            </state>
+            <point key="canvasLocation" x="802" y="556"/>
+        </button>
+    </objects>
+    <resources>
+        <image name="head_01" width="81" height="81"/>
+    </resources>
+</document>

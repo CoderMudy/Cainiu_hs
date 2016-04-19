@@ -1,0 +1,47 @@
+//
+//  SystemData.pch
+//  hs
+//
+//  Created by PXJ on 15/11/18.
+//  Copyright © 2015年 luckin. All rights reserved.
+//
+
+#ifndef SystemData_pch
+#define SystemData_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define AppStyle_SAlE   [[SystemDataMgr getAppStyle] isEqualToString:@"1"]  //判断当前应用的类型 1销售系统  0财牛应用
+
+#define App_appName [SystemDataMgr appName]//app名称
+#define App_appShortName [SystemDataMgr appShortName]//app名称简写
+
+#define App_showUrl [SystemDataMgr showUrl]//短链接
+#define App_OfficialWeb [SystemDataMgr OfficialWeb]//官网
+#define App_OfficialDownLoadAddress [SystemDataMgr officialDownLoadAddress]//官网下载地址
+#define App_domainName [SystemDataMgr domainName]//域名
+#define App_umengAppkey [SystemDataMgr umengAppkey] //友盟
+#define App_shareSDKAppkey [SystemDataMgr shareSDKAppkey] //shareSDK
+#define App_qZoneAppkey [SystemDataMgr qZoneAppkey] //qZoneAppkey
+#define App_qZoneSecret [SystemDataMgr qZoneSecret] //qZoneSecret
+#define App_weChatAppkey [SystemDataMgr weChatAppkey] //weChatAppkey
+#define App_weChatSecret [SystemDataMgr weChatSecret] //weChatSecret
+#define App_sinaWeiboAppkey [SystemDataMgr sinaWeiboAppkey] //sinaWeiboAppkey
+#define App_sinaWeiboAppSecret [SystemDataMgr sinaWeiboSecret] //sinaWeiboSecret
+#define App_sinaWeiboRedirectUri [SystemDataMgr sinaWeiboRedirectUri] //sinaWeiboRedirectUri
+#define App_zfbAccount [SystemDataMgr zfbAccount]//支付宝账号
+#define App_zfbName [SystemDataMgr zfbName] //支付宝名称
+#define App_regSource [SystemDataMgr regSource] //渠道号
+#define App_payCompanyName [SystemDataMgr payCompanyName]  //公司名称
+#define App_payBankName [SystemDataMgr payBankName] //银行名称
+#define App_payBankShowNumber [SystemDataMgr payBankShowNumber] //银行帐号显示
+#define App_payBankNumber [SystemDataMgr payBankNumber] //银行帐号
+#define App_shareIconName [SystemDataMgr shareIconName] //分享ICON
+#define App_aliyunDomainAddress [SystemDataMgr aliyunDomainAddress] //域名阿里云地址
+
+#define App_HTTP_IP_ONLINE [SystemDataMgr HTTP_IP_ONLINE]
+#define App_HTTP_IP_TEST [SystemDataMgr HTTP_IP_TEST]
+#define App_HTTP_IP_SIMULATE [SystemDataMgr HTTP_IP_SIMULATE]
+
+#endif /* SystemData_pch */

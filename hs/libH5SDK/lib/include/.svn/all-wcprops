@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dhgs/!svn/ver/1/hs_works/hs/libH5SDK/lib/include
+END
+HsSessionManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dhgs/!svn/ver/1/hs_works/hs/libH5SDK/lib/include/HsSessionManager.h
+END
+IH5Session.h
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dhgs/!svn/ver/1/hs_works/hs/libH5SDK/lib/include/IH5Session.h
+END
+hscomm_message_interface.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/1/hs_works/hs/libH5SDK/lib/include/hscomm_message_interface.h
+END
+hscomm_message_factory.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dhgs/!svn/ver/1/hs_works/hs/libH5SDK/lib/include/hscomm_message_factory.h
+END
+h5_protocol_tag.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dhgs/!svn/ver/1/hs_works/hs/libH5SDK/lib/include/h5_protocol_tag.h
+END

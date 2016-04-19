@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers
+END
+MOBFRSAHelper.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFRSAHelper.h
+END
+MOBFDebug.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFDebug.h
+END
+MOBFNotificationCenter.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFNotificationCenter.h
+END
+MOBFNumber.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFNumber.h
+END
+MOBFPluginManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFPluginManager.h
+END
+MOBFJSTypeDefine.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFJSTypeDefine.h
+END
+MOBFDataService.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFDataService.h
+END
+MOBFRSAKey.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFRSAKey.h
+END
+MOBFHttpPostedFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFHttpPostedFile.h
+END
+MOBFDevice.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFDevice.h
+END
+MOBFHttpService.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFHttpService.h
+END
+MOBFoundation.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFoundation.h
+END
+MOBFOAuthService.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFOAuthService.h
+END
+MOBFImageService.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFImageService.h
+END
+MOBFApplication.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFApplication.h
+END
+MOBFString.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFString.h
+END
+IMOBFPlugin.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/IMOBFPlugin.h
+END
+MOBFData.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFData.h
+END
+MOBFJson.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFJson.h
+END
+MOBFRegex.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFRegex.h
+END
+MOBFDate.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFDate.h
+END
+MOBFViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFViewController.h
+END
+MOBFColor.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFColor.h
+END
+MOBFMedia.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFMedia.h
+END
+MOBFJSContext.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFJSContext.h
+END
+MOBFImage.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFImage.h
+END
+MOBFImageServiceTypeDef.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Core/MOBFoundation.framework/Headers/MOBFImageServiceTypeDef.h
+END

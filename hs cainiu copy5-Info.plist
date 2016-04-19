@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;array&gt;
+	&lt;string&gt;mqzoneopensdk&lt;/string&gt;
+	&lt;string&gt;mqzoneopensdkapi&lt;/string&gt;
+	&lt;string&gt;mqzoneopensdkapi19&lt;/string&gt;
+	&lt;string&gt;mqzoneopensdkapiV2&lt;/string&gt;
+	&lt;string&gt;mqqOpensdkSSoLogin&lt;/string&gt;
+	&lt;string&gt;mqqopensdkapiV2&lt;/string&gt;
+	&lt;string&gt;mqqopensdkapiV3&lt;/string&gt;
+	&lt;string&gt;wtloginmqq2&lt;/string&gt;
+	&lt;string&gt;mqqapi&lt;/string&gt;
+	&lt;string&gt;mqqwpa&lt;/string&gt;
+	&lt;string&gt;mqzone&lt;/string&gt;
+	&lt;string&gt;mqq&lt;/string&gt;
+	&lt;string&gt;sinaweibosso&lt;/string&gt;
+	&lt;string&gt;sinaweibohdsso&lt;/string&gt;
+	&lt;string&gt;weibosdk2.5&lt;/string&gt;
+	&lt;string&gt;weibosdk&lt;/string&gt;
+	&lt;string&gt;sinaweibo&lt;/string&gt;
+	&lt;string&gt;sinaweibohd&lt;/string&gt;
+	&lt;string&gt;wechat&lt;/string&gt;
+	&lt;string&gt;weixin&lt;/string&gt;
+&lt;/array&gt;
+&lt;/plist&gt;
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;array&gt;
+	&lt;string&gt;mqzoneopensdk&lt;/string&gt;
+	&lt;string&gt;mqzoneopensdkapi&lt;/string&gt;
+	&lt;string&gt;mqzoneopensdkapi19&lt;/string&gt;
+	&lt;string&gt;mqzoneopensdkapiV2&lt;/string&gt;
+	&lt;string&gt;mqqOpensdkSSoLogin&lt;/string&gt;
+	&lt;string&gt;mqqopensdkapiV2&lt;/string&gt;
+	&lt;string&gt;mqqopensdkapiV3&lt;/string&gt;
+	&lt;string&gt;wtloginmqq2&lt;/string&gt;
+	&lt;string&gt;mqqapi&lt;/string&gt;
+	&lt;string&gt;mqqwpa&lt;/string&gt;
+	&lt;string&gt;mqzone&lt;/string&gt;
+	&lt;string&gt;mqq&lt;/string&gt;
+	&lt;string&gt;sinaweibosso&lt;/string&gt;
+	&lt;string&gt;sinaweibohdsso&lt;/string&gt;
+	&lt;string&gt;weibosdk2.5&lt;/string&gt;
+	&lt;string&gt;weibosdk&lt;/string&gt;
+	&lt;string&gt;sinaweibo&lt;/string&gt;
+	&lt;string&gt;sinaweibohd&lt;/string&gt;
+	&lt;string&gt;wechat&lt;/string&gt;
+	&lt;string&gt;weixin&lt;/string&gt;
+&lt;/array&gt;
+&lt;/plist&gt;
+</key>
+	<string></string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>期货原油宝</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wx</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wxf1ce8ed43bb09f5d</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string></string>
+			<key>CFBundleURLName</key>
+			<string>qq</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ41D6CA96</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wb</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb796277365</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>20160315</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>sinaweibo</string>
+		<string>sinaweibohd</string>
+		<string>sinaweibosso</string>
+		<string>sinaweibohdsso</string>
+		<string>weibosdk</string>
+		<string>weibosdk2.5</string>
+		<string>wechat</string>
+		<string>weixin</string>
+		<string>mqzoneopensdk</string>
+		<string>mqzoneopensdkapi</string>
+		<string>mqzoneopensdkapi19</string>
+		<string>mqzoneopensdkapiV2</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV3</string>
+		<string>wtloginmqq2</string>
+		<string>mqqapi</string>
+		<string>mqqwpa</string>
+		<string>mqzone</string>
+		<string>mqq</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>Localization native development region China</key>
+	<string>en</string>
+	<key>Localized resources can be mixed YES</key>
+	<string></string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
+</plist>

@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers
+END
+ISSCContentDescriptor.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCContentDescriptor.h
+END
+ShareSDKCoreService.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ShareSDKCoreService.h
+END
+ISSCUserDescriptor.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCUserDescriptor.h
+END
+ISSCToken.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCToken.h
+END
+SSCTypeDef.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/SSCTypeDef.h
+END
+SSCDataObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/SSCDataObject.h
+END
+ISSCRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCRequest.h
+END
+ISSCAttachment.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCAttachment.h
+END
+SSCNotificationDef.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/SSCNotificationDef.h
+END
+ISSCAccount.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCAccount.h
+END
+SSCLocationCoordinate2D.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/SSCLocationCoordinate2D.h
+END
+SSCKeyDef.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/SSCKeyDef.h
+END
+ISSCDataObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCDataObject.h
+END
+ISSCOpenApp.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCOpenApp.h
+END
+ISSCParameters.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCParameters.h
+END
+ISSCOAuthParameters.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCOAuthParameters.h
+END
+ISSCAuthSession.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Core/ShareSDKCoreService.framework/Headers/ISSCAuthSession.h
+END

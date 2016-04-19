@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "845456349AB6F787B786D098F0996B0CF427DE8C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "845456349AB6F787B786D098F0996B0CF427DE8C" : 0,
+    "b832e59f-2043-413d-8578-36160be84053++5560" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4D435817-AC0E-46A2-8D48-01ED71DBC81C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "845456349AB6F787B786D098F0996B0CF427DE8C" : "BQ\/",
+    "b832e59f-2043-413d-8578-36160be84053++5560" : "hs_works"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "hs",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "hs.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/LoverCoding\/Cainiu_hs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "845456349AB6F787B786D098F0996B0CF427DE8C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/code.taobao.org\/svn\/dhgs",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "b832e59f-2043-413d-8578-36160be84053++5560"
+    }
+  ]
+}

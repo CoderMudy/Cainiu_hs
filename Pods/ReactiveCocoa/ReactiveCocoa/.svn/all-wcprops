@@ -1,0 +1,1115 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa
+END
+NSObject+RACKVOWrapper.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACKVOWrapper.h
+END
+RACSignalSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignalSequence.h
+END
+RACSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSequence.h
+END
+NSObject+RACKVOWrapper.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACKVOWrapper.m
+END
+UITableViewHeaderFooterView+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITableViewHeaderFooterView+RACSignalSupport.h
+END
+RACSignalSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignalSequence.m
+END
+RACSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSequence.m
+END
+RACReturnSignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACReturnSignal.h
+END
+UITableViewHeaderFooterView+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITableViewHeaderFooterView+RACSignalSupport.m
+END
+RACCommand.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACCommand.h
+END
+NSString+RACSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSString+RACSupport.h
+END
+RACReturnSignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACReturnSignal.m
+END
+RACCommand.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACCommand.m
+END
+NSString+RACSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSString+RACSupport.m
+END
+RACSerialDisposable.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSerialDisposable.h
+END
+NSObject+RACDeallocating.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACDeallocating.h
+END
+RACCompoundDisposable.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACCompoundDisposable.h
+END
+RACSerialDisposable.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSerialDisposable.m
+END
+NSObject+RACDeallocating.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACDeallocating.m
+END
+RACSubject.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubject.h
+END
+RACCompoundDisposable.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACCompoundDisposable.m
+END
+RACStream+Private.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACStream+Private.h
+END
+RACSubject.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubject.m
+END
+UICollectionReusableView+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UICollectionReusableView+RACSignalSupport.h
+END
+ReactiveCocoa.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/ReactiveCocoa.h
+END
+UICollectionReusableView+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UICollectionReusableView+RACSignalSupport.m
+END
+NSObject+RACPropertySubscribing.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACPropertySubscribing.h
+END
+RACScopedDisposable.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACScopedDisposable.h
+END
+RACSignalProvider.d
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignalProvider.d
+END
+NSEnumerator+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSEnumerator+RACSequenceAdditions.h
+END
+NSObject+RACPropertySubscribing.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACPropertySubscribing.m
+END
+RACScopedDisposable.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACScopedDisposable.m
+END
+NSEnumerator+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSEnumerator+RACSequenceAdditions.m
+END
+RACStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACStream.h
+END
+RACQueueScheduler+Subclass.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACQueueScheduler+Subclass.h
+END
+RACStream.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACStream.m
+END
+RACSubscriptingAssignmentTrampoline.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriptingAssignmentTrampoline.h
+END
+RACSubscriptingAssignmentTrampoline.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriptingAssignmentTrampoline.m
+END
+RACSignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignal.h
+END
+UISegmentedControl+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UISegmentedControl+RACSignalSupport.h
+END
+RACEvent.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEvent.h
+END
+RACSignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignal.m
+END
+NSData+RACSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSData+RACSupport.h
+END
+UISegmentedControl+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UISegmentedControl+RACSignalSupport.m
+END
+RACEvent.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEvent.m
+END
+NSData+RACSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSData+RACSupport.m
+END
+NSIndexSet+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSIndexSet+RACSequenceAdditions.h
+END
+RACKVOChannel.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACKVOChannel.h
+END
+UIImagePickerController+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIImagePickerController+RACSignalSupport.h
+END
+NSIndexSet+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSIndexSet+RACSequenceAdditions.m
+END
+RACKVOChannel.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACKVOChannel.m
+END
+UIImagePickerController+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIImagePickerController+RACSignalSupport.m
+END
+RACStringSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACStringSequence.h
+END
+RACValueTransformer.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACValueTransformer.h
+END
+NSSet+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSSet+RACSequenceAdditions.h
+END
+NSNotificationCenter+RACSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSNotificationCenter+RACSupport.h
+END
+MKAnnotationView+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/MKAnnotationView+RACSignalSupport.h
+END
+RACStringSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACStringSequence.m
+END
+RACValueTransformer.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACValueTransformer.m
+END
+NSSet+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSSet+RACSequenceAdditions.m
+END
+UIRefreshControl+RACCommandSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIRefreshControl+RACCommandSupport.h
+END
+NSNotificationCenter+RACSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSNotificationCenter+RACSupport.m
+END
+RACArraySequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACArraySequence.h
+END
+MKAnnotationView+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/MKAnnotationView+RACSignalSupport.m
+END
+UIRefreshControl+RACCommandSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIRefreshControl+RACCommandSupport.m
+END
+RACArraySequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACArraySequence.m
+END
+RACTestScheduler.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTestScheduler.h
+END
+UIDatePicker+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIDatePicker+RACSignalSupport.h
+END
+RACUnit.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACUnit.h
+END
+NSObject+RACSelectorSignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACSelectorSignal.h
+END
+UITextView+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITextView+RACSignalSupport.h
+END
+RACTestScheduler.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTestScheduler.m
+END
+UIDatePicker+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIDatePicker+RACSignalSupport.m
+END
+UIBarButtonItem+RACCommandSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIBarButtonItem+RACCommandSupport.h
+END
+RACUnit.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACUnit.m
+END
+NSObject+RACSelectorSignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACSelectorSignal.m
+END
+NSObject+RACDescription.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACDescription.h
+END
+RACEmptySequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEmptySequence.h
+END
+UITextView+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITextView+RACSignalSupport.m
+END
+UIBarButtonItem+RACCommandSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIBarButtonItem+RACCommandSupport.m
+END
+RACKVOTrampoline.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACKVOTrampoline.h
+END
+NSObject+RACDescription.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACDescription.m
+END
+RACEmptySequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEmptySequence.m
+END
+UITextField+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITextField+RACSignalSupport.h
+END
+RACKVOTrampoline.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACKVOTrampoline.m
+END
+UITextField+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITextField+RACSignalSupport.m
+END
+NSString+RACKeyPathUtilities.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSString+RACKeyPathUtilities.h
+END
+RACSubscriber+Private.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriber+Private.h
+END
+NSDictionary+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSDictionary+RACSequenceAdditions.h
+END
+NSString+RACKeyPathUtilities.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSString+RACKeyPathUtilities.m
+END
+RACReplaySubject.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACReplaySubject.h
+END
+RACDelegateProxy.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDelegateProxy.h
+END
+NSDictionary+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSDictionary+RACSequenceAdditions.m
+END
+RACReplaySubject.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACReplaySubject.m
+END
+RACDelegateProxy.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDelegateProxy.m
+END
+NSArray+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSArray+RACSequenceAdditions.h
+END
+RACSubscriptionScheduler.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriptionScheduler.h
+END
+RACQueueScheduler.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACQueueScheduler.h
+END
+RACScheduler+Private.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACScheduler+Private.h
+END
+RACBlockTrampoline.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACBlockTrampoline.h
+END
+UITableViewCell+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITableViewCell+RACSignalSupport.h
+END
+NSArray+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSArray+RACSequenceAdditions.m
+END
+RACSubscriptionScheduler.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriptionScheduler.m
+END
+RACQueueScheduler.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACQueueScheduler.m
+END
+RACBlockTrampoline.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACBlockTrampoline.m
+END
+RACTargetQueueScheduler.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTargetQueueScheduler.h
+END
+UITableViewCell+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UITableViewCell+RACSignalSupport.m
+END
+NSObject+RACLifting.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACLifting.h
+END
+RACTargetQueueScheduler.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTargetQueueScheduler.m
+END
+RACSubscriber.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriber.h
+END
+NSObject+RACLifting.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSObject+RACLifting.m
+END
+NSFileHandle+RACSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSFileHandle+RACSupport.h
+END
+UISwitch+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UISwitch+RACSignalSupport.h
+END
+RACChannel.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACChannel.h
+END
+RACSubscriber.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSubscriber.m
+END
+NSFileHandle+RACSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSFileHandle+RACSupport.m
+END
+UISwitch+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UISwitch+RACSignalSupport.m
+END
+NSInvocation+RACTypeParsing.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSInvocation+RACTypeParsing.h
+END
+RACDynamicSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDynamicSequence.h
+END
+RACChannel.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACChannel.m
+END
+RACScheduler.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACScheduler.h
+END
+RACBehaviorSubject.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACBehaviorSubject.h
+END
+NSUserDefaults+RACSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSUserDefaults+RACSupport.h
+END
+UIButton+RACCommandSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIButton+RACCommandSupport.h
+END
+NSInvocation+RACTypeParsing.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSInvocation+RACTypeParsing.m
+END
+RACDynamicSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDynamicSequence.m
+END
+RACDynamicSignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDynamicSignal.h
+END
+RACTupleSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTupleSequence.h
+END
+RACScheduler.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACScheduler.m
+END
+RACBehaviorSubject.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACBehaviorSubject.m
+END
+NSUserDefaults+RACSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSUserDefaults+RACSupport.m
+END
+UIButton+RACCommandSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIButton+RACCommandSupport.m
+END
+RACDisposable.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDisposable.h
+END
+UISlider+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UISlider+RACSignalSupport.h
+END
+RACErrorSignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACErrorSignal.h
+END
+RACTupleSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTupleSequence.m
+END
+RACDynamicSignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDynamicSignal.m
+END
+RACScheduler+Subclass.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACScheduler+Subclass.h
+END
+RACDisposable.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACDisposable.m
+END
+RACMulticastConnection+Private.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACMulticastConnection+Private.h
+END
+UISlider+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UISlider+RACSignalSupport.m
+END
+RACErrorSignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACErrorSignal.m
+END
+NSOrderedSet+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSOrderedSet+RACSequenceAdditions.h
+END
+NSOrderedSet+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSOrderedSet+RACSequenceAdditions.m
+END
+UIGestureRecognizer+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIGestureRecognizer+RACSignalSupport.h
+END
+UIControl+RACSignalSupportPrivate.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIControl+RACSignalSupportPrivate.h
+END
+UIGestureRecognizer+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIGestureRecognizer+RACSignalSupport.m
+END
+UIControl+RACSignalSupportPrivate.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIControl+RACSignalSupportPrivate.m
+END
+UIControl+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIControl+RACSignalSupport.h
+END
+RACMulticastConnection.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACMulticastConnection.h
+END
+RACUnarySequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACUnarySequence.h
+END
+UIControl+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIControl+RACSignalSupport.m
+END
+RACMulticastConnection.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACMulticastConnection.m
+END
+RACUnarySequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACUnarySequence.m
+END
+RACSignal+Operations.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignal+Operations.h
+END
+RACKVOProxy.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACKVOProxy.h
+END
+RACSignal+Operations.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACSignal+Operations.m
+END
+RACGroupedSignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACGroupedSignal.h
+END
+RACKVOProxy.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACKVOProxy.m
+END
+UIAlertView+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIAlertView+RACSignalSupport.h
+END
+RACGroupedSignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACGroupedSignal.m
+END
+NSString+RACSequenceAdditions.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSString+RACSequenceAdditions.h
+END
+UIActionSheet+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIActionSheet+RACSignalSupport.h
+END
+UIAlertView+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIAlertView+RACSignalSupport.m
+END
+RACIndexSetSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACIndexSetSequence.h
+END
+RACEagerSequence.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEagerSequence.h
+END
+NSString+RACSequenceAdditions.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSString+RACSequenceAdditions.m
+END
+UIActionSheet+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIActionSheet+RACSignalSupport.m
+END
+RACIndexSetSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACIndexSetSequence.m
+END
+RACEagerSequence.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEagerSequence.m
+END
+RACObjCRuntime.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACObjCRuntime.h
+END
+UIStepper+RACSignalSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIStepper+RACSignalSupport.h
+END
+RACObjCRuntime.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACObjCRuntime.m
+END
+RACTuple.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTuple.h
+END
+RACPassthroughSubscriber.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACPassthroughSubscriber.h
+END
+UIStepper+RACSignalSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/UIStepper+RACSignalSupport.m
+END
+NSURLConnection+RACSupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSURLConnection+RACSupport.h
+END
+RACEmptySignal.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEmptySignal.h
+END
+RACImmediateScheduler.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACImmediateScheduler.h
+END
+RACTuple.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACTuple.m
+END
+RACPassthroughSubscriber.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACPassthroughSubscriber.m
+END
+NSURLConnection+RACSupport.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/NSURLConnection+RACSupport.m
+END
+RACCompoundDisposableProvider.d
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACCompoundDisposableProvider.d
+END
+RACEmptySignal.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACEmptySignal.m
+END
+RACImmediateScheduler.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dhgs/!svn/ver/104/hs_works/Pods/ReactiveCocoa/ReactiveCocoa/RACImmediateScheduler.m
+END

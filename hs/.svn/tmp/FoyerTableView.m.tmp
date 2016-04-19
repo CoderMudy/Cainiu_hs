@@ -1,0 +1,732 @@
+//
+//  FoyerTableView.m
+//  hs
+//
+//  Created by PXJ on 15/9/11.
+//  Copyright (c) 2015年 luckin. All rights reserved.
+//
+
+#import "FoyerTableView.h"
+#import "SDCycleScrollView.h"
+#import "FoyerTableViewCell.h"
+#import "ActivityPage.h"
+#import "ActivityModel.h"
+#import "FoyerPage.h"
+#import "FoyerProductModel.h"
+#import "IndexViewController.h"
+#import "FoyerReportView.h"
+#import "PositionViewController.h"
+
+@interface FoyerTableView ()<SDCycleScrollViewDelegate>
+{
+    //大厅广告图点击链接数组
+    NSMutableArray * _adHtmlArray;
+    NSMutableArray * _productDataArray;
+    
+    NSString * _IP;
+    //
+    NSString * _port;
+    NSMutableArray * _positionNumArray;
+    
+    NSMutableArray * _reportArray;
+    float            _cellHeight;
+    CGPoint          _tableViewOffSet;
+    
+    NSTimer *_dataTimer;
+    NSString *             _isClear;
+    
+}
+//头部广告滑动视图
+@property (nonatomic,strong) SDCycleScrollView * cycleView;
+@property (nonatomic,strong) FoyerReportView *reportMainView;
+@end
+@implementation FoyerTableView
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
+
+- (id)initWithFrame:(CGRect)frame {
+    
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initdata];
+        _tableViewOffSet = CGPointMake(0, 0);
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeigth-143) style:UITableViewStylePlain];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView registerClass:[FoyerTableViewCell class] forCellReuseIdentifier:@"foyerCell"];
+        [self addSubview:_tableView];
+        [self initTableHeaderView];
+        
+    }
+    return self;
+}
+
+- (void)viewAppearLoadData
+{
+    [self getMarketClear];
+    [self getpositionNum];
+    CacheModel * cachemodel =[ CacheEngine getCacheInfo];
+    _tableView.contentOffset = _tableViewOffSet;
+    switch (self.backStyle) {
+        case BackStyleDefault:
+        {
+            if (cachemodel.productListArray) {
+                _productDataArray = cachemodel.productListArray;//刷新产品列表
+                [_tableView reloadData];
+            }
+            if (cachemodel.reportArray) {
+                [self reportWithReportArray:cachemodel.reportArray];//刷新播报视图
+            }
+            if (cachemodel.bannerArray) {
+                if (cachemodel.bannerArray.count>0){
+                    if (_imageUrlArray.count>0) {
+                        [_imageUrlArray removeAllObjects];
+                    }
+                    if (_adHtmlArray.count>0) {
+                        [_adHtmlArray removeAllObjects];
+                    }
+                    for (NSDictionary * dic in cachemodel.bannerArray) {
+                        NSString * image    = dic[@"middleBanner"];
+                        image               = [NSString stringWithFormat:@"%@%@",K_MGLASS_URL,image];
+                        [_imageUrlArray addObject:image];
+                        NSString * htmlUrl     = dic[@"url"]==nil?@"":dic[@"url"];
+                        htmlUrl =[NSString stringWithFormat:@"%@%@",K_MGLASS_URL,htmlUrl];
+                        NSString * titleName = dic[@"title"]==nil?@"活动":dic[@"title"];
+                        NSDictionary * dic = @{@"titleName":titleName,@"html":htmlUrl};
+                        [_adHtmlArray addObject:dic];
+                    }
+                }
+                [self loadBaner];//刷新banner
+            }
+            [self requestProductData];//加载产品列表
+            [self requestReportData];//加载播报数据
+            [self requestBannerData];//加载banner
+            
+            
+        }
+            break;
+        case OtherPageBackStyle:
+        {
+            if (cachemodel.bannerArray) {
+                if (cachemodel.bannerArray.count>0){
+                }else{
+                    [self requestBannerData];//加载banner
+                }
+            }else{
+                [self requestBannerData];//加载banner
+                
+            }
+            
+            [self requestProductData];//加载产品列表
+//            if (cachemodel.reportArray) {
+//                [self reportWithReportArray:cachemodel.reportArray];
+//            }else{
+                [self requestReportData];//加载播报数据
+//            }
+            self.backStyle = BackStyleDefault;
+            
+        }
+            break;
+        case SubViewBackStyle:
+        {
+            self.backStyle = BackStyleDefault;
+            [self requestProductData];//加载产品列表
+
+            if (cachemodel.reportArray) {
+                [self reportWithReportArray:cachemodel.reportArray];
+            }else{
+                [self requestReportData];//加载播报数据
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+- (void)viewDisAppearLoadData
+{
+    [self reportViewStopReport];
+    if (self.backStyle==SubViewBackStyle) {
+        
+    }else{
+        
+        self.backStyle = OtherPageBackStyle;
+    }
+    _tableViewOffSet = _tableView.contentOffset;
+    [_dataTimer invalidate];
+    _dataTimer = nil;
+    
+}
+- (void)initdata
+{
+    _productDataArray = [NSMutableArray array];
+    _positionNumArray = [NSMutableArray array];
+    _reportArray      = [NSMutableArray array];
+    _cellHeight       =  ScreenWidth*80/375;
+    
+}
+- (void)initTableHeaderView
+{
+    UIView * tabHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth*ADScale+36)];
+    _tableView.tableHeaderView = tabHeaderView;
+    
+}
+
+#pragma mark - 获取用户持仓订单数量
+
+- (void)getpositionNum{
+    if ([[CMStoreManager sharedInstance] isLogin]) {
+        [RequestDataModel requestPosiOrderNumSuccessBlock:^(BOOL success, NSArray *dataArray) {
+            if (dataArray.count>0) {
+                _positionNumArray = [NSMutableArray arrayWithArray:dataArray];
+            }else{}
+            [_tableView reloadData];
+        }];
+    }
+}
+
+
+- (void)requestBannerData//加载banner
+{
+    
+    if (!_imageUrlArray) {
+        _imageUrlArray = [NSMutableArray array];
+    }
+    if(!_adHtmlArray){
+        _adHtmlArray = [NSMutableArray array];
+    }
+    
+    [RequestDataModel requestBanerDataSuccessBlock:^(BOOL success, NSArray *dataArray) {
+        if (success) {
+            if (dataArray.count>0) {
+                CacheModel * cacheModel = [CacheEngine getCacheInfo];
+                cacheModel.bannerArray  = [NSMutableArray arrayWithArray:dataArray];
+                [CacheEngine setCacheInfo:cacheModel];
+                if (_imageUrlArray.count>0) {
+                    [_imageUrlArray removeAllObjects];
+                }
+                if (_adHtmlArray.count>0) {
+                    [_adHtmlArray removeAllObjects];
+                }
+                for (NSDictionary * dic in dataArray) {
+                    NSString * image    = dic[@"middleBanner"];
+                    image               = [NSString stringWithFormat:@"%@%@",K_MGLASS_URL,image];
+                    [_imageUrlArray addObject:image];
+                    NSString * htmlUrl     = dic[@"url"]==nil?@"":dic[@"url"];
+                    htmlUrl =[NSString stringWithFormat:@"%@%@",K_MGLASS_URL,htmlUrl];
+                    NSString * titleName = dic[@"title"]==nil?@"活动":dic[@"title"];
+                    NSDictionary * dic = @{@"titleName":titleName,@"html":htmlUrl};
+                    [_adHtmlArray addObject:dic];
+                }
+            }
+            [self loadBaner];
+        }else{
+            
+            [self performSelector:@selector(requestBannerData) withObject:nil afterDelay:30];
+        }
+    }];
+}
+
+
+- (void)loadBaner
+{
+    if (_cycleView !=nil) {
+        _cycleView = nil;
+        
+        [_cycleView removeFromSuperview];
+        _cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth*ADScale) imageURLsGroup:_imageUrlArray];
+        if (_imageUrlArray.count==1) {
+            _cycleView.canMove = NO;
+            _cycleView.pageControlDotSize = CGSizeMake(0.1, 0.1);
+        }else{
+            _cycleView.canMove = YES;
+            _cycleView.pageControlDotSize = CGSizeMake(5, 5);
+        }
+        _cycleView.delegate = self;
+        _cycleView.autoScrollTimeInterval = 3.0;
+        
+        UIView * tableHeaderView = _tableView.tableHeaderView;
+        [tableHeaderView addSubview:_cycleView];
+        _tableView.tableHeaderView = tableHeaderView;
+    }else{
+        
+        _cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth*ADScale) imageURLsGroup:_imageUrlArray];
+        
+        if (_imageUrlArray.count==1) {
+            _cycleView.canMove = NO;
+            _cycleView.pageControlDotSize = CGSizeMake(0.1, 0.1);
+            
+        }else{
+            _cycleView.canMove = YES;
+            _cycleView.pageControlDotSize = CGSizeMake(5, 5);
+            
+        }
+        _cycleView.delegate = self;
+        _cycleView.autoScrollTimeInterval = 3.0;
+        
+        
+        UIView * tableHeaderView = _tableView.tableHeaderView;
+        [tableHeaderView addSubview:_cycleView];
+        _tableView.tableHeaderView = tableHeaderView;
+        
+    }
+}
+
+#pragma mark 点击banner
+
+-(void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    
+ 
+    NSDictionary * dic = _adHtmlArray[(int)index];
+    ActivityModel * model =  [[ActivityModel alloc] init];
+    model.titleName = dic[@"titleName"]==nil?@"活动":dic[@"titleName"];
+    NSString * htmlStr = dic[@"html"]==nil?@"":dic[@"html"];
+    
+//    NSString * token=@"";
+//    if ([[CMStoreManager sharedInstance]isLogin]) {
+//        token = [[CMStoreManager sharedInstance]getUserToken];
+//    }
+
+    model.htmlUrl = [NSString stringWithFormat:@"%@?version=8&abc=%d",htmlStr,arc4random()%999];
+    ActivityPage * activityVC = [[ActivityPage alloc] init];
+    activityVC.activityModel = model;
+    self.backStyle = SubViewBackStyle;
+    [self.surperVC.navigationController pushViewController:activityVC animated:YES];
+}
+- (void)getMarketClear
+{
+
+    
+    [RequestDataModel requestMarkerIsClearSuccessBlock:^(BOOL success, NSString *data) {
+       
+//        if ([data isEqualToString:@"1"]) {
+//            
+//            _isClear = YES;
+//        }else{
+//            _isClear = NO;
+//        }
+        _isClear = data;
+    }];
+
+}
+- (void)requestReportData//请求播报信息
+{
+    [RequestDataModel requestReportDataSuccessBlock:^(BOOL success, NSArray *dataArray) {
+        if (success) {
+            [self reportWithReportArray:dataArray];
+            CacheModel * cacheModel =  [CacheEngine getCacheInfo];
+            cacheModel.reportArray = [NSMutableArray arrayWithArray:dataArray];
+            [CacheEngine setCacheInfo:cacheModel];
+        }
+    }];
+}
+- (void)reportWithReportArray:(NSArray*)array
+{
+    
+    NSMutableArray * titleArray = [NSMutableArray array];
+    NSMutableArray * detailArray = [NSMutableArray array];
+    
+    if (array.count>0) {
+        for (NSDictionary * dic in array) {
+            [titleArray addObject:[NSString stringWithFormat:@" %@操盘盈利",dic[@"nickName"]]];
+            
+            float profit = [dic[@"profit"] floatValue];
+            if (profit>100000) {
+                
+                [detailArray addObject:[NSString stringWithFormat:@"%.2f万元",profit/10000]];
+           }else{
+                [detailArray addObject:[NSString stringWithFormat:@"%.2f元",profit]];
+           }
+        }
+        [self reportViewStopReport];
+        UIView * tableHeaderView= _tableView.tableHeaderView ;
+        UIView * view = [tableHeaderView viewWithTag:5000000];
+        [view removeFromSuperview];
+        float reportHeight = ScreenWidth* ADScale+4;
+        UIView * reportView = [[UIView alloc] initWithFrame:CGRectMake(0, reportHeight, ScreenWidth, 30)];
+        reportView.backgroundColor = K_COLOR_CUSTEM(230, 230, 230, 1);
+        [tableHeaderView  addSubview:reportView];
+        UILabel * reportLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 30)];
+        reportLab.text = @"最新盈利";
+        reportLab.font = [UIFont systemFontOfSize:reportLab.frame.size.height/2];
+        reportLab.textAlignment = NSTextAlignmentRight;
+        [reportView addSubview:reportLab];
+        _reportMainView = nil;
+        _reportMainView = [[FoyerReportView alloc]initWithFrame:CGRectMake(ScreenWidth/3,0, ScreenWidth*2/3, 30) nickArray:titleArray profitArray:detailArray];
+        _reportMainView.tag = 5000000;
+        [reportView addSubview:_reportMainView];
+        _tableView.tableHeaderView = tableHeaderView;
+    }
+}
+- (void)reportViewStopReport
+{
+    
+    
+    [_reportMainView stopReport];
+}
+
+
+- (void)requestProductData
+{
+    [RequestDataModel requestFoyerProductDataSuccessBlock:^(BOOL success, NSMutableArray *mutableArray) {
+        if (success) {
+            
+            [_productDataArray removeAllObjects];
+            
+            for (NSDictionary * dictionary in mutableArray) {
+               FoyerProductModel * productModel = [[FoyerProductModel alloc] init];
+                if (dictionary[@"id"] != nil && ![dictionary[@"id"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.productID = [NSString stringWithFormat:@"%@",dictionary[@"id"]];
+                }
+                else{
+                    productModel.productID = @"";
+                }
+                if (dictionary[@"commodityName"] != nil && ![dictionary[@"commodityName"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.commodityName = [NSString stringWithFormat:@"%@",dictionary[@"commodityName"]];
+                }
+                else{
+                    productModel.commodityName = @"";
+                }
+                if (dictionary[@"vendibility"] != nil && ![dictionary[@"vendibility"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.vendibility = [NSString stringWithFormat:@"%@",dictionary[@"vendibility"]];
+                }
+                else{
+                    productModel.vendibility = @"";
+                }
+                if (dictionary[@"createDate"] != nil && ![dictionary[@"createDate"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.createDate = [NSString stringWithFormat:@"%@",dictionary[@"createDate"]];
+                }
+                else{
+                    productModel.createDate = @"";
+                }
+                if (dictionary[@"creater"] != nil && ![dictionary[@"creater"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.creater = [NSString stringWithFormat:@"%@",dictionary[@"creater"]];
+                }
+                else{
+                    productModel.creater = @"";
+                }
+                if (dictionary[@"weight"] != nil && ![dictionary[@"weight"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.weight = [NSString stringWithFormat:@"%@",dictionary[@"weight"]];
+                }
+                else{
+                    productModel.weight = @"";
+                }
+                if (dictionary[@"advertisement"] != nil && ![dictionary[@"advertisement"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.advertisement = [NSString stringWithFormat:@"%@",dictionary[@"advertisement"]];
+                }
+                else{
+                    productModel.advertisement = @"";
+                }
+                if (dictionary[@"tag"] != nil && ![dictionary[@"tag"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.tag = [NSString stringWithFormat:@"%@",dictionary[@"tag"]];
+                }
+                else{
+                    productModel.tag = @"";
+                }
+                if (dictionary[@"timeTag"] != nil && ![dictionary[@"timeTag"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.timeTag = [NSString stringWithFormat:@"%@",dictionary[@"timeTag"]];
+                }
+                else{
+                    productModel.timeTag = @"";
+                }
+                if (dictionary[@"commodityDesc"] != nil && ![dictionary[@"commodityDesc"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.commodityDesc = [NSString stringWithFormat:@"%@",dictionary[@"commodityDesc"]];
+                }
+                else{
+                    productModel.commodityDesc = @"";
+                }
+                if (dictionary[@"marketId"] != nil && ![dictionary[@"marketId"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.marketId = [NSString stringWithFormat:@"%@",dictionary[@"marketId"]];
+                }
+                else{
+                    productModel.marketId = @"";
+                }
+                if (dictionary[@"imgs"] != nil && ![dictionary[@"imgs"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.imgs = [NSString stringWithFormat:@"%@",dictionary[@"imgs"]];
+                }
+                else{
+                    productModel.imgs = @"";
+                }
+                
+                if (dictionary[@"status"] != nil && ![dictionary[@"status"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.status = [NSString stringWithFormat:@"%@",dictionary[@"status"]];
+                }
+                else{
+                    productModel.status = @"";
+                }
+                if (dictionary[@"instrumentID"] != nil && ![dictionary[@"instrumentID"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.instrumentID = [NSString stringWithFormat:@"%@",dictionary[@"instrumentID"]];
+                }
+                else{
+                    productModel.instrumentID = @"";
+                }
+                if (dictionary[@"instrumentCode"] != nil && ![dictionary[@"instrumentCode"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.instrumentCode = [NSString stringWithFormat:@"%@",dictionary[@"instrumentCode"]];
+                }
+                else{
+                    productModel.instrumentCode = @"";
+                }
+                if (dictionary[@"currency"] != nil && ![dictionary[@"currency"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.currency = [NSString stringWithFormat:@"%@",dictionary[@"currency"]];
+                }
+                else{
+                    productModel.currency = @"";
+                }
+                if (dictionary[@"multiple"] != nil && ![dictionary[@"multiple"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.multiple = [NSString stringWithFormat:@"%@",dictionary[@"multiple"]];
+                }
+                else{
+                    productModel.multiple = @"";
+                }
+                if (dictionary[@"decimalPlaces"] != nil && ![dictionary[@"decimalPlaces"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.decimalPlaces = [NSString stringWithFormat:@"%@",dictionary[@"decimalPlaces"]];
+                }
+                else{
+                    productModel.decimalPlaces = @"";
+                }
+                if (dictionary[@"baseline"] != nil && ![dictionary[@"baseline"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.baseline = [NSString stringWithFormat:@"%@",dictionary[@"baseline"]];
+                }
+                else{
+                    productModel.baseline = @"";
+                }
+                if (dictionary[@"timeline"] != nil && ![dictionary[@"timeline"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.timeline = [NSString stringWithFormat:@"%@",dictionary[@"timeline"]];
+                }
+                else{
+                    productModel.timeline = @"";
+                }
+                if (dictionary[@"interval"] != nil && ![dictionary[@"interval"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.interval = [NSString stringWithFormat:@"%@",dictionary[@"interval"]];
+                }
+                else{
+                    productModel.interval = @"";
+                }
+                if (dictionary[@"isDoule"] != nil && ![dictionary[@"isDoule"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.isDoule = [NSString stringWithFormat:@"%@",dictionary[@"isDoule"]];
+                }
+                else{
+                    productModel.isDoule = @"";
+                }
+                if (dictionary[@"nightTimeAndNum"] != nil && ![dictionary[@"nightTimeAndNum"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.nightTimeAndNum = [NSString stringWithFormat:@"%@",dictionary[@"nightTimeAndNum"]];
+                }
+                else{
+                    productModel.nightTimeAndNum = @"";
+                }
+                if (dictionary[@"scale"] != nil && ![dictionary[@"scale"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.scale = [NSString stringWithFormat:@"%@",dictionary[@"scale"]];
+                }
+                else{
+                    productModel.scale = @"";
+                }
+                if (dictionary[@"timeAndNum"] != nil && ![dictionary[@"timeAndNum"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.timeAndNum = [NSString stringWithFormat:@"%@",dictionary[@"timeAndNum"]];
+                }
+                else{
+                    productModel.timeAndNum = @"";
+                }
+                if (dictionary[@"marketCode"] != nil && ![dictionary[@"marketCode"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.marketCode = [NSString stringWithFormat:@"%@",dictionary[@"marketCode"]];
+                }
+                else{
+                    productModel.marketCode = @"";
+                }
+                if (dictionary[@"marketStatus"] != nil && ![dictionary[@"marketStatus"] isKindOfClass:[NSNull class]])
+                {
+                    productModel.marketStatus = [NSString stringWithFormat:@"%@",dictionary[@"marketStatus"]];
+                }
+                else{
+                    productModel.marketStatus = @"";
+                }
+                [_productDataArray addObject:productModel];
+            }
+            _dataTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadTableview) userInfo:nil repeats:YES];
+            [_dataTimer fire];
+            //获取缓存信息
+            CacheModel *cacheModel = [CacheEngine getCacheInfo];
+            //设置属性
+            cacheModel.productListArray = _productDataArray;
+            // 存入缓存
+            [CacheEngine setCacheInfo:cacheModel];
+            
+        }else{
+            
+            
+            
+        }
+    }];
+}
+- (void)reloadTableview
+{
+    [_tableView reloadData];
+
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    return _cellHeight;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    if (_productDataArray.count>0) {
+        return _productDataArray.count;
+    }else{
+        
+        return 0;
+    }
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FoyerTableViewCell * foyerCell      = [tableView dequeueReusableCellWithIdentifier:@"foyerCell" forIndexPath:indexPath];
+    
+    if (_productDataArray.count<=indexPath.row) {
+        return foyerCell ;
+    }
+    
+    FoyerProductModel * productModel    = _productDataArray[indexPath.row];
+    
+    foyerCell.isPositionNum.hidden      = YES;
+    for (NSDictionary * dic in _positionNumArray) {
+        if ([dic[@"instrumentCode"] rangeOfString:productModel.instrumentCode].location !=NSNotFound) {
+           float num                   = [dic[@"cash"]intValue] +[dic[@"score"]intValue];
+            if (num>0) {
+                foyerCell.isPositionNum.hidden        = NO;
+            }
+            break;
+         }
+    }
+    if (indexPath.row==_productDataArray.count-1) {
+        foyerCell.lineView.hidden = YES;
+    }else{
+        foyerCell.lineView.hidden = NO;
+    }
+    [foyerCell setFoyertableViewCellWithModel:productModel];
+
+    return foyerCell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    [ManagerHUD showHUD:_surperVC.view  animated:YES andAutoHide:10];
+    FoyerProductModel * productModel = _productDataArray[indexPath.row];
+    if ([_isClear isEqualToString:@"1"]) {
+
+        productModel.isMarketClear = YES;
+    }else{
+        productModel.isMarketClear = NO;
+    }
+    [self getClickEnableWithProductModel:productModel indexPath:indexPath];
+    [DataEngine requestSpotgoodsLogin];
+    
+}
+
+- (void)getClickEnableWithProductModel:(FoyerProductModel * )productModel indexPath:(NSIndexPath *)indexPath
+{
+    if (productModel.vendibility.intValue==0) {
+        [ManagerHUD hidenHUD];
+        PopUpView * popVIew = [[PopUpView alloc] initShowAlertWithShowText:@"敬请期待" setBtnTitleArray:@[@"确定"]];
+        popVIew.confirmClick = ^(UIButton * button){
+        };
+        [self.surperVC.navigationController.view addSubview:popVIew];
+    }else{
+        if ([productModel.commodityName rangeOfString:@"股票"].location !=NSNotFound) {
+            self.backStyle = SubViewBackStyle;
+            PositionViewController * positionVC = [[PositionViewController alloc] init];
+            [_surperVC.navigationController pushViewController:positionVC animated:YES];
+            [ManagerHUD hidenHUD];
+        }else{
+            [self getIPWithIndexPath:indexPath];
+        }
+    }
+}
+
+- (void)getIPWithIndexPath:(NSIndexPath*)indexPath;
+{
+    
+    __block FoyerProductModel * productModel = _productDataArray[indexPath.row];;
+    [DataEngine requestToGetIPAndPortWithBlock:^(BOOL success, NSString * IP, NSString *Port) {
+        [ManagerHUD hidenHUD];
+
+        _IP = IP;
+        _port = Port;
+        
+        BOOL isPosition = NO;
+        for (NSDictionary * dic in _positionNumArray) {
+            if ([dic[@"instrumentCode"] rangeOfString:productModel.instrumentCode].location !=NSNotFound) {
+                
+                float num               = [dic[@"cash"]intValue] +[dic[@"score"]intValue];
+                if (num>0) {
+                    isPosition          = YES;
+                }
+                break;
+            
+            }
+        }
+        self.backStyle                  = SubViewBackStyle;
+        IndexViewController * indexVC   = [[IndexViewController alloc] init];
+        indexVC.ip                      = IP;
+        indexVC.port                    = Port;
+        indexVC.name                    = productModel.commodityName;
+        indexVC.code                    = productModel.instrumentID;
+        indexVC.isPosition              = isPosition;
+        indexVC.productModel            = productModel;
+        [_surperVC.navigationController pushViewController:indexVC animated:YES];
+        
+    }];
+    
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView;
+{
+    if (_tableView.contentOffset.y<0) {
+        _tableView.contentOffset = CGPointMake(0, 0);
+
+    }
+
+}// any offset changes
+
+@end

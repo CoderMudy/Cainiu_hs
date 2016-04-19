@@ -1,0 +1,2679 @@
+//
+//  IndexOrderController.m
+//  hs
+//
+//  Created by RGZ on 15/7/28.
+//  Copyright (c) 2015年 luckin. All rights reserved.
+//
+
+#import "IndexOrderController.h"
+#import "DetailViewController.h"
+#import "MoneyDetaillViewController.h"
+#import "NetRequest.h"
+#import "TradeConfigerModel.h"
+#import "MarketModel.h"
+
+#define Tag_stop            699
+#define Tag_get             700
+#define Tag_oneLine         701
+#define Tag_twoLine         702
+#define Tag_threeLine       703
+#define Tag_fourLine        704
+#define Tag_fiveLine        705
+//持仓时间：截至本交易时段02:27:59
+#define Tag_timeLine        706
+#define Tag_bottomButton    707
+#define Tag_agreeButton     708
+#define Tag_timeLabel       709
+
+@interface IndexOrderController ()
+{
+    NSMutableArray  *_moneyConfigerArray;
+    NSMutableArray  *_integralConfigerArray;
+    
+    TradeConfigerModel  *_moneyTrade;
+    TradeConfigerModel  *_integralTrade;
+    
+    int             selectStop;
+    int             selectGet;
+    //沪银、期指选择止损默认0
+    int             chooseStopNum;
+    //是否积分  0:现金  1：积分
+    int             isIntegral;
+    //轮询下单是否成功
+    NSTimer         *_timer;
+    //用户下单时间（系统时间）
+    NSString        *_systemTime;
+    //倒计时5秒
+    int             time;
+    
+    //优惠
+    UILabel         *_preferentialLabel;
+        
+    //小数位
+    int             floatNum;
+    
+    //当前买价
+    UILabel         *_priceLabel;
+    
+    //第一次进入，需引导
+    BOOL            isFirstStatus;
+    
+    //example:auTradeDic(存储到缓存文件的名字)
+    NSString        *_tradeDicName ;
+    
+    //汇率
+    float           exchangeRate;
+    
+    //是否开启快速下单
+    BOOL            isOpenQuick;
+    BOOL            orderQuick;
+    NSDictionary    *orderPramDic;
+    
+//    UIImageView     *guide_OneImg;
+//    UIImageView     *guide_TwoImg;
+//    UIImageView     *guide_ThreeImg;
+//    UIImageView     *guide_FourImg;
+//    
+//    UIView *guideView ;
+    
+//    UIView *couPonView;
+    UILabel *timeLabel;
+    
+    NSMutableArray *couPonIDArray;
+    
+    BOOL            isCouPonSelect;//是否有勾选优惠券
+    NSString           *isAutoCouPon;//是否自动抵扣
+
+}
+@end
+
+@implementation IndexOrderController
+@synthesize selectNum;
+@synthesize sunCoupon;
+@synthesize couPonArray;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    _isCouPon = @"NO";
+    isCouPonSelect = YES;
+    
+    [self loadNav];
+    
+    [self loadData];
+    
+    [self loadUI];
+    
+    [self orderGuideView];
+    
+//    [self requestCouPonData];
+    
+}
+
+//#pragma mark - 下单界面新手引导页
+- (void)orderGuideView
+{
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    if ([cacheModel.isOrderOrLogin isEqualToString:@"YES"])
+    {    
+        _guideView = [[UIView alloc]init];
+        _guideView.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeigth);
+        _guideView.backgroundColor = [UIColor blackColor];
+        _guideView.alpha = 0.7;
+        [self.view addSubview:_guideView];
+        
+        UITapGestureRecognizer *portraitTapTWo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editPortrait)];
+        [_guideView addGestureRecognizer:portraitTapTWo];
+
+        _guide_OneImg = [[UIImageView alloc]init];
+        _guide_OneImg.image = [UIImage imageNamed:@"order_guide_5"];
+        
+        if ([UIScreen mainScreen].bounds.size.height <= 480) {
+            _guide_OneImg.frame = CGRectMake(ScreenWidth/2 - 187*0.9*ScreenWidth/320/2, 44, 194*0.9*ScreenWidth/320 , 100*0.9*ScreenWidth/320);
+        }else
+        {
+            _guide_OneImg.frame = CGRectMake(ScreenWidth/2 - 187*0.9*ScreenWidth/320/2, 64, 194*0.9*ScreenWidth/320 , 100*0.9*ScreenWidth/320);
+        }
+        
+        [self.view addSubview:_guide_OneImg];
+        UITapGestureRecognizer *portr_one = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editPortrait)];
+        [_guide_OneImg addGestureRecognizer:portr_one];
+
+
+        _guide_TwoImg = [[UIImageView alloc]init];
+        _guide_TwoImg.image = [UIImage imageNamed:@"order_guide_6"];
+        if ([UIScreen mainScreen].bounds.size.height <= 480)
+        {
+            _guide_TwoImg.frame = CGRectMake(10, CGRectGetMaxY(_guide_OneImg.frame) + 10, ScreenWidth - 20 , 267*0.8*ScreenWidth/320);
+        }else
+        {
+            _guide_TwoImg.frame = CGRectMake(10, CGRectGetMaxY(_guide_OneImg.frame) + 20, ScreenWidth - 20 , 267*0.9*ScreenWidth/320);
+        }
+        
+        [self.view addSubview:_guide_TwoImg];
+        
+        UITapGestureRecognizer *portr_two = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editPortrait)];
+        [_guide_TwoImg addGestureRecognizer:portr_two];
+
+        _guide_ThreeImg = [[UIImageView alloc]init];
+        _guide_ThreeImg.userInteractionEnabled = YES;
+        _guide_ThreeImg.image = [UIImage imageNamed:@"order_guide_1"];
+        _guide_ThreeImg.frame = CGRectMake(ScreenWidth/2 - 55*0.9*ScreenWidth/320/2, CGRectGetMaxY(_guide_TwoImg.frame) + 25*ScreenWidth/320, 55*0.9*ScreenWidth/320 , 74*0.9*ScreenWidth/320);
+        [self.view addSubview:_guide_ThreeImg];
+    
+        UITapGestureRecognizer *portr_three = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editPortrait)];
+        [_guide_ThreeImg addGestureRecognizer:portr_three];
+
+    }
+}
+
+- (void)editPortrait
+{
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    cacheModel.isOrderOrLogin = @"NO";
+    [CacheEngine setCacheInfo:cacheModel];
+
+    [_guide_OneImg removeFromSuperview];
+    [_guide_TwoImg removeFromSuperview];
+    [_guide_ThreeImg removeFromSuperview];
+    [_guideView removeFromSuperview];
+}
+
+#pragma mark - 优惠券接口调用
+- (void)requestCouPonData
+{
+    couPonArray = [[NSMutableArray alloc]init];
+    
+    NSString * token =  [[CMStoreManager sharedInstance]getUserToken]==nil ?@"":[[CMStoreManager sharedInstance]getUserToken];
+    
+    NSDictionary * dic = @{@"token":token,@"futuresId":@([_productModel.productID intValue])};
+    [NetRequest postRequestWithNSDictionary:dic url:K_User_CouponList successBlock:^(NSDictionary *dictionary) {
+        
+        if ([dictionary[@"code"] intValue]==200)
+        {
+            if ([dictionary[@"data"] count] != 0) {
+                _isCouPon = @"YES";
+                for (NSDictionary *dic in dictionary[@"data"]) {
+                    [couPonArray addObject:dic];
+                }
+                [self changeAutoBtn];
+//                [self segClick:_seg];
+                
+                [_couPonView removeFromSuperview];
+                [self loadOtherMoneyLabel];
+                if (isFirstStatus) {
+                    [self segClick:_seg];
+                }
+
+            }else
+            {
+              _isCouPon = @"NO";
+                if (isFirstStatus) {
+                    [self segClick:_seg];
+                }
+            }
+        }else
+        {
+            if (isFirstStatus) {
+                [self segClick:_seg];
+            }
+        }
+        
+        if (!isFirstStatus) {
+            [self reloadAllData];
+        }
+
+        [self quickOrderText];
+
+    } failureBlock:^(NSError *error) {
+        
+    }];
+
+}
+
+- (void)changeAutoBtn
+{
+
+}
+
+#pragma mark - 快速下单页面说明文字
+- (void)quickOrderText
+{
+
+}
+
+#pragma mark - 改变优惠券这行后面的label文字
+- (void)couPonChangeLab
+{
+
+}
+
+#pragma mark - 改变快速下单合计支付的文字
+- (void)changeTotalMoney
+{
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+    self.rdv_tabBarController.tabBarHidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kPositionBosomPage object:self];
+}
+
+#pragma mark Nav
+
+-(void)loadNav{
+    UIImage *leftButtonImage = [UIImage imageNamed:@"return_1.png"];
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
+    [leftButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
+    [leftButton.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    leftButton.titleLabel.shadowColor = RGBACOLOR(117,38,0,1.0f);
+    leftButton.titleLabel.shadowOffset= CGSizeMake(0, -1);
+    leftButton.titleLabel.textColor = [UIColor whiteColor];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 44/2-leftButtonImage.size.height/2, leftButtonImage.size.width, leftButtonImage.size.height)];
+    imageView.image = [UIImage imageNamed:@"return_1"];
+    imageView.center = leftButton.center;
+    imageView.userInteractionEnabled = YES;
+    [self.view addSubview:imageView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backClick)];
+    [imageView addGestureRecognizer:tap];
+    
+    [self.view addSubview:leftButton];
+    
+    
+    self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    self.titleLabel.font = [UIFont systemFontOfSize:11];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@\n%@",_indexBuyModel.name,_indexBuyModel.code];
+    self.titleLabel.numberOfLines = 0;
+    self.titleLabel.center = CGPointMake(self.view.center.x, 20+22);
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.attributedText = [Helper multiplicityText:self.titleLabel.text from:0 to:(int)[_indexBuyModel.name length] font:15];
+    [self.view addSubview:self.titleLabel];
+}
+//返回
+-(void)backClick{
+    
+    UIViewController *controller = self.navigationController.viewControllers[1];
+    
+    [self.navigationController popToViewController:controller animated:YES];
+}
+
+#pragma mark Data
+
+-(void)loadData{
+    
+    //止损止盈
+    self.stopAndGetFrontHeight = 160.0;
+    //保证金手续费
+    self.otherMoneyFrontHeight = (140.0/568*ScreenHeigth + (40.0/568*ScreenHeigth) * 3 +17.0/568*ScreenHeigth);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSocketInfo:) name:kPositionBosomPage object:nil];
+    
+    _numArray = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:2],[NSNumber numberWithInt:4],[NSNumber numberWithInt:8], nil];
+    
+    _moneyConfigerArray = [NSMutableArray arrayWithCapacity:0];
+    
+    _integralConfigerArray = [NSMutableArray arrayWithCapacity:0];
+    
+    selectStop = 0;
+    selectGet = 0;
+    
+    //缓存
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    
+    if (cacheModel.tradeDic == nil || [cacheModel.tradeDic isKindOfClass:[NSNull class]]) {
+        cacheModel.tradeDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        [CacheEngine setCacheInfo:cacheModel];
+    }
+    
+    if (self.indexBuyModel.code.length > 2) {
+        _tradeDicName = [NSString stringWithFormat:@"%@TradeDic",[self.indexBuyModel.code substringToIndex:2]];
+    }
+    else{
+        _tradeDicName = self.indexBuyModel.code;
+    }
+    if (cacheModel.tradeDic[_tradeDicName] != nil && ![cacheModel.tradeDic[_tradeDicName] isKindOfClass:[NSNull class]]) {
+        _moneyConfigerArray = [NSMutableArray arrayWithArray:[cacheModel.tradeDic[_tradeDicName] objectForKey:@"money"]];
+        _integralConfigerArray = [NSMutableArray arrayWithArray:[cacheModel.tradeDic[_tradeDicName] objectForKey:@"integral"]];
+        selectGet = [cacheModel.tradeDic[_tradeDicName][@"selectGet"] intValue];
+        int count = 0;
+        
+        if (_moneyConfigerArray != nil && ![_moneyConfigerArray isKindOfClass:[NSNull class]]) {
+            if (_moneyConfigerArray.count > 0) {
+                _moneyTrade = _moneyConfigerArray[0];
+                count++;
+            }
+        }
+        
+        if (_integralConfigerArray != nil && ![_integralConfigerArray isKindOfClass:[NSNull class]]) {
+            if (_integralConfigerArray.count > 0) {
+                _integralTrade = _integralConfigerArray[0];
+                count++;
+            }
+        }
+        
+        if (count == 2) {
+            [self reloadAllData];
+        }
+    }
+    else{
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];
+        cacheModel.tradeDic[_tradeDicName] = dic;
+        [CacheEngine setCacheInfo:cacheModel];
+    }
+    
+    
+    chooseStopNum = 0;
+    selectNum = 0;
+    
+    if (!isOpenQuick) {
+        [self getMarketEndTime];
+        
+    }
+    
+    if (self.buyState !=2 && self.isOpen) {
+        
+    }
+    else{
+        [[UIEngine sharedInstance] hideProgress];
+        [self getTradeConfiger];
+    }
+}
+
+#pragma mark 获取行情数据
+
+-(void)getSocketInfo:(NSNotification *)notify{
+    NSDictionary    * infoDic = notify.object;
+    
+    if ([infoDic[@"code"] rangeOfString:self.indexBuyModel.code].location != NSNotFound) {
+        if (self.buyState == 0) {
+            //看多取的价
+            _indexBuyModel.currentPrice = infoDic[@"askPrice"];
+        }
+        else if (self.buyState == 1){
+            //看空取的价
+            _indexBuyModel.currentPrice = infoDic[@"bidPrice"];
+        }
+        
+        //au
+        if ([self.productModel.decimalPlaces floatValue] == 2) {
+            _indexBuyModel.currentPrice = [NSString stringWithFormat:@"%.2f",[_indexBuyModel.currentPrice doubleValue]];
+        }
+        //if
+        else if ([self.productModel.decimalPlaces floatValue] == 1){
+            _indexBuyModel.currentPrice = [NSString stringWithFormat:@"%.1f",[_indexBuyModel.currentPrice doubleValue]];
+        }
+        //ag
+        else if ([self.productModel.decimalPlaces floatValue] == 0){
+            _indexBuyModel.currentPrice = [NSString stringWithFormat:@"%.0f",[_indexBuyModel.currentPrice doubleValue]];
+        }
+        
+        _priceLabel.text = _indexBuyModel.currentPrice;
+        
+        //更新当前买价
+        [self updateCurrentPriceLabel];
+        
+        //刷新止损止盈价
+        [self reloadOfStopPriceOrGetPrice];
+    }
+}
+#pragma mark 获取市场交易时段
+
+-(void)getMarketEndTime{
+    
+    floatNum = [self.productModel.decimalPlaces intValue];
+    
+    NSDictionary *dic=@{
+                        @"marketId":[NSNumber numberWithInt:[self.productModel.marketId intValue]],
+                        };
+    NSString     *url=[NSString stringWithFormat:@"http://%@/market/market/marketStatus",HTTP_IP];
+    
+    
+    [NetRequest postRequestWithNSDictionary:dic url:url successBlock:^(NSDictionary *dictionary) {
+        
+        if ([dictionary[@"code"] integerValue] == 200) {
+            
+            NSMutableArray  *marketArray = [NSMutableArray arrayWithCapacity:0];
+            
+            for (int i = 0; i < [dictionary[@"data"] count]; i++) {
+                MarketModel *marketModel = [[MarketModel alloc]init];
+                marketModel.desc = dictionary[@"data"][i][@"desc"];
+                marketModel.endTime = [dictionary[@"data"][i][@"end_time"] longLongValue];
+                marketModel.startTime = [dictionary[@"data"][i][@"start_time"] longLongValue];
+                marketModel.status = [dictionary[@"data"][i][@"status"] intValue];
+                marketModel.type = [dictionary[@"data"][i][@"type"] intValue];
+                [marketArray addObject:marketModel];
+            }
+            
+            orderQuick = NO;
+            
+            UILabel *timeLabel = (UILabel *)[self.view viewWithTag:Tag_timeLabel];
+            timeLabel.text = [self autoCalculateEndTime:marketArray];
+            
+        }
+    } failureBlock:^(NSError *error) {
+    }];
+}
+
+- (NSString *)autoCalculateEndTime:(NSMutableArray *)aMarketArray{
+    
+    NSString    *showStr = @"本时段持仓时间至02:25:00";
+    
+    NSMutableArray *infoArray = [NSMutableArray arrayWithCapacity:0];
+    
+    for (int i = 0; i<aMarketArray.count; i++) {
+        MarketModel *marketModel = aMarketArray[i];
+        
+        NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:marketModel.startTime/1000];
+        NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:marketModel.endTime/1000];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"HH:mm"];
+        
+        
+        if (marketModel.status == 2 || marketModel.status == 3) {
+            NSString *startDateStr = [dateFormatter stringFromDate:startDate];
+            NSString *endDateStr = [dateFormatter stringFromDate:endDate];
+            if ([endDateStr rangeOfString:@"02:"].location != NSNotFound || [endDateStr rangeOfString:@"01:"].location != NSNotFound || [endDateStr rangeOfString:@"00:"].location != NSNotFound || [endDateStr rangeOfString:@"03:"].location != NSNotFound) {
+                endDateStr = [NSString stringWithFormat:@"次日%@",endDateStr];
+            }
+            [infoArray addObject:[NSString stringWithFormat:@"%@-%@",startDateStr,endDateStr]];
+        }
+    }
+    
+    
+    
+    for (int i = 0; i<aMarketArray.count; i++) {
+        MarketModel *marketModel = aMarketArray[i];
+
+        if ([SystemSingleton sharedInstance].timeInterval >= marketModel.startTime && [SystemSingleton sharedInstance].timeInterval <= marketModel.endTime) {
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:marketModel.endTime/1000];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+            [dateFormatter setDateFormat:@"HH:mm:ss"];
+            NSString *dateStr = [dateFormatter stringFromDate:date];
+            
+            NSLog(@"%@",marketModel.desc);
+            
+            if (marketModel.status != 2 && marketModel.status != 3) {
+                
+                if (infoArray.count == 0) {
+                    [infoArray addObject:@"周六、周日和国家规定节假日休市"];
+                }
+                
+                [[UIEngine sharedInstance] showAlertSpecialWithTitle:@"当前为非交易时间段" TimeArray:infoArray];
+                [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                };
+                if (self.isOpen) {
+                    [[UIEngine sharedInstance] hideProgress];
+                }
+            }
+            else{
+                //闪电下单
+                if (isOpenQuick) {
+                    orderQuick = YES;
+                }
+                
+                showStr = [NSString stringWithFormat:@"本时段持仓时间至%@",dateStr];
+            }
+        }
+    }
+    
+    //闪电下单
+    if (isOpenQuick && orderQuick) {
+        [self orderGo:orderPramDic];
+    }
+    
+    return showStr;
+    
+}
+
+//获取配资额度
+
+#pragma mark 获取配资额度
+
+-(void)getTradeConfiger{
+    
+    //是否第一次进入，引导用户
+    isFirstStatus = NO;
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    if (cacheModel.tradeDic[_tradeDicName]!=nil) {
+        if ([cacheModel.tradeDic[_tradeDicName] allKeys].count < 4) {
+            isFirstStatus = YES;
+        }
+        if (self.isQuickOrder) {
+            selectStop = [cacheModel.tradeDic[_tradeDicName][@"chooseStopQuick"] intValue];
+            selectGet = [cacheModel.tradeDic[_tradeDicName][@"chooseGetQuick"] intValue];
+        }
+        else{
+            selectStop = [cacheModel.tradeDic[_tradeDicName][@"chooseStop"] intValue];
+            selectGet = [cacheModel.tradeDic[_tradeDicName][@"chooseGet"] intValue];
+        }
+        [CacheEngine setCacheInfo:cacheModel];
+    }
+    
+    
+    [UIEngine sharedInstance].progressStyle = 2;
+    [[UIEngine sharedInstance] showProgress];
+    [DataEngine requestToGetTraderConfiger:self.productModel.instrumentCode completeBlock:^(BOOL SUCCESS, NSMutableArray * moneyArray,NSMutableArray *integralArray) {
+        [[UIEngine sharedInstance] hideProgress];
+        if (SUCCESS) {
+            
+            if (moneyArray.count>0 && integralArray.count > 0){
+                _moneyConfigerArray = [NSMutableArray arrayWithArray:moneyArray];
+                _integralConfigerArray = [NSMutableArray arrayWithArray:integralArray];
+                
+                //默认选择止损
+                [self defaultChooseStop];
+                //默认选择止盈
+                [self defaultChooseGet:NO];
+                //刷新UI数据
+                if (isFirstStatus) {
+                    [self defaultData];
+//                    [self requestCouPonData];
+//                    [self segClick:_seg];//暂时
+                    [self configerButton];
+                }
+                else{
+                    //缓存数组
+//                    [self requestCouPonData];
+                    [self cacheTradeInfo];
+                    [self reloadAllData];
+                }
+            }
+            else{
+                [UIEngine showShadowPrompt:@"配资额度配置失败，请重试"];
+            }
+            
+        }
+        else{
+            [UIEngine showShadowPrompt:@"配资额度配置失败，请重试"];
+        }
+    }];
+}
+
+#pragma mark 第一次进入引导
+
+-(void)defaultData{
+    _oneLabel.text = @"";
+    _oneLabel.attributedText = nil;
+    _oneLabel.text = @"请选择止损额度";
+    
+    _twoLabel.text = @"";
+    _twoLabel.attributedText = nil;
+    _twoLabel.text = @"请选择止盈额度";
+    _twoLabel.superview.backgroundColor = Color_gray;
+    
+    
+    UILabel *threeLabel = (UILabel *)[_couPonView viewWithTag:Tag_threeLine];
+    threeLabel.text = @"￥--";
+    
+    UILabel *fiveLabel = (UILabel *)[_couPonView viewWithTag:Tag_fiveLine];
+    fiveLabel.text = @"￥--";
+    
+    if([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound){
+        threeLabel.text = @"$--";
+        fiveLabel.text = [NSString stringWithFormat:@"￥--\n$--x汇率%@",_moneyTrade.rate];
+    }
+}
+
+#pragma mark 缓存数组
+-(void)cacheTradeInfo{
+    
+    NSArray *muliArray = [_moneyTrade.multiple componentsSeparatedByString:@","];
+    
+    [_numArray removeAllObjects];
+    
+    for (int i = 0; i<muliArray.count; i++) {
+        [_numArray addObject:[NSNumber numberWithInt:[muliArray[i] intValue]]];
+    }
+    
+    //缓存
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    if (cacheModel.tradeDic[_tradeDicName] == nil) {
+        cacheModel.tradeDic[_tradeDicName] = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    [cacheModel.tradeDic[_tradeDicName] setObject:_moneyConfigerArray forKey:@"money"];
+    [cacheModel.tradeDic[_tradeDicName] setObject:_integralConfigerArray forKey:@"integral"];
+    [CacheEngine setCacheInfo:cacheModel];
+}
+
+
+#pragma mark 默认选择止损
+-(void)defaultChooseStop{
+    
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    
+    BOOL    switchOpen = NO;
+    
+    if (self.isQuickOrder) {
+        if (cacheModel.tradeDic[_tradeDicName][@"chooseStopQuick"] == nil) {
+            switchOpen = NO;
+        }
+        else{
+            switchOpen = YES;
+        }
+    }
+    else{
+        if (cacheModel.tradeDic[_tradeDicName][@"chooseStop"] == nil) {
+            switchOpen = NO;
+        }
+        else{
+            switchOpen = YES;
+        }
+    }
+    
+    if (!switchOpen) {
+        for (int i = 0; i<_moneyConfigerArray.count; i++) {
+            TradeConfigerModel *model = _moneyConfigerArray[i];
+            
+            if ([model.isDefault floatValue] == 1) {
+                _moneyTrade = model;
+                selectStop = i;
+            }
+        }
+        
+        for (int i = 0; i<_integralConfigerArray.count; i++) {
+            TradeConfigerModel *model = _integralConfigerArray[i];
+            
+            if ([model.isDefault floatValue] == 1) {
+                _integralTrade = model;
+                selectStop = i;
+            }
+        }
+    }
+    else{
+        if (isIntegral) {
+            if (selectStop >= _integralConfigerArray.count) {
+                selectStop = (int)_integralConfigerArray.count - 1;
+            }
+        }
+        else{
+            if (selectStop >= _moneyConfigerArray.count) {
+                selectStop = (int)_moneyConfigerArray.count - 1;
+            }
+        }
+        
+        _moneyTrade = _moneyConfigerArray[selectStop];
+        _integralTrade = _integralConfigerArray[selectStop];
+    }
+}
+
+#pragma mark 默认选择止盈
+
+-(void)defaultChooseGet:(BOOL)aDefaultGet{
+    
+    BOOL    canUseDefault = aDefaultGet ;
+    
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    if (canUseDefault==NO) {
+        if (self.isQuickOrder) {
+            if (cacheModel.tradeDic[_tradeDicName][@"chooseGetQuick"] == nil || [cacheModel.tradeDic[_tradeDicName][@"chooseGetQuick"] isKindOfClass:[NSNull class]]) {
+                canUseDefault = YES;
+            }
+            else{
+                canUseDefault = NO;
+            }
+        }
+        else{
+            if (cacheModel.tradeDic[_tradeDicName][@"chooseGet"] == nil || [cacheModel.tradeDic[_tradeDicName][@"chooseGet"] isKindOfClass:[NSNull class]]) {
+                canUseDefault = YES;
+            }
+            else{
+                canUseDefault = NO;
+            }
+        }
+    }
+    
+    if (canUseDefault == YES) {
+        if (isIntegral) {
+            TradeConfigerModel  *model = _integralConfigerArray[selectStop];
+            NSArray *temArray = [model.maxProfit componentsSeparatedByString:@","];
+            
+            for (int i = 0; i<temArray.count; i++) {
+                if ([model.defaultProfit isEqualToString:temArray[i]]) {
+                    selectGet = i;
+                }
+            }
+        }
+        else{
+            TradeConfigerModel  *model = _moneyConfigerArray[selectStop];
+            NSArray *temArray = [model.maxProfit componentsSeparatedByString:@","];
+            
+            for (int i = 0; i<temArray.count; i++) {
+                if ([model.defaultProfit isEqualToString:temArray[i]]) {
+                    selectGet = i;
+                }
+            }
+        }
+    }
+    else{
+        if (isIntegral) {
+            TradeConfigerModel  *model = _integralConfigerArray[selectStop];
+            NSArray *temArray = [model.maxProfit componentsSeparatedByString:@","];
+            if (temArray != nil && temArray.count - 1 <= selectGet ) {
+                if (![temArray.lastObject isEqualToString:@""]) {
+                    selectGet = (int)temArray.count - 1;
+                }
+                else{
+                    selectGet = (int)temArray.count - 2;
+                }
+            }
+        }
+        else{
+            TradeConfigerModel  *model = _moneyConfigerArray[selectStop];
+            NSArray *temArray = [model.maxProfit componentsSeparatedByString:@","];
+            if (temArray != nil && temArray.count - 1 <= selectGet) {
+                if (![temArray.lastObject isEqualToString:@""]) {
+                    selectGet = (int)temArray.count - 1;
+                }
+                else{
+                    selectGet = (int)temArray.count - 2;
+                }
+            }
+        }
+    }
+}
+
+#pragma mark - 更新优惠券数据
+- (void)reloadCouPonData
+{
+    //判断优惠券的张数和面额值是否大于手续费活手数
+    sunCoupon = 0.0;
+    double couPonMore = 0.0;
+    double couPonLittle = 0.0;
+    
+    couPonIDArray = [[NSMutableArray alloc]init];
+    
+    NSInteger numCount;
+    
+    if (couPonArray.count > 0 && couPonArray != nil) {
+        if (couPonArray.count >[_numArray[selectNum] intValue]) {
+            numCount = [_numArray[selectNum] intValue];
+        }else
+        {
+            numCount = couPonArray.count;
+        }
+        for (NSInteger i = 0; i<numCount; i++)
+        {
+            NSDictionary *couDic = couPonArray[i];
+            if ([couDic[@"amount"] doubleValue] > [_tradeModel.counterFee doubleValue]) {
+                couPonMore = couPonMore + [_tradeModel.counterFee doubleValue];
+            }else
+            {
+                couPonLittle = couPonLittle + [couDic[@"amount"] doubleValue];
+            }
+            
+            [couPonIDArray addObject:couDic[@"id"]];
+        }
+        
+        sunCoupon = couPonLittle + couPonMore;
+        _couPonLab.text = [NSString stringWithFormat:@"使用%d张 ￥-%.2f",numCount,sunCoupon];
+        CGSize couPonSize = [Helper sizeWithText:_couPonLab.text font:[UIFont systemFontOfSize:15.0] maxSize:CGSizeMake(ScreenWidth - 60, 20)];
+        _couPonBtn.frame = CGRectMake(ScreenWidth - 60 - couPonSize.width, CGRectGetMinY(_couPonLab.frame), 40, _couPonLab.frame.size.height);
+    }
+
+}
+#pragma mark -
+#pragma mark 刷新数据
+
+-(void)reloadAllData{
+    
+    //触发止损
+    if (self.mainState == 0) {
+        chooseStopNum = 0;
+    }
+    //保证金
+    UILabel *threeLabel = (UILabel *)[_couPonView viewWithTag:Tag_threeLine];
+    //交易综合费
+    UILabel *fourLabel = (UILabel *)[_couPonView viewWithTag:Tag_fourLine];
+    //合计
+    UILabel *fiveLabel = (UILabel *)[_couPonView viewWithTag:Tag_fiveLine];
+    
+//    TradeConfigerModel *tradeModel ;
+    
+    if (isIntegral) {
+        if (chooseStopNum == 0) {
+            _tradeModel = _integralTrade;
+        }
+        
+        if (selectStop >= _integralConfigerArray.count) {
+            selectStop = (int)_integralConfigerArray.count - 1;
+        }
+    }
+    else{
+        if (chooseStopNum == 0) {
+            _tradeModel = _moneyTrade;
+        }
+        
+        if (selectStop >= _moneyConfigerArray.count) {
+            selectStop = (int)_moneyConfigerArray.count - 1;
+        }
+    }
+    
+    //====
+    
+    [self reloadCouPonData];
+    [self configerButton];
+    
+    NSString    *twoLabelPrice;
+    NSArray  * getArray = [_tradeModel.maxProfit componentsSeparatedByString:@","];
+    if (getArray != nil && selectGet <= getArray.count-1) {
+        twoLabelPrice = getArray[selectGet];
+    }
+    else{
+        twoLabelPrice = @"";
+    }
+    
+
+        //手数
+//    NSArray *numArray = @[@1,@2,@4,@8];
+    if (isIntegral) {
+        
+        if (_integralConfigerArray != nil && selectStop >= _integralConfigerArray.count) {
+            selectStop = (int)_integralConfigerArray.count - 1;
+        }
+        
+        _oneLabel.text = @"";
+        _oneLabel.attributedText = nil;
+        _oneLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%ld",(long)[_tradeModel.maxLoss integerValue]]] stringByAppendingString:@" 积分/手"];
+        _oneLabel.attributedText = [Helper multiplicityText:_oneLabel.text from:(int)_oneLabel.text.length-4 to:2 font:11];
+        
+        _twoLabel.text = @"";
+        _twoLabel.attributedText = nil;
+        _twoLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%ld",(long)[twoLabelPrice integerValue]]] stringByAppendingString:@" 积分/手"];
+        _twoLabel.attributedText = [Helper multiplicityText:_twoLabel.text from:(int)_twoLabel.text.length-4 to:2 font:11];
+        
+        
+        threeLabel.text = @"";
+        threeLabel.attributedText = nil;
+        threeLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%d",[_tradeModel.cashFund intValue] * [_numArray[selectNum] intValue]]] stringByAppendingString:@" 积分"];
+        threeLabel.attributedText = [Helper multiplicityText:threeLabel.text from:(int)threeLabel.text.length-2 to:2 font:11];
+        
+        
+        fourLabel.text = @"";
+        fourLabel.attributedText = nil;
+        //更新服务费
+        //优惠
+        if ([_tradeModel.theoryCounterFee doubleValue] != [_tradeModel.counterFee doubleValue]){
+            NSString    *frontStr = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.0f",[_tradeModel.theoryCounterFee doubleValue] * [_numArray[selectNum] intValue]]];
+            NSString    *behindStr = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.0f",[_tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue]]];
+
+            if (fourLabel!= nil) {
+                fourLabel.text = [NSString stringWithFormat:@"%@积分 %@积分",frontStr,behindStr];
+                fourLabel.attributedText = [self multiplicityActivity:fourLabel.text from:0 to:(int)(frontStr.length+2) color:[UIColor lightGrayColor] otherFontWithFrom:(int)frontStr.length to:2 SecondOtherFontWithFrom:(int)(frontStr.length+2+1+behindStr.length) to:2];
+            }
+        }
+        else{
+            fourLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%d",[_tradeModel.counterFee intValue] * [_numArray[selectNum] intValue]]] stringByAppendingString:@" 积分"];
+            fourLabel.attributedText = [Helper multiplicityText:fourLabel.text from:(int)fourLabel.text.length-2 to:2 font:11];
+        
+        }
+        
+        
+        if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+            double fiveLabelNum = [_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue];
+            
+            fiveLabel.text = [NSString stringWithFormat:@"%@积分 \n%@积分x汇率%@",[DataEngine addSign:[NSString stringWithFormat:@"%.0f",fiveLabelNum*[_tradeModel.rate floatValue]]],[DataEngine addSign:[NSString stringWithFormat:@"%.0f",fiveLabelNum]],_tradeModel.rate];
+            int attributeNum =(int)[DataEngine addSign:[NSString stringWithFormat:@"%.0f",fiveLabelNum*[_tradeModel.rate floatValue]]].length;
+            if (fiveLabel.text != nil && fiveLabel.text.length > attributeNum) {
+                fiveLabel.attributedText = [Helper multiplicityText:fiveLabel.text from:attributeNum to:(int)fiveLabel.text.length - attributeNum font:10];
+            }
+        }
+        else{
+            fiveLabel.text = @"";
+            fiveLabel.attributedText = nil;
+            fiveLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.f",[_tradeModel.cashFund intValue] * [_numArray[selectNum] intValue] + [_tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue]]] stringByAppendingString:@" 积分"];
+        }
+        
+    }
+    else{
+        NSLog(@"现金交易");
+        if (_moneyConfigerArray != nil && selectStop >= _moneyConfigerArray.count) {
+            selectStop = (int)_moneyConfigerArray.count - 1;
+        }
+        
+        if ([self.indexBuyModel.code rangeOfString:@"CN"].location == NSNotFound) {
+            _oneLabel.text = [NSString stringWithFormat:@"￥%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.maxLoss floatValue]]]];
+            _twoLabel.text = [NSString stringWithFormat:@"￥%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[twoLabelPrice floatValue]]]];
+            threeLabel.text = [NSString stringWithFormat:@"￥%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]]];
+            
+            //判断是否勾选和自动勾选优惠券
+            if (isCouPonSelect == YES) {
+                
+                if (couPonArray.count > 0) {
+                    NSString *fontStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]];
+                    NSString *behindStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue] - sunCoupon]];
+                    NSString *ceshiStr = [NSString stringWithFormat:@"￥%@ ￥%@",fontStr,behindStr];
+                    fiveLabel.attributedText = [self multiplicityActivity:ceshiStr from:0 to:(int)(fontStr.length+1) color:[UIColor lightGrayColor] otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
+                }else
+                {
+                    fiveLabel.text = [NSString stringWithFormat:@"￥%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]]];
+                }
+                
+            }else
+            {
+                fiveLabel.text = [NSString stringWithFormat:@"￥%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]]];
+            }
+            
+        }
+        else{
+            _oneLabel.text = [NSString stringWithFormat:@"$%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.maxLoss floatValue]]]];
+            _twoLabel.text = [NSString stringWithFormat:@"$%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[twoLabelPrice floatValue]]]];
+            threeLabel.text = [NSString stringWithFormat:@"$%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]]];
+            double fiveLabelNum = [_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue];
+            
+            if (isCouPonSelect == YES)
+            {
+//                fiveLabel.text = [NSString stringWithFormat:@"￥%@ ￥%@ \n$%@x汇率%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",fiveLabelNum*[_tradeModel.rate floatValue]]],[DataEngine addSign:[NSString stringWithFormat:@"%.2f",fiveLabelNum*[_tradeModel.rate floatValue]]],[DataEngine addSign:[NSString stringWithFormat:@"%.2f",fiveLabelNum]],_tradeModel.rate];
+            }else
+            {
+                fiveLabel.text = [NSString stringWithFormat:@"￥%@ \n$%@x汇率%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",fiveLabelNum*[_tradeModel.rate floatValue]]],[DataEngine addSign:[NSString stringWithFormat:@"%.2f",fiveLabelNum]],_tradeModel.rate];
+            }
+            
+            
+            int attributeNum =(int)[DataEngine addSign:[NSString stringWithFormat:@"%.2f",fiveLabelNum*[_tradeModel.rate floatValue]]].length + 2;
+            if (fiveLabel.text != nil && fiveLabel.text.length > attributeNum) {
+                fiveLabel.attributedText = [Helper multiplicityText:fiveLabel.text from:attributeNum to:(int)fiveLabel.text.length - attributeNum font:10];
+            }
+            
+        }
+        
+        //优惠
+        NSString    *frontStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.theoryCounterFee doubleValue] * [_numArray[selectNum] intValue]]];
+        NSString    *behindStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue]]];
+        
+        
+        if ([_tradeModel.theoryCounterFee doubleValue] != [_tradeModel.counterFee doubleValue]) {
+            if (fourLabel != nil) {
+                
+                if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                    fourLabel.text = [NSString stringWithFormat:@"$%@ $%@",frontStr,behindStr];
+                }
+                else{
+                    fourLabel.text = [NSString stringWithFormat:@"￥%@ ￥%@",frontStr,behindStr];
+                }
+                
+                fourLabel.attributedText = [self multiplicityActivity:fourLabel.text from:0 to:(int)(frontStr.length+1) color:[UIColor lightGrayColor] otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
+                
+                _preferentialLabel.hidden = NO;
+            }
+        }
+        else{
+        //无优惠
+            
+            if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                fourLabel.text = [NSString stringWithFormat:@"$%@",behindStr];
+            }
+            else{
+                fourLabel.text = [NSString stringWithFormat:@"￥%@",behindStr];
+            }
+            _preferentialLabel.hidden = YES;
+        }
+    }
+    
+    
+    //计算止损价、止盈价
+    [self reloadOfStopPriceOrGetPrice];
+    [self couPonChangeLab];
+    [self changeTotalMoney];
+}
+
+#pragma mark 刷新触发止损、止盈价
+//计算止损止盈单价
+-(double)calculateStopUnitPrice{
+    double aStopPrice = 0.0;
+    
+    TradeConfigerModel *tradeModel ;
+    
+    if (isIntegral) {
+        if (chooseStopNum == 0) {
+            tradeModel = _integralTrade;
+        }
+    }
+    else{
+        if (chooseStopNum == 0) {
+            tradeModel = _moneyTrade;
+        }
+    }
+    
+    aStopPrice = [tradeModel.maxLoss doubleValue];
+    
+    return aStopPrice;
+}
+
+-(double)calculateGetUnitPrice{
+    double aGetPrice  = 0.0;
+    
+    TradeConfigerModel *tradeModel ;
+    
+    if (isIntegral) {
+        if (chooseStopNum == 0) {
+            tradeModel = _integralTrade;
+        }
+    }
+    else{
+        if (chooseStopNum == 0) {
+            tradeModel = _moneyTrade;
+        }
+    }
+    NSString    *twoLabelPrice;
+    NSArray  * getArray = [tradeModel.maxProfit componentsSeparatedByString:@","];
+    if (getArray != nil && selectGet <= getArray.count-1) {
+        twoLabelPrice = getArray[selectGet];
+    }
+    else{
+        twoLabelPrice = @"";
+    }
+    
+    aGetPrice  = [twoLabelPrice doubleValue];
+    
+    return aGetPrice;
+}
+
+-(void)reloadOfStopPriceOrGetPrice{
+    
+    double  aStopPrice = [self calculateStopUnitPrice] ,
+            aGetPrice = [self calculateGetUnitPrice];
+    
+    double unitPrice = 0.0;
+    
+    UILabel *stopLabel = (UILabel *)[self.view viewWithTag:Tag_stop];
+    UILabel *getLabel  = (UILabel *)[self.view viewWithTag:Tag_get];
+    
+    if ([_oneLabel.text isEqualToString:@"￥0.00"]) {
+        _oneLabel.text = @"请选择止损额度";
+    }
+    
+    if ([_twoLabel.text isEqualToString:@"￥0.00"]) {
+        _twoLabel.text = @"请选择止盈额度";
+    }
+    
+    if (stopLabel != nil) {
+        if (![_oneLabel.text isEqualToString:@"请选择止损额度"]) {
+            
+            unitPrice = aStopPrice/[self.productModel.multiple doubleValue];
+            
+            NSString *unitPriceStr = [NSString stringWithFormat:@"%f",unitPrice];
+            
+            if (self.buyState == 0) {
+                stopLabel.text = [NSString stringWithFormat:@"触发止损（价格%@）",[DataUsedEngine conversionFloatNum:[_indexBuyModel.bullishBuyPrice floatValue] - [unitPriceStr floatValue] ExpectFloatNum:[self.productModel.decimalPlaces intValue] ]];
+            }
+            else if (self.buyState == 1){
+                stopLabel.text = [NSString stringWithFormat:@"触发止损（价格%@）",[DataUsedEngine conversionFloatNum:[_indexBuyModel.bearishAveragePrice floatValue] + [unitPriceStr floatValue] ExpectFloatNum:[self.productModel.decimalPlaces intValue] ]];
+            }
+            
+            if (stopLabel.text.length > 4) {
+                stopLabel.attributedText = [Helper multiplicityText:stopLabel.text from:4 to:(int)stopLabel.text.length - 4 color:Color_Gold];
+            }
+            
+        }
+    }
+    
+    if (getLabel != nil) {
+        if (![_twoLabel.text isEqualToString:@"请选择止盈额度"]) {
+            
+            unitPrice = aGetPrice/[self.productModel.multiple doubleValue];
+            
+            NSString *unitPriceStr = [NSString stringWithFormat:@"%f",unitPrice];
+            
+            
+            if (self.buyState == 0) {
+                
+                getLabel.text = [NSString stringWithFormat:@"触发止赢（价格%@）",[DataUsedEngine conversionFloatNum:[_indexBuyModel.bullishBuyPrice floatValue] + [unitPriceStr floatValue] ExpectFloatNum:[self.productModel.decimalPlaces intValue] ]];
+            }
+            else if (self.buyState == 1){
+                
+                getLabel.text = [NSString stringWithFormat:@"触发止赢（价格%@）",[DataUsedEngine conversionFloatNum:[_indexBuyModel.bearishAveragePrice floatValue] - [unitPriceStr floatValue] ExpectFloatNum:[self.productModel.decimalPlaces intValue] ]];
+            }
+            
+            if (getLabel.text.length > 4) {
+                getLabel.attributedText = [Helper multiplicityText:getLabel.text from:4 to:(int)getLabel.text.length - 4 color:Color_Gold];
+            }
+        }
+    }
+}
+
+#pragma mark 配置交易数量按钮
+-(void)configerButton{
+    TradeConfigerModel *tradeNumModel ;
+    
+    if (isIntegral) {
+        if (chooseStopNum == 0) {
+            tradeNumModel = _integralTrade;
+        }
+    }
+    else{
+        if (chooseStopNum == 0) {
+            tradeNumModel = _moneyTrade;
+        }
+    }
+    
+    NSArray *muliArray = [tradeNumModel.multiple componentsSeparatedByString:@","];
+    
+    [_numArray removeAllObjects];
+    
+    for (int i = 0; i<muliArray.count; i++) {
+        [_numArray addObject:[NSNumber numberWithInt:[muliArray[i] intValue]]];
+    }
+    
+    
+    NSArray *numsArray = _numArray;
+    
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+    
+    for (int i = 0; i< _numArray.count; i++) {
+        for (int j = 0; j<numsArray.count; j++) {
+            if ([_numArray[i] intValue] == [numsArray[j] intValue]) {
+                [array addObject:_numArray[i]];
+            }
+        }
+    }
+    
+    for (int i = 0; i<_numArray.count; i++) {
+        UIButton *button = (UIButton *)[self.view viewWithTag:i+777];
+        button.tag = i+777;
+        [button setTitle:[NSString stringWithFormat:@"%d手",[_numArray[i] intValue]] forState:UIControlStateNormal];
+    }
+    
+}
+#pragma mark -
+#pragma mark UI
+
+-(void)loadUI{
+    self.view.backgroundColor = Color_black;
+    
+    [self loadSeg];
+    
+    //当前价
+    [self loadCurrentPriceLabel];
+    
+    //触发止损、止盈、手数
+    [self loadStopAndGetUI];
+    
+    //保证金、手续费
+    [self loadOtherMoneyLabel];
+    
+    timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, ScreenHeigth-80.0/667*ScreenHeigth-5.0/568.0*ScreenHeigth - 30.0/568*ScreenHeigth, ScreenWidth, 30.0/568*ScreenHeigth)];
+    timeLabel.font = [UIFont boldSystemFontOfSize:13];
+    timeLabel.textColor = Color_red;
+    timeLabel.tag = Tag_timeLabel;
+    timeLabel.text = @"本时段持仓时间至02:25:00";
+    timeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:timeLabel];
+    
+    if (!self.canUse) {
+        timeLabel.hidden = YES;
+    }
+
+    [self loadBottomButton];
+    
+}
+
+#pragma mark 当前价
+
+-(void)loadCurrentPriceLabel{
+    
+    UILabel *proLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (64+50)/568.0*ScreenHeigth, ScreenWidth, 14)];
+    if (self.buyState == 0) {
+        proLabel.text  = @"看多价";
+    }
+    else{
+        proLabel.text  = @"看空价";
+    }
+    proLabel.textAlignment = NSTextAlignmentCenter;
+    proLabel.font = [UIFont systemFontOfSize:10];
+    proLabel.textColor = [UIColor lightGrayColor];
+    [self.view addSubview:proLabel];
+    
+    _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, proLabel.frame.size.height+proLabel.frame.origin.y, ScreenWidth, 20)];
+    _priceLabel.text = @"— —";
+    _priceLabel.font = [UIFont systemFontOfSize:17];
+    _priceLabel.textColor = Color_Gold;
+    _priceLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_priceLabel];
+    
+    if (self.buyState == 0) {
+        _priceLabel.text = _indexBuyModel.bullishBuyPrice;
+    }
+    else if (self.buyState == 1){
+        _priceLabel.text = _indexBuyModel.bearishAveragePrice;
+    }
+    
+    if ([self.productModel.decimalPlaces intValue] == 2) {
+        _priceLabel.text = [NSString stringWithFormat:@"%.2f",[_priceLabel.text doubleValue]];
+    }
+    else if ([self.productModel.decimalPlaces intValue] == 1){
+        _priceLabel.text = [NSString stringWithFormat:@"%.1f",[_priceLabel.text doubleValue]];
+    }
+    else if ([self.productModel.decimalPlaces intValue] == 0){
+        _priceLabel.text = [NSString stringWithFormat:@"%.0f",[_priceLabel.text doubleValue]];
+    }
+    else{
+        _priceLabel.text = [NSString stringWithFormat:@"%.2f",[_priceLabel.text doubleValue]];
+    }
+    
+    [self updateCurrentPriceLabel];
+}
+
+-(void)updateCurrentPriceLabel{
+    
+    if ([_priceLabel.text rangeOfString:@"."].location != NSNotFound) {
+        NSArray *temArray = [_priceLabel.text componentsSeparatedByString:@"."];
+        
+        if (temArray != nil && temArray.count > 0) {
+            _priceLabel.attributedText = [Helper multiplicityText:_priceLabel.text from:0 to:(int)[temArray[0] length] font:23];
+        }
+    }
+    else{
+        _priceLabel.attributedText = [Helper multiplicityText:_priceLabel.text from:0 to:(int)[_priceLabel.text length] font:23];
+    }
+}
+
+#pragma mark 触发止盈、止损
+-(void)loadStopAndGetUI{
+    NSArray *array = @[@"交易数量",@"触发止损",@"触发止盈"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        float labelWidth = 60;
+        
+        if (i != 0) {
+            labelWidth = ScreenWidth/2;
+        }
+        
+        UILabel    *label = [[UILabel alloc]initWithFrame:CGRectMake(20, self.stopAndGetFrontHeight/568*ScreenHeigth+i*(40.0/568*ScreenHeigth), labelWidth, 40.0/568*ScreenHeigth)];
+        label.text = array[i];
+        label.font = [UIFont systemFontOfSize:11];
+        label.textColor = [UIColor lightGrayColor];
+        if (i==1) {
+            label.tag = Tag_stop;
+        }
+        else if (i == 2){
+            label.tag = Tag_get;
+        }
+        [self.view addSubview:label];
+        
+        if (i==0) {
+            UIView *view = [self transactionNumberView:CGRectMake(60+20, label.frame.origin.y, ScreenWidth-60-40, 40.0/568*ScreenHeigth)];
+            [self.view addSubview:view];
+        }
+        else{
+            if (i == 1) {
+                
+                UIView  *clickView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth - (320.0/5*2)-20, label.frame.origin.y+7, 320.0/5*2+10, (40.0/568*ScreenHeigth)/5*3)];
+                clickView.backgroundColor = Color_Gold;
+                clickView.clipsToBounds = YES;
+                clickView.layer.cornerRadius = 2;
+                clickView.userInteractionEnabled = YES;
+                [self.view addSubview:clickView];
+                
+                _oneLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320.0/5*2-15+10, (40.0/568*ScreenHeigth)/5*3)];
+                _oneLabel.textAlignment = NSTextAlignmentRight;
+                _oneLabel.text = @"￥0.00";
+                _oneLabel.font = [UIFont systemFontOfSize:15];
+                _oneLabel.textColor = [UIColor blackColor];
+                _oneLabel.tag = Tag_oneLine;
+                _oneLabel.userInteractionEnabled = YES;
+                [clickView addSubview:_oneLabel];
+                
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-10, 9, 5, clickView.frame.size.height-18)];
+                imageView.image = [UIImage imageNamed:@"button_order"];
+                imageView.userInteractionEnabled = YES;
+                [clickView addSubview:imageView];
+                
+                UITapGestureRecognizer *stopTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chooseStop)];
+                [clickView addGestureRecognizer:stopTap];
+                
+                
+            }
+            else{
+                
+                UIView  *clickView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth - (320.0/5*2) - 20, label.frame.origin.y+7, 320.0/5*2+10, (40.0/568*ScreenHeigth)/5*3)];
+                clickView.backgroundColor = Color_Gold;
+                clickView.clipsToBounds = YES;
+                clickView.layer.cornerRadius = 2;
+                [self.view addSubview:clickView];
+                
+                _twoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320.0/5*2-15+10, (40.0/568*ScreenHeigth)/5*3)];
+                _twoLabel.textAlignment = NSTextAlignmentRight;
+                _twoLabel.text = @"￥0.00";
+                _twoLabel.font = [UIFont systemFontOfSize:15];
+                _twoLabel.textColor = [UIColor blackColor];
+                _twoLabel.tag = Tag_twoLine;
+                [clickView addSubview:_twoLabel];
+                
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-10, 9, 5, clickView.frame.size.height-18)];
+                imageView.image = [UIImage imageNamed:@"button_order"];
+                imageView.userInteractionEnabled = YES;
+                [clickView addSubview:imageView];
+                
+                UITapGestureRecognizer *getTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chooseGet)];
+                [clickView addGestureRecognizer:getTap];
+            }
+            
+        }
+        
+    }
+}
+
+#pragma mark 保证金手续费
+-(void)loadOtherMoneyLabel{
+    
+    NSArray     *bottomArray;
+    
+    if ([_isCouPon isEqualToString:@"NO"]) {
+        if (self.isQuickOrder) {
+            bottomArray = @[@"冻结保证金（结算后退还）",@"支付交易综合费",@"优惠券",@"合计支付"];
+        }
+        else{
+            bottomArray = @[@"冻结保证金（结算后退还）",@"支付交易综合费",@"合计支付"];
+        }
+        //        couPonView.frame = CGRectMake(0, self.otherMoneyFrontHeight, ScreenWidth, bottomArray.count *(40.0/568*ScreenHeigth));
+    }else
+    {
+        bottomArray = @[@"冻结保证金（结算后退还）",@"支付交易综合费",@"优惠券",@"合计支付"];
+        if (self.isQuickOrder) {
+            bottomArray = @[@"冻结保证金（结算后退还）",@"支付交易综合费",@"优惠券",@"合计支付"];
+        }
+        
+    }
+    
+    
+//    if (_couPonView == nil) {
+        _couPonView = [[UIView alloc]init];
+        _couPonView.frame = CGRectMake(0, self.otherMoneyFrontHeight, ScreenWidth, bottomArray.count *(40.0/568*ScreenHeigth));
+        [self.view addSubview:_couPonView];
+//    }
+   
+    
+    
+    for (int i = 0 ; i<bottomArray.count; i++) {
+        UILabel    *label = [[UILabel alloc]initWithFrame:CGRectMake(20,i*(40.0/568*ScreenHeigth), ScreenWidth/2, 40.0/568*ScreenHeigth)];
+        label.text = bottomArray[i];
+        label.font = [UIFont systemFontOfSize:11];
+        label.textColor = [UIColor lightGrayColor];
+        [_couPonView addSubview:label];
+        
+        UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(60+20, label.frame.origin.y, ScreenWidth-60-40, 40.0/568*ScreenHeigth)];
+        moneyLabel.textAlignment = NSTextAlignmentRight;
+        moneyLabel.text = @"￥0.00";
+        moneyLabel.numberOfLines = 0;
+        moneyLabel.font = [UIFont boldSystemFontOfSize:15];
+        moneyLabel.textColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1];
+        
+        //=====
+        if (i == 0) {
+            moneyLabel.tag = Tag_threeLine;
+        }else if (i ==1)
+        {
+            moneyLabel.tag = Tag_fourLine;
+        }else if (i == 2)
+        {
+            if ([_isCouPon isEqualToString:@"NO"]) {
+                moneyLabel.tag = Tag_fiveLine;
+                _couPonLab.hidden = YES;
+                if (self.isQuickOrder) {
+                    _couPonLab.hidden = NO;
+                    _couPonLab = moneyLabel;
+                    _couPonLab.tag = 1001010;
+                    _couPonLab.frame = moneyLabel.frame;
+                    _couPonLab.text = @"自动抵扣";
+                    _couPonLab.textColor = [UIColor redColor];
+                    [self.view addSubview:_couPonLab];
+                    
+                    CGSize moneSize = [Helper sizeWithText:moneyLabel.text font:[UIFont  systemFontOfSize:15.0] maxSize:CGSizeMake(ScreenWidth - 60 - 40, label.frame.size.height)];
+                    _couPonBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    _couPonBtn.tag = 1001011;
+                    _couPonBtn.frame = CGRectMake(ScreenWidth - 60 - moneSize.width - 5, CGRectGetMinY(moneyLabel.frame), 40, label.frame.size.height);
+                    [_couPonBtn setImage:[UIImage imageNamed:@"coupon_00"] forState:UIControlStateNormal];
+                    [_couPonBtn addTarget:self action:@selector(clickCouPonAction:) forControlEvents:UIControlEventTouchUpInside];
+//                    _couPonBtn.backgroundColor = [UIColor redColor];
+                    [_couPonView addSubview:_couPonBtn];
+
+                }
+            }else
+            {
+                _couPonLab = moneyLabel;
+                _couPonLab.tag = 1001010;
+                _couPonLab.frame = moneyLabel.frame;
+                _couPonLab.text = @"使用1张 ￥ 0.00";
+                _couPonLab.textColor = [UIColor redColor];
+                [self.view addSubview:_couPonLab];
+
+                CGSize moneSize = [Helper sizeWithText:moneyLabel.text font:[UIFont  systemFontOfSize:15.0] maxSize:CGSizeMake(ScreenWidth - 60 - 40, label.frame.size.height)];
+                _couPonBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                _couPonBtn.tag = 1001011;
+                _couPonBtn.frame = CGRectMake(ScreenWidth - 60 - moneSize.width - 5, CGRectGetMinY(moneyLabel.frame), 40, label.frame.size.height);
+                [_couPonBtn setImage:[UIImage imageNamed:@"coupon_00"] forState:UIControlStateNormal];
+                [_couPonBtn addTarget:self action:@selector(clickCouPonAction:) forControlEvents:UIControlEventTouchUpInside];
+//                _couPonBtn.backgroundColor = [UIColor redColor];
+                [_couPonView addSubview:_couPonBtn];
+
+            }
+        }
+        
+        if ([_isCouPon isEqualToString:@"YES"] || self.isQuickOrder) {
+            if (i == 3) {
+                moneyLabel.tag = Tag_fiveLine;
+            }
+        }
+        
+//        switch (i) {
+//            case 0:
+//                moneyLabel.tag = Tag_threeLine;
+//                break;
+//            case 1:
+//                moneyLabel.tag = Tag_fourLine;
+//                break;
+//            case 2:
+//            {
+//                moneyLabel.text = @"使用3张 ￥-30";
+//                CGSize moneSize = [Helper sizeWithText:moneyLabel.text font:[UIFont  systemFontOfSize:15.0] maxSize:CGSizeMake(ScreenWidth - 60 - 40, label.frame.size.height)];
+//                UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//                btn.frame = CGRectMake(ScreenWidth - 60 - moneSize.width, CGRectGetMinY(moneyLabel.frame), 40, label.frame.size.height);
+//                [btn addTarget:self action:@selector(clickCouPonAction:) forControlEvents:UIControlEventTouchUpInside];
+//                btn.backgroundColor = [UIColor redColor];
+//                [self.view addSubview:btn];
+//                
+//            }
+//                break;
+//            case 3:
+//                moneyLabel.tag = Tag_fiveLine;
+//                break;
+//                
+//            default:
+//                break;
+//        }
+        [_couPonView addSubview:moneyLabel];
+        
+        
+        UIView  *lineView = [[UIView alloc]initWithFrame:CGRectMake(20, label.frame.origin.y+label.frame.size.height, ScreenWidth-40, 0.5)];
+        lineView.backgroundColor = [UIColor grayColor];
+        [_couPonView addSubview:lineView];
+        
+        /*if (i==2) {
+            timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, ScreenHeigth-80.0/667*ScreenHeigth-5.0/568.0*ScreenHeigth - 30.0/568*ScreenHeigth, ScreenWidth, 30.0/568*ScreenHeigth)];
+            timeLabel.font = [UIFont boldSystemFontOfSize:13];
+            timeLabel.textColor = Color_red;
+            timeLabel.tag = Tag_timeLabel;
+            timeLabel.text = @"本时段持仓时间至02:25:00";
+            timeLabel.textAlignment = NSTextAlignmentCenter;
+            [self.view addSubview:timeLabel];
+
+            if (!self.canUse) {
+                timeLabel.hidden = YES;
+            }
+        }*/
+        
+        if (i==1) {
+            _preferentialLabel = [[UILabel alloc]initWithFrame:CGRectMake(112, label.frame.origin.y, 40, 16)];
+            _preferentialLabel.center = CGPointMake(_preferentialLabel.center.x, label.center.y);
+            _preferentialLabel.backgroundColor = CanSelectButBackColor;
+            _preferentialLabel.font = [UIFont systemFontOfSize:10];
+            _preferentialLabel.textAlignment = NSTextAlignmentCenter;
+            _preferentialLabel.layer.cornerRadius = 2;
+            _preferentialLabel.clipsToBounds = YES;
+            _preferentialLabel.text = @"优惠";
+            _preferentialLabel.textColor = [UIColor whiteColor];
+            [_couPonView addSubview:_preferentialLabel];
+            _preferentialLabel.hidden = YES;
+        }
+    }
+
+}
+
+#pragma mark -
+#pragma mark 选择止损
+
+-(void)chooseStop{
+    
+    if ([_oneLabel.superview.backgroundColor isEqual:Color_Gold]) {
+        NSMutableArray *infoArray = [NSMutableArray arrayWithCapacity:0];
+        
+        if (isIntegral==0) {
+            for (int i = 0; i < _moneyConfigerArray.count; i++) {
+                TradeConfigerModel *tradeModel = _moneyConfigerArray[i];
+                [infoArray addObject:tradeModel.maxLoss];
+            }
+        }
+        else{
+            for (int i = 0; i < _integralConfigerArray.count; i++) {
+                TradeConfigerModel *tradeModel = _integralConfigerArray[i];
+                [infoArray addObject:tradeModel.maxLoss];
+            }
+        }
+        
+        BOOL    isA50 = NO;
+        if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+            isA50 = YES;
+        }
+        
+        [[UIEngine sharedInstance] showOrderAlertWithTitle:@"请选择止损金额/手" DataArray:infoArray isMoney:isIntegral DefaultSelect:selectStop isA50:isA50];
+        
+        [UIEngine sharedInstance].orderClick = ^(int aIndex){
+            selectStop = aIndex;
+            if (isIntegral == 0) {
+                _moneyTrade = _moneyConfigerArray[selectStop];
+            }
+            else{
+                _integralTrade = _integralConfigerArray[selectStop];
+            }
+            
+            CacheModel *cacheModel = [CacheEngine getCacheInfo];
+            if (self.isQuickOrder) {
+                [cacheModel.tradeDic[_tradeDicName] setObject:[NSNumber numberWithInt:aIndex] forKey:@"chooseStopQuick"];
+            }
+            else{
+                [cacheModel.tradeDic[_tradeDicName] setObject:[NSNumber numberWithInt:aIndex] forKey:@"chooseStop"];
+            }
+            
+            [CacheEngine setCacheInfo:cacheModel];
+            
+            if (isFirstStatus == YES) {
+                _twoLabel.superview.backgroundColor = Color_Gold;
+                
+                TradeConfigerModel *tradeModel ;
+                
+                if (isIntegral) {
+                    if (chooseStopNum == 0) {
+                        tradeModel = _integralTrade;
+                    }
+                    
+                    if (selectStop >= _integralConfigerArray.count) {
+                        selectStop = (int)_integralConfigerArray.count - 1;
+                    }
+                }
+                else{
+                    if (chooseStopNum == 0) {
+                        tradeModel = _moneyTrade;
+                    }
+                    
+                    if (selectStop >= _moneyConfigerArray.count) {
+                        selectStop = (int)_moneyConfigerArray.count - 1;
+                    }
+                }
+                
+                if(isIntegral){
+                    if (_integralConfigerArray != nil && selectStop >= _integralConfigerArray.count) {
+                        selectStop = (int)_integralConfigerArray.count - 1;
+                    }
+                    
+                    _oneLabel.text = @"";
+                    _oneLabel.attributedText = nil;
+                    _oneLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%ld",(long)[tradeModel.maxLoss integerValue]]] stringByAppendingString:@" 积分/手"];
+                    _oneLabel.attributedText = [Helper multiplicityText:_oneLabel.text from:(int)_oneLabel.text.length-4 to:2 font:11];
+                }
+                else{
+                    if (_moneyConfigerArray != nil && selectStop >= _moneyConfigerArray.count) {
+                        selectStop = (int)_moneyConfigerArray.count - 1;
+                    }
+                    
+                    
+                    if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                        _oneLabel.text = [NSString stringWithFormat:@"$%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[tradeModel.maxLoss floatValue]]]];
+                    }
+                    else{
+                        _oneLabel.text = [NSString stringWithFormat:@"￥%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[tradeModel.maxLoss floatValue]]]];
+                    }
+                    
+                }
+                //刷新止损止盈价
+                [self reloadOfStopPriceOrGetPrice];
+            }
+            else{
+                [self defaultChooseGet:YES];
+                
+                //选择完止盈，重新选择止损，存储默认止盈
+                CacheModel *cacheModel = [CacheEngine getCacheInfo];
+                if (self.isQuickOrder) {
+                    [cacheModel.tradeDic[_tradeDicName] setObject:[NSNumber numberWithInt:selectGet] forKey:@"chooseGetQuick"];
+                }
+                else{
+                    [cacheModel.tradeDic[_tradeDicName] setObject:[NSNumber numberWithInt:selectGet] forKey:@"chooseGet"];
+                }
+                [CacheEngine setCacheInfo:cacheModel];
+                
+                [self reloadAllData];
+            }
+            
+            
+        };
+
+    }
+    
+}
+
+#pragma mark 选择止盈
+
+-(void)chooseGet{
+    
+    if ([_twoLabel.superview.backgroundColor isEqual:Color_Gold]) {
+        NSMutableArray *infoArray;
+        
+        if (isIntegral==0) {
+            TradeConfigerModel *tradeModel = _moneyConfigerArray[selectStop];
+            
+            NSArray *temArray = [tradeModel.maxProfit componentsSeparatedByString:@","];
+            
+            infoArray = [NSMutableArray arrayWithArray:temArray];
+            
+        }
+        else{
+            TradeConfigerModel *tradeModel = _integralConfigerArray[selectStop];
+            
+            NSArray *temArray = [tradeModel.maxProfit componentsSeparatedByString:@","];
+            
+            infoArray = [NSMutableArray arrayWithArray:temArray];
+        }
+        
+        BOOL    isA50 = NO;
+        if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+            isA50 = YES;
+        }
+        
+        [[UIEngine sharedInstance] showOrderAlertWithTitle:@"请选择止盈金额/手" DataArray:infoArray isMoney:isIntegral DefaultSelect:selectGet isA50:isA50];
+        
+        [UIEngine sharedInstance].orderClick = ^(int aIndex){
+            selectGet = aIndex;
+            
+            if (isFirstStatus) {
+                //缓存数组
+                [self cacheTradeInfo];
+            }
+            
+            isFirstStatus = NO;
+            
+            CacheModel *cacheModel = [CacheEngine getCacheInfo];
+            if (self.isQuickOrder) {
+                [cacheModel.tradeDic[_tradeDicName] setObject:[NSNumber numberWithInt:aIndex] forKey:@"chooseGetQuick"];
+            }
+            else{
+                [cacheModel.tradeDic[_tradeDicName] setObject:[NSNumber numberWithInt:aIndex] forKey:@"chooseGet"];
+            }
+            [CacheEngine setCacheInfo:cacheModel];
+            
+            [self reloadAllData];
+        };
+
+    }
+}
+
+#pragma mark 选择最大止损
+-(void)stopClick:(UIButton *)btn{
+    UIButton *btnOne = (UIButton *)[self.view viewWithTag:750];
+    btnOne.backgroundColor = Color_black;
+    [btnOne setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    UIButton *btnTwo = (UIButton *)[self.view viewWithTag:751];
+    btnTwo.backgroundColor = Color_black;
+    [btnTwo setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    btn.backgroundColor = Color_Gold;
+    [btn setTitleColor:Color_black forState:UIControlStateNormal];
+    
+    if (btn.tag == 751) {
+        chooseStopNum = 1;
+    }
+    else{
+        chooseStopNum = 0;
+    }
+    
+    [self reloadAllData];
+}
+
+-(void)loadSeg{
+//    // 判断：如果是A50的情况，就是美金支付，其他的都是现金支付
+//    if([_productModel.instrumentCode isEqualToString:@"CN"])
+//    {
+//        _seg = [[UISegmentedControl alloc]initWithItems:@[@"美金支付",@"积分模拟"]];
+//    }else
+//    {
+//        
+//    }
+    _seg = [[UISegmentedControl alloc]initWithItems:@[@"现金支付",@"积分模拟"]];
+    _seg.frame = CGRectMake(ScreenWidth/2-ScreenWidth/5*2/2-10, 64+5, ScreenWidth/5*2+20, 32.0/667*ScreenHeigth);
+    _seg.selectedSegmentIndex = 0;
+    [_seg addTarget:self action:@selector(segClick:) forControlEvents:UIControlEventValueChanged];
+    _seg.tintColor = [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1];
+    [self.view addSubview:_seg];
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica" size:10],NSFontAttributeName,nil];
+    
+    [_seg setTitleTextAttributes:dic forState:UIControlStateNormal];
+}
+
+-(void)segClick:(UISegmentedControl *)seg{
+    
+    if (seg.selectedSegmentIndex == 0) {
+       //调用是否有优惠券的接口
+        if (couPonArray.count > 0) {
+            _isCouPon = @"YES";
+            [_couPonView removeFromSuperview];
+            [self loadOtherMoneyLabel];
+        }
+        
+        isIntegral = NO;
+        if (selectStop >= _moneyConfigerArray.count) {
+            selectStop = (int)_moneyConfigerArray.count - 1;
+        }
+        _moneyTrade = _moneyConfigerArray[selectStop];
+    }
+    else{
+        isIntegral = YES;
+        if (selectStop >= _integralConfigerArray.count) {
+            selectStop = (int)_integralConfigerArray.count - 1;
+        }
+        _integralTrade = _integralConfigerArray[selectStop];
+        
+        _isCouPon = @"NO";
+        [_couPonView removeFromSuperview];
+        [self loadOtherMoneyLabel];
+
+    }
+    
+    if (!isFirstStatus) {
+        [self reloadAllData];
+    }
+    else{
+        
+        TradeConfigerModel *tradeModel ;
+        
+        if (isIntegral) {
+            if (chooseStopNum == 0) {
+                tradeModel = _integralTrade;
+            }
+            
+            if (selectStop >= _integralConfigerArray.count) {
+                selectStop = (int)_integralConfigerArray.count - 1;
+            }
+        }
+        else{
+            if (chooseStopNum == 0) {
+                tradeModel = _moneyTrade;
+            }
+            
+            if (selectStop >= _moneyConfigerArray.count) {
+                selectStop = (int)_moneyConfigerArray.count - 1;
+            }
+        }
+        
+        NSString    *twoLabelPrice;
+        NSArray  * getArray = [tradeModel.maxProfit componentsSeparatedByString:@","];
+        if (getArray != nil && selectGet <= getArray.count-1) {
+            twoLabelPrice = getArray[selectGet];
+        }
+        else{
+            twoLabelPrice = @"";
+        }
+        
+        
+        UILabel *fourLabel = (UILabel *)[_couPonView viewWithTag:Tag_fourLine];
+        fourLabel.text = @"";
+        fourLabel.attributedText = nil;
+        
+        UILabel *threeLabel = (UILabel *)[_couPonView viewWithTag:Tag_threeLine];
+        threeLabel.text = @"";
+        threeLabel.attributedText = nil;
+        
+        UILabel *fiveLabel = (UILabel *)[_couPonView viewWithTag:Tag_fiveLine];
+        fiveLabel.text = @"";
+        fiveLabel.attributedText = nil;
+        
+        if (isIntegral) {
+            
+            if ([_oneLabel.text rangeOfString:@"请选择"].location == NSNotFound) {
+                _oneLabel.text = @"";
+                _oneLabel.attributedText = nil;
+                _oneLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%ld",(long)[tradeModel.maxLoss integerValue]]] stringByAppendingString:@" 积分/手"];
+                _oneLabel.attributedText = [Helper multiplicityText:_oneLabel.text from:(int)_oneLabel.text.length-4 to:2 font:11];
+            }
+            
+            //更新服务费
+            //优惠
+            if ([tradeModel.theoryCounterFee doubleValue] != [tradeModel.counterFee doubleValue]){
+                NSString    *frontStr = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.0f",[tradeModel.theoryCounterFee doubleValue] * [_numArray[selectNum] intValue]]];
+                NSString    *behindStr = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.0f",[tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue]]];
+                if (fourLabel!= nil) {
+                    fourLabel.text = [NSString stringWithFormat:@"%@积分 %@积分",frontStr,behindStr];
+                    fourLabel.attributedText = [self multiplicityActivity:fourLabel.text from:0 to:(int)(frontStr.length+2) color:[UIColor lightGrayColor] otherFontWithFrom:(int)frontStr.length to:2 SecondOtherFontWithFrom:(int)(frontStr.length+2+1+behindStr.length) to:2];
+                }
+               
+            }
+            else{
+                fourLabel.text = [[DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%d",[tradeModel.counterFee intValue] * [_numArray[selectNum] intValue]]] stringByAppendingString:@" 积分"];
+                fourLabel.attributedText = [Helper multiplicityText:fourLabel.text from:(int)fourLabel.text.length-2 to:2 font:11];
+            }
+            
+            if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                fiveLabel.text = [NSString stringWithFormat:@"-- \n--x汇率%@",_moneyTrade.rate];
+                fiveLabel.attributedText = [Helper multiplicityText:fiveLabel.text from:3 to:(int)fiveLabel.text.length - 3 font:10];
+                threeLabel.text = @"--";
+            }
+            else{
+                fiveLabel.text = @"--";
+                threeLabel.text = @"--";
+            }
+        }
+        else{
+            
+            if ([_oneLabel.text rangeOfString:@"请选择"].location == NSNotFound) {
+                _oneLabel.text = [NSString stringWithFormat:@"￥%@/手",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[tradeModel.maxLoss floatValue]]]];
+            }
+            
+            //优惠
+            NSString    *frontStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[tradeModel.theoryCounterFee doubleValue] * [_numArray[selectNum] intValue]]];
+            NSString    *behindStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue]]];
+            
+            NSLog(@"打印测试：%@==%@",frontStr,behindStr);
+            if ([tradeModel.theoryCounterFee doubleValue] != [tradeModel.counterFee doubleValue]) {
+                if (fourLabel != nil) {
+                    //a50判断
+                    if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                        fourLabel.text = [NSString stringWithFormat:@"$%@ $%@",frontStr,behindStr];
+                    }
+                    else{
+                        fourLabel.text = [NSString stringWithFormat:@"￥%@ ￥%@",frontStr,behindStr];
+                    }
+                    
+                    fourLabel.attributedText = [self multiplicityActivity:fourLabel.text from:0 to:(int)(frontStr.length+1) color:[UIColor lightGrayColor] otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
+                    
+                    _preferentialLabel.hidden = NO;
+//                    fourLabel.backgroundColor = [UIColor redColor];
+                }
+            }
+            else{
+                //无优惠
+                //a50判断
+                if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                    fourLabel.text = [NSString stringWithFormat:@"$%@",behindStr];
+                }
+                else{
+                    fourLabel.text = [NSString stringWithFormat:@"￥%@",behindStr];
+                }
+                
+                _preferentialLabel.hidden = YES;
+            }
+            
+            //a50判断
+            if ([self.indexBuyModel.code rangeOfString:@"CN"].location != NSNotFound) {
+                fiveLabel.text = [NSString stringWithFormat:@"￥-- \n$--x汇率%@",_moneyTrade.rate];
+                fiveLabel.attributedText = [Helper multiplicityText:fiveLabel.text from:3 to:(int)fiveLabel.text.length - 3 font:10];
+                threeLabel.text = @"$--";
+            }
+            else{
+                fiveLabel.text = @"￥--";
+                threeLabel.text = @"￥--";
+            }
+            
+            //判断优惠券的张数和面额值是否大于手续费活手数
+            sunCoupon = 0.0;
+            double couPonMore = 0.0;
+            double couPonLittle = 0.0;
+            
+            couPonIDArray = [[NSMutableArray alloc]init];
+            
+            NSInteger numCount;
+            
+            if (couPonArray.count > 0 && couPonArray != nil) {
+                if (couPonArray.count >[_numArray[selectNum] intValue]) {
+                    numCount = [_numArray[selectNum] intValue];
+                }else
+                {
+                    numCount = couPonArray.count;
+                }
+                for (NSInteger i = 0; i<numCount; i++)
+                {
+                    NSDictionary *couDic = couPonArray[i];
+                    if ([couDic[@"amount"] doubleValue] > [tradeModel.counterFee doubleValue]) {
+                        couPonMore = couPonMore + [tradeModel.counterFee doubleValue];
+                    }else
+                    {
+                        couPonLittle = couPonLittle + [couDic[@"amount"] doubleValue];
+                    }
+                    
+                    [couPonIDArray addObject:couDic[@"id"]];
+                }
+                
+                sunCoupon = couPonLittle + couPonMore;
+                _couPonLab.text = [NSString stringWithFormat:@"使用%d张 ￥-%.2f",numCount,sunCoupon];
+            }
+            
+            if (isCouPonSelect == YES) {
+                [self.couPonBtn setImage:[UIImage imageNamed:@"coupon_00"] forState:UIControlStateNormal];
+
+            }else
+            {
+                [self.couPonBtn setImage:[UIImage imageNamed:@"coupon_01"] forState:UIControlStateNormal];
+            }
+        }
+    }
+}
+
+-(UIView *)transactionNumberView:(CGRect)aRect{
+    _tradeNumView = [[UIView alloc]initWithFrame:aRect];
+    _tradeNumView.backgroundColor = Color_black;
+    
+    //默认交易数量
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    int num = 0;
+    if (self.isQuickOrder) {
+        num = [cacheModel.tradeDic[_tradeDicName][@"numfloat"] intValue];
+    }
+    
+    selectNum = num;
+    
+    if ([self.indexBuyModel.code rangeOfString:@"IF"].location != NSNotFound) {
+        for (int i = 0 ; i<1; i++) {
+            
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 8, _tradeNumView.frame.size.width, _tradeNumView.bounds.size.height/5*3)];
+            label.textColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1];
+            label.font = [UIFont boldSystemFontOfSize:14];
+            label.textAlignment = NSTextAlignmentRight;
+            label.text = @"1手";
+            [_tradeNumView addSubview:label];
+        }
+    }
+    else{
+        for (int i = 0 ; i<4; i++) {
+            UIView  *lineFrontView = [[UIView alloc]initWithFrame:CGRectMake(i*((ScreenWidth-40-60)/4), 8, 0.5, _tradeNumView.bounds.size.height/5*3)];
+            lineFrontView.backgroundColor = [UIColor lightGrayColor];
+            [_tradeNumView addSubview:lineFrontView];
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(i*((ScreenWidth-40-60)/4), 8, ((ScreenWidth-40-60)/4)+1, _tradeNumView.bounds.size.height/5*3);
+            
+            if (i==3) {
+                UIView *lineRightView = [[UIView alloc]initWithFrame:CGRectMake(button.frame.origin.x+button.frame.size.width-1, button.frame.origin.y, 0.5, _tradeNumView.bounds.size.height/5*3)];
+                lineRightView.backgroundColor = [UIColor lightGrayColor];
+                [_tradeNumView addSubview:lineRightView];
+            }
+        }
+        
+        for (int i = 0 ; i<_numArray.count; i++) {
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            [button setTitleColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1] forState:UIControlStateNormal];
+            button.frame = CGRectMake(i*((ScreenWidth-40-60)/4), 8, ((ScreenWidth-40-60)/4)+1, _tradeNumView.bounds.size.height/5*3);
+            [button setTitle:[NSString stringWithFormat:@"%d手",[_numArray[i] intValue]] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+            [button setBackgroundColor:[UIColor clearColor]];
+            if (i==num) {
+                button.backgroundColor = Color_Gold;
+                [button setTitleColor:Color_black forState:UIControlStateNormal];
+            }
+            button.tag = i+777;
+            [button addTarget:self action:@selector(chooseNum:) forControlEvents:UIControlEventTouchUpInside];
+            [_tradeNumView addSubview:button];
+        }
+    }
+    return _tradeNumView;
+}
+
+-(void)chooseNum:(UIButton *)button{
+    
+    BOOL    canUse = NO;
+    
+    for (int i = 0; i<4; i++) {
+        UIButton *btn = (UIButton *)[self.view viewWithTag:777+i];
+        if ([btn.backgroundColor isEqual:Color_Gold]) {
+            canUse = YES;
+        }
+    }
+    
+    //是否被快速下单冻结
+    if (canUse) {
+        for (int i = 0; i<4; i++) {
+            UIButton *btn = (UIButton *)[self.view viewWithTag:777+i];
+            btn.backgroundColor = [UIColor clearColor];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+        
+        button.backgroundColor = Color_Gold;
+        [button setTitleColor:Color_black forState:UIControlStateNormal];
+        
+        selectNum = (int)button.tag - 777;
+        
+        if(!isFirstStatus){
+            [self reloadAllData];
+        }else{
+            [self segClick:_seg];
+        }
+        
+        //保存选中手数
+        if (self.isQuickOrder) {
+            CacheModel *cacheModel = [CacheEngine getCacheInfo];
+            cacheModel.tradeDic[_tradeDicName][@"numfloat"] = [NSString stringWithFormat:@"%d",selectNum];
+            [CacheEngine setCacheInfo:cacheModel];
+        }
+    }
+}
+
+#pragma mark 看多/看空 买入
+
+-(void)loadBottomButton{
+    self.bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.bottomBtn.frame = CGRectMake(20, ScreenHeigth-80.0/667*ScreenHeigth, ScreenWidth-40, 40.0/667*ScreenHeigth);
+    if (!self.canUse) {
+        [self.bottomBtn setTitle:@"已闭市" forState:UIControlStateNormal];
+        self.bottomBtn.backgroundColor = [UIColor grayColor];
+    }
+    else{
+        if (self.buyState == 0) {
+            [self.bottomBtn setTitle:@"看多买入" forState:UIControlStateNormal];
+            [self.bottomBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Red] forState:UIControlStateNormal];
+            self.bottomBtn.backgroundColor = Color_red;
+        }
+        else{
+            [self.bottomBtn setTitle:@"看空买入" forState:UIControlStateNormal];
+            [self.bottomBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Green] forState:UIControlStateNormal];
+            self.bottomBtn.backgroundColor = Color_green;
+        }
+    }
+    [self.bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.bottomBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.bottomBtn.clipsToBounds = YES;
+    self.bottomBtn.layer.cornerRadius = 3;
+    self.bottomBtn.tag = Tag_bottomButton;
+    [self.bottomBtn addTarget:self action:@selector(bottomClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.bottomBtn];
+    
+    [self loadAgreement:self.bottomBtn];
+}
+
+-(void)bottomClick:(UIButton *)btn{
+    if (![btn.backgroundColor isEqual:[UIColor grayColor]]) {
+        
+        if ([_twoLabel.text rangeOfString:@"选择"].location != NSNotFound || [_oneLabel.text rangeOfString:@"选择"].location != NSNotFound) {
+            [[UIEngine sharedInstance] showAlertWithTitle:@"首次下单需要选择止损、止盈额度 \n下次将会记住您的选择" ButtonNumber:1 FirstButtonTitle:@"确定" SecondButtonTitle:@""];
+            [UIEngine sharedInstance].alertClick = ^(int aIndex){};
+        }
+        else{
+            [self getSystemDate];
+        }
+    }
+}
+
+-(NSString *)toJSON:(id)aParam
+{
+    NSData   *jsonData=[NSJSONSerialization dataWithJSONObject:aParam options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonStr=[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonStr;
+}
+
+#pragma mark - 查询订单交易状态
+
+//查询订单交易状态r
+- (void)searchOrderStork:(NSString *)idArray
+{
+    if (_timer == nil) {
+        return;
+    }else{
+        
+        NSDictionary *dic = @{
+                              @"futuredOrderIdsStr" : idArray,
+                              @"version" : VERSION ,
+                              @"token" : [[CMStoreManager sharedInstance] getUserToken],
+                              @"fundType":[NSNumber numberWithInt:isIntegral],
+                              };
+        
+        NSString *urlStr = [NSString stringWithFormat:@"%@/order/futures/orderStatus", K_MGLASS_URL];
+        
+        [NetRequest postRequestWithNSDictionary:dic
+                                            url:urlStr
+                                   successBlock:^(NSDictionary *dictionary) {
+                                       
+               if ([dictionary[@"code"] intValue] == 200) {
+                   
+                   //                                   data:
+                   //                                       -2：买入失败
+                   //                                       0：买待处理，创建订单默认状态
+                   //                                       1：买处理中
+                   //                                       2：买委托成功，即申报成功
+                   //                                       3：持仓中
+                   //                                       4：卖处理中
+                   //                                       5：卖委托成功，即申报成功
+                   //                                       6：卖出成功
+                   
+                   int count = 0;
+                   for (int i = 0; i < [dictionary[@"data"] count]; i++) {
+                       if ([dictionary[@"data"][i][@"status"] floatValue] == 2 || [dictionary[@"data"][i][@"status"] floatValue] == 3) {
+                           [_timer invalidate];
+                           _timer = nil;
+                           [[UIEngine sharedInstance] hideProgress];
+                           
+                           [[UIEngine sharedInstance] showAlertWithTitle:@"已申报成功" ButtonNumber:1 FirstButtonTitle:@"确定" SecondButtonTitle:@""];
+                           [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                               [[NSNotificationCenter defaultCenter] postNotificationName:kSegValueChange object:nil];
+                               UIViewController *viewController = self.navigationController.viewControllers[1];
+                               [self.navigationController popToViewController:viewController animated:YES];
+                           };
+                       }
+                       else if([dictionary[@"data"][i][@"status"] floatValue] == 0 || [dictionary[@"data"][i][@"status"] floatValue] == 1){
+                           count ++;
+                           if (count == [dictionary[@"data"] count]) {
+                               [self searchOrderStork:idArray];
+                           }
+                       }
+                       else{
+                           
+                           [_timer invalidate];
+                           _timer = nil;
+                           [[UIEngine sharedInstance] hideProgress];
+                           
+                           [[UIEngine sharedInstance] showAlertWithTitle:@"申报失败" ButtonNumber:2 FirstButtonTitle:@"返回大厅" SecondButtonTitle:@"确定"];
+                           [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                               if (aIndex == 10086) {
+                                    [self closeSocket];
+                                   if (isOpenQuick) {
+                                       self.backBlock();
+                                   }
+                                   else{
+                                       [self.navigationController popToRootViewControllerAnimated:YES];
+                                   }
+                               }
+                           };
+                           
+                           
+                       }
+                   }
+                   
+               }
+               else{
+                   [self searchOrderStork:idArray];
+               }
+               
+           }
+           failureBlock:^(NSError *error){
+               [self searchOrderStork:idArray];
+               
+           }];
+        }
+}
+
+//加“,”
+-(NSString *)addSign:(NSString *)aStr
+{
+    NSString *point=[aStr substringFromIndex:aStr.length-3];
+    
+    NSString *money=[aStr substringToIndex:aStr.length-3];
+    
+    return [[DataEngine countNumAndChangeformat:money] stringByAppendingString:point];
+}
+
+-(void)afterTime{
+    
+    time ++;
+    if (time > 5) {
+        
+        [_timer invalidate];
+        _timer = nil;
+        [[UIEngine sharedInstance] hideProgress];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        if(!isOpenQuick){
+            [self closeSocket];
+        }
+        else{
+            self.backBlock();
+        }
+    }
+}
+
+-(void)closeSocket{
+    //断开行情socket
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCloseConnection object:nil];
+}
+
+//系统时间
+
+-(void)getSystemDate
+{
+    [UIEngine sharedInstance].progressStyle = 2;
+    [[UIEngine sharedInstance] showProgress];
+    [DataEngine requestToGetSystemDateWithComplete:^(BOOL SUCCESS, NSString *data , NSString *timeInterval) {
+        if (SUCCESS) {
+            _systemTime = data;
+        }
+        else
+        {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+            
+            _systemTime = [dateFormatter stringFromDate:[NSDate date]];
+        }
+        
+        
+        
+        TradeConfigerModel *tradeModel;
+        if (isIntegral) {
+            if (chooseStopNum == 0) {
+                tradeModel = _integralTrade;
+            }
+        }
+        else{
+            if (chooseStopNum == 0) {
+                tradeModel = _moneyTrade;
+            }
+        }
+        NSNumber *count = [NSNumber numberWithInt:1];
+        if (selectNum >=0 && selectNum <= 3) {
+            count = _numArray[selectNum];
+        }
+        NSString *tradeID = @"";
+        if (tradeModel == nil || [tradeModel isKindOfClass:[NSNull class]]) {
+            tradeID = @"0";
+        }
+        else{
+            tradeID = tradeModel.tradeID;
+        }
+        
+        NSDictionary *dic;
+        //判断是否有选择使用优惠券。如果使用了。就新增加一个字段。
+        if (isCouPonSelect == YES)
+        {
+            dic = @{
+                    @"tradeType": [NSNumber numberWithInt:self.buyState], //看多看空
+                    @"userBuyDate": _systemTime,              //购买时间
+                    @"userBuyPrice": _indexBuyModel.currentPrice, //价格
+                    
+                    @"rate":[NSNumber numberWithDouble:[tradeModel.rate doubleValue]],
+                    @"futuresCode": _indexBuyModel.code,      //代码
+                    @"count": _numArray[selectNum],            //手数
+                    @"traderId": tradeID,                 //配资ID
+                    @"stopProfit":[tradeModel.maxProfit componentsSeparatedByString:@","][selectGet],//止盈金额
+                    @"couponIds":couPonIDArray,
+                    };
+
+        }else
+        {
+            dic = @{
+                    @"tradeType": [NSNumber numberWithInt:self.buyState], //看多看空
+                    @"userBuyDate": _systemTime,              //购买时间
+                    @"userBuyPrice": _indexBuyModel.currentPrice, //价格
+                    
+                    @"rate":[NSNumber numberWithDouble:[tradeModel.rate doubleValue]],
+                    @"futuresCode": _indexBuyModel.code,      //代码
+                    @"count": _numArray[selectNum],            //手数
+                    @"traderId": tradeID,                 //配资ID
+                    @"stopProfit":[tradeModel.maxProfit componentsSeparatedByString:@","][selectGet],//止盈金额
+                    };
+        }
+         [self orderBegin:dic];
+        
+    }];
+}
+
+//闪电下单保存数据
+//打开
+-(void)quickOrderData:(NSString *)isQuikKeepCoupon{
+    TradeConfigerModel *tradeModel;
+    if (isIntegral) {
+        if (chooseStopNum == 0) {
+            tradeModel = _integralTrade;
+        }
+    }
+    else{
+        if (chooseStopNum == 0) {
+            tradeModel = _moneyTrade;
+        }
+    }
+    NSNumber *count = [NSNumber numberWithInt:1];
+    if (selectNum >=0 && selectNum <= 3) {
+        count = _numArray[selectNum];
+    }
+    NSString *tradeID = @"";
+    if (tradeModel == nil || [tradeModel isKindOfClass:[NSNull class]]) {
+        tradeID = @"0";
+    }
+    else{
+        tradeID = tradeModel.tradeID;
+    }
+    NSDictionary *dic = @{
+                          @"rate":[NSNumber numberWithDouble:[tradeModel.rate doubleValue]],
+                          @"count": _numArray[selectNum],            //手数
+                          @"traderId": tradeID,                 //配资ID
+                          @"stopProfit":[tradeModel.maxProfit componentsSeparatedByString:@","][selectGet],//止盈金额
+                          };
+    
+    NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+    [dataDic setValue:isQuikKeepCoupon forKey:@"isQuickCouponStatus"];
+    
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    cacheModel.tradeDic[_tradeDicName][kOrderQuickDic] = [NSMutableDictionary dictionaryWithDictionary:dataDic];
+    cacheModel.tradeDic[_tradeDicName][kOrderQuickIsOpen] = @"YES";
+    [CacheEngine setCacheInfo:cacheModel];
+    
+    
+}
+//关闭
+-(void)quickOrderClose
+{
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    cacheModel.tradeDic[_tradeDicName][kOrderQuickIsOpen] = @"NO";
+//    if (self.isQuickOrder) {
+//        cacheModel.tradeDic[_tradeDicName][kOrderQuickDic][@"isQuickCouponStatus"] = @"NO";
+//    }
+    
+    [CacheEngine setCacheInfo:cacheModel];
+}
+
+-(void)orderBegin:(NSDictionary *)aPramDic{
+    
+    orderPramDic = [NSDictionary dictionaryWithDictionary:aPramDic];
+    
+    if (self.indexBuyModel.code.length > 2) {
+        _tradeDicName = [NSString stringWithFormat:@"%@TradeDic",[self.indexBuyModel.code substringToIndex:2]];
+    }
+    else{
+        _tradeDicName = self.indexBuyModel.code;
+    }
+    
+    isOpenQuick = NO;
+    CacheModel *cacheModel = [CacheEngine getCacheInfo];
+    if (cacheModel.tradeDic[_tradeDicName][kOrderQuickIsOpen] == nil || [cacheModel.tradeDic[_tradeDicName][kOrderQuickIsOpen] isKindOfClass:[NSNull class]] || [cacheModel.tradeDic[_tradeDicName][kOrderQuickIsOpen] isEqualToString:@"NO"]) {
+        isOpenQuick = NO;
+    }
+    else if ([cacheModel.tradeDic[_tradeDicName][kOrderQuickIsOpen] isEqualToString:@"YES"]){
+        isOpenQuick = YES;
+    }
+    else{
+        isOpenQuick = NO;
+    }
+    
+    //未打开闪电下单 或 合约状态可售
+    if (!isOpenQuick || self.canUse) {
+        [self orderGo:orderPramDic];
+    }
+    else{
+        [self getMarketEndTime];
+    }
+}
+
+-(void)orderGo:(NSDictionary *)aPramDic{
+    NSString *jsonStr = [self toJSON:aPramDic];
+    NSDictionary *jsonDic = @{
+                              @"orderData" : jsonStr,
+                              @"version" : @"0.0.2" ,
+                              @"token" : [[CMStoreManager sharedInstance] getUserToken]
+                              };
+    
+    [DataEngine requestToBuy:jsonDic completeBlock:^(BOOL SUCCESS, NSDictionary *dictionary) {
+ 
+        if (SUCCESS) {
+            _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(afterTime) userInfo:nil repeats:YES];
+            [self searchOrderStork:dictionary[@"data"][@"futuredOrderIdsStr"]];
+        }
+        //抱歉，目前暂不支持现金交易！
+        else if ([dictionary[@"code"] intValue] == 49999 || [dictionary[@"code"] intValue] == 49997){
+            if (isOpenQuick) {
+                [[UIEngine sharedInstance] showAlertWithTitle:@"抱歉，目前暂不支持现金交易！" ButtonNumber:1 FirstButtonTitle:@"确定" SecondButtonTitle:@""];
+                [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                    self.cantTradeBlock();
+                    [[UIEngine sharedInstance] hideProgress];
+                };
+            }
+            else{
+                [[UIEngine sharedInstance] showAlertWithTitle:@"抱歉，目前暂不支持现金交易！" ButtonNumber:2 FirstButtonTitle:@"确定" SecondButtonTitle:@"积分模拟"];
+                [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                    //积分模拟
+                    if (aIndex == 10087) {
+                        _seg.selectedSegmentIndex = 1;
+                        [self segClick:_seg];
+                    }
+                    [[UIEngine sharedInstance] hideProgress];
+                };
+            }
+        }
+        //余额不足
+        else if([dictionary[@"code"] intValue] == 44007){
+            
+            if (isOpenQuick) {
+                [[UIEngine sharedInstance] showAlertWithTitle:@"您当前现金余额不足，请先充值" ButtonNumber:2 FirstButtonTitle:@"取消" SecondButtonTitle:@"充值"];
+                [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                    if (aIndex == 10086) {
+                        
+                    }
+                    if (aIndex == 10087) {
+                        //                        [self closeSocket];
+                        self.accountBlock();
+                    }
+                };
+            }
+            else{
+                if (isIntegral == 0) {
+                    [[UIEngine sharedInstance] showAlertWithTitle:@"您当前现金余额不足，请先充值" ButtonNumber:2 FirstButtonTitle:@"积分模拟" SecondButtonTitle:@"充值"];
+                    [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                        //积分模拟
+                        if (aIndex == 10086) {
+                            _seg.selectedSegmentIndex = 1;
+                            [self segClick:_seg];
+                        }
+                        if (aIndex == 10087) {
+                            //                        [self closeSocket];
+                            [self getAccountMoney];
+                        }
+                    };
+                }
+                else{
+                    [[UIEngine sharedInstance] showAlertWithTitle:@"您当前积分余额不足，无法买入" ButtonNumber:1 FirstButtonTitle:@"确定" SecondButtonTitle:@""];
+                    [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                        
+                    };
+                }
+            }
+            
+            
+            [[UIEngine sharedInstance] hideProgress];
+        }
+        else if([dictionary[@"code"] intValue] == 44026){
+            //44026 涨跌幅过滤
+            [[UIEngine sharedInstance] showAlertWithTitle:@"申报失败，涨跌幅过滤" ButtonNumber:1 FirstButtonTitle:@"确定" SecondButtonTitle:@""];
+            [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                
+            };
+            [[UIEngine sharedInstance] hideProgress];
+        }
+        else {
+            //44003 可卖
+            [[UIEngine sharedInstance] showAlertWithTitle:@"申报失败" ButtonNumber:2 FirstButtonTitle:@"返回大厅" SecondButtonTitle:@"确定"];
+            [UIEngine sharedInstance].alertClick = ^(int aIndex){
+                if (aIndex == 10086) {
+                    [self closeSocket];
+                    
+                    if (isOpenQuick) {
+                        self.backBlock();
+                    }
+                    else{
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }
+                }
+            };
+            [[UIEngine sharedInstance] hideProgress];
+        }
+    }];
+}
+
+-(void)changeBottomButton{
+    UIButton    *bottomBtn = (UIButton *)[self.view viewWithTag:Tag_bottomButton];
+    
+    UIButton    *agreeBtn = (UIButton *)[self.view viewWithTag:Tag_agreeButton];
+    
+    if (agreeBtn.selected) {
+        if (!self.canUse) {
+            [bottomBtn setTitle:@"已闭市" forState:UIControlStateNormal];
+            bottomBtn.backgroundColor = [UIColor grayColor];
+            [bottomBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Gray] forState:UIControlStateNormal];
+            bottomBtn.enabled = NO;
+        }
+        else{
+            if (self.buyState == 0) {
+                [bottomBtn setTitle:@"看多买入" forState:UIControlStateNormal];
+                bottomBtn.backgroundColor = CanSelectButBackColor;
+                [bottomBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Red] forState:UIControlStateNormal];
+            }
+            else{
+                [bottomBtn setTitle:@"看空买入" forState:UIControlStateNormal];
+                bottomBtn.backgroundColor = Color_green;
+                [bottomBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Green] forState:UIControlStateNormal];
+            }
+            bottomBtn.enabled = YES;
+        }
+    }
+    else{
+        if (!self.canUse) {
+            [bottomBtn setTitle:@"已闭市" forState:UIControlStateNormal];
+        }
+        else{
+            if (self.buyState == 0) {
+                [bottomBtn setTitle:@"看多买入" forState:UIControlStateNormal];
+            }
+            else{
+                [bottomBtn setTitle:@"看空买入" forState:UIControlStateNormal];
+            }
+        }
+        
+        bottomBtn.backgroundColor = [UIColor grayColor];
+        [bottomBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Gray] forState:UIControlStateNormal];
+        bottomBtn.enabled = NO;
+    }
+
+}
+
+#pragma mark 去充值
+
+-(void)getAccountMoney{
+    MoneyDetaillViewController *moneyVC = [[MoneyDetaillViewController alloc]init];
+    [self.navigationController pushViewController:moneyVC animated:NO];
+}
+
+
+#pragma mark 同意协议
+
+-(void)loadAgreement:(UIButton *)btn{
+    
+    NSString *name = @"沪金";
+    
+    if (self.mainState == 1) {
+        name = @"期指";
+    }
+    else if (self.mainState == 2){
+        name = @"沪银";
+    }
+    else{
+        name = _indexBuyModel.name;
+    }
+    
+    UILabel *agreeLabel = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth/2-120, btn.frame.size.height+btn.frame.origin.y+8, 240, 16)];
+    agreeLabel.text = [NSString stringWithFormat:@"我已阅读并同意《投资人与用户交易合作协议》"];
+    agreeLabel.font = [UIFont systemFontOfSize:11];
+    agreeLabel.center = CGPointMake(agreeLabel.center.x+20, agreeLabel.center.y);
+    agreeLabel.textColor = [UIColor lightGrayColor];
+    
+    agreeLabel.attributedText = [Helper multiplicityText:agreeLabel.text from:7 to:(int)agreeLabel.text.length-7 color:Color_Gold];;
+    [self.view addSubview:agreeLabel];
+    UIButton *agreeInfoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    agreeInfoBtn.frame = agreeLabel.frame;
+    [agreeInfoBtn setBackgroundColor:[UIColor clearColor]];
+    [agreeInfoBtn addTarget:self action:@selector(lookRule) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:agreeInfoBtn];
+    
+    UIButton *agreeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    agreeBtn.frame = CGRectMake(agreeLabel.frame.origin.x-20+2, agreeLabel.frame.origin.y+2, 12, 12);
+    [agreeBtn setImage:[UIImage imageNamed:@"button_10"] forState:UIControlStateNormal];
+    [agreeBtn setImage:[UIImage imageNamed:@"button_09_1"] forState:UIControlStateSelected];
+    agreeBtn.selected = YES;
+    agreeBtn.tag = Tag_agreeButton;
+    [agreeBtn addTarget:self action:@selector(agreeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:agreeBtn];
+}
+
+-(void)lookRule{
+    DetailViewController *detailVC = [[DetailViewController alloc]init];
+    
+    detailVC.isUseCustomURL = YES;
+    detailVC.customURL = [NSString stringWithFormat:@"http://%@/rule/rule_transaction.html",HTTP_IP];
+    detailVC.otherTitle = [NSString stringWithFormat:@"财牛协议"];
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(void)agreeBtnClick:(UIButton *)btn{
+    if (btn.selected) {
+        btn.selected = NO;
+    }
+    else{
+        btn.selected = YES;
+    }
+    
+    [self changeBottomButton];
+}
+
+#pragma mark - 点击勾选优惠券
+- (void)clickCouPonAction:(UIButton *)sender
+{
+    //合计
+    UILabel *fiveLabel = (UILabel *)[_couPonView viewWithTag:Tag_fiveLine];
+    if ([self.couPonBtn isSelected]) {
+        //选中
+        [self.couPonBtn setImage:[UIImage imageNamed:@"coupon_00"] forState:UIControlStateNormal];
+        [self.couPonBtn setSelected:NO];
+        isCouPonSelect = YES;
+        
+        NSString *fontStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]];
+        NSString *behindStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue] - sunCoupon]];
+        NSString *ceshiStr = [NSString stringWithFormat:@"￥%@ ￥%@",fontStr,behindStr];
+        if ([_twoLabel.text rangeOfString:@"选择"].location != NSNotFound || [_oneLabel.text rangeOfString:@"选择"].location != NSNotFound)
+        {
+            fiveLabel.text = @"￥--";
+        }else
+        {
+            fiveLabel.attributedText = [self multiplicityActivity:ceshiStr from:0 to:(int)(fontStr.length+1) color:[UIColor lightGrayColor] otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
+        }
+
+        
+    }else{
+        //未选中
+        [self.couPonBtn setImage:[UIImage imageNamed:@"coupon_01"] forState:UIControlStateNormal];
+        [self.couPonBtn setSelected:YES];
+        isCouPonSelect = NO;
+        fiveLabel.text = [NSString stringWithFormat:@"￥%@",[DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee floatValue] * [_numArray[selectNum] intValue] + [_tradeModel.cashFund floatValue] * [_numArray[selectNum] intValue]]]];
+        }
+
+}
+
+-(NSMutableAttributedString *)multiplicityActivity:(NSString *)aStr from:(int)aFrom to:(int)aTo color:(UIColor *)aColor otherFontWithFrom:(int)aOtherFrrm to:(int)aOtherTo SecondOtherFontWithFrom:(int)aSecondFrom to:(int)aSecondTo
+{
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:aStr];
+    
+    [str addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(aFrom, aTo)];
+    
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(aFrom,aTo)];
+    
+    [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:11] range:NSMakeRange(aOtherFrrm, aOtherTo)];
+    [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:11] range:NSMakeRange(aSecondFrom, aSecondTo)];
+    
+    return str;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

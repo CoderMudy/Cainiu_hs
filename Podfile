@@ -1,0 +1,15 @@
+platform :ios, '7.0'
+
+pod 'AFNetworking', '~> 2.5.3'
+pod 'RDVTabBarController', '~> 1.1.9'
+pod 'UICKeyChainStore', '~> 2.0.4'
+pod 'SDWebImage', '~> 3.7.2'
+pod 'PureLayout', '~> 2.0.6'
+pod 'NimbusKit-AttributedLabel', '~> 1.0.0'
+pod 'MD5Digest', '~> 0.1.0'
+pod 'SFHFKeychainUtils', '~> 0.0.1'
+pod 'ReactiveCocoa'
+pod 'OpenUDID', '~> 1.0.0'
+pod 'MBProgressHUD'
+pod 'UMengAnalytics-NO-IDFA'
+

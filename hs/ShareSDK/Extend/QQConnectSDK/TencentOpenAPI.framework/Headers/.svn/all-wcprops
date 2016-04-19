@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers
+END
+WeiyunAPI.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/WeiyunAPI.h
+END
+QQApi.h
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/QQApi.h
+END
+TencentApiInterface.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/TencentApiInterface.h
+END
+QQApiInterface.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/QQApiInterface.h
+END
+TencentMessageObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/TencentMessageObject.h
+END
+WeiBoAPI.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/WeiBoAPI.h
+END
+sdkdef.h
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/sdkdef.h
+END
+TencentOAuth.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/TencentOAuth.h
+END
+QQApiInterfaceObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/dhgs/!svn/ver/723/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/QQApiInterfaceObject.h
+END
+TencentOAuthObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/dhgs/!svn/ver/126/hs_works/hs/ShareSDK/Extend/QQConnectSDK/TencentOpenAPI.framework/Headers/TencentOAuthObject.h
+END
