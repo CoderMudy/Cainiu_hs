@@ -1273,7 +1273,6 @@
             }
         }
     }
-    NSLog(@"%d,%d,%d",self.cainiuStatus,self.scoreStatus,self.nanjsStatus);
 }
 
 #pragma mark 交易规则
@@ -1301,8 +1300,6 @@
 }
 
 -(void)loadSubUI{
-    
-    NSLog(@"123-------");
     
     if (_topSubView == nil) {
         _topSubView = [[UIView   alloc]initWithFrame:CGRectMake(0, _tradeRulesView.frame.origin.y + _tradeRulesView.frame.size.height+5, ScreenWidth, _indexScrollView.frame.origin.y - (_tradeRulesView.frame.origin.y + _tradeRulesView.frame.size.height+5))];
