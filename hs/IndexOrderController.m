@@ -3247,7 +3247,7 @@
     
     //（涨停价/跌停价 - 当前价格）* 每次跳动金额 = 止损金额
     if (self.buyState == 0) {
-        float   stopMoney = ([_chooseDataModel.highestPrice floatValue] - [_priceLabel.text floatValue]) * [_chooseDataModel.jump floatValue] ;
+//        float   stopMoney = ([_chooseDataModel.highestPrice floatValue] - [_priceLabel.text floatValue]) * [_chooseDataModel.jump floatValue] ;
         
     }
     else{

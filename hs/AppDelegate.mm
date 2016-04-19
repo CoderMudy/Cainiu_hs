@@ -11,6 +11,7 @@
 #import "FindPage.h"
 #import "AccountPage.h"
 #import "InfomationIndexController.h"
+#import "AccountViewController.h"
 #import "h5DataCenterMgr.h"
 #import "NetRequest.h"
 #import "WelcomePageView.h"
@@ -635,7 +636,7 @@ void UncaughtExceptionHandler(NSException *exception)
     HSNavigationController *findPageNav = [[HSNavigationController alloc]
                                            initWithRootViewController:findPage];
     
-    AccountPage *userPage = [[AccountPage alloc] init];
+    AccountViewController *userPage = [[AccountViewController alloc] init];
     HSNavigationController *userPageNav = [[HSNavigationController alloc]
                                            initWithRootViewController:userPage];
     

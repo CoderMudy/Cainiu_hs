@@ -514,6 +514,16 @@
 		B522F8441B689811000748F3 /* TradeConfigerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B522F8431B689811000748F3 /* TradeConfigerModel.m */; };
 		B52CA14B1B21BBBC00F2701D /* NetReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CA14A1B21BBBC00F2701D /* NetReachability.m */; };
 		B52CA14E1B21BC1A00F2701D /* PersionInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CA14D1B21BC1A00F2701D /* PersionInfoCell.m */; };
+		B5448E8F1CC5FFE500BC3F6A /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */; };
+		B5448E901CC5FFE500BC3F6A /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */; };
+		B5448E911CC5FFE500BC3F6A /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */; };
+		B5448E921CC5FFE500BC3F6A /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */; };
+		B5448E931CC5FFE500BC3F6A /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */; };
+		B5448E941CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
+		B5448E951CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
+		B5448E961CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
+		B5448E971CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
+		B5448E981CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
 		B569FD3B1B67169E00152FA8 /* IndexBuyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B569FD3A1B67169E00152FA8 /* IndexBuyModel.m */; };
 		B569FD431B671D3900152FA8 /* LineView.m in Sources */ = {isa = PBXBuildFile; fileRef = B569FD401B671D3900152FA8 /* LineView.m */; };
 		B569FD461B671D3900152FA8 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = B569FD421B671D3900152FA8 /* MainView.m */; };
@@ -2572,6 +2582,9 @@
 		B52CA14A1B21BBBC00F2701D /* NetReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetReachability.m; sourceTree = "<group>"; };
 		B52CA14C1B21BC1A00F2701D /* PersionInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersionInfoCell.h; sourceTree = "<group>"; };
 		B52CA14D1B21BC1A00F2701D /* PersionInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersionInfoCell.m; sourceTree = "<group>"; };
+		B5448E8C1CC5FFE500BC3F6A /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
 		B54A25971C730A9000616AE2 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		B569FD351B670DEA00152FA8 /* ConfigerPCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigerPCH.pch; sourceTree = "<group>"; };
 		B569FD391B67169E00152FA8 /* IndexBuyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexBuyModel.h; sourceTree = "<group>"; };
@@ -3950,6 +3963,16 @@
 				B51DDF361B19919C0068A123 /* ShareSDKShareActionSheet.framework */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		B5448E8B1CC5FF9B00BC3F6A /* 账户首页黑色版 */ = {
+			isa = PBXGroup;
+			children = (
+				B5448E8C1CC5FFE500BC3F6A /* AccountViewController.h */,
+				B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */,
+				B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */,
+			);
+			name = "账户首页黑色版";
 			sourceTree = "<group>";
 		};
 		B54A25951C730A9000616AE2 /* UMOnlineConfig */ = {
@@ -5972,6 +5995,7 @@
 		C9CB2FD91AFB0F7500097B9F /* 账户 */ = {
 			isa = PBXGroup;
 			children = (
+				B5448E8B1CC5FF9B00BC3F6A /* 账户首页黑色版 */,
 				C9D95E231C76A48D006A4890 /* 账户首页20160219 */,
 				B5CA40341BAAB2B000E5A6E7 /* 账户首页 */,
 				B5D71C351C0BFB7D0023AAB5 /* 现货交易所信息 */,
@@ -6796,6 +6820,7 @@
 				459B525C1C3E89F100CDD55C /* whiteArrow@2x.png in Resources */,
 				459B525D1C3E89F100CDD55C /* HJCAdjustNumButton.bundle in Resources */,
 				459B525F1C3E89F100CDD55C /* blueArrow@2x.png in Resources */,
+				B5448E951CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
 				459B52601C3E89F100CDD55C /* grayArrow.png in Resources */,
 				459B52611C3E89F100CDD55C /* KeychainAccessGroups.plist in Resources */,
 				459B52621C3E89F100CDD55C /* 512.png in Resources */,
@@ -6845,6 +6870,7 @@
 				C9140DA91C868F3800023DE0 /* 512.png in Resources */,
 				C9140DAA1C868F3800023DE0 /* cainiuIcon.png in Resources */,
 				C9140DAB1C868F3800023DE0 /* btn_020@2x.png in Resources */,
+				B5448E961CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
 				C9140DAC1C868F3800023DE0 /* Localizable.strings in Resources */,
 				C9140DAD1C868F3800023DE0 /* btn_021.press@2x.png in Resources */,
 				C9140DAE1C868F3800023DE0 /* whiteArrow.png in Resources */,
@@ -6895,6 +6921,7 @@
 				C98301A91CC0CA2000A8F049 /* whiteArrow.png in Resources */,
 				C98301AA1CC0CA2000A8F049 /* btn_021.disable@2x.png in Resources */,
 				C98301AB1CC0CA2000A8F049 /* Images.xcassets in Resources */,
+				B5448E981CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
 				C98301AC1CC0CA2000A8F049 /* blueArrow.png in Resources */,
 				C98301AD1CC0CA2000A8F049 /* Resource.bundle in Resources */,
 				C98301AE1CC0CA2000A8F049 /* btn_020.disable@2x.png in Resources */,
@@ -6940,6 +6967,7 @@
 				C9EC8EEC1C968A8E005882C8 /* whiteArrow.png in Resources */,
 				C9EC8EED1C968A8E005882C8 /* btn_021.disable@2x.png in Resources */,
 				C9EC8EEE1C968A8E005882C8 /* Images.xcassets in Resources */,
+				B5448E971CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
 				C9EC8EEF1C968A8E005882C8 /* blueArrow.png in Resources */,
 				C9EC8EF01C968A8E005882C8 /* Resource.bundle in Resources */,
 				C9EC8EF11C968A8E005882C8 /* btn_020.disable@2x.png in Resources */,
@@ -6979,6 +7007,7 @@
 				B5CFCA2E1B9D84C500C843BE /* cainiuIcon.png in Resources */,
 				F0B1EC9F1B14D4D3000DDF36 /* btn_020@2x.png in Resources */,
 				B5CFCA161B9D6DBD00C843BE /* Localizable.strings in Resources */,
+				B5448E941CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
 				F0B1ECA31B14D4D3000DDF36 /* btn_021.press@2x.png in Resources */,
 				F014BAF51B0199B900D02C2A /* whiteArrow.png in Resources */,
 				F0B1ECA01B14D4D3000DDF36 /* btn_021.disable@2x.png in Resources */,
@@ -7533,6 +7562,7 @@
 				459B51FD1C3E89F100CDD55C /* OrderByModel.m in Sources */,
 				B5E914631C4F31B60030B18D /* IndexMarketInfoModel.m in Sources */,
 				459B51FE1C3E89F100CDD55C /* RankButton.m in Sources */,
+				B5448E901CC5FFE500BC3F6A /* AccountViewController.m in Sources */,
 				459B51FF1C3E89F100CDD55C /* ManagerHUD.m in Sources */,
 				459B52001C3E89F100CDD55C /* SignAgreement.m in Sources */,
 				459B52021C3E89F100CDD55C /* NSArray+FirstLetterArray.m in Sources */,
@@ -7942,6 +7972,7 @@
 				C9140D421C868F3800023DE0 /* OrderByModel.m in Sources */,
 				C9140D431C868F3800023DE0 /* IndexMarketInfoModel.m in Sources */,
 				C9140D441C868F3800023DE0 /* RankButton.m in Sources */,
+				B5448E911CC5FFE500BC3F6A /* AccountViewController.m in Sources */,
 				C9140D451C868F3800023DE0 /* ManagerHUD.m in Sources */,
 				C9140D461C868F3800023DE0 /* SignAgreement.m in Sources */,
 				C9140D481C868F3800023DE0 /* NSArray+FirstLetterArray.m in Sources */,
@@ -8351,6 +8382,7 @@
 				C983013D1CC0CA2000A8F049 /* OrderByModel.m in Sources */,
 				C983013E1CC0CA2000A8F049 /* IndexMarketInfoModel.m in Sources */,
 				C983013F1CC0CA2000A8F049 /* RankButton.m in Sources */,
+				B5448E931CC5FFE500BC3F6A /* AccountViewController.m in Sources */,
 				C98301401CC0CA2000A8F049 /* ManagerHUD.m in Sources */,
 				C98301411CC0CA2000A8F049 /* SignAgreement.m in Sources */,
 				C98301431CC0CA2000A8F049 /* NSArray+FirstLetterArray.m in Sources */,
@@ -8760,6 +8792,7 @@
 				C9EC8E801C968A8E005882C8 /* OrderByModel.m in Sources */,
 				C9EC8E811C968A8E005882C8 /* IndexMarketInfoModel.m in Sources */,
 				C9EC8E821C968A8E005882C8 /* RankButton.m in Sources */,
+				B5448E921CC5FFE500BC3F6A /* AccountViewController.m in Sources */,
 				C9EC8E831C968A8E005882C8 /* ManagerHUD.m in Sources */,
 				C9EC8E841C968A8E005882C8 /* SignAgreement.m in Sources */,
 				C9EC8E861C968A8E005882C8 /* NSArray+FirstLetterArray.m in Sources */,
@@ -9169,6 +9202,7 @@
 				C95FC44B1B4B8246007397D4 /* OrderByModel.m in Sources */,
 				B5E914611C4F31B60030B18D /* IndexMarketInfoModel.m in Sources */,
 				45D7902C1BEC7CF100537B88 /* RankButton.m in Sources */,
+				B5448E8F1CC5FFE500BC3F6A /* AccountViewController.m in Sources */,
 				F09CC42F1B199625006A2A3B /* ManagerHUD.m in Sources */,
 				C93E78E81B4A9FF40064FE6B /* SignAgreement.m in Sources */,
 				B5CDB04A1B1E9AE700C9513B /* NSArray+FirstLetterArray.m in Sources */,

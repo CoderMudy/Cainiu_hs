@@ -79,17 +79,17 @@
 -(void)loadData
 {   if (![[CMStoreManager sharedInstance] isLogin])
     {
-        _titleArray = @[helperCenter_row,share_row,aboutUs_row];
-        _imgNameArray = @[@"account_icon_06",@"share",@"account_icon_07"];
+        _titleArray = @[share_row,aboutUs_row];
+        _imgNameArray = @[@"share",@"account_icon_07"];
     }else{
         if (_userStyle==0)
         {
-            _titleArray = @[advice_row,helperCenter_row,share_row,aboutUs_row];
-            _imgNameArray = @[@"account_icon_05",@"account_icon_06",@"share",@"account_icon_07"];
+            _titleArray = @[share_row,aboutUs_row];
+            _imgNameArray = @[@"share",@"account_icon_07"];
         }else
         {
-            _titleArray = @[advice_row,helperCenter_row,share_row,aboutUs_row,enviro_row];
-            _imgNameArray = @[@"account_icon_05",@"account_icon_06",@"share",@"account_icon_07",@"nowState"];
+            _titleArray = @[share_row,aboutUs_row];
+            _imgNameArray = @[@"share",@"account_icon_07"];
         }
     }
     
