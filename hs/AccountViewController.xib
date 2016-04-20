@@ -52,8 +52,9 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="7nf-rL-TUv">
-                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <rect key="frame" x="0.0" y="64" width="600" height="535"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="vQr-Pj-Fbr"/>
                         <outlet property="delegate" destination="-1" id="0wn-KI-xnt"/>
@@ -62,14 +63,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="7nf-rL-TUv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1Qf-bT-wT8"/>
+                <constraint firstAttribute="trailing" secondItem="7nf-rL-TUv" secondAttribute="trailing" id="Bq4-ZJ-YwD"/>
                 <constraint firstAttribute="trailing" secondItem="hbC-Ik-OhH" secondAttribute="trailing" id="E8Z-ej-a1y"/>
-                <constraint firstItem="7nf-rL-TUv" firstAttribute="top" secondItem="hbC-Ik-OhH" secondAttribute="bottom" id="FZV-MA-lD2"/>
+                <constraint firstItem="7nf-rL-TUv" firstAttribute="top" secondItem="hbC-Ik-OhH" secondAttribute="bottom" id="Jgb-nl-rVi"/>
                 <constraint firstItem="hbC-Ik-OhH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qg8-Pb-sid"/>
-                <constraint firstAttribute="bottom" secondItem="7nf-rL-TUv" secondAttribute="bottom" id="WPW-F0-s6e"/>
-                <constraint firstAttribute="trailing" secondItem="7nf-rL-TUv" secondAttribute="trailing" id="h5g-8d-Is3"/>
+                <constraint firstItem="7nf-rL-TUv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ez3-Mn-l21"/>
                 <constraint firstItem="hbC-Ik-OhH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iBS-iU-XYZ"/>
-                <constraint firstItem="7nf-rL-TUv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iQ5-k3-vvx"/>
+                <constraint firstItem="7nf-rL-TUv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lVh-o5-itr"/>
+                <constraint firstAttribute="bottom" secondItem="7nf-rL-TUv" secondAttribute="bottom" constant="1" id="szo-Ao-Ujl"/>
             </constraints>
             <point key="canvasLocation" x="374" y="316"/>
         </view>

@@ -983,9 +983,16 @@ DEF_SINGLETON(DataEngine)
 }
 
 +(void)requestToDownloadEnvironmentFile{
+    
+    NSArray     *fileArray = [App_aliyunDomainAddress componentsSeparatedByString:@"/"];
+    NSString    *fileName = @"cainiudomain.txt";
+    if (fileArray != nil && fileArray.count > 0) {
+        fileName = fileArray.lastObject;
+    }
+    
     NSFileManager *fileManager = [[NSFileManager alloc]init];
-    if ([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@/Documents/cainiudomain.txt",NSHomeDirectory()]]) {
-        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/Documents/cainiudomain.txt",NSHomeDirectory()] error:nil];
+    if ([fileManager fileExistsAtPath:[NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),fileName]]) {
+        [fileManager removeItemAtPath:[NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),fileName] error:nil];
     }
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -1000,7 +1007,7 @@ DEF_SINGLETON(DataEngine)
         NSURL *documentsDirectoryURL        = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        NSString    *str            = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Documents/cainiudomain.txt",NSHomeDirectory()] encoding:NSUTF8StringEncoding error:nil];
+        NSString    *str            = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Documents/%@",NSHomeDirectory(),fileName] encoding:NSUTF8StringEncoding error:nil];
         NSDictionary *environmentDic = [DataUsedEngine toJsonObjectWithJsonString:str];
         /**
          *  环境存储
@@ -1008,7 +1015,6 @@ DEF_SINGLETON(DataEngine)
         NSString    *HTTP_IP_ONLINE = environmentDic[@"HTTP_IP_ONLINE"];
         NSString    *HTTP_IP_TEST   = environmentDic[@"HTTP_IP_TEST"];
         NSString    *HTTP_IP_SIMULATE   = environmentDic[@"HTTP_IP_SIMULATE"];
-        
         if (HTTP_IP_ONLINE != nil) {
             [[EnvironmentConfiger sharedInstance] setHTTP_IP_ONLINE:HTTP_IP_ONLINE];
         }

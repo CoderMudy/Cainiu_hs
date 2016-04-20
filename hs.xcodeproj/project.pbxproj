@@ -524,6 +524,11 @@
 		B5448E961CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
 		B5448E971CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
 		B5448E981CC5FFE500BC3F6A /* AccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */; };
+		B5448E9B1CC627D100BC3F6A /* AccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */; };
+		B5448E9C1CC627D100BC3F6A /* AccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */; };
+		B5448E9D1CC627D100BC3F6A /* AccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */; };
+		B5448E9E1CC627D100BC3F6A /* AccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */; };
+		B5448E9F1CC627D100BC3F6A /* AccountViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */; };
 		B569FD3B1B67169E00152FA8 /* IndexBuyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B569FD3A1B67169E00152FA8 /* IndexBuyModel.m */; };
 		B569FD431B671D3900152FA8 /* LineView.m in Sources */ = {isa = PBXBuildFile; fileRef = B569FD401B671D3900152FA8 /* LineView.m */; };
 		B569FD461B671D3900152FA8 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = B569FD421B671D3900152FA8 /* MainView.m */; };
@@ -2585,6 +2590,8 @@
 		B5448E8C1CC5FFE500BC3F6A /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountViewController.xib; sourceTree = "<group>"; };
+		B5448E991CC627D100BC3F6A /* AccountViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewCell.h; sourceTree = "<group>"; };
+		B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewCell.m; sourceTree = "<group>"; };
 		B54A25971C730A9000616AE2 /* UMOnlineConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMOnlineConfig.h; sourceTree = "<group>"; };
 		B569FD351B670DEA00152FA8 /* ConfigerPCH.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigerPCH.pch; sourceTree = "<group>"; };
 		B569FD391B67169E00152FA8 /* IndexBuyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexBuyModel.h; sourceTree = "<group>"; };
@@ -3971,6 +3978,8 @@
 				B5448E8C1CC5FFE500BC3F6A /* AccountViewController.h */,
 				B5448E8D1CC5FFE500BC3F6A /* AccountViewController.m */,
 				B5448E8E1CC5FFE500BC3F6A /* AccountViewController.xib */,
+				B5448E991CC627D100BC3F6A /* AccountViewCell.h */,
+				B5448E9A1CC627D100BC3F6A /* AccountViewCell.m */,
 			);
 			name = "账户首页黑色版";
 			sourceTree = "<group>";
@@ -7551,6 +7560,7 @@
 				459B51F41C3E89F100CDD55C /* CommissionExplain.m in Sources */,
 				459B51F51C3E89F100CDD55C /* FindKeFuController.m in Sources */,
 				C9D95E3A1C76AB38006A4890 /* AccountPage.m in Sources */,
+				B5448E9C1CC627D100BC3F6A /* AccountViewCell.m in Sources */,
 				459B51F61C3E89F100CDD55C /* CashPositionListModel.m in Sources */,
 				459B51F71C3E89F100CDD55C /* OtherPositionBaseClass.m in Sources */,
 				459B51F81C3E89F100CDD55C /* TiXianListModel.m in Sources */,
@@ -7961,6 +7971,7 @@
 				C9140D381C868F3800023DE0 /* CommissionExplain.m in Sources */,
 				C9140D391C868F3800023DE0 /* FindKeFuController.m in Sources */,
 				C9140D3A1C868F3800023DE0 /* AccountPage.m in Sources */,
+				B5448E9D1CC627D100BC3F6A /* AccountViewCell.m in Sources */,
 				C9140D3B1C868F3800023DE0 /* CashPositionListModel.m in Sources */,
 				C9140D3C1C868F3800023DE0 /* OtherPositionBaseClass.m in Sources */,
 				C9140D3D1C868F3800023DE0 /* TiXianListModel.m in Sources */,
@@ -8371,6 +8382,7 @@
 				C98301321CC0CA2000A8F049 /* CLLockView.m in Sources */,
 				C98301331CC0CA2000A8F049 /* CommissionExplain.m in Sources */,
 				C98301341CC0CA2000A8F049 /* FindKeFuController.m in Sources */,
+				B5448E9F1CC627D100BC3F6A /* AccountViewCell.m in Sources */,
 				C98301351CC0CA2000A8F049 /* AccountPage.m in Sources */,
 				C98301361CC0CA2000A8F049 /* CashPositionListModel.m in Sources */,
 				C98301371CC0CA2000A8F049 /* OtherPositionBaseClass.m in Sources */,
@@ -8781,6 +8793,7 @@
 				C9EC8E761C968A8E005882C8 /* CommissionExplain.m in Sources */,
 				C9EC8E771C968A8E005882C8 /* FindKeFuController.m in Sources */,
 				C9EC8E781C968A8E005882C8 /* AccountPage.m in Sources */,
+				B5448E9E1CC627D100BC3F6A /* AccountViewCell.m in Sources */,
 				C9EC8E791C968A8E005882C8 /* CashPositionListModel.m in Sources */,
 				C9EC8E7A1C968A8E005882C8 /* OtherPositionBaseClass.m in Sources */,
 				C9EC8E7B1C968A8E005882C8 /* TiXianListModel.m in Sources */,
@@ -9191,6 +9204,7 @@
 				C97353F11BE21A9300EBA33E /* CommissionExplain.m in Sources */,
 				B5DEDA741C23AF31007FAF16 /* FindKeFuController.m in Sources */,
 				C9D95E381C76AB38006A4890 /* AccountPage.m in Sources */,
+				B5448E9B1CC627D100BC3F6A /* AccountViewCell.m in Sources */,
 				C9DBC1841C112AF9007C9533 /* CashPositionListModel.m in Sources */,
 				C954FD5B1B1C6BF2005CE0B2 /* OtherPositionBaseClass.m in Sources */,
 				45CEBF021BD5E656006E7E52 /* TiXianListModel.m in Sources */,

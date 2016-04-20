@@ -78,20 +78,20 @@
 
 -(void)loadData
 {   if (![[CMStoreManager sharedInstance] isLogin])
+{
+    _titleArray = @[helperCenter_row,share_row,aboutUs_row];
+    _imgNameArray = @[@"account_icon_06",@"share",@"account_icon_07"];
+}else{
+    if (_userStyle==0)
     {
-        _titleArray = @[share_row,aboutUs_row];
-        _imgNameArray = @[@"share",@"account_icon_07"];
-    }else{
-        if (_userStyle==0)
-        {
-            _titleArray = @[share_row,aboutUs_row];
-            _imgNameArray = @[@"share",@"account_icon_07"];
-        }else
-        {
-            _titleArray = @[share_row,aboutUs_row];
-            _imgNameArray = @[@"share",@"account_icon_07"];
-        }
+        _titleArray = @[advice_row,helperCenter_row,share_row,aboutUs_row];
+        _imgNameArray = @[@"account_icon_05",@"account_icon_06",@"share",@"account_icon_07"];
+    }else
+    {
+        _titleArray = @[advice_row,helperCenter_row,share_row,aboutUs_row,enviro_row];
+        _imgNameArray = @[@"account_icon_05",@"account_icon_06",@"share",@"account_icon_07",@"nowState"];
     }
+}
     
     
 }
@@ -283,22 +283,22 @@
     
     if ([rowName isEqualToString:advice_row]) {
         [self goAdvicePage];
-
+        
         
     }else if ([rowName isEqualToString:helperCenter_row])
     {
         [self goHelperPage];
-
+        
     }
     else if ([rowName isEqualToString:share_row])
     {
         [self loadShare];
-
+        
     }
     else if ([rowName isEqualToString:aboutUs_row])
     {
         [self goAboutUsPage];
-
+        
     }
     
 }
@@ -327,7 +327,7 @@
         AboutUserViewController *aboutCtrl = [[AboutUserViewController alloc]init];
         [self.navigationController pushViewController:aboutCtrl animated:YES];
     }
-
+    
 }
 #pragma mark 分享
 -(void)loadShare
@@ -346,7 +346,7 @@
                                 content:[NSString stringWithFormat:@"%@\n%@",niu,url]
                                  urlStr:url
                               imagePath:imagePath];
-
+    
 }
 - (void)openSwitch
 {
