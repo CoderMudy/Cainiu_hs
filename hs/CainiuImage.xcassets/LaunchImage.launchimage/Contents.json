@@ -4,7 +4,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "736h",
-      "filename" : "1242x2208iPhonePortraitiOS8_414x736pt@3x.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS8_414x736pt@3x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "3x"
@@ -13,7 +13,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "667h",
-      "filename" : "1242x2208iPhonePortraitiOS8_375x667pt@2x.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS8_375x667pt@2x.png",
       "minimum-system-version" : "8.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -21,7 +21,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "1242x2208iPhonePortraitiOS8_375x667pt@2x-1.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS78_320x480pt@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -30,7 +30,7 @@
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "1242x2208iPhonePortraitiOS78_320x568pt@2x.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS78_320x568pt@2x.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
@@ -38,7 +38,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1242x2208iPadPortraitiOS78_768x1024pt.png",
+      "filename" : "BiquLaunchiPadPortraitiOS78_768x1024pt.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -46,7 +46,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1242x2208iPadPortraitiOS78_768x1024pt@2x.png",
+      "filename" : "BiquLaunchiPadPortraitiOS78_768x1024pt@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -54,21 +54,21 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "1242x2208iPhonePortraitiOS56_320x480pt.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS56_320x480pt.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "1242x2208iPhonePortraitiOS56_320x480pt@2x.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS56_320x480pt@2x.png",
       "extent" : "full-screen",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
-      "filename" : "1242x2208iPhonePortraitiOS56_320x568pt@2x.png",
+      "filename" : "BiquLaunchiPhonePortraitiOS56_320x568pt@2x.png",
       "extent" : "full-screen",
       "subtype" : "retina4",
       "scale" : "2x"
@@ -76,38 +76,29 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1242x2208iPadPortraitWOSBiOS56_768x1004pt.png",
+      "filename" : "BiquLaunchiPadPortraitWOSBiOS56_768x1004pt.png",
       "extent" : "to-status-bar",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1242x2208iPadPortraitiOS56_768x1024pt.png",
+      "filename" : "BiquLaunchiPadPortraitiOS56_768x1024pt.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1242x2208iPadPortraitWOSBiOS56_768x1004pt@2x.png",
+      "filename" : "BiquLaunchiPadPortraitWOSBiOS56_768x1004pt@2x.png",
       "extent" : "to-status-bar",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "1242x2208iPadPortraitiOS56_768x1024pt@2x.png",
+      "filename" : "BiquLaunchiPadPortraitiOS56_768x1024pt@2x.png",
       "extent" : "full-screen",
-      "scale" : "2x"
-    },
-    {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "subtype" : "",
-      "filename" : "1242x2208iPhonePortraitiOS78_320x480pt@2x.png",
-      "minimum-system-version" : "7.0",
-      "orientation" : "portrait",
       "scale" : "2x"
     }
   ],

@@ -425,7 +425,7 @@
 		459B52601C3E89F100CDD55C /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F014BAE71B0199B800D02C2A /* grayArrow.png */; };
 		459B52611C3E89F100CDD55C /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D149F71B9C2CD500676068 /* KeychainAccessGroups.plist */; };
 		459B52621C3E89F100CDD55C /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E09F1B1C3BF4EA00685CC1 /* 512.png */; };
-		459B52631C3E89F100CDD55C /* cainiuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */; };
+		459B52631C3E89F100CDD55C /* biquIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* biquIcon.png */; };
 		459B52641C3E89F100CDD55C /* btn_020@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC981B14D4D3000DDF36 /* btn_020@2x.png */; };
 		459B52651C3E89F100CDD55C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA1B1B9D6DBD00C843BE /* Localizable.strings */; };
 		459B52661C3E89F100CDD55C /* btn_021.press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC9C1B14D4D3000DDF36 /* btn_021.press@2x.png */; };
@@ -583,7 +583,7 @@
 		B5CF55361B706FAF00528CE9 /* IndexOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CF55351B706FAF00528CE9 /* IndexOrderView.m */; };
 		B5CFCA161B9D6DBD00C843BE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA1B1B9D6DBD00C843BE /* Localizable.strings */; };
 		B5CFCA1F1B9D6E4000C843BE /* GDLocalizableConroller.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CFCA1E1B9D6E4000C843BE /* GDLocalizableConroller.m */; };
-		B5CFCA2E1B9D84C500C843BE /* cainiuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */; };
+		B5CFCA2E1B9D84C500C843BE /* biquIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* biquIcon.png */; };
 		B5D008C11B0DFB2800655BC7 /* AdviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D008C01B0DFB2800655BC7 /* AdviceViewController.m */; };
 		B5D008C61B0DFB3E00655BC7 /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D008C31B0DFB3E00655BC7 /* BankCardViewController.m */; };
 		B5D008C71B0DFB3E00655BC7 /* HelpCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D008C51B0DFB3E00655BC7 /* HelpCenterViewController.m */; };
@@ -1154,7 +1154,7 @@
 		C9140DA71C868F3800023DE0 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F014BAE71B0199B800D02C2A /* grayArrow.png */; };
 		C9140DA81C868F3800023DE0 /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D149F71B9C2CD500676068 /* KeychainAccessGroups.plist */; };
 		C9140DA91C868F3800023DE0 /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E09F1B1C3BF4EA00685CC1 /* 512.png */; };
-		C9140DAA1C868F3800023DE0 /* cainiuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */; };
+		C9140DAA1C868F3800023DE0 /* biquIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* biquIcon.png */; };
 		C9140DAB1C868F3800023DE0 /* btn_020@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC981B14D4D3000DDF36 /* btn_020@2x.png */; };
 		C9140DAC1C868F3800023DE0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA1B1B9D6DBD00C843BE /* Localizable.strings */; };
 		C9140DAD1C868F3800023DE0 /* btn_021.press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC9C1B14D4D3000DDF36 /* btn_021.press@2x.png */; };
@@ -1708,7 +1708,7 @@
 		C98301A21CC0CA2000A8F049 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F014BAE71B0199B800D02C2A /* grayArrow.png */; };
 		C98301A31CC0CA2000A8F049 /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D149F71B9C2CD500676068 /* KeychainAccessGroups.plist */; };
 		C98301A41CC0CA2000A8F049 /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E09F1B1C3BF4EA00685CC1 /* 512.png */; };
-		C98301A51CC0CA2000A8F049 /* cainiuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */; };
+		C98301A51CC0CA2000A8F049 /* biquIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* biquIcon.png */; };
 		C98301A61CC0CA2000A8F049 /* btn_020@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC981B14D4D3000DDF36 /* btn_020@2x.png */; };
 		C98301A71CC0CA2000A8F049 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA1B1B9D6DBD00C843BE /* Localizable.strings */; };
 		C98301A81CC0CA2000A8F049 /* btn_021.press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC9C1B14D4D3000DDF36 /* btn_021.press@2x.png */; };
@@ -2374,7 +2374,7 @@
 		C9EC8EE51C968A8E005882C8 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F014BAE71B0199B800D02C2A /* grayArrow.png */; };
 		C9EC8EE61C968A8E005882C8 /* KeychainAccessGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5D149F71B9C2CD500676068 /* KeychainAccessGroups.plist */; };
 		C9EC8EE71C968A8E005882C8 /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = B5E09F1B1C3BF4EA00685CC1 /* 512.png */; };
-		C9EC8EE81C968A8E005882C8 /* cainiuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */; };
+		C9EC8EE81C968A8E005882C8 /* biquIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA2D1B9D84C500C843BE /* biquIcon.png */; };
 		C9EC8EE91C968A8E005882C8 /* btn_020@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC981B14D4D3000DDF36 /* btn_020@2x.png */; };
 		C9EC8EEA1C968A8E005882C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CFCA1B1B9D6DBD00C843BE /* Localizable.strings */; };
 		C9EC8EEB1C968A8E005882C8 /* btn_021.press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0B1EC9C1B14D4D3000DDF36 /* btn_021.press@2x.png */; };
@@ -2694,7 +2694,7 @@
 		B5CFCA1C1B9D6DBF00C843BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5CFCA1D1B9D6E4000C843BE /* GDLocalizableConroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDLocalizableConroller.h; sourceTree = "<group>"; };
 		B5CFCA1E1B9D6E4000C843BE /* GDLocalizableConroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDLocalizableConroller.m; sourceTree = "<group>"; };
-		B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cainiuIcon.png; sourceTree = "<group>"; };
+		B5CFCA2D1B9D84C500C843BE /* biquIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = biquIcon.png; sourceTree = "<group>"; };
 		B5D008BF1B0DFB2800655BC7 /* AdviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviceViewController.h; sourceTree = "<group>"; };
 		B5D008C01B0DFB2800655BC7 /* AdviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviceViewController.m; sourceTree = "<group>"; };
 		B5D008C21B0DFB3E00655BC7 /* BankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardViewController.h; sourceTree = "<group>"; };
@@ -6362,7 +6362,7 @@
 				C9D40CCE1C97DEF6001982F7 /* CainiuYYBJsonClass.json */,
 				C93FF70E1BFDE8C500E2E18C /* SaleJsonClass.json */,
 				DC3CC4FF1AF9A9500090F9E9 /* Info.plist */,
-				B5CFCA2D1B9D84C500C843BE /* cainiuIcon.png */,
+				B5CFCA2D1B9D84C500C843BE /* biquIcon.png */,
 				C972E0761C02B61200E0DAC9 /* qllIcon.png */,
 				DC3CC5001AF9A9500090F9E9 /* main.m */,
 				C98301C61CC0DAC600A8F049 /* yqbIcon.png */,
@@ -6833,7 +6833,7 @@
 				459B52601C3E89F100CDD55C /* grayArrow.png in Resources */,
 				459B52611C3E89F100CDD55C /* KeychainAccessGroups.plist in Resources */,
 				459B52621C3E89F100CDD55C /* 512.png in Resources */,
-				459B52631C3E89F100CDD55C /* cainiuIcon.png in Resources */,
+				459B52631C3E89F100CDD55C /* biquIcon.png in Resources */,
 				459B52641C3E89F100CDD55C /* btn_020@2x.png in Resources */,
 				459B52651C3E89F100CDD55C /* Localizable.strings in Resources */,
 				459B52661C3E89F100CDD55C /* btn_021.press@2x.png in Resources */,
@@ -6877,7 +6877,7 @@
 				C9140DA71C868F3800023DE0 /* grayArrow.png in Resources */,
 				C9140DA81C868F3800023DE0 /* KeychainAccessGroups.plist in Resources */,
 				C9140DA91C868F3800023DE0 /* 512.png in Resources */,
-				C9140DAA1C868F3800023DE0 /* cainiuIcon.png in Resources */,
+				C9140DAA1C868F3800023DE0 /* biquIcon.png in Resources */,
 				C9140DAB1C868F3800023DE0 /* btn_020@2x.png in Resources */,
 				B5448E961CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
 				C9140DAC1C868F3800023DE0 /* Localizable.strings in Resources */,
@@ -6923,7 +6923,7 @@
 				C98301A21CC0CA2000A8F049 /* grayArrow.png in Resources */,
 				C98301A31CC0CA2000A8F049 /* KeychainAccessGroups.plist in Resources */,
 				C98301A41CC0CA2000A8F049 /* 512.png in Resources */,
-				C98301A51CC0CA2000A8F049 /* cainiuIcon.png in Resources */,
+				C98301A51CC0CA2000A8F049 /* biquIcon.png in Resources */,
 				C98301A61CC0CA2000A8F049 /* btn_020@2x.png in Resources */,
 				C98301A71CC0CA2000A8F049 /* Localizable.strings in Resources */,
 				C98301A81CC0CA2000A8F049 /* btn_021.press@2x.png in Resources */,
@@ -6967,7 +6967,7 @@
 				C9EC8EE51C968A8E005882C8 /* grayArrow.png in Resources */,
 				C9EC8EE61C968A8E005882C8 /* KeychainAccessGroups.plist in Resources */,
 				C9EC8EE71C968A8E005882C8 /* 512.png in Resources */,
-				C9EC8EE81C968A8E005882C8 /* cainiuIcon.png in Resources */,
+				C9EC8EE81C968A8E005882C8 /* biquIcon.png in Resources */,
 				C9EC8EE91C968A8E005882C8 /* btn_020@2x.png in Resources */,
 				C9EC8EEA1C968A8E005882C8 /* Localizable.strings in Resources */,
 				C9D40CCF1C97DEF6001982F7 /* CainiuYYBJsonClass.json in Resources */,
@@ -7013,7 +7013,7 @@
 				F014BAF31B0199B900D02C2A /* grayArrow.png in Resources */,
 				B5D149F81B9C2CD500676068 /* KeychainAccessGroups.plist in Resources */,
 				B5E09F1C1C3BF4EA00685CC1 /* 512.png in Resources */,
-				B5CFCA2E1B9D84C500C843BE /* cainiuIcon.png in Resources */,
+				B5CFCA2E1B9D84C500C843BE /* biquIcon.png in Resources */,
 				F0B1EC9F1B14D4D3000DDF36 /* btn_020@2x.png in Resources */,
 				B5CFCA161B9D6DBD00C843BE /* Localizable.strings in Resources */,
 				B5448E941CC5FFE500BC3F6A /* AccountViewController.xib in Resources */,
@@ -9563,7 +9563,7 @@
 					"-l\"UICKeyChainStore\"",
 					"-l\"z\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cainiu.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bll.biqu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -9650,7 +9650,7 @@
 					"-l\"UICKeyChainStore\"",
 					"-l\"z\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cainiu.test;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bll.biqu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

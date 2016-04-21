@@ -446,7 +446,7 @@
 -(void)clearFoyerHistoryData
 {
     CacheModel *cacheModel = [CacheEngine getCacheInfo];
-    cacheModel.productListArray = [NSMutableArray array];
+    cacheModel.productSectionArray = [NSMutableArray array];
     cacheModel.bannerArray      = [NSMutableArray array];
     [CacheEngine setCacheInfo:cacheModel];
     CacheModel *model = [CacheEngine getCacheInfo];

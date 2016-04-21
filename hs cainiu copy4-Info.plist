@@ -67,7 +67,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>财牛</string>
+	<string>币趣</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -83,7 +83,7 @@
 			<string>wx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxf1ce8ed43bb09f5d</string>
+				<string>wx6e3c7a4d99209f98</string>
 			</array>
 		</dict>
 		<dict>
@@ -93,7 +93,7 @@
 			<string>qq</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ41D6CA96</string>
+				<string>QQ41E0CE01</string>
 			</array>
 		</dict>
 		<dict>
@@ -103,7 +103,7 @@
 			<string>wb</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb796277365</string>
+				<string>wb3780869722</string>
 			</array>
 		</dict>
 	</array>

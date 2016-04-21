@@ -103,10 +103,10 @@
     _detailArray = @[@"0成本 轻松赚",@"重大消息都在这",@"及时交易时时提醒",@"红包抢不停"];
     _imageNameArray = @[@"promotion_share",@"xitongxiaoxi",@"ic_trade_remind",@"ic_task_center"];
     _enableArray = @[@"1",@"1",@"1",@"1"];
-//    if (AppStyle_SAlE) {
-//        _enableArray = @[@"1",@"0",@"0",@"0",@"0",@"0",@"0"];
-//        
-//    }
+    //    if (AppStyle_SAlE) {
+    //        _enableArray = @[@"1",@"0",@"0",@"0",@"0",@"0",@"0"];
+    //
+    //    }
 }
 
 - (void)getMessageCount//
@@ -152,33 +152,33 @@
 }
 - (void)initTableView
 {
-//    FindHeaderView * findHeaderView = [[FindHeaderView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 200*ScreenWidth/375)];
-//    findHeaderView.clickViewBlock = ^(int cliViewNum){
-//        
-//        
-//        switch (cliViewNum) {
-//            case 1://推广赚钱
-//            {
-//                [self clickSpread];
-//            }
-//                break;
-//            case 2://消息中心
-//            {
-//                [_msgCountDictionary setObject:@"0" forKey:@"system"];
-//                SystemMessagePage * sysMsgVC = [[SystemMessagePage alloc] init];
-//                [self.navigationController pushViewController:sysMsgVC animated:YES];
-//            }
-//                break;
-//            case 3://客服中心
-//            {
-//                [self clickKeFu];
-//            }
-//                break;
-//                
-//            default:
-//                break;
-//        }
-//    };
+    //    FindHeaderView * findHeaderView = [[FindHeaderView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 200*ScreenWidth/375)];
+    //    findHeaderView.clickViewBlock = ^(int cliViewNum){
+    //
+    //
+    //        switch (cliViewNum) {
+    //            case 1://推广赚钱
+    //            {
+    //                [self clickSpread];
+    //            }
+    //                break;
+    //            case 2://消息中心
+    //            {
+    //                [_msgCountDictionary setObject:@"0" forKey:@"system"];
+    //                SystemMessagePage * sysMsgVC = [[SystemMessagePage alloc] init];
+    //                [self.navigationController pushViewController:sysMsgVC animated:YES];
+    //            }
+    //                break;
+    //            case 3://客服中心
+    //            {
+    //                [self clickKeFu];
+    //            }
+    //                break;
+    //
+    //            default:
+    //                break;
+    //        }
+    //    };
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeigth-113) style:UITableViewStylePlain];
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.delegate = self;
@@ -264,8 +264,27 @@
     }
     
     switch (indexPath.row) {
-        case 0://交易提醒
+        case 0://推广赚钱
         {
+            [self clickSpread];
+            
+        }
+            break;
+            
+        case 1:{
+            
+            
+            [_msgCountDictionary setObject:@"0" forKey:@"system"];
+            SystemMessagePage * sysMsgVC = [[SystemMessagePage alloc] init];
+            [self.navigationController pushViewController:sysMsgVC animated:YES];
+            
+            
+        }
+            break;
+            
+        case 2://交易提醒
+        {
+            
             
             if ([[CMStoreManager sharedInstance] isLogin]) {
                 if([[CMStoreManager sharedInstance] getAccountCainiuStatus]){
@@ -284,7 +303,8 @@
         }
             break;
             
-        case 1:{
+        case 3://任务中心
+        {
             if (AppStyle_SAlE) {
                 break;
             }
@@ -303,17 +323,6 @@
                 
                 [self goLogin];
             }
-            break;
-            
-        }
-            
-        case 2://活动中心
-        {
-            
-            ActionCenter * actionCenter = [[ActionCenter alloc] init];
-            actionCenter.titleNav = @"活动中心";
-            actionCenter.urlStr =[NSString stringWithFormat:@"%@/activity/hdCenter.html?version=8&abc=%@",K_MGLASS_URL,[Helper randomGet]];
-            [self.navigationController pushViewController:actionCenter animated:YES];
         }
             break;
             
@@ -367,6 +376,7 @@
             case 66667:
             {
                 LoginViewController * loginVC = [[LoginViewController alloc] init];
+                loginVC.isBackLastPage = YES;
                 [self.navigationController pushViewController:loginVC animated:YES];
             }
                 break;
@@ -430,6 +440,7 @@
                 case 66667:
                 {
                     LoginViewController * loginVC = [[LoginViewController alloc] init];
+                    loginVC.isBackLastPage = YES;
                     [self.navigationController pushViewController:loginVC animated:YES];
                 }
                     break;

@@ -89,6 +89,11 @@
 
 
 -(void)popEvent{
+    if (self.isBackLastPage) {
+        [self.navigationController popViewControllerAnimated:YES];
+        self.navigationController.navigationBarHidden = NO;
+        return;
+    }
     //沪金沪银期指进入
     if (self.isOtherFutures) {
         [self.navigationController popViewControllerAnimated:NO];

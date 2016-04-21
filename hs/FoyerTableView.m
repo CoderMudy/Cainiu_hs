@@ -69,9 +69,9 @@
     switch (self.backStyle) {
         case BackStyleDefault:
         {
-            if (cachemodel.productListArray)
+            if (cachemodel.productSectionArray)
             {
-                _productDataArray = cachemodel.productListArray;//刷新产品列表
+                _productDataArray = cachemodel.productSectionArray;//刷新产品列表
                 [_tableView reloadData];
             }
         }
@@ -301,7 +301,7 @@
              //获取缓存信息
              CacheModel *cacheModel = [CacheEngine getCacheInfo];
              //设置属性
-             cacheModel.productListArray = _productDataArray;
+             cacheModel.productSectionArray = _productDataArray;
              // 存入缓存
              [CacheEngine setCacheInfo:cacheModel];
          }
@@ -348,7 +348,7 @@
     }else{
         title.text = @"国内品种";
     }
-    title.font = FontSize(15);
+    title.font = FontSize(14);
     title.textColor = K_color_black;
     title.backgroundColor = K_color_backView;
     [header addSubview:title];

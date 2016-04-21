@@ -149,6 +149,7 @@
 #pragma mark 点击事件
 - (void)logBtnClick:(id)sender {
     LoginViewController * logVC = [[LoginViewController alloc] init];
+    logVC.isBackLastPage = YES;
     [self.navigationController pushViewController:logVC animated:YES];
     //    [self.rdv_tabBarController setTabBarHidden:YES animated:NO];
     

@@ -26,6 +26,13 @@
  *  期货
  */
 @property (nonatomic,assign)BOOL    isOtherFutures;
+
+/**
+ * 返回上层
+ */
+@property (nonatomic,assign)BOOL    isBackLastPage;
+
+
 /**
  *  没有返回按钮
  */

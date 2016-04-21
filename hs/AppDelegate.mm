@@ -382,7 +382,7 @@
 #elif defined (CAINIUCPS)
     appkey =@"568e556ee0f55a4c5200057f";
 #else
-    appkey =@"556ff33167e58e3c87001727";// cainiu com test企业版
+    appkey =@"5715d515e0f55a5fb20017bb";// cainiu com test企业版
     //    NSLog(@"umeng else");
 #endif
     
@@ -669,16 +669,16 @@ void UncaughtExceptionHandler(NSException *exception)
 - (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
     UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
     UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
-    NSArray *tabBarItemImages = @[@"viewvontroller_01",@"viewvontroller_05", @"viewvontroller_02", @"viewvontroller_03"];
     NSArray *taberTitleStr = @[@"行情",@"资讯",@"发现",@"账户"];
-    
+    NSArray * tabBarItemSelectImages = @[@"ic_hall_tab_selected",@"ic_news_tab_selected",@"ic_discovery_tab_selected",@"ic_account_tab_selected"];
+    NSArray * tabBarItemUnSelectImages = @[@"ic_hall_tab_unselected",@"ic_news_tab_unselected",@"ic_discovery_tab_unselected",@"ic_account_tab_unselected"];
+
     NSInteger index = 0;
     for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
         [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_1",
-                                                      [tabBarItemImages objectAtIndex:index]]];
-        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_0",
-                                                        [tabBarItemImages objectAtIndex:index]]];
+        UIImage *selectedimage = [UIImage imageNamed:tabBarItemSelectImages[index]];
+        UIImage *unselectedimage = [UIImage imageNamed:tabBarItemUnSelectImages[index]];
+
         NSDictionary *selectdeAttrubributeDic = @{NSFontAttributeName: [UIFont systemFontOfSize:11.0f],
                                                   NSForegroundColorAttributeName:[UIColor redColor]};
         NSDictionary *unSelectedAttrubributeDic = @{NSFontAttributeName: [UIFont systemFontOfSize:11.0f],

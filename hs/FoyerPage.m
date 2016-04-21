@@ -222,6 +222,7 @@ ShowGestureMethod
             case 66667:
             {
                 LoginViewController * loginVC = [[LoginViewController alloc] init];
+                loginVC.isBackLastPage = YES;
                 [self.navigationController pushViewController:loginVC animated:YES];
             }
                 break;

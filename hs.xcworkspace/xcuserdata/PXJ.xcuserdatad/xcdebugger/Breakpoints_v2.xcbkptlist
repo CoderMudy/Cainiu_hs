@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hs/FoyerScorePage.m"
-            timestampString = "482292492.150068"
+            timestampString = "482836850.829833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
             landmarkName = "-getClickEnableWithProductModel:indexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hs/FoyerScorePage.m"
-            timestampString = "482292510.419763"
+            timestampString = "482836850.829833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "-goScorePage"
             landmarkType = "5">
          </BreakpointContent>
@@ -185,13 +185,13 @@
                   symbolName = "-[IndexRecordView cancelOrderWithIndexPath:]"
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/PXJ/Desktop/BQ/hs/IndexRecordView.m"
-                  timestampString = "482750081.037388"
+                  urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
+                  timestampString = "482836342.534637"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "484"
                   endingLineNumber = "484"
-                  offsetFromSymbolStart = "584">
+                  offsetFromSymbolStart = "638">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -200,13 +200,13 @@
                   symbolName = "__44-[IndexRecordView cancelOrderWithIndexPath:]_block_invoke"
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/PXJ/Desktop/BQ/hs/IndexRecordView.m"
-                  timestampString = "482750081.03803"
+                  urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
+                  timestampString = "482836342.535106"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "484"
                   endingLineNumber = "484"
-                  offsetFromSymbolStart = "72">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -304,22 +304,6 @@
             startingLineNumber = "332"
             endingLineNumber = "332"
             landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "hs/FoyerTableView.m"
-            timestampString = "482750147.63795"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

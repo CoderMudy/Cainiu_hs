@@ -95,7 +95,7 @@
 //NSMutableArray *ifInfoArray; NSMutableArray *agInfoArray;
 #pragma mark  大厅产品列表
 
-@property (nonatomic,strong)NSMutableArray *productListArray;
+@property (nonatomic,strong)NSMutableArray *productSectionArray;
 @property (nonatomic,strong)NSMutableArray *reportArray;
 @property (nonatomic,strong)NSMutableArray *bannerArray;
 

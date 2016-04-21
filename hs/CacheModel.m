@@ -10,7 +10,7 @@
 #import "HsRealtime.h"
 @implementation CacheModel
 
-@synthesize accountModel,stockDetailArray,positionPrivateIndex,positionPublic,positionPublicIndex,financeIndex,tradeHot,orderIndex,isAgree,payModel,userAmt,searchArray,isAgreeOfAu,socketInfoDic,tradeDic,productListArray,reportArray,bannerArray,isOrLogin,imageRenzhengArray,isOrderOrLogin,isQuickOrderOrLogin,isClickLJCN,holidayCacheModel,isFirstSpotIndex,spotgoodsInfo,cashSaleDic;
+@synthesize accountModel,stockDetailArray,positionPrivateIndex,positionPublic,positionPublicIndex,financeIndex,tradeHot,orderIndex,isAgree,payModel,userAmt,searchArray,isAgreeOfAu,socketInfoDic,tradeDic,productSectionArray,reportArray,bannerArray,isOrLogin,imageRenzhengArray,isOrderOrLogin,isQuickOrderOrLogin,isClickLJCN,holidayCacheModel,isFirstSpotIndex,spotgoodsInfo,cashSaleDic;
 
 
 -(void)encodeWithCoder:(NSCoder *)aCoder
@@ -30,7 +30,7 @@
     [aCoder encodeObject:searchArray forKey:@"searchArray"];
     [aCoder encodeObject:socketInfoDic forKey:@"socketInfoDic"];
     [aCoder encodeObject:tradeDic forKey:@"tradeDic"];
-    [aCoder encodeObject:productListArray forKey:@"productListArray"];
+    [aCoder encodeObject:productSectionArray forKey:@"productSectionArray"];
     [aCoder encodeObject:reportArray forKey:@"reportArray"];
     [aCoder encodeObject:bannerArray forKey:@"bannerArray"];
     [aCoder encodeObject:isOrLogin forKey:@"isOrLogin"];
@@ -62,7 +62,7 @@
         self.payModel               = [aDecoder decodeObjectForKey:@"payModel"];
         self.userAmt                = [aDecoder decodeIntForKey:@"userAmt"];
         self.searchArray            = [aDecoder decodeObjectForKey:@"searchArray"];
-        self.productListArray       = [aDecoder decodeObjectForKey:@"productListArray"];
+        self.productSectionArray    = [aDecoder decodeObjectForKey:@"productSectionArray"];
         self.reportArray            = [aDecoder decodeObjectForKey:@"reportArray"];
         self.bannerArray            = [aDecoder decodeObjectForKey:@"bannerArray"];
         self.isOrLogin              = [aDecoder decodeObjectForKey:@"isOrLogin"];
