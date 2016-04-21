@@ -11,7 +11,7 @@
 
 
 
-#define AccountPageName AccountPage
+#define AccountPageName AccountViewController
 
 /**获取域名格式 www.cainiu.com*/
 #define K_URL [[CMStoreManager sharedInstance] getEnvironment]//获取到域名 www.cainiu.com

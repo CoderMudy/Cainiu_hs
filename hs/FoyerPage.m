@@ -55,11 +55,6 @@ ShowGestureMethod
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if ([[CMStoreManager sharedInstance] isLogin]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"uFirstOpenClearLoginInfo" object:nil];
-
-    }
-    
     //添加手势通知
     ShowGestureNotification;
     //    self.title = @"行情大厅";

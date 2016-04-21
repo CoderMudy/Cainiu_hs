@@ -11,6 +11,7 @@
 #import "TiXianDeatialCell.h"
 #import "NetRequest.h"
 #import "AccountPage.h"
+#import "AccountViewController.h"
 
 @interface TiXianFinishViewController ()<UITableViewDataSource,UITableViewDelegate>
 {

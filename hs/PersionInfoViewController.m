@@ -24,6 +24,7 @@
 #import "NetRequest.h"
 #import "NJImageCropperViewController.h"
 #import "UIImageView+WebCache.h"
+#import "AccountViewController.h"
 
 //结束加载
 #define IsEndLoading \
@@ -150,22 +151,19 @@ if (_loadStatusNum==3) {\
                 isHiddleRenZheng = @"hiddle";
                 //初始化title
                 //                _titleArray=@[@"头像",@"昵称",@"个性签名",@"我的推广码",@"",@"手机号",@"实名认证",@"银行卡",@"修改密码",@"手势密码",@"修改手势"];
+                                _titleArray=@[@"头像",@"昵称",@"个性签名",@"手机号",@"实名认证",@"银行卡",@"修改密码",@"手势密码",@"修改手势"];
                 
             }else
             {
                 isHiddleRenZheng = @"show";
                 if (![isHiddleRenZheng isEqualToString:@"hiddle"]) {
                     //身份认证
-                    _titleArray=@[@"头像",@"昵称",@"个性签名",@"我的推广码",@"",@"手机号",@"实名认证",@"银行卡",@"身份认证",@"修改密码",@"手势密码",@"修改手势"];
+                    _titleArray=@[@"头像",@"昵称",@"个性签名",@"手机号",@"实名认证",@"银行卡",@"身份认证",@"修改密码",@"手势密码",@"修改手势"];
                     [_detailArray addObject:infoShenHeStatus];
                 }
                 
                 [_detailArray replaceObjectAtIndex:8 withObject:infoShenHeStatus];
-                //                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:8 inSection:0];
-                //                NSArray *array=@[indexPath];
-                //                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
             }
-            
         }else
         {
             //            _titleArray=@[@"头像",@"昵称",@"个性签名",@"我的推广码",@"",@"手机号",@"实名认证",@"银行卡",@"修改密码",@"手势密码",@"修改手势"];
@@ -188,7 +186,7 @@ if (_loadStatusNum==3) {\
     
     isHiddleRenZheng = @"hiddle";
     //    //初始化title
-    _titleArray=@[@"头像",@"昵称",@"个性签名",@"我的推广码",@"",@"手机号",@"实名认证",@"银行卡",@"修改密码",@"手势密码",@"修改手势"];
+    _titleArray=@[@"头像",@"昵称",@"个性签名",@"手机号",@"实名认证",@"银行卡",@"修改密码",@"手势密码",@"修改手势"];
     _detailArray=[NSMutableArray arrayWithCapacity:0];
     
     
@@ -211,21 +209,15 @@ if (_loadStatusNum==3) {\
     [_detailArray addObject:strNickname];
     //签名
     [_detailArray addObject:sign];
-    [_detailArray addObject:@" "];
-    [_detailArray addObject:@" "];
+//    [_detailArray addObject:@" "];
+//    [_detailArray addObject:@" "];
     //手机号
     [_detailArray addObject:@"未绑定"];
     //实名
     [_detailArray addObject:@"未填写"];
     //银行卡
     [_detailArray addObject:@"未填写"];
-    
-    //    if (![isHiddleRenZheng isEqualToString:@"hiddle"]) {
-    //        //身份认证
-    //        _titleArray=@[@"头像",@"昵称",@"个性签名",@"我的推广码",@"",@"手机号",@"实名认证",@"银行卡",@"身份认证",@"修改密码",@"手势密码",@"修改手势"];
-    //        [_detailArray addObject:infoShenHeStatus];
-    //    }
-    
+
     [_detailArray addObject:@" "];
     //修改密码
     [_detailArray addObject:@" "];
@@ -302,7 +294,7 @@ if (_loadStatusNum==3) {\
     [DataEngine requestToAuthbindOfMobileWithComplete:^(BOOL SUCCESS, NSString * status, NSString * tel) {
         if (SUCCESS) {
             if ([status isEqualToString:@"1"]) {
-                [_detailArray replaceObjectAtIndex:5 withObject:tel];
+                [_detailArray replaceObjectAtIndex:3 withObject:tel];
                 _privateUserInfo.statusMobile=@"1";
                 _privateUserInfo.mobile=tel;
                 userInfo.tele=tel;
@@ -345,11 +337,11 @@ if (_loadStatusNum==3) {\
             if ([status isEqualToString:@"1"]||[status isEqualToString:@"2"]) {
                 if([status isEqualToString:@"1"])
                 {
-                    [_detailArray replaceObjectAtIndex:6 withObject:@"已认证"];
+                    [_detailArray replaceObjectAtIndex:4 withObject:@"已认证"];
                 }
                 else
                 {
-                    [_detailArray replaceObjectAtIndex:6 withObject:@"已填写"];
+                    [_detailArray replaceObjectAtIndex:4 withObject:@"已填写"];
                 }
                 _privateUserInfo.statusRealName=status;
                 _privateUserInfo.realName=realName;
@@ -372,10 +364,6 @@ if (_loadStatusNum==3) {\
             if (status.length>0) {
                 [UIEngine showShadowPrompt:status];
             }
-            else
-            {
-                //                [UIEngine showShadowPrompt:@"！您当前网络不佳，请稍后重试"];
-            }
         }
         IsEndLoading
     }];
@@ -391,22 +379,20 @@ if (_loadStatusNum==3) {\
                 
                 if([status isEqualToString:@"1"])
                 {
-                    [_detailArray replaceObjectAtIndex:7 withObject:@"已绑定"];
+                    [_detailArray replaceObjectAtIndex:5 withObject:@"已绑定"];
                 }
                 else
                 {
-                    [_detailArray replaceObjectAtIndex:7 withObject:@"已填写"];
+                    [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
                 }
                 _privateUserInfo.statusBankCardBind=status;
                 _privateUserInfo.bankCard=bankCard;
                 _privateUserInfo.bankName=bankName;
                 
             }
-            else
-            {
+            else{
                 _privateUserInfo.statusBankCardBind = @"0";
             }
-            
             
             //缓存
             CacheModel *cacheModel = [CacheEngine getCacheInfo];
@@ -414,16 +400,11 @@ if (_loadStatusNum==3) {\
             cacheModel.accountModel.accountIndexModel.privateUserInfo.bankCard = _privateUserInfo.bankCard;
             cacheModel.accountModel.accountIndexModel.privateUserInfo.bankName = _privateUserInfo.bankName;
             [CacheEngine setCacheInfo:cacheModel];
-            
         }
         else
         {
             if (status.length>0) {
                 [UIEngine showShadowPrompt:status];
-            }
-            else
-            {
-                //                [UIEngine showShadowPrompt:@"！您当前网络不佳，请稍后重试"];
             }
         }
         IsEndLoading
@@ -434,18 +415,10 @@ if (_loadStatusNum==3) {\
 
 -(void)loadNav
 {
-//    NavTitle(@"个人资料")
     _nav = [[NavView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
     [_nav.leftControl  addTarget:self action:@selector(leftAction) forControlEvents:UIControlEventTouchUpInside];
     _nav.titleLab.text = @"个人资料";
     [self.view addSubview:_nav];
-    
-    
-    
-    
-    //如果是身份认证进入然后在进入
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return_1"] style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
-    
 }
 
 - (void)leftAction
@@ -480,37 +453,31 @@ if (_loadStatusNum==3) {\
     if (![isHiddleRenZheng isEqualToString:@"hiddle"])//身份认证显示的时候
     {
         if ([userInfo.userGestureIsOpenidLogin isEqualToString:@"1"]) {
-            return 9;
+            return 7;
         }
         else
         {
             if ([CacheEngine isOpenGes]) {
-                return 12;
+                return 10;
             }
-            else
-            {
-                return 11;
+            else{
+                return 9;
             }
-            
         }
-        
     }else
     {
         if ([userInfo.userGestureIsOpenidLogin isEqualToString:@"1"]) {
-            return 8;
+            return 6;
         }
         else
         {
             if ([CacheEngine isOpenGes]) {
-                return 11;
+                return 9;
             }
-            else
-            {
-                return 10;
+            else{
+                return 8;
             }
-            
         }
-        
     }
 }
 
@@ -530,10 +497,6 @@ if (_loadStatusNum==3) {\
     if (indexPath.section==0) {
         if (indexPath.row==0) {
             return 69;
-        }
-        else if (indexPath.row==4)
-        {
-            return 70;
         }
         else
         {
@@ -555,133 +518,10 @@ if (_loadStatusNum==3) {\
     return view;
 }
 
-//账户安全等级
--(UIView *)loadSafeView
-{
-    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 70)];
-    
-    //    view.backgroundColor=[UIColor grayColor];
-    //账户安全等级
-    UILabel *safePro=[[UILabel alloc]init];
-    safePro.frame=CGRectMake(0, 12, ScreenWidth, 18);
-    safePro.font=[UIFont systemFontOfSize:12];
-    safePro.text=@"账户安全等级";
-    safePro.textColor=RGBACOLOR(187, 33, 34, 1);
-    safePro.textAlignment=NSTextAlignmentCenter;
-    [view addSubview:safePro];
-    
-    //灰条
-    UIView *redBackgroundView=[[UIView alloc]initWithFrame:CGRectMake(0, safePro.frame.size.height+safePro.frame.origin.y+3, ScreenWidth, 13)];
-    redBackgroundView.backgroundColor=RGBACOLOR(188, 188, 188, 1);
-    [view addSubview:redBackgroundView];
-    
-    //红条
-    UIView *redView=[[UIView alloc]initWithFrame:CGRectMake(-ScreenWidth-14, 0, ScreenWidth+14, 13)];
-    redView.backgroundColor=RGBACOLOR(187, 33, 34, 1);
-    redView.clipsToBounds=YES;
-    redView.layer.cornerRadius=6;
-    [redBackgroundView addSubview:redView];
-    
-    //低
-    UILabel *safeLabel=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, redView.frame.size.width-24, 13)];
-    safeLabel.text=@"低";
-    safeLabel.textColor=[UIColor whiteColor];
-    safeLabel.font=[UIFont systemFontOfSize:12];
-    safeLabel.textAlignment=NSTextAlignmentRight;
-    [redView addSubview:safeLabel];
-    
-    //请完善以下资料来保护账号
-    UILabel *addInfoLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, redBackgroundView.frame.size.height+redBackgroundView.frame.origin.y+3, ScreenWidth, 18)];
-    addInfoLabel.textColor=RGBACOLOR(187, 33, 34, 1);
-    addInfoLabel.text=@"请完善以下资料来保护账号";
-    addInfoLabel.textAlignment=NSTextAlignmentCenter;
-    addInfoLabel.font=[UIFont systemFontOfSize:12];
-    addInfoLabel.hidden=YES;
-    [view addSubview:addInfoLabel];
-    
-    switch (_safeState) {
-        case 0:
-        {
-            safeLabel.text=@"低";
-            [UIView animateWithDuration:1.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                redView.frame=CGRectMake(redView.frame.origin.x+ScreenWidth/3+7, redView.frame.origin.y, redView.frame.size.width, redView.frame.size.height);
-            } completion:^(BOOL finished) {
-                //显示‘完善资料’提示
-                addInfoLabel.hidden=NO;
-            }];
-        }
-            break;
-        case 1:
-        {
-            safeLabel.text=@"低";
-            [UIView animateWithDuration:1.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                redView.frame=CGRectMake(redView.frame.origin.x+ScreenWidth/3+7, redView.frame.origin.y, redView.frame.size.width, redView.frame.size.height);
-            } completion:^(BOOL finished) {
-                //显示‘完善资料’提示
-                addInfoLabel.hidden=NO;
-            }];
-        }
-            break;
-        case 2:
-        {
-            safeLabel.text=@"中";
-            [UIView animateWithDuration:1.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                redView.frame=CGRectMake(redView.frame.origin.x+ScreenWidth/3*2+7, redView.frame.origin.y, redView.frame.size.width, redView.frame.size.height);
-            } completion:^(BOOL finished) {
-                //显示‘完善资料’提示
-                addInfoLabel.hidden=NO;
-                
-            }];
-        }
-            break;
-        case 3:
-        {
-            safeLabel.text=@"高";
-            safeLabel.frame = CGRectMake(safeLabel.frame.origin.x-ScreenWidth/2+10, safeLabel.frame.origin.y, safeLabel.frame.size.width, safeLabel.frame.size.height);
-            safeLabel.alpha = 0;
-            
-            redView.backgroundColor=RGBACOLOR(78, 179, 53, 1);
-            safePro.textColor=RGBACOLOR(78, 179, 53, 1);
-            [UIView animateWithDuration:1.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                redView.frame=CGRectMake(redView.frame.origin.x+ScreenWidth+7, redView.frame.origin.y, redView.frame.size.width, redView.frame.size.height);
-                
-                
-            } completion:^(BOOL finished) {
-                
-                [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-                    safeLabel.alpha = 1;
-                } completion:nil];
-                
-                //                safeLabel.textAlignment=NSTextAlignmentCenter;
-                //隐藏‘完善资料’提示
-                addInfoLabel.hidden=YES;
-            }];
-        }
-            break;
-            
-        default:
-            break;
-    }
-    
-    return view;
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PersionInfoCell *cell=[[PersionInfoCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     cell.titleLabel.text=_titleArray[indexPath.section*3+indexPath.row];
-    
-    if (![isHiddleRenZheng isEqualToString:@"hiddle"])//身份认证显示的时候
-    {
-        if (indexPath.row==4||indexPath.row==10) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-    }else
-    {
-        if (indexPath.row==4||indexPath.row==9) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-    }
     
     float cellHeight=0.0;
     
@@ -700,7 +540,6 @@ if (_loadStatusNum==3) {\
                 cellHeight=69;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, 69);
                 _headerImageView=[[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth-45-45, 69/2-23, 50, 50)];
-//                [_headerImageView sd_setImageWithURL:[NSURL URLWithString:[[CMStoreManager sharedInstance] getUserHeader]] placeholderImage:[UIImage imageNamed:@"head_01"]];
                 [_headerImageView setImage:[[CMStoreManager sharedInstance] getUserHeader]];
 
                 _headerImageView.clipsToBounds=YES;
@@ -726,19 +565,16 @@ if (_loadStatusNum==3) {\
                 cell.titleLabel.frame = CGRectMake(20, 2, 65, cellHeight);
             }
                 break;
-            case 3:{
-                cellHeight = cellHeightDefault;
-                CGFloat imgVLength = cellHeight-30;
-                cell.userImgV.frame = CGRectMake(ScreenWidth-40-imgVLength, 15, imgVLength, imgVLength);
-                cell.userImgV.hidden = NO;
-                
+            case 3:
+            {
+                cellHeight=cellHeightDefault;
+                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
             }
                 break;
             case 4:
             {
-                cellHeight=70;
-                
-                [cell addSubview:[self loadSafeView]];
+                cellHeight=cellHeightDefault;
+                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
             }
                 break;
             case 5:
@@ -751,8 +587,8 @@ if (_loadStatusNum==3) {\
             {
                 cellHeight=cellHeightDefault;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
-            }
-                break;
+                
+            }break;
             case 7:
             {
                 cellHeight=cellHeightDefault;
@@ -760,18 +596,6 @@ if (_loadStatusNum==3) {\
             }
                 break;
             case 8:
-            {
-                cellHeight=cellHeightDefault;
-                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
-                
-            }break;
-            case 9:
-            {
-                cellHeight=cellHeightDefault;
-                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
-            }
-                break;
-            case 10:
             {
                 cellHeight=cellHeightDefault;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
@@ -790,7 +614,7 @@ if (_loadStatusNum==3) {\
                 }
             }
                 break;
-            case 11:
+            case 9:
             {
                 cellHeight=cellHeightDefault;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
@@ -810,7 +634,6 @@ if (_loadStatusNum==3) {\
                 cellHeight=69;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, 69);
                 _headerImageView=[[UIImageView alloc]initWithFrame:CGRectMake(ScreenWidth-45-45, 69/2-23, 50, 50)];
-//                [_headerImageView sd_setImageWithURL:[NSURL URLWithString:[[CMStoreManager sharedInstance] getUserHeader]] placeholderImage:[UIImage imageNamed:@"head_01"]];
                 [_headerImageView setImage:[[CMStoreManager sharedInstance] getUserHeader]];
                 _headerImageView.clipsToBounds=YES;
                 _headerImageView.layer.cornerRadius=50/2;
@@ -831,19 +654,16 @@ if (_loadStatusNum==3) {\
                 cell.titleLabel.frame = CGRectMake(20, 2, 65, cellHeight);
             }
                 break;
-            case 3:{
-                cellHeight = cellHeightDefault;
-                CGFloat imgVLength = cellHeight-30;
-                cell.userImgV.frame = CGRectMake(ScreenWidth-40-imgVLength, 15, imgVLength, imgVLength);
-                cell.userImgV.hidden = NO;
-                
+            case 3:
+            {
+                cellHeight=cellHeightDefault;
+                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
             }
                 break;
             case 4:
             {
-                cellHeight=70;
-                
-                [cell addSubview:[self loadSafeView]];
+                cellHeight=cellHeightDefault;
+                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
             }
                 break;
             case 5:
@@ -856,21 +676,9 @@ if (_loadStatusNum==3) {\
             {
                 cellHeight=cellHeightDefault;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
-            }
-                break;
-            case 7:
-            {
-                cellHeight=cellHeightDefault;
-                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
-            }
-                break;
-            case 8:
-            {
-                cellHeight=cellHeightDefault;
-                cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
                 
             }break;
-            case 9:
+            case 7:
             {
                 cellHeight=cellHeightDefault;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
@@ -889,13 +697,12 @@ if (_loadStatusNum==3) {\
                 }
             }
                 break;
-            case 10:
+            case 8:
             {
                 cellHeight=cellHeightDefault;
                 cell.titleLabel.frame = CGRectMake(20, 0, 65, cellHeight);
             }
                 break;
-                
             default:
                 break;
         }
@@ -905,175 +712,96 @@ if (_loadStatusNum==3) {\
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, cellHeight-0.5, ScreenWidth, 0.5)];
     lineView.backgroundColor=RGBACOLOR(180, 180, 180, 1);
     [cell addSubview:lineView];
-    
-    //隐藏线
+
+    //隐藏箭头
+    if ([cell.titleLabel.text isEqualToString:@"手势密码"]){
+        cell.accessoryView = nil;
+    }
+    else{
+        UIImageView *accessoryImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+        accessoryImageView.image = [UIImage imageNamed:@"button_02"];
+        
+        cell.accessoryView = accessoryImageView;
+    }
     
     if (![isHiddleRenZheng isEqualToString:@"hiddle"])//身份认证显示的时候
     {
-        //第三方登录
-        if ([userInfo.userGestureIsOpenidLogin isEqualToString:@"1"]) {
-            if (indexPath.row==3||indexPath.row==4||indexPath.row == 7) {
-                lineView.hidden=YES;
-            }
-            else{
-                lineView.hidden=NO;
-            }
-        }
-        //正常用户登录但未开启手势密码
-        else if(![CacheEngine isOpenGes]){
-            if (indexPath.row==3||indexPath.row==4||indexPath.row==10){
-                lineView.hidden=YES;
-            }
-            else{
-                lineView.hidden=NO;
-            }
-        }
-        //开启手势密码
-        else if ([CacheEngine isOpenGes]){
-            if (indexPath.row==3||indexPath.row==4||indexPath.row==11){
-                lineView.hidden=YES;
-            }
-            else{
-                lineView.hidden=NO;
-            }
-        }
-        
-        //隐藏箭头
-        if (indexPath.row==4||indexPath.row==10){
-            cell.accessoryView = nil;
-        }
-        else{
-            UIImageView *accessoryImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
-            accessoryImageView.image = [UIImage imageNamed:@"button_02"];
-            
-            cell.accessoryView = accessoryImageView;
-        }
-        
-        if (indexPath.row==9){
-            if([_privateUserInfo.statusMobile isEqualToString:@"1"]){
-                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-            }
-            
-            
-            else{
-                cell.accessoryType=UITableViewCellAccessoryNone;
-            }
-        }
-        
-        
+//        if (indexPath.row==9){
+//            if([_privateUserInfo.statusMobile isEqualToString:@"1"]){
+//                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+//            }
+//            
+//            
+//            else{
+//                cell.accessoryType=UITableViewCellAccessoryNone;
+//            }
+//        }
     }else
     {//不显示身份认证
-        //第三方登录
-        if ([userInfo.userGestureIsOpenidLogin isEqualToString:@"1"]) {
-            if (indexPath.row==3||indexPath.row==4||indexPath.row == 7) {
-                lineView.hidden=YES;
-            }
-            else{
-                lineView.hidden=NO;
-            }
-        }
-        //正常用户登录但未开启手势密码
-        else if(![CacheEngine isOpenGes]){
-            if (indexPath.row==3||indexPath.row==4||indexPath.row==9){
-                lineView.hidden=YES;
-            }
-            else{
-                lineView.hidden=NO;
-            }
-        }
-        //开启手势密码
-        else if ([CacheEngine isOpenGes]){
-            if (indexPath.row==3||indexPath.row==4||indexPath.row==10){
-                lineView.hidden=YES;
-            }
-            else{
-                lineView.hidden=NO;
-            }
-        }
-        
         //隐藏箭头
-        if (indexPath.row==4||indexPath.row==9){
-            cell.accessoryView = nil;
-        }
-        else{
-            UIImageView *accessoryImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
-            accessoryImageView.image = [UIImage imageNamed:@"button_02"];
-            
-            cell.accessoryView = accessoryImageView;
-        }
-        
-        if (indexPath.row==8){
-            if([_privateUserInfo.statusMobile isEqualToString:@"1"]){
-                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-            }
-            
-            
-            else{
-                cell.accessoryType=UITableViewCellAccessoryNone;
-            }
-        }
-        
-        
+//        if (indexPath.row==8){
+//            if([_privateUserInfo.statusMobile isEqualToString:@"1"]){
+//                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+//            }
+//            
+//            
+//            else{
+//                cell.accessoryType=UITableViewCellAccessoryNone;
+//            }
+//        }
     }
     
-    //是否绑定的颜色变化
-    switch (indexPath.row) {
-        case 5:
+    if ([cell.titleLabel.text isEqualToString:@"手势密码"]) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"手机号"]) {
+        if ([_privateUserInfo.statusMobile isEqualToString:@"0"]) {
+            cell.detailTextLabel.textColor=RGBACOLOR(226, 50, 42, 1);
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else
         {
-            if ([_privateUserInfo.statusMobile isEqualToString:@"0"]) {
-                cell.detailTextLabel.textColor=RGBACOLOR(226, 50, 42, 1);
-                cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+            cell.detailTextLabel.textColor=RGBACOLOR(180, 180, 180, 1);
+            cell.accessoryType=UITableViewCellAccessoryNone;
+            if (_privateUserInfo.mobile.length>5) {
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@****%@",[_privateUserInfo.mobile substringToIndex:3],[_privateUserInfo.mobile substringFromIndex:_privateUserInfo.mobile.length-4]];
             }
-            else
-            {
-                cell.detailTextLabel.textColor=RGBACOLOR(180, 180, 180, 1);
-                cell.accessoryType=UITableViewCellAccessoryNone;
-                if (_privateUserInfo.mobile.length>5) {
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@****%@",[_privateUserInfo.mobile substringToIndex:3],[_privateUserInfo.mobile substringFromIndex:_privateUserInfo.mobile.length-4]];
-                }
-            }
+        }
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"实名认证"]) {
+        if ([_privateUserInfo.statusRealName isEqualToString:@"0"]) {
+            cell.detailTextLabel.textColor=RGBACOLOR(226, 50, 42, 1);
+        }
+        else
+        {
+            cell.detailTextLabel.textColor=RGBACOLOR(180, 180, 180, 1);
             
+            if ([_privateUserInfo.statusRealName isEqualToString:@"1"]) {
+                cell.detailTextLabel.text = @"已认证";
+            }
+            else if ([_privateUserInfo.statusRealName isEqualToString:@"2"]){
+                cell.detailTextLabel.text = @"已填写";
+            }
         }
-            break;
-        case 6:
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"银行卡"]) {
+        if ([_privateUserInfo.statusBankCardBind isEqualToString:@"0"]) {
+            cell.detailTextLabel.textColor=RGBACOLOR(226, 50, 42, 1);
+        }
+        else
         {
-            if ([_privateUserInfo.statusRealName isEqualToString:@"0"]) {
-                cell.detailTextLabel.textColor=RGBACOLOR(226, 50, 42, 1);
-            }
-            else
-            {
-                cell.detailTextLabel.textColor=RGBACOLOR(180, 180, 180, 1);
-                
-                if ([_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-                    cell.detailTextLabel.text = @"已认证";
-                }
-                else if ([_privateUserInfo.statusRealName isEqualToString:@"2"]){
-                    cell.detailTextLabel.text = @"已填写";
-                }
-            }
-        }
-            break;
-        case 7:
-        {
-            if ([_privateUserInfo.statusBankCardBind isEqualToString:@"0"]) {
-                cell.detailTextLabel.textColor=RGBACOLOR(226, 50, 42, 1);
-            }
-            else
-            {
-                cell.detailTextLabel.textColor=RGBACOLOR(180, 180, 180, 1);
-                
-                if ([_privateUserInfo.statusBankCardBind isEqualToString:@"1"]) {
-                    cell.detailTextLabel.text = @"已绑定";
-                }
-                else if ([_privateUserInfo.statusBankCardBind isEqualToString:@"2"]){
-                    cell.detailTextLabel.text = @"已填写";
-                }
-            }
-        }
-            break;
+            cell.detailTextLabel.textColor=RGBACOLOR(180, 180, 180, 1);
             
-        default:
-            break;
+            if ([_privateUserInfo.statusBankCardBind isEqualToString:@"1"]) {
+                cell.detailTextLabel.text = @"已绑定";
+            }
+            else if ([_privateUserInfo.statusBankCardBind isEqualToString:@"2"]){
+                cell.detailTextLabel.text = @"已填写";
+            }
+        }
     }
     
     cell.backgroundColor = RGBACOLOR(239, 239, 244, 1);
@@ -1083,506 +811,225 @@ if (_loadStatusNum==3) {\
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(![isHiddleRenZheng isEqualToString:@"hiddle"])//显示身份认证
-    {
-        if (indexPath.row==4||indexPath.row==10) {
-            
-        }else{
-            
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            
-        }
+    PersionInfoCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.titleLabel.text isEqualToString:@"手势密码"]) {
         
-        switch (indexPath.row) {
-            case 0:{
-                [self initWithCamerView];
-                
-            }
-                break;
-                //昵称
-            case 1:
-            {
-                BackButtonHeader
-                NickViewController *nickVC=[[NickViewController alloc]init];
-                nickVC.block=^(NSString * nick)
-                {
-                    [_detailArray replaceObjectAtIndex:1 withObject:nick];
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-                    NSArray *array=@[indexPath];
-                    [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:nickVC animated:YES];
-            }
-                break;
-                //个性签名
-            case 2:
-            {
-                BackButtonHeader
-                SignViewController *signVC=[[SignViewController alloc]init];
-                signVC.privateUserInfo = _privateUserInfo;
-                signVC.block=^(NSString *sign)
-                {
-                    if([sign isEqualToString:@""])
-                    {
-                        [_detailArray replaceObjectAtIndex:2 withObject:@"编辑您的个性签名"];
-                    }
-                    else
-                    {
-                        [_detailArray replaceObjectAtIndex:2 withObject:sign];
-                    }
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-                    NSArray *array=@[indexPath];
-                    [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:signVC animated:YES];
-            }
-                break;
-                
-                
-            case 3:{
-                
-                FindZBarViewController * findZBar = [[FindZBarViewController alloc] init];
-                [self.navigationController pushViewController:findZBar animated:YES];
-                
-            }break;
-                
-                //手机号
-            case 5:
-            {
-                
-                BackButtonHeader;
-                
-                UIBarButtonItem *item=[[UIBarButtonItem alloc]init];
-                UIImage* image = [UIImage imageNamed:@"return_1.png"];
-                [item setBackButtonBackgroundImage:[image resizableImageWithCapInsets:UIEdgeInsetsMake(0, image.size.width, 0, 80)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-                [item setBackButtonTitlePositionAdjustment:UIOffsetMake(-400.f, 0) forBarMetrics:UIBarMetricsDefault];
-                self.navigationItem.backBarButtonItem = item;
-                
-                MobileBindViewController *phoneVC=[[MobileBindViewController alloc]init];
-                phoneVC.privateUserInfo = _privateUserInfo;
-                if ([_privateUserInfo.statusMobile isEqualToString:@"1"]) {
-                    phoneVC.isBind = YES;
-                }
-                else
-                {
-                    phoneVC.isBind = NO;
-                }
-                phoneVC.block=^(PrivateUserInfo *privateUserInfo)
-                {
-                    _privateUserInfo = privateUserInfo;
-                    NSString *phone = [NSString stringWithFormat:@"%@****%@",[privateUserInfo.mobile substringToIndex:3],[privateUserInfo.mobile substringFromIndex:privateUserInfo.mobile.length-4]];
-                    [_detailArray replaceObjectAtIndex:4 withObject:phone];
-                    //                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
-                    //                NSArray *array=@[indexPath];
-                    [self.tableView reloadData];
-                    //                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:phoneVC animated:YES];
-            }
-                break;
-                //实名认证
-            case 6:
-            {
-                BackButtonHeader
-                RealNameViewController *realVC=[[RealNameViewController alloc]init];
-                //                realVC.isRenZheng = YES;
-                if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-                    realVC.isAuth=NO;
-                }
-                else
-                {
-                    realVC.isAuth=YES;
-                }
-                realVC.privateUserInfo=_privateUserInfo;
-                realVC.block=^(PrivateUserInfo *privateUserInfo)
-                {
-                    _privateUserInfo=privateUserInfo;
-                    [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-                    NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                    NSArray *array=@[indexPath,indexPath3];
-                    [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:realVC animated:YES];
-            }
-                break;
-                //银行卡
-            case 7:
-            {
-                if (![_privateUserInfo.statusRealName isEqualToString:@"0"]) {
-                    BackButtonHeader
-                    BankCardViewController *bankVC=[[BankCardViewController alloc]init];
-                    if (![_privateUserInfo.statusBankCardBind isEqualToString:@"1"]) {
-                        bankVC.isBinding=NO;
-                    }
-                    else
-                    {
-                        bankVC.isBinding=YES;
-                    }
-                    bankVC.privateUserInfo=_privateUserInfo;
-                    bankVC.block=^(PrivateUserInfo *privateUserInfo)
-                    {
-                        [_detailArray replaceObjectAtIndex:6 withObject:@"已填写"];
-                        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:6 inSection:0];
-                        NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                        NSArray *array=@[indexPath,indexPath3];
-                        [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                    };
-                    [self.navigationController pushViewController:bankVC animated:YES];
-                }
-                else
-                {
-                    [[UIEngine sharedInstance] showAlertWithTitle:@"真实信息是您今后提现的唯一凭证，请先进行实名认证" ButtonNumber:2 FirstButtonTitle:@"取消" SecondButtonTitle:@"认证"];
-                    [UIEngine sharedInstance].alertClick=^(int aIndex)
-                    {
-                        if (aIndex==10087) {
-                            BackButtonHeader
-                            RealNameViewController *realVC=[[RealNameViewController alloc]init];
-                            if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-                                realVC.isAuth=NO;
-                            }
-                            else
-                            {
-                                realVC.isAuth=YES;
-                            }
-                            realVC.privateUserInfo=_privateUserInfo;
-                            realVC.block=^(PrivateUserInfo *privateUserInfo)
-                            {
-                                _privateUserInfo=privateUserInfo;
-                                [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
-                                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-                                NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                                NSArray *array=@[indexPath,indexPath3];
-                                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                            };
-                            [self.navigationController pushViewController:realVC animated:YES];
-                        }
-                    };
-                }
-            }
-                break;
-            case 8:
-            {
-                //身份认证
-                //先判断用户是否进行了实名认证和银行卡信息填写
-                BOOL idCard = [_privateUserInfo.statusRealName isEqualToString:@"1"] || [_privateUserInfo.statusRealName isEqualToString:@"2"];
-                BOOL bank = [_privateUserInfo.statusBankCardBind isEqualToString:@"1"] || [_privateUserInfo.statusBankCardBind isEqualToString:@"2"];
-                if (idCard && bank) {
-                    
-                    ShengfenRenZhengViewController *shenCtrl = [[ShengfenRenZhengViewController alloc]init];
-                    shenCtrl.userInfo = _privateUserInfo;
-                    shenCtrl.shenHeStatus = _detailArray[8];
-                    shenCtrl.infoArray = imageDetailArray;
-                    shenCtrl.faileMsg  = failinfoMsg;
-                    
-                    [self.navigationController pushViewController:shenCtrl animated:YES];
-                    
-                }else if(!idCard)
-                {
-                    [UIEngine showShadowPrompt:@"实名信息未填写"];
-                }else
-                {
-                    [UIEngine showShadowPrompt:@"银行卡信息未填写"];
-                }
-            }
-                break;
-                
-                //修改密码
-            case 9:
-            {
-                if ([_privateUserInfo.statusMobile isEqualToString:@"1"]) {
-                    BackButtonHeader
-                    PasswordViewController *passVC=[[PasswordViewController alloc]init];
-                    [self.navigationController pushViewController:passVC animated:YES];
-                }
-            }
-                break;
-                //修改手势
-            case 11:
-            {
-                [[UIEngine sharedInstance] showAuthLoginPWD];
-                [UIEngine sharedInstance].authClick = ^(int aIndex, NSString *loginPwd){
-                    if (aIndex == 10086) {
-                        
-                    }
-                    else if (aIndex == 10087){
-                        
-                        if (loginPwd != nil && loginPwd.length<6) {
-                            [UIEngine showShadowPrompt:@"密码长度不够"];
-                        }
-                        else{
-                            [UIEngine sharedInstance].progressStyle = 1;
-                            [[UIEngine sharedInstance] showProgress];
-                            [DataEngine requestToAuthLoginPWD:loginPwd Complete:^(BOOL SUCCESS, NSString *msg, NSString *data) {
-                                [[UIEngine sharedInstance] hideProgress];
-                                if (SUCCESS) {
-                                    [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *gesPwd) {
-                                        [CacheEngine setGesPwd:gesPwd];
-                                        [CacheEngine setOpenGes:YES];
-                                        [lockVC dismiss:0.0f];
-                                    }];
-                                }
-                                else
-                                {
-                                    if (msg.length>0) {
-                                        [UIEngine showShadowPrompt:msg];
-                                        if ([data floatValue] == 2) {
-                                            [self exit];
-                                        }
-                                    }else{
-                                        //                                        [UIEngine showShadowPrompt:@"！您当前网络不佳，请稍后再试"];
-                                    }
-                                }
-                            }];
-                        }
-                        
-                    }
-                };
-                
-            }
-                break;
-            default:
-                break;
-        }
+    }else{
         
-    }else
-    {//不显示身份认证
-        if (indexPath.row==4||indexPath.row==9) {
-            
-        }else{
-            
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            
-        }
-        
-        switch (indexPath.row) {
-            case 0:{
-                [self initWithCamerView];
-                
-            }
-                break;
-                //昵称
-            case 1:
-            {
-                BackButtonHeader
-                NickViewController *nickVC=[[NickViewController alloc]init];
-                nickVC.block=^(NSString * nick)
-                {
-                    [_detailArray replaceObjectAtIndex:1 withObject:nick];
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
-                    NSArray *array=@[indexPath];
-                    [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:nickVC animated:YES];
-            }
-                break;
-                //个性签名
-            case 2:
-            {
-                BackButtonHeader
-                SignViewController *signVC=[[SignViewController alloc]init];
-                signVC.privateUserInfo = _privateUserInfo;
-                signVC.block=^(NSString *sign)
-                {
-                    if([sign isEqualToString:@""])
-                    {
-                        [_detailArray replaceObjectAtIndex:2 withObject:@"编辑您的个性签名"];
-                    }
-                    else
-                    {
-                        [_detailArray replaceObjectAtIndex:2 withObject:sign];
-                    }
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-                    NSArray *array=@[indexPath];
-                    [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:signVC animated:YES];
-            }
-                break;
-                
-                
-            case 3:{
-                
-                FindZBarViewController * findZBar = [[FindZBarViewController alloc] init];
-                [self.navigationController pushViewController:findZBar animated:YES];
-                
-            }break;
-                
-                //手机号
-            case 5:
-            {
-                
-                BackButtonHeader;
-                
-                UIBarButtonItem *item=[[UIBarButtonItem alloc]init];
-                UIImage* image = [UIImage imageNamed:@"return_1.png"];
-                [item setBackButtonBackgroundImage:[image resizableImageWithCapInsets:UIEdgeInsetsMake(0, image.size.width, 0, 80)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-                [item setBackButtonTitlePositionAdjustment:UIOffsetMake(-400.f, 0) forBarMetrics:UIBarMetricsDefault];
-                self.navigationItem.backBarButtonItem = item;
-                
-                MobileBindViewController *phoneVC=[[MobileBindViewController alloc]init];
-                phoneVC.privateUserInfo = _privateUserInfo;
-                if ([_privateUserInfo.statusMobile isEqualToString:@"1"]) {
-                    phoneVC.isBind = YES;
-                }
-                else
-                {
-                    phoneVC.isBind = NO;
-                }
-                phoneVC.block=^(PrivateUserInfo *privateUserInfo)
-                {
-                    _privateUserInfo = privateUserInfo;
-                    NSString *phone = [NSString stringWithFormat:@"%@****%@",[privateUserInfo.mobile substringToIndex:3],[privateUserInfo.mobile substringFromIndex:privateUserInfo.mobile.length-4]];
-                    [_detailArray replaceObjectAtIndex:4 withObject:phone];
-                    //                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
-                    //                NSArray *array=@[indexPath];
-                    [self.tableView reloadData];
-                    //                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:phoneVC animated:YES];
-            }
-                break;
-                //实名认证
-            case 6:
-            {
-                BackButtonHeader
-                RealNameViewController *realVC=[[RealNameViewController alloc]init];
-                //                realVC.isRenZheng = YES;
-                if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-                    realVC.isAuth=NO;
-                }
-                else
-                {
-                    realVC.isAuth=YES;
-                }
-                realVC.privateUserInfo=_privateUserInfo;
-                realVC.block=^(PrivateUserInfo *privateUserInfo)
-                {
-                    _privateUserInfo=privateUserInfo;
-                    [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
-                    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-                    NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                    NSArray *array=@[indexPath,indexPath3];
-                    [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                };
-                [self.navigationController pushViewController:realVC animated:YES];
-            }
-                break;
-                //银行卡
-            case 7:
-            {
-                if (![_privateUserInfo.statusRealName isEqualToString:@"0"]) {
-                    BackButtonHeader
-                    BankCardViewController *bankVC=[[BankCardViewController alloc]init];
-                    if (![_privateUserInfo.statusBankCardBind isEqualToString:@"1"]) {
-                        bankVC.isBinding=NO;
-                    }
-                    else
-                    {
-                        bankVC.isBinding=YES;
-                    }
-                    bankVC.privateUserInfo=_privateUserInfo;
-                    bankVC.block=^(PrivateUserInfo *privateUserInfo)
-                    {
-                        [_detailArray replaceObjectAtIndex:6 withObject:@"已填写"];
-                        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:6 inSection:0];
-                        NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                        NSArray *array=@[indexPath,indexPath3];
-                        [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                    };
-                    [self.navigationController pushViewController:bankVC animated:YES];
-                }
-                else
-                {
-                    [[UIEngine sharedInstance] showAlertWithTitle:@"真实信息是您今后提现的唯一凭证，请先进行实名认证" ButtonNumber:2 FirstButtonTitle:@"取消" SecondButtonTitle:@"认证"];
-                    [UIEngine sharedInstance].alertClick=^(int aIndex)
-                    {
-                        if (aIndex==10087) {
-                            BackButtonHeader
-                            RealNameViewController *realVC=[[RealNameViewController alloc]init];
-                            if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-                                realVC.isAuth=NO;
-                            }
-                            else
-                            {
-                                realVC.isAuth=YES;
-                            }
-                            realVC.privateUserInfo=_privateUserInfo;
-                            realVC.block=^(PrivateUserInfo *privateUserInfo)
-                            {
-                                _privateUserInfo=privateUserInfo;
-                                [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
-                                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-                                NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                                NSArray *array=@[indexPath,indexPath3];
-                                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                            };
-                            [self.navigationController pushViewController:realVC animated:YES];
-                        }
-                    };
-                }
-            }
-                break;
-                //修改密码
-            case 8:
-            {
-                if ([_privateUserInfo.statusMobile isEqualToString:@"1"]) {
-                    BackButtonHeader
-                    PasswordViewController *passVC=[[PasswordViewController alloc]init];
-                    [self.navigationController pushViewController:passVC animated:YES];
-                }
-            }
-                break;
-                //修改手势
-            case 10:
-            {
-                [[UIEngine sharedInstance] showAuthLoginPWD];
-                [UIEngine sharedInstance].authClick = ^(int aIndex, NSString *loginPwd){
-                    if (aIndex == 10086) {
-                        
-                    }
-                    else if (aIndex == 10087){
-                        
-                        if (loginPwd != nil && loginPwd.length<6) {
-                            [UIEngine showShadowPrompt:@"密码长度不够"];
-                        }
-                        else{
-                            [UIEngine sharedInstance].progressStyle = 1;
-                            [[UIEngine sharedInstance] showProgress];
-                            [DataEngine requestToAuthLoginPWD:loginPwd Complete:^(BOOL SUCCESS, NSString *msg, NSString *data) {
-                                [[UIEngine sharedInstance] hideProgress];
-                                if (SUCCESS) {
-                                    [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *gesPwd) {
-                                        [CacheEngine setGesPwd:gesPwd];
-                                        [CacheEngine setOpenGes:YES];
-                                        [lockVC dismiss:0.0f];
-                                    }];
-                                }
-                                else
-                                {
-                                    if (msg.length>0) {
-                                        [UIEngine showShadowPrompt:msg];
-                                        if ([data floatValue] == 2) {
-                                            [self exit];
-                                        }
-                                    }else{
-                                        //                                        [UIEngine showShadowPrompt:@"！您当前网络不佳，请稍后再试"];
-                                    }
-                                }
-                            }];
-                        }
-                        
-                    }
-                };
-                
-            }
-                break;
-            default:
-                break;
-        }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
     }
     
+    if ([cell.titleLabel.text isEqualToString:@"头像"]) {
+        [self initWithCamerView];
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"昵称"]) {
+        NickViewController *nickVC=[[NickViewController alloc]init];
+        nickVC.block=^(NSString * nick)
+        {
+            [_detailArray replaceObjectAtIndex:1 withObject:nick];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            NSArray *array=@[indexPath];
+            [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+        };
+        [self.navigationController pushViewController:nickVC animated:YES];
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"个性签名"]) {
+        SignViewController *signVC=[[SignViewController alloc]init];
+        signVC.privateUserInfo = _privateUserInfo;
+        signVC.block=^(NSString *sign)
+        {
+            if([sign isEqualToString:@""])
+            {
+                [_detailArray replaceObjectAtIndex:2 withObject:@"编辑您的个性签名"];
+            }
+            else
+            {
+                [_detailArray replaceObjectAtIndex:2 withObject:sign];
+            }
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+            NSArray *array=@[indexPath];
+            [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+        };
+        [self.navigationController pushViewController:signVC animated:YES];
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"手机号"]) {
+        UIBarButtonItem *item=[[UIBarButtonItem alloc]init];
+        UIImage* image = [UIImage imageNamed:@"return_1.png"];
+        [item setBackButtonBackgroundImage:[image resizableImageWithCapInsets:UIEdgeInsetsMake(0, image.size.width, 0, 80)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        [item setBackButtonTitlePositionAdjustment:UIOffsetMake(-400.f, 0) forBarMetrics:UIBarMetricsDefault];
+        self.navigationItem.backBarButtonItem = item;
+        
+        MobileBindViewController *phoneVC=[[MobileBindViewController alloc]init];
+        phoneVC.privateUserInfo = _privateUserInfo;
+        if ([_privateUserInfo.statusMobile isEqualToString:@"1"]) {
+            phoneVC.isBind = YES;
+        }
+        else
+        {
+            phoneVC.isBind = NO;
+        }
+        phoneVC.block=^(PrivateUserInfo *privateUserInfo)
+        {
+            _privateUserInfo = privateUserInfo;
+            NSString *phone = [NSString stringWithFormat:@"%@****%@",[privateUserInfo.mobile substringToIndex:3],[privateUserInfo.mobile substringFromIndex:privateUserInfo.mobile.length-4]];
+            [_detailArray replaceObjectAtIndex:4 withObject:phone];
+            //                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
+            //                NSArray *array=@[indexPath];
+            [self.tableView reloadData];
+            //                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+        };
+        [self.navigationController pushViewController:phoneVC animated:YES];
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"实名认证"]) {
+        RealNameViewController *realVC=[[RealNameViewController alloc]init];
+        //                realVC.isRenZheng = YES;
+        if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
+            realVC.isAuth=NO;
+        }
+        else
+        {
+            realVC.isAuth=YES;
+        }
+        realVC.privateUserInfo=_privateUserInfo;
+        realVC.block=^(PrivateUserInfo *privateUserInfo)
+        {
+            _privateUserInfo=privateUserInfo;
+            [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
+            NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
+            NSArray *array=@[indexPath,indexPath3];
+            [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+        };
+        [self.navigationController pushViewController:realVC animated:YES];
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"银行卡"]) {
+        if (![_privateUserInfo.statusRealName isEqualToString:@"0"]) {
+            BackButtonHeader
+            BankCardViewController *bankVC=[[BankCardViewController alloc]init];
+            if (![_privateUserInfo.statusBankCardBind isEqualToString:@"1"]) {
+                bankVC.isBinding=NO;
+            }
+            else
+            {
+                bankVC.isBinding=YES;
+            }
+            bankVC.privateUserInfo=_privateUserInfo;
+            bankVC.block=^(PrivateUserInfo *privateUserInfo)
+            {
+                [_detailArray replaceObjectAtIndex:6 withObject:@"已填写"];
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:6 inSection:0];
+                NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
+                NSArray *array=@[indexPath,indexPath3];
+                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+            };
+            [self.navigationController pushViewController:bankVC animated:YES];
+        }
+        else
+        {
+            [[UIEngine sharedInstance] showAlertWithTitle:@"真实信息是您今后提现的唯一凭证，请先进行实名认证" ButtonNumber:2 FirstButtonTitle:@"取消" SecondButtonTitle:@"认证"];
+            [UIEngine sharedInstance].alertClick=^(int aIndex)
+            {
+                if (aIndex==10087) {
+                    BackButtonHeader
+                    RealNameViewController *realVC=[[RealNameViewController alloc]init];
+                    if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
+                        realVC.isAuth=NO;
+                    }
+                    else
+                    {
+                        realVC.isAuth=YES;
+                    }
+                    realVC.privateUserInfo=_privateUserInfo;
+                    realVC.block=^(PrivateUserInfo *privateUserInfo)
+                    {
+                        _privateUserInfo=privateUserInfo;
+                        [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
+                        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
+                        NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
+                        NSArray *array=@[indexPath,indexPath3];
+                        [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
+                    };
+                    [self.navigationController pushViewController:realVC animated:YES];
+                }
+            };
+        }
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"身份认证"]) {
+        //身份认证
+        //先判断用户是否进行了实名认证和银行卡信息填写
+        BOOL idCard = [_privateUserInfo.statusRealName isEqualToString:@"1"] || [_privateUserInfo.statusRealName isEqualToString:@"2"];
+        BOOL bank = [_privateUserInfo.statusBankCardBind isEqualToString:@"1"] || [_privateUserInfo.statusBankCardBind isEqualToString:@"2"];
+        if (idCard && bank) {
+            
+            ShengfenRenZhengViewController *shenCtrl = [[ShengfenRenZhengViewController alloc]init];
+            shenCtrl.userInfo = _privateUserInfo;
+            shenCtrl.shenHeStatus = _detailArray[8];
+            shenCtrl.infoArray = imageDetailArray;
+            shenCtrl.faileMsg  = failinfoMsg;
+            
+            [self.navigationController pushViewController:shenCtrl animated:YES];
+            
+        }else if(!idCard)
+        {
+            [UIEngine showShadowPrompt:@"实名信息未填写"];
+        }else
+        {
+            [UIEngine showShadowPrompt:@"银行卡信息未填写"];
+        }
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"修改密码"]) {
+        if ([_privateUserInfo.statusMobile isEqualToString:@"1"]) {
+            BackButtonHeader
+            PasswordViewController *passVC=[[PasswordViewController alloc]init];
+            [self.navigationController pushViewController:passVC animated:YES];
+        }
+    }
+    
+    if ([cell.titleLabel.text isEqualToString:@"修改手势"]) {
+        [[UIEngine sharedInstance] showAuthLoginPWD];
+        [UIEngine sharedInstance].authClick = ^(int aIndex, NSString *loginPwd){
+            if (aIndex == 10086) {
+                
+            }
+            else if (aIndex == 10087){
+                
+                if (loginPwd != nil && loginPwd.length<6) {
+                    [UIEngine showShadowPrompt:@"密码长度不够"];
+                }
+                else{
+                    [UIEngine sharedInstance].progressStyle = 1;
+                    [[UIEngine sharedInstance] showProgress];
+                    [DataEngine requestToAuthLoginPWD:loginPwd Complete:^(BOOL SUCCESS, NSString *msg, NSString *data) {
+                        [[UIEngine sharedInstance] hideProgress];
+                        if (SUCCESS) {
+                            [CLLockVC showSettingLockVCInVC:self successBlock:^(CLLockVC *lockVC, NSString *gesPwd) {
+                                [CacheEngine setGesPwd:gesPwd];
+                                [CacheEngine setOpenGes:YES];
+                                [lockVC dismiss:0.0f];
+                            }];
+                        }
+                        else
+                        {
+                            if (msg.length>0) {
+                                [UIEngine showShadowPrompt:msg];
+                                if ([data floatValue] == 2) {
+                                    [self exit];
+                                }
+                            }
+                        }
+                    }];
+                }
+            }
+        };
+    }
 }
 
 #pragma mark 退出登录

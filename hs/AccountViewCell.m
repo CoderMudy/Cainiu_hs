@@ -37,6 +37,8 @@
         self.detailLabel.textColor = Color_lightGray;
         self.detailLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.detailLabel];
+        
+        
     }
     
     return self;

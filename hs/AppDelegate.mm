@@ -310,6 +310,11 @@
     if ([getUserDefaults(@"FirstLogin") isEqualToString:@""]||getUserDefaults(@"FirstLogin")==nil) {
         saveUserDefaults(@"NO", @"FirstLogin");
     }
+    
+    if ([[CMStoreManager sharedInstance] isLogin]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"uFirstOpenClearLoginInfo" object:nil];
+    }
+    
 }
 
 #pragma mark 跑秒和市场状态数据配置

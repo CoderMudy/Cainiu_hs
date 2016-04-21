@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RGZActionStyleMoreButton.h"
-@interface PersionInfoViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,RGZActionStyleDelegate>
+@interface PersionInfoViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong) NSString *isRegister;
 
 @end
