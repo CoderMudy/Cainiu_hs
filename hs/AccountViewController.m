@@ -307,8 +307,8 @@ UILabel     *_unUseMoneyLabel;
             //账户可用余额
             _usedMoney = [NSString stringWithFormat:@"%.2f",[infoArray[2] doubleValue]];
             //积分
-            [_detailArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%.0f",[infoArray[1] floatValue]]];
-            _integral = [NSString stringWithFormat:@"%.0f",[infoArray[1] floatValue]];
+            [_detailArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%.2f",[infoArray[1] floatValue]]];
+            _integral = [NSString stringWithFormat:@"%.2f",[infoArray[1] floatValue]];
             //冻结金额
             _freezeMoney = [NSString stringWithFormat:@"%.2f",[infoArray[5] doubleValue]];
             //刷新表
