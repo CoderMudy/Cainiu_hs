@@ -72,7 +72,7 @@
     _productAdL                 = [[UILabel alloc] init];
     _productAdL.center = CGPointMake(ScreenWidth-ScreenWidth/4-20, _priceLab.center.y);
     _productAdL.bounds = CGRectMake(0, 0, ScreenWidth-ScreenWidth/2, 20);
-    _productAdL.textColor       = [UIColor blackColor];
+    _productAdL.textColor       = K_color_grayBlack;
     _productAdL.textAlignment   = NSTextAlignmentRight;
     _productAdL.font            = FontSize(detailFont);
     [self addSubview:_productAdL];

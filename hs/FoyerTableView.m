@@ -12,7 +12,7 @@
 #import "FoyerProductModel.h"
 #define cellHeight 65
 
-#define headerColor K_COLOR_CUSTEM(55, 54, 59, 1)
+#define headerColor K_COLOR_CUSTEM(45, 44, 49, 1)
 
 @interface FoyerTableView ()
 {
@@ -141,7 +141,7 @@
         
         UIImageView * imgV = [[UIImageView alloc] init];
         imgV.image = [UIImage imageNamed:array[i][@"imgName"]];
-        imgV.center = CGPointMake(subLength/2, 40*ScreenWidth/375);
+        imgV.center = CGPointMake(subLength/2, 35*ScreenWidth/375);
 //        imgV.bounds = CGRectMake(0, 0, 40*ScreenWidth/375, 40*ScreenWidth/375);
         imgV.bounds = CGRectMake(0, 0, imgV.image.size.width, imgV.image.size.height);
         [subSubView addSubview:imgV];
@@ -149,21 +149,22 @@
         UILabel * name = [[UILabel alloc] init];
         name.center = CGPointMake(subLength/2, 65*ScreenWidth/375);
         name.bounds = CGRectMake(0, 0, subLength, 15);
-        name.font = FontSize(13);
+        name.font = FontSize(13*ScreenWidth/375);
         name.text = array[i][@"name"];
         name.textAlignment = NSTextAlignmentCenter;
         [subSubView addSubview:name];
         
         UILabel * detail = [[UILabel alloc] init];
-        detail.center = CGPointMake(subLength/2, 77*ScreenWidth/375);
-        detail.bounds = CGRectMake(0, 0, subLength, 12);
+        detail.center = CGPointMake(subLength/2, 79*ScreenWidth/375);
+        detail.bounds = CGRectMake(0, 0, subLength, 12*ScreenWidth/375);
         detail.font = FontSize(9);
         detail.text = array[i][@"detail"];
         detail.textColor = K_color_grayBlack;
         detail.textAlignment = NSTextAlignmentCenter;
         [subSubView addSubview:detail];
         
-        if (i==0) {
+        if (i==0)
+        {
             name.textColor = detail.textColor = K_COLOR_CUSTEM(8, 143, 224, 1);
         }else if(i==1)
         {
@@ -348,8 +349,8 @@
     }else{
         title.text = @"国内品种";
     }
-    title.font = FontSize(14);
-    title.textColor = K_color_black;
+    title.font = FontSize(13);
+    title.textColor = K_color_grayBlack;
     title.backgroundColor = K_color_backView;
     [header addSubview:title];
     return header;

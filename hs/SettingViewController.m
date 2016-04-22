@@ -33,7 +33,6 @@
 {
     NSArray   *_titleArray;
     NSArray   *_imgNameArray;
-    //环境状态  0:正式   1:模拟 2:测试    3:预发布
     int         environmentState;
     BOOL        _isChangeOpen;
 }
