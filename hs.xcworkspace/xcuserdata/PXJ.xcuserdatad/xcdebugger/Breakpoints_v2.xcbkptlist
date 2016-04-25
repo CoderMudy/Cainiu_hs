@@ -186,7 +186,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "482995703.448183"
+                  timestampString = "483261032.520384"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "484"
@@ -201,7 +201,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "482995703.448582"
+                  timestampString = "483261032.520816"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "485"
@@ -265,29 +265,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "hs/PageChangeControl.m"
-            timestampString = "482638375.758255"
+            filePath = "hs/NetRequest.m"
+            timestampString = "483246867.889385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "+goShareWithTitle:content:urlStr:imagePath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "hs/FoyerTableView.m"
-            timestampString = "482995702.131866"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "-requestProductData"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "+postRequestWithNSDictionary:url:successBlock:failureBlock:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

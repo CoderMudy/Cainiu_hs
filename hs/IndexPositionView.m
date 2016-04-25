@@ -625,8 +625,13 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    __block IndexPositionList * listModel = _positionListArray[indexPath.row];
     IndexPositionCell * cell = [tableView dequeueReusableCellWithIdentifier:@"indexCell" forIndexPath:indexPath];
+    if (_positionListArray.count<=indexPath.row)
+    {
+        return cell ;
+    }
+    __block IndexPositionList * listModel = _positionListArray[indexPath.row];
+
     NSString * newprice;
     if (listModel.tradeType==0) {
         

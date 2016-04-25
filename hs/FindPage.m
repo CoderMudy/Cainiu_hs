@@ -100,7 +100,7 @@
 {
     _msgCountDictionary = [NSMutableDictionary dictionary];
     _nameArray = @[@"推广赚钱",@"消息中心",@"交易提醒",@"任务中心"];
-    _detailArray = @[@"0成本 轻松赚",@"重大消息都在这",@"及时交易时时提醒",@"红包抢不停"];
+    _detailArray = @[@"0成本 轻松赚",@"重大消息都在这",@"即时交易时时提醒",@"动动手指做任务"];
     _imageNameArray = @[@"promotion_share",@"xitongxiaoxi",@"ic_trade_remind",@"ic_task_center"];
     _enableArray = @[@"1",@"1",@"1",@"1"];
 

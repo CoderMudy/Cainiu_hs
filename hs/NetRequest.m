@@ -79,6 +79,7 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",url);
         failureBlock(error);
         //        [UIEngine showShadowPrompt:@"！您当前网络不佳，请稍后再试"];
         [[UIEngine sharedInstance] hideProgress];
