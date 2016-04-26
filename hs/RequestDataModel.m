@@ -935,6 +935,7 @@
             for (int i=0; i<detailArray.count; i++) {
                 AccountModel * model = [AccountModel accountModelWithDictionary:detailArray[i]];
                 NSDictionary * detailDic = detailArray[i];
+                model.status = @"1";
                 if ([model.code isEqualToString:@"score"]) {
                     [[CMStoreManager sharedInstance] setAccountScoreStatus:model.status];
                     [[CMStoreManager sharedInstance] setAccountScoreDetailDic:detailDic];
