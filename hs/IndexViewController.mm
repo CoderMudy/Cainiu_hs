@@ -1577,8 +1577,12 @@
             [self.navigationController pushViewController:spotgoodsVC animated:YES];
         }
         else{//非现货跳转财牛账户
-            AccountModel *accountModel = [AccountModel accountModelWithDictionary:[[CMStoreManager sharedInstance] getAccountCainiuDetailDic]];
-            [self goCainiuPage:accountModel];
+//            AccountModel *accountModel = [AccountModel accountModelWithDictionary:[[CMStoreManager sharedInstance] getAccountCainiuDetailDic]];
+//            [self goCainiuPage:accountModel];
+            AccountH5Page *h5 = [[AccountH5Page alloc]init];
+            h5.url = [NSString stringWithFormat:@"http://%@/account/banks.html?type=original",HTTP_IP];
+            h5.isHaveToken = YES;
+            [self.navigationController pushViewController:h5 animated:YES];
         }
     }
 }
