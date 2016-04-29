@@ -138,7 +138,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/RequestDataModel.m"
-                  timestampString = "483603024.113113"
+                  timestampString = "483614911.88351"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "525"
@@ -153,7 +153,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/RequestDataModel.m"
-                  timestampString = "483603024.113773"
+                  timestampString = "483614911.884056"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "527"
@@ -218,7 +218,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "483603024.1206"
+                  timestampString = "483614911.890285"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "487"
@@ -233,7 +233,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "483603024.121259"
+                  timestampString = "483614911.89077"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "488"
@@ -288,6 +288,22 @@
             startingLineNumber = "1715"
             endingLineNumber = "1715"
             landmarkName = "-chooseStop"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/IndexViewController.mm"
+            timestampString = "483613778.753482"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "-loadSocket"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
