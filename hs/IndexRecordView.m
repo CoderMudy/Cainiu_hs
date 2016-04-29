@@ -404,12 +404,12 @@
             IndexRecordModel * model =  [IndexRecordModel modelObjectWithDictionary:_sectionArray[section][0]];
             headerHeight = 40;
             UILabel * dateLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, ScreenWidth, 15)];
-            dateLab.textColor = k_color_blueColor;
+            dateLab.textColor = Color_Gold;
             dateLab.font = FontSize(11);
             dateLab.text= [Helper timeTransform:model.buyDate intFormat:@"yyyy-MM-dd HH:mm:ss" toFormat:@"yyyy年MM月dd日"];
             [view addSubview:dateLab];
             UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, headerHeight-1, ScreenWidth, 2)];
-            line.backgroundColor = k_color_blueColor;
+            line.backgroundColor = Color_Gold;
             [view addSubview:line];
         }break;
         case IndexRecordTypeConditionsStyle:
@@ -417,12 +417,12 @@
             IndexRecordModel * model =  [IndexRecordModel modelObjectWithDictionary:_sectionArray[section][0]];
             headerHeight = 40;
             UILabel * dateLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, ScreenWidth, 15)];
-            dateLab.textColor = k_color_blueColor;
+            dateLab.textColor = Color_Gold;
             dateLab.font = FontSize(11);
             dateLab.text= [Helper timeTransform:model.createDate intFormat:@"yyyy-MM-dd HH:mm:ss" toFormat:@"yyyy年MM月dd日"];
             [view addSubview:dateLab];
             UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, headerHeight-1, ScreenWidth, 2)];
-            line.backgroundColor = k_color_blueColor;
+            line.backgroundColor = Color_Gold;
             [view addSubview:line];
             
         }break;

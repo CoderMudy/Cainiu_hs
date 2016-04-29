@@ -13,7 +13,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 //金色
-#define Color_Gold [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1]
+#define Color_Gold K_COLOR_CUSTEM(8, 129, 198, 1)
 
 //黑色
 #define Color_black [UIColor colorWithRed:22/255.0 green:22/255.0 blue:24/255.0 alpha:1]

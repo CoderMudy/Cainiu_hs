@@ -69,7 +69,7 @@
     [self addSubview:_saleBtn];
     
     _saleLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-20-saleBtnWidth, 10+(cellHeight-50)/2, saleBtnWidth, saleBtnWidth/2)];
-    _saleLab.backgroundColor =k_color_blueColor;
+    _saleLab.backgroundColor =Color_Gold;
     _saleLab.textAlignment = NSTextAlignmentCenter;
     _saleLab.text = @"平仓";
     _saleLab.textColor = [UIColor whiteColor];
@@ -155,7 +155,7 @@
             _saleLab.text = @"平仓";
             _priceLab.hidden = NO;
             _profitLab.hidden = NO;
-            _saleLab.backgroundColor = k_color_blueColor;
+            _saleLab.backgroundColor = Color_Gold;
         }
             break;
         case 4:{

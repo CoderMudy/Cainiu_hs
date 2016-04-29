@@ -360,7 +360,7 @@
 //销售包导航黑色
 #define K_color_NavColor K_COLOR_CUSTEM(22, 22, 24, 1)
 //销售包蓝色
-#define k_color_blueColor K_COLOR_CUSTEM(8, 129, 198, 1)
+#define Color_Gold K_COLOR_CUSTEM(8, 129, 198, 1)
 //销售包白色背景
 #define k_color_whiteBack [UIColor whiteColor]
 //系统绿色

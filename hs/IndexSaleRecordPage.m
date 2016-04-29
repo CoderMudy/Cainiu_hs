@@ -105,7 +105,7 @@
         [_controlView addSubview:button];
         if (self.indexSaleRecordType==i) {
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [button setBackgroundColor:k_color_blueColor];
+            [button setBackgroundColor:Color_Gold];
             _lastBtn = button;
         }else{
             [button setTitleColor:SALERECORE_TEXTCOLOR_GRAY forState:UIControlStateNormal];
@@ -176,7 +176,7 @@
     [_lastBtn setBackgroundColor:[UIColor whiteColor]];
     _lastBtn = button;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button setBackgroundColor:k_color_blueColor];
+    [button setBackgroundColor:Color_Gold];
 
     
     

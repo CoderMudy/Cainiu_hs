@@ -430,7 +430,7 @@
     sectionTitleView.backgroundColor =  k_color_whiteBack;
     UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, ScreenWidth-40, 14)];
     titleLab.font = [UIFont systemFontOfSize:10];
-    titleLab.textColor =k_color_blueColor;
+    titleLab.textColor =Color_Gold;
     
     
     UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 29, ScreenWidth, 1)];

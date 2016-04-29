@@ -95,6 +95,7 @@
 
 -(void)loadQuickUI{
    
+    self.view.backgroundColor = k_color_whiteBack;
     self.seg.hidden = YES;
     UIButton * btn = (UIButton *)[self.view viewWithTag:Tag_agreeButton];
     [btn addTarget:self action:@selector(agreeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -117,7 +118,7 @@
     titleNameLabel.text = @"VIP快速通道设置";
     titleNameLabel.font = [UIFont systemFontOfSize:17*ScreenWidth/375];
     titleNameLabel.numberOfLines = 0;
-    titleNameLabel.textColor = k_color_blueColor;
+    titleNameLabel.textColor = Color_Gold;
     titleNameLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleNameLabel];
     self.stopAndGetFrontHeight = titleNameLabel.frame.size.height+titleNameLabel.frame.origin.y+20/568.0*ScreenHeigth;
@@ -130,7 +131,7 @@
     explainLabel.frame = CGRectMake(20, self.otherMoneyFrontHeight + (130.0/568*ScreenHeigth) + 40.0/568*ScreenHeigth, ScreenWidth, 60);
     explainLabel.text  = @"说明 \n1.一旦开启，点击即买 \n2.关闭以后才可重新设置，开启生效";
     explainLabel.font = [UIFont systemFontOfSize:11];
-    explainLabel.textColor = [UIColor lightGrayColor];
+    explainLabel.textColor = SALERECORE_TEXTCOLOR_GRAY;
     explainLabel.backgroundColor = [UIColor clearColor];
     explainLabel.numberOfLines = 0;
     [self.view addSubview:explainLabel];
@@ -140,7 +141,7 @@
     
     [self.bottomBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [self.bottomBtn setBackgroundImage:nil forState:UIControlStateNormal];
-    self.bottomBtn.backgroundColor = Color_black;
+    self.bottomBtn.backgroundColor = k_color_whiteBack;
     self.bottomBtn.layer.cornerRadius = 3;
     self.bottomBtn.layer.masksToBounds = YES;
     self.bottomBtn.layer.borderWidth = 1;
@@ -160,14 +161,12 @@
     if (self.isOpen) {
         _hiddenView.hidden = NO;
         [self.bottomBtn setTitle:@"关闭" forState:UIControlStateNormal];
-        [self.bottomBtn setImage:nil forState:UIControlStateNormal];
-        viewColor =Color_gray;
+        viewColor =SALERECORE_TEXTCOLOR_GRAY;
         
     }else{
     
         _hiddenView.hidden = YES;
         [self.bottomBtn setTitle:@"请开启" forState:UIControlStateNormal];
-        [self.bottomBtn setImage:[UIImage imageNamed:@"lightning_gold"] forState:UIControlStateNormal];
 
         viewColor = Color_Gold;
         self.couPonBtn.enabled = YES;
