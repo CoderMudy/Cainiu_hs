@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 luckin. All rights reserved.
 //
 
+#define RECOREDETAIL_TEXT_COLOR K_color_NavColor
+
 #import "IndexRecordDetailPage.h"
 #import "IndexRecordDetailCell.h"
 #import "IndexRecordModel.h"
@@ -52,16 +54,16 @@
 #pragma mark Nav
 
 -(void)loadNav{
-    self.view.backgroundColor = Color_black;
+    self.view.backgroundColor = k_color_whiteBack;
     
-    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, 44)];
-    
+    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+    navView.backgroundColor = K_color_NavColor;
     [self.view addSubview:navView];
     
     //Left Button
     
     UIImage *leftButtonImage = [UIImage imageNamed:@"return_1.png"];
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 59, 44)];
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 59, 44)];
     [leftButton addTarget:self action:@selector(leftButtonClick) forControlEvents:UIControlEventTouchDown];
     [leftButton.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
     leftButton.titleLabel.shadowColor = RGBACOLOR(117,38,0,1.0f);
@@ -80,10 +82,10 @@
     
     
     UILabel * titleLab = [[UILabel alloc] init];
-    titleLab.center = CGPointMake(ScreenWidth/2, 22);
+    titleLab.center = CGPointMake(ScreenWidth/2, 42);
     titleLab.bounds = CGRectMake(0, 0, 100, 20);
     titleLab.font = [UIFont systemFontOfSize:15];
-    titleLab.textColor = K_color_gray;
+    titleLab.textColor = K_color_lightGray;
     titleLab.textAlignment = NSTextAlignmentCenter;
     titleLab.text = @"订单详情";
     [navView addSubview:titleLab];
@@ -95,7 +97,7 @@
 -(void)initTableView{
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeigth-64) style:UITableViewStyleGrouped];
-    _tableView.backgroundColor = Color_black;
+    _tableView.backgroundColor = k_color_whiteBack;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -103,35 +105,31 @@
     [self.view addSubview:_tableView];
     
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 110)];
-    
     UILabel * headerTitleLab = [[UILabel alloc] init];
-    headerTitleLab.center = CGPointMake(ScreenWidth/2-15, 30);
-    headerTitleLab.bounds = CGRectMake(0, 0, 60, 15);
+
+    headerTitleLab.frame = CGRectMake(25, 25, 60, 16);
     headerTitleLab.text = @"结算盈亏(¥)";
-    headerTitleLab.textAlignment = NSTextAlignmentCenter;
-    headerTitleLab.textColor = K_color_gray;
+    headerTitleLab.textColor = K_color_grayBlack;
     headerTitleLab.font = [UIFont systemFontOfSize:11];
     [_headerView addSubview:headerTitleLab];
     
     _marktitleLab = [[UILabel alloc] init];
-    _marktitleLab.center = CGPointMake(ScreenWidth/2+headerTitleLab.frame.size.width/2, headerTitleLab.center.y);
-    _marktitleLab.bounds = CGRectMake(0, 0, 30, 12);
-    _marktitleLab.textAlignment = NSTextAlignmentCenter;
+    _marktitleLab.frame = CGRectMake(CGRectGetMaxX(headerTitleLab.frame), 27, 30, 12);
     _marktitleLab.layer.cornerRadius = 2;
     _marktitleLab.layer.masksToBounds = YES;
+    _marktitleLab.layer.borderWidth= 1;
+    _marktitleLab.textAlignment = NSTextAlignmentCenter;
     _marktitleLab.textColor = [UIColor whiteColor];
     _marktitleLab.font = [UIFont systemFontOfSize:10];
     [_headerView addSubview:_marktitleLab];
     
-    _profitLab = [[UILabel alloc] initWithFrame:CGRectMake(0, _marktitleLab.frame.origin.y+_marktitleLab.frame.size.height+10, ScreenWidth, 30)];
-    _profitLab.textColor = K_color_gray;
-    _profitLab.textAlignment = NSTextAlignmentCenter;
-    _profitLab.font = [UIFont systemFontOfSize:30];
+    _profitLab = [[UILabel alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(headerTitleLab.frame)+5, ScreenWidth, 40)];
+    _profitLab.textColor = RECOREDETAIL_TEXT_COLOR;
+    _profitLab.font = [UIFont systemFontOfSize:36];
     [_headerView addSubview:_profitLab];
     
-    UILabel * rateLab = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_profitLab.frame), ScreenWidth, 15)];
-    rateLab.textAlignment= NSTextAlignmentCenter;
-    rateLab.font = [UIFont systemFontOfSize:11];
+    UILabel * rateLab = [[UILabel alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(_profitLab.frame), ScreenWidth, 20)];
+    rateLab.font = [UIFont systemFontOfSize:12];
     [_headerView addSubview:rateLab];
     
     NSAttributedString * atrProfitStr;
@@ -200,10 +198,12 @@
     if (_detailModel.tradeType==0) {
         
         _marktitleLab.text = @"看多";
-        _marktitleLab.backgroundColor = K_color_red;
+        _marktitleLab.textColor = K_color_red;
+        _marktitleLab.layer.borderColor = K_color_red.CGColor;
     }else{
         _marktitleLab.text = @"看空";
-        _marktitleLab.backgroundColor = K_color_green;
+        _marktitleLab.textColor = K_color_green;
+        _marktitleLab.layer.borderColor = K_color_green.CGColor;
     }
     _tableView.tableHeaderView = _headerView;
 }
@@ -214,24 +214,33 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section==0) {
-        return 3;
-    }else{
         return 5;
+    }else{
+        return 7;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40;
+    return 30;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 30;
+    if(indexPath.section ==0)
+    {
+        return 25;
+    }else{
+        return 28;
+    }
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     IndexRecordDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:@"recordDetailCell" forIndexPath:indexPath];
-    cell.backgroundColor = Color_black;
+    cell.backgroundColor = k_color_whiteBack;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSString * fundType = _productModel.currencyUnit;
@@ -242,36 +251,51 @@
     {
         unit = @"积分";
     }
-    if (indexPath.section==0) {
+    if (indexPath.section==0)
+    {
         
-        switch (indexPath.row) {
+        switch (indexPath.row)
+        {
             case 0:
             {
                 cell.nameLeft.text = @"交易品种";
-                cell.nameRight.text = @"交易数量";
-                cell.valueLeft.text = [NSString stringWithFormat:@"%@",_detailModel.futuresCode];
-                cell.valueRight.text = [NSString stringWithFormat:@"%.0f手",_detailModel.count];
+                cell.valueRight.text = [NSString stringWithFormat:@"%@",_detailModel.futuresCode];
             }
                 break;
             case 1:
             {
-                cell.nameLeft.text = @"保证金";
-                cell.nameRight.text = @"交易综合费";
-                NSString * cashFundStr ;
-                NSString * counterStr;
-                if (_detailModel.fundType==0) {//现金
-                    cashFundStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",_detailModel.cashFund]];
-                    counterStr = [NSString stringWithFormat:@"%.2f%@",_detailModel.counterFee,unit];
-                }else{//积分
-                    cashFundStr = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%@ %.0f",_productModel.currencySign,_detailModel.cashFund]];
-                    counterStr = [NSString stringWithFormat:@"%@ %.0f%@",_productModel.currencySign,_detailModel.counterFee,unit];
-                }
-                cashFundStr = [NSString stringWithFormat:@"%@%@",cashFundStr,unit];
-                cell.valueLeft.attributedText = [Helper multiplicityText:cashFundStr from:(int)cashFundStr.length-(int)unit.length to:(int)unit.length font:10];
-                cell.valueRight.attributedText = [Helper multiplicityText:counterStr from:(int)counterStr.length-(int)unit.length to:(int)unit.length font:10];
+                cell.nameLeft.text = @"交易数量";
+                cell.valueRight.text =  [NSString stringWithFormat:@"%.0f手",_detailModel.count];
+    
             }
                 break;
             case 2:
+            {
+                cell.nameLeft.text = @"保证金";
+                NSString * cashFundStr ;
+                if (_detailModel.fundType==0) {//现金
+                    cashFundStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",_detailModel.cashFund]];
+                }else{//积分
+                    cashFundStr = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%@ %.0f",_productModel.currencySign,_detailModel.cashFund]];
+                }
+                cashFundStr = [NSString stringWithFormat:@"%@%@",cashFundStr,unit];
+                cell.valueRight.attributedText = [Helper multiplicityText:cashFundStr from:(int)cashFundStr.length-(int)unit.length to:(int)unit.length font:10];
+            }
+                break;
+            case 3:
+            {
+                
+                cell.nameLeft.text = @"交易综合费";
+                NSString * counterStr;
+                if (_detailModel.fundType==0) {//现金
+                    counterStr = [NSString stringWithFormat:@"%.2f%@",_detailModel.counterFee,unit];
+                }else{//积分
+                    counterStr = [NSString stringWithFormat:@"%@ %.0f%@",_productModel.currencySign,_detailModel.counterFee,unit];
+                }
+                cell.valueRight.attributedText = [Helper multiplicityText:counterStr from:(int)counterStr.length-(int)unit.length to:(int)unit.length font:10];
+            }
+                break;
+            case 4:
             {
                 cell.nameLeft.text = @"合约到期时间";
                 cell.valueRight.text = [NSString stringWithFormat:@"%@",_detailModel.sysSetSaleDate];;
@@ -285,25 +309,55 @@
             case 0:
             {
                 cell.nameLeft.text = @"买入价";
-                cell.nameRight.text = @"卖出价";
                 NSString * buyPriceStr;
-                NSString * salePriceStr;
                 switch (_productModel.decimalPlaces.intValue) {
                     case 0:
                     {
                         buyPriceStr   = [NSString stringWithFormat:@"%.0f%@",_detailModel.buyPrice,fundType];
-                        salePriceStr = [NSString stringWithFormat:@"%.0f%@",_detailModel.salePrice,fundType];
                     }
                         break;
                     case 1:
                     {
                         buyPriceStr   = [NSString stringWithFormat:@"%.1f%@",_detailModel.buyPrice,fundType];
-                        salePriceStr = [NSString stringWithFormat:@"%.1f%@",_detailModel.salePrice,fundType];
                     }
                         break;
                     case 2:
                     {
                         buyPriceStr   = [NSString stringWithFormat:@"%.2f%@",_detailModel.buyPrice,fundType];
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+               cell.valueRight.attributedText = [Helper multiplicityText:buyPriceStr from:(int)buyPriceStr.length-(int)fundType.length to:(int)fundType.length font:10];
+
+            }
+                break;
+                
+            case 1:
+            {
+                cell.nameLeft.text = @"买入类型";
+                cell.valueRight.text = @"市价买入";
+            }
+                break;
+            case 2:
+            {
+                cell.nameLeft.text = @"卖出价";
+                NSString * salePriceStr;
+                switch (_productModel.decimalPlaces.intValue) {
+                    case 0:
+                    {
+                        salePriceStr = [NSString stringWithFormat:@"%.0f%@",_detailModel.salePrice,fundType];
+                    }
+                        break;
+                    case 1:
+                    {
+                        salePriceStr = [NSString stringWithFormat:@"%.1f%@",_detailModel.salePrice,fundType];
+                    }
+                        break;
+                    case 2:
+                    {
                         salePriceStr = [NSString stringWithFormat:@"%.2f%@",_detailModel.salePrice,fundType];
                     }
                         break;
@@ -311,17 +365,12 @@
                     default:
                         break;
                 }
-               cell.valueLeft.attributedText = [Helper multiplicityText:buyPriceStr from:(int)buyPriceStr.length-(int)fundType.length to:(int)fundType.length font:10];
-                
                 cell.valueRight.attributedText = [Helper multiplicityText:salePriceStr from:(int)salePriceStr.length-(int)fundType.length to:(int)fundType.length font:10];
             }
                 break;
-                
-            case 1:
+            case 3:
             {
-                cell.nameLeft.text = @"买入类型";
-                cell.nameRight.text = @"卖出类型";
-                cell.valueLeft.text = @"市价买入";
+                cell.nameLeft.text = @"卖出类型";
                 NSString * saleOpSourceText;
                 switch (_detailModel.saleOpSource.intValue) {
                     case 2:
@@ -347,26 +396,24 @@
                 cell.valueRight.text = saleOpSourceText;
             }
                 break;
-                
-            case 2:
+            case 4:
             {
                 cell.nameLeft.text = @"买入时间";
                 cell.valueRight.text = [NSString stringWithFormat:@"%@",_detailModel.buyDate];;
             }
                 break;
-            case 3:
+            case 5:
             {
                 cell.nameLeft.text = @"卖出时间";
                 cell.valueRight.text = [NSString stringWithFormat:@"%@",_detailModel.saleDate];;
             }
                 break;
-            case 4:
+            case 6:
             {
                 cell.nameLeft.text = @"订单单号";
                 cell.valueRight.text = [NSString stringWithFormat:@"%@",_detailModel.displayId];;
             }
                 break;
-                
             default:
                 break;
         }
@@ -379,16 +426,15 @@
 }
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * sectionTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
-    sectionTitleView.backgroundColor =  Color_black;
-    UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, ScreenWidth, 14)];
+    UIView * sectionTitleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+    sectionTitleView.backgroundColor =  k_color_whiteBack;
+    UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, ScreenWidth-40, 14)];
     titleLab.font = [UIFont systemFontOfSize:10];
-    titleLab.textColor =K_color_gray;
-    titleLab.textAlignment = NSTextAlignmentCenter;
+    titleLab.textColor =k_color_blueColor;
     
     
-    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(20, 39, ScreenWidth-40, 1)];
-    line.backgroundColor = K_COLOR_CUSTEM(110, 110, 110, 1);
+    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 29, ScreenWidth, 1)];
+    line.backgroundColor = K_color_line;
     [sectionTitleView addSubview:titleLab];
     [sectionTitleView addSubview:line];
     switch (section) {

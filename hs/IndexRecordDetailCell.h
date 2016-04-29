@@ -10,8 +10,6 @@
 
 @interface IndexRecordDetailCell : UITableViewCell
 @property (nonatomic,strong)UILabel * nameLeft;
-@property (nonatomic,strong)UILabel * valueLeft;
-@property (nonatomic,strong)UILabel * nameRight;
 @property (nonatomic,strong)UILabel * valueRight;
 
 @end

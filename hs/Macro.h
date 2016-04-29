@@ -337,6 +337,9 @@
 #define LARGE_NRATE  10000.0
 
 #define ADScale 96/270
+
+
+
 #define K_color_backView  K_COLOR_CUSTEM(246, 246, 246, 1)
 
 #define K_color_line  K_COLOR_CUSTEM(230, 230, 230, 1)
@@ -346,8 +349,7 @@
 
 #define K_color_grayBlack  K_COLOR_CUSTEM(110, 110, 110, 1)
 #define K_color_black  K_COLOR_CUSTEM(55, 54, 53, 1)
-#define K_color_green  K_COLOR_CUSTEM(8, 186, 66, 1)
-#define K_color_red  K_COLOR_CUSTEM(250, 67, 0, 1)
+
 #define K_color_Purple K_COLOR_CUSTEM(105, 27, 79, 1)
 
 #define K_color_orangeLine K_COLOR_CUSTEM(255, 155, 49, 1)
@@ -355,6 +357,14 @@
 
 #define K_color_infoBlue K_COLOR_CUSTEM(87, 107, 149, 1)
 #define K_color_infoBack K_COLOR_CUSTEM(243,243,245,1)
+//销售包导航黑色
 #define K_color_NavColor K_COLOR_CUSTEM(22, 22, 24, 1)
-
+//销售包蓝色
+#define k_color_blueColor K_COLOR_CUSTEM(8, 129, 198, 1)
+//销售包白色背景
+#define k_color_whiteBack [UIColor whiteColor]
+//系统绿色
+#define K_color_green  K_COLOR_CUSTEM(0, 166, 120, 1)
+//系统红色
+#define K_color_red  K_COLOR_CUSTEM(200, 50, 30, 1)
 #endif

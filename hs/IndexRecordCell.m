@@ -6,12 +6,16 @@
 //  Copyright (c) 2015年 luckin. All rights reserved.
 //
 
+
 #import "IndexRecordCell.h"
 #import "IndexRecordModel.h"
 
 #define Key_DecimalPlaces productModel.decimalPlaces.intValue
 #define DecimalNumStr(a) [Helper rangeNumString:a withDecimalPlaces:Key_DecimalPlaces]
 #define fontText 13*ScreenWidth/375
+#define SALERECORE_TEXTCOLOR_GRAY K_color_grayBlack
+
+
 
 @implementation IndexRecordCell
 
@@ -39,7 +43,7 @@
     float cellHeight = 73*ScreenWidth/375;
     
     self.timeLab = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 70*ScreenWidth/320, cellHeight-1)];
-    self.timeLab.textColor = [UIColor lightGrayColor];
+    self.timeLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
     self.timeLab.font = [UIFont systemFontOfSize:10];
     self.timeLab.numberOfLines = 0;
     [self addSubview:self.timeLab];
@@ -48,6 +52,7 @@
     self.buyTypeLab.textAlignment = NSTextAlignmentCenter;
     self.buyTypeLab.layer.cornerRadius = 2;
     self.buyTypeLab.layer.masksToBounds = YES;
+    self.buyTypeLab.layer.borderWidth = 1;
     self.buyTypeLab.font = [UIFont systemFontOfSize:13];
     self.buyTypeLab.textColor = [UIColor whiteColor];
     [self addSubview:self.buyTypeLab];
@@ -57,7 +62,7 @@
     self.saleTypeLab.center = CGPointMake(CGRectGetMaxX(self.buyTypeLab.frame) + saleTypeLength/2 +20 , self.buyTypeLab.center.y);
     self.saleTypeLab.bounds = CGRectMake(0, 0, ScreenWidth/6, 20);
     self.saleTypeLab.font = FontSize(13);
-    self.saleTypeLab.textColor = [UIColor lightGrayColor];
+    self.saleTypeLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
     self.saleTypeLab.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.saleTypeLab];
     
@@ -72,8 +77,8 @@
     self.riseLab.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.riseLab];
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(20, cellHeight-1, ScreenWidth-40, 0.5)];
-    lineView.backgroundColor = K_color_black;
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, ScreenWidth, 0.5)];
+    lineView.backgroundColor = K_color_line;
     [self addSubview:lineView];
 
 }
@@ -105,10 +110,12 @@
     self.timeLab.text = [NSString stringWithFormat:@"%@\n%@",timeStr,dateArray[1]];
     if (model.tradeType==0) {
         self.buyTypeLab.text = @"看多";
-        self.buyTypeLab.backgroundColor = K_color_red;
+        self.buyTypeLab.textColor = K_color_red;
+        self.buyTypeLab.layer.borderColor = K_color_red.CGColor;
     }else{
         self.buyTypeLab.text = @"看空";
-        self.buyTypeLab.backgroundColor = K_color_green;
+        self.buyTypeLab.textColor = K_color_green;
+        self.buyTypeLab.layer.borderColor = K_color_green.CGColor;
     }
     NSString * saleOpSourceText;
     switch (model.saleOpSource.intValue) {
@@ -171,7 +178,7 @@
 
     }
     profitStr = [NSString stringWithFormat:@"%@%@",profitStr,unit];
-    self.addLab.attributedText = [Helper mutableFontAndColorText:profitStr from:(int)profitStr.length-(int)unit.length to:(int)unit.length font:10 from:(int)profitStr.length-(int)unit.length to:(int)unit.length color:[UIColor lightGrayColor]];
+    self.addLab.attributedText = [Helper mutableFontAndColorText:profitStr from:(int)profitStr.length-(int)unit.length to:(int)unit.length font:10 from:(int)profitStr.length-(int)unit.length to:(int)unit.length color:SALERECORE_TEXTCOLOR_GRAY];
 //    self.addLab.attributedText = [Helper multiplicityText:profitStr from:(int)profitStr.length-(int)unit.length to:(int)unit.length  font:10];
     if(model.rate.floatValue !=1){
         NSString * riseUnit = @"积分)";
@@ -226,7 +233,12 @@
     [self addSubview:_cancelBtn];
 
   
-    _buyTypeLab.frame = CGRectMake(ScreenWidth*3/7, 12, 20, 12);
+    _buyTypeLab.frame = CGRectMake(ScreenWidth*3/7, 12, 20, 14);
+    _buyTypeLab.layer.cornerRadius = 2;
+    _buyTypeLab.layer.masksToBounds = YES;
+    _buyTypeLab.layer.borderWidth = 1;
+
+    
     _nameLab.frame = CGRectMake(CGRectGetMaxX(_buyTypeLab.frame)+10, CGRectGetMinY(_buyTypeLab.frame), ScreenWidth/4, CGRectGetHeight(_buyTypeLab.frame));
     
     _timeLab.font = _buyTypeLab.font = _nameLab.font = _orderTypeLab.font = _priceLab.font = _stopLossLab.font = _stopProfitLab.font = FontSize(fontText);
@@ -239,13 +251,13 @@
     _stopLossLab.adjustsFontSizeToFitWidth =YES;
     _stopProfitLab.adjustsFontSizeToFitWidth =YES;
 
-    _timeLab.textColor = _nameLab.textColor = _orderTypeLab.textColor = _priceLab.textColor = _stopLossLab.textColor = _stopProfitLab.textColor = [UIColor lightGrayColor];
+    _timeLab.textColor = _nameLab.textColor = _orderTypeLab.textColor = _priceLab.textColor = _stopLossLab.textColor = _stopProfitLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
     _buyTypeLab.textColor = [UIColor whiteColor];
     _timeLab.numberOfLines = 2;
     _buyTypeLab.textAlignment = NSTextAlignmentCenter;
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(20, cellHeight-1, ScreenWidth-40, 0.5)];
-    lineView.backgroundColor = K_color_black;
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, ScreenWidth, 0.5)];
+    lineView.backgroundColor = K_color_line;
     [self addSubview:lineView];
 }
 - (void)setEntrustedCellWithDictionary:(NSDictionary*)dictionary withSystemTime:(NSString*)systemTime productModel:(FoyerProductModel*)productModel cellStyle:(int)cellStyle;
@@ -258,10 +270,12 @@
     if (model.tradeType==0)
     {
         self.buyTypeLab.text = @"多";
-        self.buyTypeLab.backgroundColor = K_color_red;
+        self.buyTypeLab.layer.borderColor = K_color_red.CGColor;
+        self.buyTypeLab.textColor = K_color_red;
     }else{
         self.buyTypeLab.text = @"空";
-        self.buyTypeLab.backgroundColor = K_color_green;
+        self.buyTypeLab.layer.borderColor = K_color_green.CGColor;
+        self.buyTypeLab.textColor = K_color_green;
     }
     
     self.nameLab.text = productModel.commodityName;
@@ -300,11 +314,11 @@
         switch (modelStatus) {/*  *条件单：（-1：已撤单，1：委托中（可撤单），2：已触发）*/
             case -1:
             {
-                _timeLab.textColor = [UIColor lightGrayColor];
+                _timeLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
                 _cancelLab.text = @"已撤单";
                 _cancelLab.frame = CGRectMake(25, cellHeight/2+6, 70, 20);
                 _cancelBtn.hidden = YES;
-                _cancelLab.textColor = [UIColor lightGrayColor];
+                _cancelLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
                 _cancelLab.textAlignment = NSTextAlignmentLeft;
                 _cancelLab.layer.borderWidth = 0;
                 _cancelLab.layer.masksToBounds = NO;
@@ -329,10 +343,10 @@
                 break;
             case 2://case 6:
             {
-                _timeLab.textColor = [UIColor lightGrayColor];
+                _timeLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
                 _cancelLab.text = @"已触发";
                 _cancelBtn.hidden = YES;
-                _cancelLab.textColor = [UIColor lightGrayColor];;
+                _cancelLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
                 _cancelLab.textAlignment = NSTextAlignmentLeft;
                 _cancelLab.layer.borderWidth = 0;
                 _cancelLab.layer.masksToBounds = NO;

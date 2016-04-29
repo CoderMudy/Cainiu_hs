@@ -10,6 +10,7 @@
 #import "MarketModel.h"
 #import "NetRequest.h"
 
+#define SALERECORE_TEXTCOLOR_GRAY K_color_grayBlack
 
 #define Tag_agreeButton     708
 #define Tag_timeLabel       709
@@ -99,7 +100,7 @@
     [btn addTarget:self action:@selector(agreeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     btn.selected = YES;
     _hiddenView = [[UIView alloc]initWithFrame:CGRectMake(0, self.bottomBtn.frame.size.height+self.bottomBtn.frame.origin.y, ScreenWidth, ScreenHeigth-self.bottomBtn.frame.size.height-self.bottomBtn.frame.origin.y)];
-    _hiddenView.backgroundColor = Color_black;
+    _hiddenView.backgroundColor = k_color_whiteBack;
     
     UILabel *timeLabel = (UILabel *)[self.view viewWithTag:Tag_timeLabel];
     timeLabel.hidden = NO;
@@ -116,7 +117,7 @@
     titleNameLabel.text = @"VIP快速通道设置";
     titleNameLabel.font = [UIFont systemFontOfSize:17*ScreenWidth/375];
     titleNameLabel.numberOfLines = 0;
-    titleNameLabel.textColor = Color_Gold;
+    titleNameLabel.textColor = k_color_blueColor;
     titleNameLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleNameLabel];
     self.stopAndGetFrontHeight = titleNameLabel.frame.size.height+titleNameLabel.frame.origin.y+20/568.0*ScreenHeigth;

@@ -23,6 +23,7 @@ typedef void(^IndexBuyBlock)();
 @property (nonatomic,strong)IndexBuyBlock buyBlock;
 @property (nonatomic,strong)AKeySaleBlock aKeySaleBlock;
 
+@property (nonatomic,strong)UIView * lineView;
 @property (nonatomic,strong)UILabel * priceMoreLab;//平多价标签
 @property (nonatomic,strong)UILabel * priceEmptyLab;//平空价标签
 @property (nonatomic,strong)UIButton * saleMoreBtn; //一键平多按钮

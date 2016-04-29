@@ -10,7 +10,7 @@
 #define  listView_Tag 13000 //13000~12003
 #define  Btn_Tag 99900 //99900~99902
 #define  Btn_Length (ScreenWidth-40)/itemNum
-#define  markLine_Tag 98000
+#define SALERECORE_TEXTCOLOR_GRAY K_color_grayBlack
 
 #import "IndexSaleRecordPage.h"
 #import "IndexRecordView.h"
@@ -60,51 +60,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = Color_black;
+    self.view.backgroundColor = k_color_whiteBack;
     [ManagerHUD showHUD:self.view animated:YES];
     
     [self loadNav];
     [self loadControlView];
     [self initScrollView];
-    
-//    [self initTestBtn];
-    
+   
 }
-//- (void)initTestBtn
-//{
-//    UIButton * button= [UIButton buttonWithType:UIButtonTypeCustom];
-//    button.frame = CGRectMake(100, 20, 50, 40);
-//    button.backgroundColor= K_color_orangeBack;
-//    [button setTitle:@"下单" forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:button];
-//}
-//- (void)clickBtn
-//{
-//    
-//    NSDictionary * orderData =@{@"futuresCode":@"CL1605",
-//                                @"fundType":@"1",
-//                                @"count":@"1",
-//                                @"sizeSymbol":@"1",
-//                                @"tradeType":@"1",
-//                                @"conditionPrice":@"40.41",
-//                                @"stopProfit":@"1000",
-//                                @"stopLoss":@"1000"
-//                                };
-//    
-//    NSDictionary * dic = @{@"orderData":[Helper toJSON:orderData],
-//                           @"token":[[CMStoreManager sharedInstance]getUserToken],
-//                           @"version":@"0.0.1"
-//                           };
-//    
-//    NSString * urlStr = [NSString stringWithFormat:@"http://stock.luckin.cn/order/condition/conditionBuy"];
-//    [NetRequest postRequestWithNSDictionary:dic url:urlStr successBlock:^(NSDictionary *dictionary) {
-//        NSLog(@"%@",dictionary);
-//    } failureBlock:^(NSError *error) {
-//        NSLog(@"%@",error.localizedDescription);
-//    }];
-//
-//}
+
 #pragma mark Nav
 
 -(void)loadNav{
@@ -112,7 +76,7 @@
     [nav.leftControl addTarget:self action:@selector(leftControl) forControlEvents:UIControlEventTouchUpInside];
     nav.titleLab.text = @"我的订单";
     nav.titleLab.textColor = K_color_lightGray;
-    nav.backgroundColor = Color_black;
+    nav.backgroundColor = K_color_NavColor;
     [self.view addSubview:nav];
 }
 - (void)leftControl
@@ -123,37 +87,37 @@
 #pragma mark -topView
 -(void)loadControlView
 {
-    _controlView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 33)];
+    _controlView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, 50)];
+    _controlView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_controlView];
-    UILabel * markLine = [[UILabel alloc] initWithFrame:CGRectMake(20+(ScreenWidth-40)/3, 26, Btn_Length, 2)];
-    markLine.tag = markLine_Tag;
-    markLine.backgroundColor = Color_Gold;
-    [_controlView addSubview:markLine];
     NSArray * btnTitleArray = @[@"委托记录",@"委托单",@"结算单"];
     for (int i=0; i<3; i++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20+i*(ScreenWidth-40)/3, 0, Btn_Length, 33);
+        button.center = CGPointMake(20+(ScreenWidth-40)/6+i*(ScreenWidth-40)/3, 35);
+        button.bounds = CGRectMake(0, 0, 80, 20);
+        button.layer.cornerRadius = 3;
+        button.layer.masksToBounds = YES;
         button.tag = 99900+i;
-//        button.enabled = [btnEnable[i] boolValue];
         [button setTitleColor:K_color_gray forState:UIControlStateNormal];
         [button.titleLabel setFont:[UIFont systemFontOfSize:13*ScreenWidth/375]];
         [button setTitle:btnTitleArray[i] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(controlClick:) forControlEvents:UIControlEventTouchUpInside];
         [_controlView addSubview:button];
         if (self.indexSaleRecordType==i) {
-            [button setTitleColor:Color_Gold forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setBackgroundColor:k_color_blueColor];
             _lastBtn = button;
-            markLine.frame =  CGRectMake(20+i*Btn_Length, 26, Btn_Length, 2);
         }else{
-            [button setTitleColor:K_color_lightGray forState:UIControlStateNormal];
+            [button setTitleColor:SALERECORE_TEXTCOLOR_GRAY forState:UIControlStateNormal];
+            [button setBackgroundColor:[UIColor whiteColor]];
         }
     }
 }
 #pragma mark - loadTableView
 - (void)initScrollView
 {
-    CGFloat scrollHeight = ScreenHeigth-100;
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, ScreenWidth, ScreenHeigth)];
+    CGFloat scrollHeight = ScreenHeigth-114;
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 114, ScreenWidth, scrollHeight)];
     _scrollView.scrollEnabled = NO;
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -185,16 +149,16 @@
     {
         case 0:
         {
-            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
-            return;
-//            urlStr = K_Index_futuresOrderEntrustList;//委托记录列表
+//            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
+//            return;
+            urlStr = K_Index_futuresOrderEntrustList;//委托记录列表
         }
             break;
         case 1:
         {
-            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
-            return;
-//            urlStr = K_Index_conditionOrderList;//条件单列表
+//            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
+//            return;
+            urlStr = K_Index_conditionOrderList;//条件单列表
         }
             break;
         case 2:
@@ -208,12 +172,12 @@
     }
     self.indexSaleRecordType = selectNum;
     self.scrollView.contentOffset = CGPointMake(selectNum*ScreenWidth, 0);
-    [_lastBtn setTitleColor:K_color_lightGray forState:UIControlStateNormal];
+    [_lastBtn setTitleColor:SALERECORE_TEXTCOLOR_GRAY forState:UIControlStateNormal];
+    [_lastBtn setBackgroundColor:[UIColor whiteColor]];
     _lastBtn = button;
-    [button setTitleColor:Color_Gold forState:UIControlStateNormal];
-    
-    UILabel * markLine = (UILabel *)[_controlView viewWithTag:markLine_Tag];
-    markLine.center = CGPointMake(button.center.x, markLine.center.y);
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setBackgroundColor:k_color_blueColor];
+
     
     
     IndexRecordView * orderListView = (IndexRecordView*)[_scrollView viewWithTag:selectNum +listView_Tag];
@@ -242,11 +206,7 @@
     [self controlClick:button];
     
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    UIView * markLine = [_controlView viewWithTag:markLine_Tag];
-    markLine.center = CGPointMake(Btn_Length*scrollView.contentOffset.x/ScreenWidth+20+Btn_Length/2, 31);
-}
+
 
 - (void)dealloc
 {

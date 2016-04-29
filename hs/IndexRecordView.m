@@ -13,6 +13,9 @@
 #import "MJRefresh.h"
 #import "FoyerProductModel.h"
 #import "IndexRecordModel.h"
+
+#define SALERECORE_TEXTCOLOR_GRAY K_color_grayBlack
+
 @interface IndexRecordView()<UITableViewDataSource,UITableViewDelegate>
 {
     NSString * _urlStr;
@@ -43,7 +46,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.indexRecordType = listStyle;
-        self.backgroundColor = Color_black;
+        self.backgroundColor = k_color_whiteBack;
         [self initData];
         [self initUI];
         
@@ -57,7 +60,7 @@
 - (void)initUI
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.frame.size.height) style:UITableViewStyleGrouped];
-    _tableView.backgroundColor = Color_black;
+    _tableView.backgroundColor = k_color_whiteBack;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -67,14 +70,14 @@
     
     [self initRefresh];
     _showBackV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.frame.size.height)];
-    _showBackV.backgroundColor = Color_black;
+    _showBackV.backgroundColor = k_color_whiteBack;
     _showBackV.hidden = YES;
     [self addSubview:_showBackV];
     
     UILabel * showLab = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)/3, ScreenWidth, 20)];
     showLab.text = @"暂无订单";
-    showLab.backgroundColor = Color_black;
-    showLab.textColor = K_color_lightGray;
+    showLab.backgroundColor = k_color_whiteBack;
+    showLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
     showLab.textAlignment = NSTextAlignmentCenter;
     showLab.font = FontSize(15);
     [_showBackV addSubview:showLab];
@@ -306,7 +309,7 @@
     }
 
     IndexRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    cell.backgroundColor = Color_black;
+    cell.backgroundColor = k_color_whiteBack;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     
@@ -328,9 +331,9 @@
     
     IndexRecordCell * cell = (IndexRecordCell *)[tableView cellForRowAtIndexPath:indexPath];
     [UIView animateWithDuration:0.2 animations:^{
-        cell.backgroundColor = K_color_black;
+        cell.backgroundColor = K_color_backView;
     } completion:^(BOOL finished) {
-        cell.backgroundColor = Color_black;
+        cell.backgroundColor = k_color_whiteBack;
         if (self.indexRecordType == IndexRecordTypeEndStyle)
         {
             self.pageChangeBlock(_productModel,_recordArray[indexPath.row]);
@@ -401,12 +404,12 @@
             IndexRecordModel * model =  [IndexRecordModel modelObjectWithDictionary:_sectionArray[section][0]];
             headerHeight = 40;
             UILabel * dateLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, ScreenWidth, 15)];
-            dateLab.textColor = K_color_lightGray;
-            dateLab.font = FontSize(11*ScreenWidth/375);
+            dateLab.textColor = k_color_blueColor;
+            dateLab.font = FontSize(11);
             dateLab.text= [Helper timeTransform:model.buyDate intFormat:@"yyyy-MM-dd HH:mm:ss" toFormat:@"yyyy年MM月dd日"];
             [view addSubview:dateLab];
-            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(20, headerHeight-1, ScreenWidth-40, 1)];
-            line.backgroundColor = K_color_black;
+            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, headerHeight-1, ScreenWidth, 2)];
+            line.backgroundColor = k_color_blueColor;
             [view addSubview:line];
         }break;
         case IndexRecordTypeConditionsStyle:
@@ -414,12 +417,12 @@
             IndexRecordModel * model =  [IndexRecordModel modelObjectWithDictionary:_sectionArray[section][0]];
             headerHeight = 40;
             UILabel * dateLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 15, ScreenWidth, 15)];
-            dateLab.textColor = K_color_lightGray;
-            dateLab.font = FontSize(11*ScreenWidth/375);
+            dateLab.textColor = k_color_blueColor;
+            dateLab.font = FontSize(11);
             dateLab.text= [Helper timeTransform:model.createDate intFormat:@"yyyy-MM-dd HH:mm:ss" toFormat:@"yyyy年MM月dd日"];
             [view addSubview:dateLab];
-            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(20, headerHeight-1, ScreenWidth-40, 1)];
-            line.backgroundColor = K_color_black;
+            UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, headerHeight-1, ScreenWidth, 2)];
+            line.backgroundColor = k_color_blueColor;
             [view addSubview:line];
             
         }break;

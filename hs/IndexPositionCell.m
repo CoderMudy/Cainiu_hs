@@ -13,6 +13,7 @@
 
 #define cellHeight 80//ScreenWidth*80/375
 #define textFont 13
+#define SALERECORE_TEXTCOLOR_GRAY K_color_grayBlack
 
 @implementation IndexPositionCell
 
@@ -25,7 +26,7 @@
     
     if (self) {
         
-        self.backgroundColor = Color_black;
+        self.backgroundColor = k_color_whiteBack;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self initCell];
         
@@ -36,20 +37,9 @@
 }
 - (void)initCell
 {
-    _endLossLab = [[UILabel alloc] initWithFrame:CGRectMake(20, cellHeight/5, ScreenWidth/4, cellHeight/5)];
-    _endLossLab.textColor = K_color_gray;
-    _endLossLab.font = [UIFont systemFontOfSize:textFont];
-    [self addSubview:_endLossLab];
-    
-    _endEarnLab = [[UILabel alloc] initWithFrame:CGRectMake(_endLossLab.frame.origin.x, _endLossLab.frame.origin.y+_endLossLab.frame.size.height, ScreenWidth/4, cellHeight*2/11)];
-    _endEarnLab.textColor = K_color_gray;
-    _endEarnLab.textAlignment = NSTextAlignmentLeft;
-    _endEarnLab.font = [UIFont systemFontOfSize:textFont];
-    [self addSubview:_endEarnLab];
-    
     
     float tradeTypeFont = cellHeight/8;
-    _tradeTypeLab = [[UILabel alloc] initWithFrame:CGRectMake(_endEarnLab.frame.origin.x, _endEarnLab.frame.origin.y+_endEarnLab.frame.size.height + cellHeight/20, tradeTypeFont*2+2, tradeTypeFont+2)];
+    _tradeTypeLab = [[UILabel alloc] initWithFrame:CGRectMake(20, cellHeight/5 , tradeTypeFont*2+2, tradeTypeFont+2)];
     _tradeTypeLab.textAlignment = NSTextAlignmentCenter;
     _tradeTypeLab.textColor = [UIColor whiteColor];
     _tradeTypeLab.font = [UIFont systemFontOfSize:tradeTypeFont];
@@ -57,21 +47,21 @@
     _tradeTypeLab.layer.masksToBounds = YES;
     [self addSubview:_tradeTypeLab];
     
+    _endLossLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_tradeTypeLab.frame),CGRectGetMaxY(_tradeTypeLab.frame) + cellHeight/20, ScreenWidth/4, cellHeight/5)];
+    _endLossLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
+    _endLossLab.font = [UIFont systemFontOfSize:textFont];
+    [self addSubview:_endLossLab];
     
-    float fundTypeFont = tradeTypeFont;
-    _fundTypeLab = [[UILabel alloc] initWithFrame:CGRectMake(_tradeTypeLab.frame.origin.x+_tradeTypeLab.frame.size.width+5, _tradeTypeLab.frame.origin.y, fundTypeFont*4 +3, fundTypeFont +3)];
-    _fundTypeLab.textAlignment = NSTextAlignmentCenter;
-    _fundTypeLab.text = @"查看详情";
-    _fundTypeLab.textColor = K_color_gray;
-    _fundTypeLab.layer.cornerRadius = 1;
-    _fundTypeLab.layer.masksToBounds = YES;
-    _fundTypeLab.layer.borderWidth = ScreenWidth/375;
-    _fundTypeLab.layer.borderColor =K_color_gray.CGColor;
-    _fundTypeLab.font = [UIFont systemFontOfSize:fundTypeFont];
-    _fundTypeLab.layer.cornerRadius = 1;
-    _fundTypeLab.layer.masksToBounds = YES;
-    [self addSubview:_fundTypeLab];
+    _endEarnLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_tradeTypeLab.frame), _endLossLab.frame.origin.y+_endLossLab.frame.size.height, ScreenWidth/4, cellHeight*2/11)];
+    _endEarnLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
+    _endEarnLab.textAlignment = NSTextAlignmentLeft;
+    _endEarnLab.font = [UIFont systemFontOfSize:textFont];
+    [self addSubview:_endEarnLab];
+    
+    
 
+    
+    
     float saleBtnWidth = ScreenWidth *60 /375;
     _saleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _saleBtn.frame = CGRectMake(ScreenWidth-20-saleBtnWidth, 3*cellHeight/50,saleBtnWidth, 44*cellHeight/50);
@@ -79,9 +69,10 @@
     [self addSubview:_saleBtn];
     
     _saleLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-20-saleBtnWidth, 10+(cellHeight-50)/2, saleBtnWidth, saleBtnWidth/2)];
-    _saleLab.backgroundColor =Color_Gold;
+    _saleLab.backgroundColor =k_color_blueColor;
     _saleLab.textAlignment = NSTextAlignmentCenter;
     _saleLab.text = @"平仓";
+    _saleLab.textColor = [UIColor whiteColor];
     _saleLab.layer.cornerRadius = 3;
     _saleLab.layer.masksToBounds = YES;
     _saleLab.font = [UIFont systemFontOfSize:11];
@@ -96,14 +87,14 @@
     
     
     _priceLab = [[UILabel alloc] initWithFrame:CGRectMake(profit_X, _profitLab.frame.origin.y+_profitLab.frame.size.height, ScreenWidth/2,cellHeight*13/50)];
-    _priceLab.textColor = K_color_gray;
+    _priceLab.textColor = SALERECORE_TEXTCOLOR_GRAY;
     _priceLab.textAlignment = NSTextAlignmentRight;
     _priceLab.font = [UIFont systemFontOfSize:textFont];
     [self addSubview:_priceLab];
  
     
     UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(20, cellHeight-1, ScreenWidth-40, 0.6)];
-    lineView.backgroundColor = K_color_gray;
+    lineView.backgroundColor = K_color_line;
     [self addSubview:lineView];
     
     
@@ -164,7 +155,7 @@
             _saleLab.text = @"平仓";
             _priceLab.hidden = NO;
             _profitLab.hidden = NO;
-            _saleLab.backgroundColor = Color_Gold;
+            _saleLab.backgroundColor = k_color_blueColor;
         }
             break;
         case 4:{
@@ -214,12 +205,12 @@
     //止损金额
     NSString * endLossLab   = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.0f",model.stopLoss]] ;
     NSString * endearnLab   = [DataEngine countNumAndChangeformat:[NSString stringWithFormat:@"%.0f",model.stopProfit]] ;
-    _endLossLab.text        = [NSString stringWithFormat:@"止损额 -%@",endLossLab];
-    _endEarnLab.text        = [NSString stringWithFormat:@"止盈额 +%@",endearnLab];
+    _endLossLab.text        = [NSString stringWithFormat:@"止损 -%@",endLossLab];
+    _endEarnLab.text        = [NSString stringWithFormat:@"止盈 +%@",endearnLab];
     
     CGFloat endLossWidth    = [Helper calculateTheHightOfText:_endLossLab.text height:textFont font:[UIFont systemFontOfSize:textFont]];
     CGFloat endEarnWidth    = [Helper calculateTheHightOfText:_endEarnLab.text height:textFont font:[UIFont systemFontOfSize:textFont]];
-    _endLossLab.frame       = CGRectMake(20, cellHeight/5, endLossWidth+10, cellHeight/5);
+    _endLossLab.frame       = CGRectMake(20, CGRectGetMaxY(_tradeTypeLab.frame)+cellHeight/20, endLossWidth+10, cellHeight/5);
     _endEarnLab.frame       = CGRectMake(_endLossLab.frame.origin.x, _endLossLab.frame.origin.y+_endLossLab.frame.size.height, endEarnWidth+10, cellHeight*2/11);
 
     
@@ -285,7 +276,7 @@
         profitStr = [NSString stringWithFormat:@"%@%@",profitStr,unit];;
         _profitLab.textColor = K_color_green;
     }
-    NSMutableAttributedString * profitAtrStr = [Helper mutableFontAndColorText:profitStr from:(int)profitStr.length-(int)unit.length to:(int)unit.length font:textFont from:(int)profitStr.length-(int)unit.length to:(int)unit.length color:K_color_gray];
+    NSMutableAttributedString * profitAtrStr = [Helper mutableFontAndColorText:profitStr from:(int)profitStr.length-(int)unit.length to:(int)unit.length font:textFont from:(int)profitStr.length-(int)unit.length to:(int)unit.length color:SALERECORE_TEXTCOLOR_GRAY];
     
     _profitLab.attributedText = profitAtrStr;
         if (profitD>=model.stopProfit&&profitD>0&&model.status==3) {

@@ -19,7 +19,6 @@ typedef void(^SaleBlock)(id);
 @property (nonatomic,strong)UILabel * endLossLab;
 @property (nonatomic,strong)UILabel * endEarnLab;
 @property (nonatomic,strong)UILabel * tradeTypeLab;
-@property (nonatomic,strong)UILabel * fundTypeLab;
 @property (nonatomic,strong)UILabel * profitLab;
 @property (nonatomic,strong)UILabel * priceLab;
 @property (nonatomic,strong)UIButton * saleBtn;

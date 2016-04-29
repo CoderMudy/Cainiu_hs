@@ -20,7 +20,7 @@
 #import "HandlePosiData.h"
 
 
-#define headerHeight 140*ScreenWidth/375
+#define headerHeight 40*ScreenWidth/375
 
 @interface IndexPositionView ()
 {
@@ -43,7 +43,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = Color_black;
+        self.backgroundColor = k_color_whiteBack;
         _positionListArray = [NSMutableArray array];
         _productModel = model;
         [self initTableView];
@@ -126,7 +126,7 @@
 - (void)initTableView
 {
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeigth-64)];
-    _tableView.backgroundColor = Color_black;
+    _tableView.backgroundColor = k_color_whiteBack;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -574,7 +574,6 @@
         }else{
             newprice = _askPrice;
         }
-
         [handle setPositionOrderWithModel:positionOrderModel newPrice:newprice productModel:_productModel row:i];
     }
 }

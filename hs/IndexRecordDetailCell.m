@@ -5,6 +5,7 @@
 //  Created by PXJ on 15/7/28.
 //  Copyright (c) 2015年 luckin. All rights reserved.
 //
+#define RECOREDETAIL_TEXT_COLOR K_color_NavColor
 
 #import "IndexRecordDetailCell.h"
 
@@ -18,30 +19,18 @@
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        float width = (ScreenWidth-60)/2;
+        float width = (ScreenWidth-60)/3;
         _nameLeft = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, width, 20)];
-        _valueLeft = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, width, 20)];
-        _nameRight = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_nameLeft.frame)+10, 5, width, 20)];
-        _valueRight = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_nameLeft.frame), 5, width+10, 20)];
+        _valueRight = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_nameLeft.frame), 5, width*2, 20)];
         
         _nameLeft.font = [UIFont systemFontOfSize:10];
-        _valueLeft.font = [UIFont systemFontOfSize:13];
-        _nameRight.font = [UIFont systemFontOfSize:10];
         _valueRight.font = [UIFont systemFontOfSize:13];
         
-        _nameLeft.textColor = K_color_gray;
-        _nameRight.textColor = K_color_gray;
-        _valueLeft.textColor = [UIColor whiteColor];
-        _valueRight.textColor = [UIColor whiteColor];
-        
-        _nameLeft.textAlignment = NSTextAlignmentLeft;
-        _valueLeft.textAlignment = NSTextAlignmentRight;
-        _nameRight.textAlignment = NSTextAlignmentLeft;
-        _valueRight.textAlignment = NSTextAlignmentRight;
+        _nameLeft.textColor = K_color_grayBlack;
+        _valueRight.textColor = K_color_NavColor;
+
         
         [self addSubview:_nameLeft];
-        [self addSubview:_valueLeft];
-        [self addSubview:_nameRight];
         [self addSubview:_valueRight];
         
         
