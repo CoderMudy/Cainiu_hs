@@ -72,6 +72,7 @@
         
         _showLabel.text = [DataUsedEngine conversionFloatNum:[self.priceArray[0] doubleValue] ExpectFloatNum:floatNum];
     }
+    _showLabel.textColor = [UIColor whiteColor];
     [self addSubview:_showLabel];
     [self loadLineView];
 }

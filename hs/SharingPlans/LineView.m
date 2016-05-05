@@ -15,10 +15,10 @@
 #define LineWidthPercent 0.75
 
 //金色
-#define Color_Gold [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1]
-
-//黑色
-#define Color_black [UIColor colorWithRed:3/255.0 green:0/255.0 blue:20/255.0 alpha:1]
+//#define Color_Gold [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1]
+//
+////黑色
+//#define Color_black [UIColor colorWithRed:3/255.0 green:0/255.0 blue:20/255.0 alpha:1]
 
 @implementation LineView
 
@@ -43,7 +43,9 @@
         self.backgroundColor = [UIColor clearColor];
         
         _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(-10, 0, 5, 5)];
-        _imageView.image = [UIImage imageNamed:@"dian_table"];
+        _imageView.backgroundColor = [UIColor blackColor];
+        _imageView.clipsToBounds = YES;
+        _imageView.layer.cornerRadius = 5/2.0;
         [self addSubview:_imageView];
                 
         if(aLineArray == nil){
@@ -52,7 +54,7 @@
         else{
             self.pointArray = [NSMutableArray arrayWithArray:aLineArray];
         }
-        _lineColor = [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1];
+        _lineColor = Color_Gold;
         
         self.contentSize = CGSizeMake((LineDistanceWidth+2)*100, self.frame.size.height);
         self.userInteractionEnabled = NO;
@@ -63,21 +65,6 @@
     
 }
 
--(void)animationStart{
-    [UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        _imageView.bounds = CGRectMake(0, 0, 8, 8);
-    } completion:^(BOOL finished) {
-        [self animationEnd];
-    }];
-}
-
--(void)animationEnd{
-    [UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        _imageView.bounds = CGRectMake(0, 0, 5, 5);
-    } completion:^(BOOL finished) {
-        [self animationStart];
-    }];
-}
 
 -(void)setUpperAndLowerLimitsWithUpper:(float)aUpper Middle:(float)aMiddle Lower:(float)aLower{
     

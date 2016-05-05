@@ -356,7 +356,7 @@
 
 - (void)drawRect:(CGRect)rect {
     UIBezierPath *arrow = [[UIBezierPath alloc] init];
-    UIColor *contentColor = [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1];
+    UIColor *contentColor = Color_Gold;
     // the point in the ourself view coordinator
     CGPoint arrowPoint = [self.containerView convertPoint:self.arrowShowPoint toView:self];
     CGSize arrowSize = self.arrowSize;

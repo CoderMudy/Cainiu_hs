@@ -167,7 +167,7 @@
     
     //切换到k线图
     UITableView *blueView       = [[UITableView alloc] init];
-    blueView.frame              = CGRectMake(0, 0, _popoverWidth, 150);
+    blueView.frame              = CGRectMake(0, 0, _popoverWidth, 120/667.0*ScreenHeigth);
     blueView.dataSource         = self;
     blueView.delegate           = self;
     blueView.backgroundColor    = Color_Gold;
@@ -1388,7 +1388,7 @@
 #pragma mark K线图下拉列表选择
 - (void)resetPopover {
     self.popover = [DXPopover new];
-    _popoverWidth = 100;
+    _popoverWidth = 70;
 }
 
 - (void)showPopover {
@@ -1430,7 +1430,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 30;
+    return self.tableView.frame.size.height/self.configs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -1451,7 +1451,7 @@
     cell.textLabel.text = self.configs[indexPath.row];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.backgroundColor = Color_Gold;
     
     return cell;
@@ -1700,12 +1700,12 @@
     
     //看多
     bullishBtn           = [UIButton buttonWithType:UIButtonTypeCustom];
-    bullishBtn.frame     = CGRectMake(15,
+    bullishBtn.frame     = CGRectMake(0,
                                     adapterHeight,
-                                    (ScreenWidth-30/568.0*ScreenWidth)/2-15/568.0*ScreenWidth,
+                                    (ScreenWidth)/2-15/568.0*ScreenWidth,
                                     36.0/568.0*ScreenHeigth);
-    bullishBtn.clipsToBounds      = YES;
-    bullishBtn.layer.cornerRadius = 3;
+//    bullishBtn.clipsToBounds      = YES;
+//    bullishBtn.layer.cornerRadius = 3;
     [bullishBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Red] forState:UIControlStateNormal];
     bullishBtn.titleLabel.font    = [UIFont systemFontOfSize:13];
     [bullishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -1750,12 +1750,12 @@
     
     //看空
     bearishBtn                      = [UIButton buttonWithType:UIButtonTypeCustom];
-    bearishBtn.frame                = CGRectMake(ScreenWidth-15-bullishBtn.frame.size.width,
+    bearishBtn.frame                = CGRectMake(ScreenWidth-bullishBtn.frame.size.width,
                                                  bullishBtn.frame.origin.y,
                                                  bullishBtn.frame.size.width,
                                                  36.0/568.0*ScreenHeigth);
-    bearishBtn.clipsToBounds        = YES;
-    bearishBtn.layer.cornerRadius   = 3;
+//    bearishBtn.clipsToBounds        = YES;
+//    bearishBtn.layer.cornerRadius   = 3;
     [bearishBtn setBackgroundImage:[UIImage imageNamed:Image_Color_Green] forState:UIControlStateNormal];
     bearishBtn.titleLabel.font      = [UIFont systemFontOfSize:13];
     [bearishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -1834,7 +1834,7 @@
         }
         _orderLightningBtn                  = [UIButton  buttonWithType:UIButtonTypeCustom];
         _orderLightningBtn.backgroundColor  = [UIColor clearColor];
-        _orderLightningBtn.frame            = CGRectMake(0, 0, (bullishBtn.frame.size.height+5)*58/48, bullishBtn.frame.size.height+5);
+        _orderLightningBtn.frame            = CGRectMake(0, 0, (bullishBtn.frame.size.height+5)*59/58, bullishBtn.frame.size.height+5);
         _orderLightningBtn.center           = CGPointMake(ScreenWidth/2, bearishBtn.center.y);
         [_orderLightningBtn addTarget:self action:@selector(orderLightning) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_orderLightningBtn];

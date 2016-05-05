@@ -522,7 +522,7 @@
     titleLab.text = str;
     [titleView addSubview:titleLab];
     
-    _tradeRulesView = [[TradeRulesView alloc]initWithFrame:CGRectMake(0, 30, titleView.frame.size.width, 12) TimeLabelHeight:0];
+    _tradeRulesView = [[TradeRulesView alloc]initWithFrame:CGRectMake(0, 27, titleView.frame.size.width, 12) TimeLabelHeight:0];
     if (![self.productModel.instrumentCode isEqualToString:@"IF"]) {
         [titleView addSubview:_tradeRulesView];
         UITapGestureRecognizer *tradeRulesGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tradeRulesTap)];
@@ -1448,6 +1448,14 @@
         [_optionButton removeFromSuperview];
         _optionButton = nil;
     }
+    
+    //移除登录、注册
+    if (_topSubView != nil) {
+        UIButton *loginBtn = [_topSubView viewWithTag:720];
+        UIButton *registeBtn = [_topSubView viewWithTag:721];
+        [loginBtn removeFromSuperview];
+        [registeBtn removeFromSuperview];
+    }
 }
 
 #pragma mark 加载登录UI
@@ -1464,6 +1472,7 @@
     loginButton.titleLabel.font = [UIFont systemFontOfSize:13];
     loginButton.clipsToBounds = YES;
     loginButton.layer.cornerRadius = 3;
+    loginButton.tag = 720;
     [loginButton addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
     [_topSubView addSubview:loginButton];
     
@@ -1474,6 +1483,7 @@
     registeButton.titleLabel.font = [UIFont systemFontOfSize:13];
     registeButton.clipsToBounds = YES;
     registeButton.layer.cornerRadius = 3;
+    registeButton.tag = 721;
     [registeButton addTarget:self action:@selector(goRegiste) forControlEvents:UIControlEventTouchUpInside];
     [_topSubView addSubview:registeButton];
 }
@@ -1614,7 +1624,7 @@
 //        }
 //    }
     
-    [self goPosition];
+//    [self goPosition];
 }
 
 #pragma mark 进入财牛账户页
@@ -1879,7 +1889,7 @@ float rowHeight;
     cell.imageView.image = [UIImage imageNamed:_imgArray[indexPath.row]];
     cell.textLabel.text = _titleArray[indexPath.row];
     cell.textLabel.textColor = Color_Gold;
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:13];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:12/667.0*ScreenHeigth];
     
     UIButton *rightButton = [cell viewWithTag:indexPath.row+10];
     if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {

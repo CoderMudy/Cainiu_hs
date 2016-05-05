@@ -41,7 +41,7 @@
 
 #define NIUA  App_appShortName //@"牛A"
 
-#define AlertColor CanSelectButBackColor
+#define AlertColor Color_Gold
 
 //IP
 #define HTTP_IP K_URL
