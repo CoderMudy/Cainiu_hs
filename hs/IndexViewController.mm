@@ -29,7 +29,7 @@
 #import "RegViewController.h"
 #import "RegistRedBagView.h"
 #import "IndexBottomSwitchView.h"
-
+#import "IndexFinanceNewsView.h"
 #define KEY @"cainiu_luckin"
 
 @interface IndexViewController ()
@@ -61,7 +61,9 @@
     //交易规则
     TradeRulesView      *_tradeRulesView;
 }
+@property (nonatomic,strong)IndexFinanceNewsView * indexFinanceNewsV;
 @property (nonatomic,strong)IndexPositionView *indexPositionV;
+@property (nonatomic,strong)IndexBottomSwitchView *indexBottomSwitchView;
 @end
 
 
@@ -763,9 +765,10 @@
         [_indexBuyV.bullishBtn setImage:nil forState:UIControlStateHighlighted];
         [_indexBuyV.bearishBtn setImage:nil forState:UIControlStateHighlighted];
     }
-    
+    [self loadBottomSwitchView];
+
     //持仓View
-    CGRect rect = CGRectMake(ScreenWidth, 55, ScreenWidth, ScreenHeigth - 55);
+    CGRect rect = CGRectMake(0, CGRectGetHeight(_indexScrollView.frame)+64, ScreenWidth, 0);
     if (isXH) {
         _cashPositionV = [[CashPositionView alloc]initWithFrame:rect model:self.productModel];
         _cashPositionV.superVC = self;
@@ -776,17 +779,30 @@
     }
     else{
         _indexPositionV = [[IndexPositionView alloc]initWithFrame:rect withProductModel:_productModel];
+        _indexPositionV.layer.masksToBounds = YES;
         _indexPositionV.indexName = self.name;
         _indexPositionV.indexCode = self.code;
         _indexPositionV.isPosi = _isPosition;
         _indexPositionV.superVC = self;
         _indexPositionV.block = ^(){
-            [indexVC leftButtonClick];
+            [indexVC popPositionView:NO];
+            [_indexBottomSwitchView reSetSelected];
+            
         };
         [self.view addSubview:_indexPositionV];
     }
+    //金十财经View
+    _indexFinanceNewsV = [[IndexFinanceNewsView alloc] initWithFrame:rect];
+    _indexFinanceNewsV.layer.masksToBounds = YES;
     
-    [self loadBottomSwitchView];
+    _indexFinanceNewsV.close= ^(){
+        [indexVC popFinanceNewsView:NO];
+        [_indexBottomSwitchView reSetSelected];
+
+    };
+    [self.view addSubview:_indexFinanceNewsV];
+    
+    
 }
 
 #pragma mark 玩法
@@ -807,15 +823,96 @@
 #pragma mark BottomView
 
 -(void)loadBottomSwitchView{
-    IndexBottomSwitchView *indexBottomSwitchView = [[IndexBottomSwitchView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_indexScrollView.frame), ScreenWidth, 40)];
-    [self.view addSubview:indexBottomSwitchView];
-    indexBottomSwitchView.financeNewsBlock = ^(BOOL selected){
-        
+    
+    IndexViewController *indexVC = self;
+
+    _indexBottomSwitchView = [[IndexBottomSwitchView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_indexScrollView.frame), ScreenWidth, 40)];
+    [self.view addSubview:_indexBottomSwitchView];
+    _indexBottomSwitchView.financeNewsBlock = ^(BOOL selected){
+        [indexVC popFinanceNewsView:selected];
     };
-    indexBottomSwitchView.positionBlock = ^(BOOL    selected){
-        
+    _indexBottomSwitchView.positionBlock = ^(BOOL    selected){
+        [indexVC popPositionView:selected];
     };
 }
+- (void)popFinanceNewsView:(BOOL)isPop
+{
+    if (isPop) {
+        //关闭实时策略
+        [self closeTactics];
+        _indexFinanceNewsV.hidden = NO;
+        [_indexFinanceNewsV.webView reload];
+        [UIView animateWithDuration:0.5 animations:^{
+//            self.isSecondJump = YES;
+            float  spPercent = 5;
+            if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
+                spPercent = 4.5;
+            }
+            else if (ScreenHeigth <= 480){
+                spPercent = 4.0;
+            }
+            float startHeight = ScreenHeigth/spPercent ;
+            
+            _indexFinanceNewsV.frame = CGRectMake(0, startHeight, _indexFinanceNewsV.frame.size.width, ScreenHeigth-startHeight-40);
+            [self.view bringSubviewToFront:_indexFinanceNewsV];
+
+        }];
+    }else{
+        _indexFinanceNewsV.frame = CGRectMake(0, ScreenHeigth-40, ScreenWidth, 0);
+        _indexFinanceNewsV.hidden = YES;
+        
+    }
+}
+- (void)popPositionView:(BOOL)isPop
+{
+    if (isPop) {
+        [self requestPositionData];
+        //关闭实时策略
+        [self closeTactics];
+        _indexPositionV.hidden = NO;
+
+        [UIView animateWithDuration:0.5 animations:^{
+//            [self goPosition];
+//            self.isSecondJump = YES;
+            float  spPercent = 5;
+            if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
+                spPercent = 4.5;
+            }
+            else if (ScreenHeigth <= 480){
+                spPercent = 4.0;
+            }
+            float startHeight = ScreenHeigth/spPercent ;
+            
+            _indexPositionV.frame = CGRectMake(0, startHeight, _indexPositionV.frame.size.width, ScreenHeigth-startHeight-40);
+            [self.view bringSubviewToFront:_indexPositionV];
+
+        }];
+    }else{
+        _indexPositionV.frame = CGRectMake(0, ScreenHeigth-40, ScreenWidth, 1);
+        _indexPositionV.hidden = YES;
+
+    }
+}
+
+#pragma mark 去持仓页
+/**
+ *  去持仓页
+ */
+-(void)goPosition{
+    self.isSecondJump = YES;
+    float  spPercent = 5;
+    if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
+        spPercent = 4.5;
+    }
+    else if (ScreenHeigth <= 480){
+        spPercent = 4.0;
+    }
+    float startHeight = ScreenHeigth/spPercent ;
+   
+    _indexPositionV.frame = CGRectMake(0, startHeight, _indexPositionV.frame.size.width, ScreenHeigth-startHeight-40);
+    [self.view bringSubviewToFront:_indexPositionV];
+}
+
 
 #pragma mark - positionView请求持仓数据
 - (void)requestPositionData
@@ -1717,23 +1814,6 @@
     }
 }
 
-#pragma mark 去持仓页
-/**
- *  去持仓页
- */
--(void)goPosition{
-    self.isSecondJump = YES;
-    if (isXH) {
-        _cashPositionV.frame = CGRectMake(0, _cashPositionV.frame.origin.y, _cashPositionV.frame.size.width, _cashPositionV.frame.size.height);
-        [self.view bringSubviewToFront:_cashPositionV];
-    }else{
-        _indexPositionV.frame = CGRectMake(0, _indexPositionV.frame.origin.y, _indexPositionV.frame.size.width, _indexPositionV.frame.size.height);
-        [self.view bringSubviewToFront:_indexPositionV];
-    }
-    [self requestPositionData];
-    //关闭实时策略
-    [self closeTactics];
-}
 
 #pragma mark 闪电平仓
 /**

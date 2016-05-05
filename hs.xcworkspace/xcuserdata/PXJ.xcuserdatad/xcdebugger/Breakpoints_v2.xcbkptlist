@@ -186,12 +186,12 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "484129098.186064"
+                  timestampString = "484134822.583183"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "487"
                   endingLineNumber = "487"
-                  offsetFromSymbolStart = "618">
+                  offsetFromSymbolStart = "638">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -201,12 +201,12 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "484129098.186621"
+                  timestampString = "484134822.583499"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "487"
                   endingLineNumber = "487"
-                  offsetFromSymbolStart = "32">
+                  offsetFromSymbolStart = "64">
                </Location>
             </Locations>
          </BreakpointContent>

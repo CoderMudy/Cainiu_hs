@@ -1917,6 +1917,11 @@
 		C9DBC1841C112AF9007C9533 /* CashPositionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DBC1831C112AF9007C9533 /* CashPositionListModel.m */; };
 		C9DCA08C1C3D41D70035FF0F /* CBResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C9DCA0891C3D41D70035FF0F /* CBResource.bundle */; };
 		C9DCA0911C3D44740035FF0F /* libCyberPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9DCA08B1C3D41D70035FF0F /* libCyberPayPlugin.a */; };
+		C9DCF7931CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */; };
+		C9DCF7941CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */; };
+		C9DCF7951CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */; };
+		C9DCF7961CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */; };
+		C9DCF7971CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */; };
 		C9DDF44A1CAA104C00886F3A /* NewsBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF4431CAA104C00886F3A /* NewsBaseClass.m */; };
 		C9DDF44B1CAA104C00886F3A /* NewsBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF4431CAA104C00886F3A /* NewsBaseClass.m */; };
 		C9DDF44C1CAA104C00886F3A /* NewsBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DDF4431CAA104C00886F3A /* NewsBaseClass.m */; };
@@ -3311,6 +3316,8 @@
 		C9DCA0891C3D41D70035FF0F /* CBResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CBResource.bundle; sourceTree = "<group>"; };
 		C9DCA08A1C3D41D70035FF0F /* CyberPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CyberPayPlugin.h; sourceTree = "<group>"; };
 		C9DCA08B1C3D41D70035FF0F /* libCyberPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCyberPayPlugin.a; sourceTree = "<group>"; };
+		C9DCF7911CDB4A1300D3A673 /* IndexFinanceNewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexFinanceNewsView.h; sourceTree = "<group>"; };
+		C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexFinanceNewsView.m; sourceTree = "<group>"; };
 		C9DDF4411CAA104C00886F3A /* NewsDataModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDataModels.h; sourceTree = "<group>"; };
 		C9DDF4421CAA104C00886F3A /* NewsBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsBaseClass.h; sourceTree = "<group>"; };
 		C9DDF4431CAA104C00886F3A /* NewsBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsBaseClass.m; sourceTree = "<group>"; };
@@ -5355,6 +5362,7 @@
 		B5DD2EFB1C8D2491009FB96B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C9DCF7901CDB49B500D3A673 /* FinanceNewsView */,
 				B5D976461CDAE86400F6AB8B /* BottomSwitch */,
 				B5E2899F1C8E6FE000DF7B70 /* 切换下拉选项 */,
 				B5E2899E1C8E6FCD00DF7B70 /* 激活下拉选项 */,
@@ -6295,6 +6303,15 @@
 			name = Class;
 			sourceTree = "<group>";
 		};
+		C9DCF7901CDB49B500D3A673 /* FinanceNewsView */ = {
+			isa = PBXGroup;
+			children = (
+				C9DCF7911CDB4A1300D3A673 /* IndexFinanceNewsView.h */,
+				C9DCF7921CDB4A1300D3A673 /* IndexFinanceNewsView.m */,
+			);
+			name = FinanceNewsView;
+			sourceTree = "<group>";
+		};
 		C9DDF45A1CAA57D300886F3A /* emoji */ = {
 			isa = PBXGroup;
 			children = (
@@ -7228,6 +7245,7 @@
 				459B50BC1C3E89F100CDD55C /* IndexBuyView.m in Sources */,
 				459B50BD1C3E89F100CDD55C /* AilPayDetailViewController.m in Sources */,
 				C96740F41C7EC5AA00933703 /* AccountH5Page.m in Sources */,
+				C9DCF7941CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */,
 				459B50BE1C3E89F100CDD55C /* UIEngine.m in Sources */,
 				459B50BF1C3E89F100CDD55C /* TransferDetailViewController.m in Sources */,
 				459B50C01C3E89F100CDD55C /* NSString+File.m in Sources */,
@@ -7746,6 +7764,7 @@
 				C9140C581C868F3800023DE0 /* UnLoginView.m in Sources */,
 				C9140C591C868F3800023DE0 /* IndexSingleControl.m in Sources */,
 				C9140C5A1C868F3800023DE0 /* IndexBuyModel.m in Sources */,
+				C9DCF7951CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */,
 				C9140C5B1C868F3800023DE0 /* DataEngine+Futures.m in Sources */,
 				B5E654121CBB4A2100509A42 /* IndexOrderChooseBillModel.m in Sources */,
 				C9140C5C1C868F3800023DE0 /* LoadMoreTableFooterView.m in Sources */,
@@ -8158,6 +8177,7 @@
 				C98300421CC0CA2000A8F049 /* TradeRulesView.m in Sources */,
 				C98300431CC0CA2000A8F049 /* UnLoginView.m in Sources */,
 				C98300441CC0CA2000A8F049 /* IndexSingleControl.m in Sources */,
+				C9DCF7971CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */,
 				C98300451CC0CA2000A8F049 /* IndexBuyModel.m in Sources */,
 				C98300461CC0CA2000A8F049 /* DataEngine+Futures.m in Sources */,
 				C98300471CC0CA2000A8F049 /* IndexOrderChooseBillModel.m in Sources */,
@@ -8570,6 +8590,7 @@
 				C9EC8D941C968A8E005882C8 /* UnLoginView.m in Sources */,
 				C9EC8D951C968A8E005882C8 /* IndexSingleControl.m in Sources */,
 				C9EC8D961C968A8E005882C8 /* IndexBuyModel.m in Sources */,
+				C9DCF7961CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */,
 				C9EC8D971C968A8E005882C8 /* DataEngine+Futures.m in Sources */,
 				B5E654131CBB4A2100509A42 /* IndexOrderChooseBillModel.m in Sources */,
 				C9EC8D981C968A8E005882C8 /* LoadMoreTableFooterView.m in Sources */,
@@ -8982,6 +9003,7 @@
 				B5C5FF911B53416E009D325D /* UnLoginView.m in Sources */,
 				B5DADA8D1C7C538300278088 /* IndexSingleControl.m in Sources */,
 				B569FD3B1B67169E00152FA8 /* IndexBuyModel.m in Sources */,
+				C9DCF7931CDB4A1300D3A673 /* IndexFinanceNewsView.m in Sources */,
 				B5D71C291C0BEEC20023AAB5 /* DataEngine+Futures.m in Sources */,
 				B5E654101CBB4A2100509A42 /* IndexOrderChooseBillModel.m in Sources */,
 				F014BAEC1B0199B900D02C2A /* LoadMoreTableFooterView.m in Sources */,
