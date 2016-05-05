@@ -107,4 +107,12 @@
     }
 }
 
+-(void)reSetSelected{
+    self.positionButton.selected = NO;
+    self.positionButton.backgroundColor = [UIColor clearColor];
+    
+    self.financeNewsButton.selected = NO;
+    self.financeNewsButton.backgroundColor = [UIColor clearColor];
+}
+
 @end

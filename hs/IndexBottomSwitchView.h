@@ -21,4 +21,6 @@ typedef void(^PositionBlock)(BOOL);
 
 @property (nonatomic,strong)PositionBlock   positionBlock;
 
+-(void)reSetSelected;
+
 @end
