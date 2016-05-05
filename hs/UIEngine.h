@@ -50,6 +50,10 @@ AS_SINGLETON(UIEngine)
                        isMoney:(BOOL)isMoney
                  DefaultSelect:(int)aIndex
                          Unit:(NSString *)unit;
+-(void)showOrderAlertWithTitle:(NSString    *)aTitle
+                     DataArray:(NSMutableArray  *)aArray
+                 DefaultSelect:(int)aIndex
+                          Unit:(NSString *)unit;
 
 +(UIViewController *)getCurrentRootViewController;
 

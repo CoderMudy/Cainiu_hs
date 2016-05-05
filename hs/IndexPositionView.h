@@ -12,8 +12,10 @@
 @class IndexPositionTopView;
 @class IndexViewController;
 @class FoyerProductModel;
+
 typedef void(^IndexPositionBlock)();
 typedef void(^FundLoadBlock)(BOOL isPosition,NSString * userFund,NSString *userProfit);
+
 @interface IndexPositionView : UIView<UITableViewDelegate,UITableViewDataSource>
 {
 

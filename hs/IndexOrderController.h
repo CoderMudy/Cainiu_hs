@@ -72,6 +72,11 @@ typedef void(^CantTradeBlock)();
 @property (nonatomic,strong)UISegmentedControl  *modifySeg;//市价/限价
 @property (nonatomic,assign)float               stopAndGetFrontHeight;
 @property (nonatomic,assign)float               otherMoneyFrontHeight;
+
+//交易数量(手数选择)
+@property (nonatomic,strong)UILabel             *zoreLabel;
+
+
 //触发止损、触发止盈
 @property (nonatomic,strong)UILabel             *oneLabel;
 @property (nonatomic,strong)UILabel             *twoLabel;

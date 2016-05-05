@@ -687,6 +687,10 @@
 #pragma mark 第一次进入引导
 
 -(void)defaultData{
+    _zoreLabel.text = @"";
+    _zoreLabel.attributedText = nil;
+    _zoreLabel.text = @"请选择交易手数";
+    
     _oneLabel.text = @"";
     _oneLabel.attributedText = nil;
     _oneLabel.text = @"请选择止损额度";
@@ -1070,13 +1074,13 @@
             fourLabel.text = [NSString stringWithFormat:@"%@ %@ ￥ %@\n(%@ %@)",self.productModel.currencySign,behindStr,moneyOfRate,self.productModel.currencySign,frontStr];
             fourLabel.attributedText = [DataUsedEngine mutableFontAndColorArrayAddDeleteLine:[NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%@ %@ ", self.productModel.currencySign,behindStr],[NSString stringWithFormat:@"￥ %@\n",moneyOfRate],[NSString stringWithFormat:@"(%@ %@)",self.productModel.currencySign,frontStr], nil]
                                                                                    fontArray:[NSMutableArray arrayWithObjects:@"15",@"15",@"11", nil]
-                                                                                  colorArray:[NSMutableArray arrayWithObjects:@"99/99/99/1",@"255/255/255/1",@"255/255/255/255/1", nil]];
+                                                                                  colorArray:[NSMutableArray arrayWithObjects:@"99/99/99/1",@"0/0/0/1",@"0/0/0/1", nil]];
         }
         else{
             fourLabel.text = [NSString stringWithFormat:@"%@ %@ ￥ %@",self.productModel.currencySign,behindStr,moneyOfRate];
             fourLabel.attributedText = [DataUsedEngine mutableFontAndColorArrayAddDeleteLine:[NSMutableArray arrayWithObjects:[NSString stringWithFormat:@"%@ %@ ", self.productModel.currencySign,behindStr],[NSString stringWithFormat:@"￥ %@",moneyOfRate], nil]
                                                                                    fontArray:[NSMutableArray arrayWithObjects:@"15",@"15", nil]
-                                                                                  colorArray:[NSMutableArray arrayWithObjects:@"99/99/99/1",@"255/255/255/1", nil]];
+                                                                                  colorArray:[NSMutableArray arrayWithObjects:@"99/99/99/1",@"0/0/0/1", nil]];
         }
         
 
@@ -1098,7 +1102,7 @@
         UILabel    *label = [[UILabel alloc]initWithFrame:CGRectMake(0,0, ScreenWidth/2, 40.0/568*ScreenHeigth)];
         label.text = [NSString stringWithFormat:@"汇率 > %@人民币",_productModel.currencyName];
         label.font = [UIFont systemFontOfSize:11];
-        label.textColor = [UIColor lightGrayColor];
+        label.textColor = Color_gray;
         [rateView addSubview:label];
         
         UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, label.frame.origin.y, rateView.frame.size.width-60, 40.0/568*ScreenHeigth)];
@@ -1382,7 +1386,7 @@
     }
     proLabel.textAlignment = NSTextAlignmentCenter;
     proLabel.font = [UIFont systemFontOfSize:10];
-    proLabel.textColor = [UIColor lightGrayColor];
+    proLabel.textColor = Color_gray;
     [self.view addSubview:proLabel];
     
     _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, proLabel.frame.size.height+proLabel.frame.origin.y, ScreenWidth, 20)];
@@ -1448,7 +1452,7 @@
         UILabel    *label = [[UILabel alloc]initWithFrame:CGRectMake(20, i*(40.0/568*ScreenHeigth), labelWidth, 40.0/568*ScreenHeigth)];
         label.text = array[i];
         label.font = [UIFont systemFontOfSize:11];
-        label.textColor = [UIColor lightGrayColor];
+        label.textColor = Color_gray;
         if (i==1) {
             label.tag = Tag_stop;
         }
@@ -1458,8 +1462,46 @@
         [self.chooseBGView addSubview:label];
         
         if (i==0) {
-            UIView *view = [self transactionNumberView:CGRectMake(60+20, label.frame.origin.y, ScreenWidth-60-40, 40.0/568*ScreenHeigth)];
-            [self.chooseBGView addSubview:view];
+//            UIView *view = [self transactionNumberView:CGRectMake(60+20, label.frame.origin.y, ScreenWidth-60-40, 40.0/568*ScreenHeigth)];
+//            [self.chooseBGView addSubview:view];
+            //默认交易数量
+            CacheModel *cacheModel = [CacheEngine getCacheInfo];
+            int num = 0;
+            NSString * numString = @"请选择交易手数";
+
+            if (self.isQuickOrder) {
+                num = [cacheModel.tradeDic[self.productModel.tradeSubDicName][@"numfloat"] intValue];
+            }else{
+            
+                if(!isFirstStatus){
+                    numString = @"1手";
+                }
+            }
+            
+            UIView  *clickView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth - (320.0/5*2)-20, label.frame.origin.y+7, 320.0/5*2+10, (40.0/568*ScreenHeigth)/5*3)];
+            clickView.backgroundColor = Color_Gold;
+            clickView.clipsToBounds = YES;
+            clickView.layer.cornerRadius = 2;
+            clickView.userInteractionEnabled = YES;
+            [self.chooseBGView addSubview:clickView];
+            
+            _zoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320.0/5*2-15+10, (40.0/568*ScreenHeigth)/5*3)];
+            _zoreLabel.textAlignment = NSTextAlignmentRight;
+            _zoreLabel.text = numString;
+            _zoreLabel.font = [UIFont systemFontOfSize:15];
+            _zoreLabel.textColor = [UIColor whiteColor];
+            _zoreLabel.tag = Tag_oneLine;
+            _zoreLabel.userInteractionEnabled = YES;
+            [clickView addSubview:_zoreLabel];
+            
+            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-7, clickView.frame.size.height-7, 5, 5)];
+            imageView.image = [UIImage imageNamed:@"button_order"];
+            imageView.userInteractionEnabled = YES;
+            [clickView addSubview:imageView];
+            
+            UITapGestureRecognizer *stopTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chooseOrderNum)];
+            [clickView addGestureRecognizer:stopTap];
+            
         }
         else{
             if (i == 1) {
@@ -1473,14 +1515,14 @@
                 
                 _oneLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320.0/5*2-15+10, (40.0/568*ScreenHeigth)/5*3)];
                 _oneLabel.textAlignment = NSTextAlignmentRight;
-                _oneLabel.text = @"请选择止损金额/手";
+                _oneLabel.text = @"请选择止损金额";
                 _oneLabel.font = [UIFont systemFontOfSize:15];
-                _oneLabel.textColor = [UIColor blackColor];
+                _oneLabel.textColor = [UIColor whiteColor];
                 _oneLabel.tag = Tag_oneLine;
                 _oneLabel.userInteractionEnabled = YES;
                 [clickView addSubview:_oneLabel];
                 
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-10, 9, 5, clickView.frame.size.height-18)];
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-7, clickView.frame.size.height-7, 5, 5)];
                 imageView.image = [UIImage imageNamed:@"button_order"];
                 imageView.userInteractionEnabled = YES;
                 [clickView addSubview:imageView];
@@ -1500,13 +1542,13 @@
                 
                 _twoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320.0/5*2-15+10, (40.0/568*ScreenHeigth)/5*3)];
                 _twoLabel.textAlignment = NSTextAlignmentRight;
-                _twoLabel.text = @"请选择止盈金额/手";
+                _twoLabel.text = @"请选择止盈金额";
                 _twoLabel.font = [UIFont systemFontOfSize:15];
-                _twoLabel.textColor = [UIColor blackColor];
+                _twoLabel.textColor = [UIColor whiteColor];
                 _twoLabel.tag = Tag_twoLine;
                 [clickView addSubview:_twoLabel];
                 
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-10, 9, 5, clickView.frame.size.height-18)];
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(clickView.frame.size.width-7, clickView.frame.size.height-7, 5, 5)];
                 imageView.image = [UIImage imageNamed:@"button_order"];
                 imageView.userInteractionEnabled = YES;
                 [clickView addSubview:imageView];
@@ -1564,7 +1606,7 @@
         UILabel    *label = [[UILabel alloc]initWithFrame:CGRectMake(20,i*(40.0/568*ScreenHeigth), ScreenWidth/2, 40.0/568*ScreenHeigth)];
         label.text = bottomArray[i];
         label.font = [UIFont systemFontOfSize:11];
-        label.textColor = [UIColor lightGrayColor];
+        label.textColor = Color_gray;
         [_couPonView addSubview:label];
         
         UILabel *moneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(60+20, label.frame.origin.y, ScreenWidth-60-40, 40.0/568*ScreenHeigth)];
@@ -1575,7 +1617,7 @@
         if (ScreenHeigth<=480) {
             moneyLabel.font = [UIFont systemFontOfSize:12];
         }
-        moneyLabel.textColor = [UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1];
+        moneyLabel.textColor = Color_gray;
         
         //=====
         if (i == 0) {
@@ -1685,7 +1727,7 @@
             }else
             {
                 NSString *ceshiStr = [NSString stringWithFormat:@"￥%@ ￥%@",fontStr,behindStr];
-                sumLab.attributedText = [self multiplicityActivity:ceshiStr from:0 to:(int)(fontStr.length+1) color:[UIColor lightGrayColor] otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
+                sumLab.attributedText = [self multiplicityActivity:ceshiStr from:0 to:(int)(fontStr.length+1) color:Color_gray otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
             }
             
             [self.couPonBtn setImage:[UIImage imageNamed:@"coupon_00"] forState:UIControlStateNormal];
@@ -1710,13 +1752,49 @@
         self.couPonBtn.enabled = YES;
     }
 }
+#pragma mark -
+#pragma mark 选择订单手数
+-(void)chooseOrderNum
+{
+
+    if ([_zoreLabel.superview.backgroundColor isEqual:Color_Gold]) {
+
+        NSString    *unit = self.productModel.currencySign;
+        
+//        [[UIEngine sharedInstance] showOrderAlertWithTitle:@"请选择交易手数/手" DataArray:_numArray isMoney:isIntegral DefaultSelect:selectNum Unit:unit];
+        [[UIEngine sharedInstance] showOrderAlertWithTitle:@"请选择交易手数/手" DataArray:_numArray DefaultSelect:selectNum Unit:@"手"];
+        [UIEngine sharedInstance].orderClick = ^(int aIndex){
+            selectNum = aIndex;
+
+            if(!isFirstStatus){
+                [self reloadAllData];
+            }else{
+                [self segClickReloadData];
+            }
+            
+            _zoreLabel.text = [NSString stringWithFormat:@"%.0f手",[_numArray[selectNum] floatValue]];
+            //保存选中手数
+            if (self.isQuickOrder) {
+                CacheModel *cacheModel = [CacheEngine getCacheInfo];
+                cacheModel.tradeDic[self.productModel.tradeSubDicName][@"numfloat"] = [NSString stringWithFormat:@"%d",selectNum];
+                [CacheEngine setCacheInfo:cacheModel];
+                //优惠配置
+                [self quickOrderConfigerOfFourLabel];
+            }
+        };
+        
+    }
+
+}
+
 
 #pragma mark -
 #pragma mark 选择止损
 
 -(void)chooseStop{
     
-    if ([_oneLabel.superview.backgroundColor isEqual:Color_Gold]) {
+    if ([_zoreLabel.superview.backgroundColor isEqual:Color_Gold])
+    {
         NSMutableArray *infoArray = [NSMutableArray arrayWithCapacity:0];
         
         if (isIntegral==0) {
@@ -2116,7 +2194,7 @@
     for (int i = 0 ; i<_numArray.count; i++) {
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitleColor:[UIColor colorWithRed:221/255.0 green:221/255.0 blue:221/255.0 alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:Color_gray forState:UIControlStateNormal];
         button.frame = CGRectMake(i*((ScreenWidth-40-60)/4), 8, ((ScreenWidth-40-60)/4)+1, _tradeNumView.bounds.size.height/5*3);
         [button setTitle:[NSString stringWithFormat:@"%d手",[_numArray[i] intValue]] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -2148,11 +2226,11 @@
         for (int i = 0; i<4; i++) {
             UIButton *btn = (UIButton *)[self.view viewWithTag:777+i];
             btn.backgroundColor = [UIColor clearColor];
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btn setTitleColor:Color_gray forState:UIControlStateNormal];
         }
         
         button.backgroundColor = Color_Gold;
-        [button setTitleColor:Color_black forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         selectNum = (int)button.tag - 777;
         
@@ -2697,7 +2775,7 @@
     agreeLabel.text = [NSString stringWithFormat:@"我已阅读并同意《投资人与用户交易合作协议》"];
     agreeLabel.font = [UIFont systemFontOfSize:11];
     agreeLabel.center = CGPointMake(agreeLabel.center.x+20, agreeLabel.center.y);
-    agreeLabel.textColor = [UIColor lightGrayColor];
+    agreeLabel.textColor = Color_gray;
     
     agreeLabel.attributedText = [Helper multiplicityText:agreeLabel.text from:7 to:(int)agreeLabel.text.length-7 color:Color_Gold];;
     [self.view addSubview:agreeLabel];
@@ -2789,7 +2867,7 @@
                 NSString    *frontStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue] - sunCoupon / [_tradeModel.rate floatValue]]];
                 NSString    *behindStr = [DataEngine addSign:[NSString stringWithFormat:@"%.2f",[_tradeModel.counterFee doubleValue] * [_numArray[selectNum] intValue]]];
                 fourLabel.text = [NSString stringWithFormat:@"%@%@ %@%@",self.productModel.currencySign,behindStr,self.productModel.currencySign,frontStr];
-                fourLabel.attributedText = [self multiplicityActivity:fourLabel.text from:0 to:(int)(behindStr.length+self.productModel.currencySign.length) color:[UIColor lightGrayColor] otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
+                fourLabel.attributedText = [self multiplicityActivity:fourLabel.text from:0 to:(int)(behindStr.length+self.productModel.currencySign.length) color:Color_gray otherFontWithFrom:0 to:0 SecondOtherFontWithFrom:0 to:0];
                 _preferentialLabel.hidden = NO;
             }
         }
@@ -2850,7 +2928,7 @@
     
     [str addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(aFrom, aTo)];
     
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(aFrom,aTo)];
+    [str addAttribute:NSForegroundColorAttributeName value:aColor range:NSMakeRange(aFrom,aTo)];
     
     [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:11] range:NSMakeRange(aOtherFrrm, aOtherTo)];
     [str addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:11] range:NSMakeRange(aSecondFrom, aSecondTo)];
@@ -2901,7 +2979,7 @@
     }
     _seg.selectedSegmentIndex = 0;
     [_seg addTarget:self action:@selector(segClick:) forControlEvents:UIControlEventValueChanged];
-    _seg.tintColor = [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1];
+    _seg.tintColor = Color_Gold;
     [self.view addSubview:_seg];
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: [UIFont fontWithName:@"Helvetica" size:10],NSFontAttributeName,nil];

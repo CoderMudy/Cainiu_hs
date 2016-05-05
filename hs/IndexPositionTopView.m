@@ -44,6 +44,7 @@
 
     _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, newHeight-1, ScreenWidth, 1)];
     _lineView.backgroundColor  = K_color_line;
+    _lineView.hidden = YES;
     [self addSubview:_lineView];
 
     _goBuyBtn = [UIButton buttonWithType:UIButtonTypeCustom];

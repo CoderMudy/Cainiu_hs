@@ -599,6 +599,108 @@ DEF_SINGLETON(UIEngine)
     }
 }
 
+
+
+-(void)showOrderAlertWithTitle:(NSString    *)aTitle   DataArray:(NSMutableArray  *)aArray DefaultSelect:(int)aIndex Unit:(NSString *)unit
+{
+    selectMoneyIndex = aIndex;
+    
+    NSMutableArray  *aInfoArray = [NSMutableArray arrayWithCapacity:0];
+        for (int i = 0; i<aArray.count; i++) {
+            [aInfoArray addObject:[NSString stringWithFormat:@"%.0f%@",[aArray[i] floatValue],unit]];
+        }
+    
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    NSArray * array = [[UIApplication sharedApplication] windows];
+    
+    if (array.count >= 2) {
+        
+        window = [array objectAtIndex:1];
+        
+    }
+    
+    if(_coverView==nil)
+    {
+        _coverView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeigth)];
+        _coverView.backgroundColor=[UIColor blackColor];
+        _coverView.alpha=0.7;
+        [window addSubview:_coverView];
+        
+        int  lineNum = aArray.count%2==0? (int)aArray.count/2:(int)array.count/2+1;
+        CGFloat alertViewHeight = 10+15+10 + lineNum*40 +5+10;
+        
+        alertView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _coverView.bounds.size.width-60, alertViewHeight)];
+        alertView.center=CGPointMake(ScreenWidth/2, ScreenHeigth/2-30);
+        alertView.backgroundColor = [UIColor whiteColor];
+        alertView.layer.cornerRadius = 8;
+        alertView.alpha=1;
+        alertView.layer.masksToBounds = YES;
+        
+        
+        UILabel * titlelab = [[UILabel alloc] initWithFrame:CGRectMake(17, 7, alertView.bounds.size.width-17*2, 15)];
+        titlelab.numberOfLines = 1;
+        titlelab.textAlignment=NSTextAlignmentCenter;
+        titlelab.font = [UIFont systemFontOfSize:10];
+        titlelab.backgroundColor = [UIColor clearColor];
+        titlelab.text = aTitle;
+        titlelab.textColor = Color_gray;
+        [alertView addSubview:titlelab];
+        
+        
+        for (int i = 0 ; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (i*2+j < aInfoArray.count) {
+                    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+                    button.frame=CGRectMake((alertView.bounds.size.width-(alertView.frame.size.width/5*2)*2)/3*(j+1)+j*(alertView.frame.size.width/5*2), 44+i*40, (alertView.frame.size.width/5*2), 26);
+                    button.backgroundColor=[UIColor clearColor];
+                    button.tag=10088+(i*2+j);
+                    [button setTitleColor:Color_gray forState:UIControlStateNormal];
+                    [button setTitle:aInfoArray[i*2+j] forState:UIControlStateNormal];
+                    button.clipsToBounds = YES;
+                    button.layer.cornerRadius = 3;
+                    button.titleLabel.font = [UIFont systemFontOfSize:15];
+                    [button addTarget:self action:@selector(orderChoose:) forControlEvents:UIControlEventTouchUpInside];
+                    [alertView addSubview:button];
+                    
+                    if (aIndex == i*2+j) {
+                        button.backgroundColor = AlertColor;
+                        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    }
+                    
+                    if (unit.length > 1) {
+                        button.titleLabel.font = [UIFont systemFontOfSize:13];
+                    }
+                }
+            }
+        }
+        
+        
+        _linelab = [[UILabel alloc] initWithFrame:CGRectMake(0,CGRectGetMaxY(alertView.frame)-20, alertView.bounds.size.width, 20+40)];
+        _linelab.center = CGPointMake(ScreenWidth/2, _linelab.center.y);
+        _linelab.backgroundColor = AlertColor;
+        _linelab.alpha=1;
+        _linelab.clipsToBounds = YES;
+        _linelab.userInteractionEnabled = YES;
+        _linelab.layer.cornerRadius = 8;
+        [window addSubview:_linelab];
+        
+        UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame=CGRectMake(0, 20, alertView.frame.size.width, 40);
+        button.backgroundColor=[UIColor clearColor];
+        button.tag=10086;
+        button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setTitle:@"确定" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(orderClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_linelab addSubview:button];
+        
+        [window addSubview:alertView];
+    }
+}
+
+
 -(void)orderChoose:(UIButton *)btn{
     for (int i = 0 ; i < 6; i++) {
         UIButton *button = (UIButton *)[alertView viewWithTag:10088+i];

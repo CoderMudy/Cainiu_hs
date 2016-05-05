@@ -9,6 +9,7 @@
 #import "PopUpView.h"
 #define SelfWidth self.frame.size.width
 #define SelfHeight self.frame.size.height
+#define k_Color_blue K_COLOR_CUSTEM(8, 129, 198, 1)
 
 @interface PopUpView()<UITextFieldDelegate>
 
@@ -45,8 +46,8 @@
         UIView * btnView = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth-alertWidth)/2, ScreenHeigth/2+alertHeight/2-(titleHeight-itemHeight)-itemHeight/2, alertWidth, titleHeight)];
         btnView.layer.cornerRadius =itemHeight/6;
         btnView.layer.masksToBounds = YES;
-        btnView.backgroundColor = K_color_red;
-        
+        btnView.backgroundColor = k_Color_blue;
+    
         [_shadeView addSubview:btnView];
         
         
@@ -133,7 +134,7 @@
         btnView.bounds = CGRectMake(0, 0, alertWidth, btnViewHeight);
         btnView.layer.cornerRadius =itemHeight/6;
         btnView.layer.masksToBounds = YES;
-        btnView.backgroundColor = K_color_red;
+        btnView.backgroundColor = k_Color_blue;
         [_shadeView addSubview:btnView];
         
         UIView * alertView = [[UIView alloc] init];
@@ -196,7 +197,7 @@
         UIView * btnView = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth-alertWidth)/2, ScreenHeigth/2+alertHeight/2-(titleHeight-itemHeight)-itemHeight/2, alertWidth, titleHeight)];
         btnView.layer.cornerRadius =itemHeight/6;
         btnView.layer.masksToBounds = YES;
-        btnView.backgroundColor = K_color_red;
+        btnView.backgroundColor = k_Color_blue;
         
         [_shadeView addSubview:btnView];
         
@@ -283,7 +284,7 @@
         UIView * btnView = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth-alertWidth)/2, ScreenHeigth/2+alertHeight/2-(titleHeight-itemHeight)-itemHeight/2, alertWidth, titleHeight)];
         btnView.layer.cornerRadius =itemHeight/6;
         btnView.layer.masksToBounds = YES;
-        btnView.backgroundColor = K_color_red;
+        btnView.backgroundColor = k_Color_blue;
         
         [_shadeView addSubview:btnView];
         
@@ -305,7 +306,7 @@
         UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, alertWidth, titleHeight)];
         titleLab.text = title;
         titleLab.font = [UIFont systemFontOfSize:itemHeight*4/9];
-        titleLab.textColor = K_color_red;
+        titleLab.textColor = k_Color_blue;
         titleLab.textAlignment = NSTextAlignmentCenter;
         [alertView addSubview:titleLab];
         
@@ -372,7 +373,7 @@
     _backConcelBtn.bounds = CGRectMake(0, 0, SelfWidth, SelfHeight);
     _backConcelBtn.alpha = 0.5;
 
-    _backConcelBtn.backgroundColor = Color_black;
+    _backConcelBtn.backgroundColor = [UIColor blackColor];
     [_backConcelBtn addTarget:self action:@selector(hideSelf) forControlEvents:UIControlEventTouchUpInside];
     [_shadeView addSubview:_backConcelBtn];
 

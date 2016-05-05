@@ -125,6 +125,8 @@
 }
 - (void)initTableView
 {
+    
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeigth-64)];
     _tableView.backgroundColor = k_color_whiteBack;
     _tableView.delegate = self;
@@ -145,8 +147,38 @@
     };
     _tableView.tableHeaderView = _headerView;
     
+    UIView  *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1.5)];
+    lineView.backgroundColor = Color_Gold;
+    [self addSubview:lineView];
+    
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeButton.frame = CGRectMake(0, 5, 36, 13);
+    [closeButton setImage:[UIImage imageNamed:@"tactics_Close"] forState:UIControlStateNormal];
+    closeButton.center = CGPointMake(self.frame.size.width/2, closeButton.frame.size.height/2);
+    [closeButton addTarget:self action:@selector(closeSelf) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:closeButton];
+    
+    UIButton *closeButton_enlargeClick = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeButton_enlargeClick.frame = CGRectMake(0, 0, self.frame.size.width/3, 30);
+    closeButton_enlargeClick.center = CGPointMake(self.frame.size.width/2, closeButton_enlargeClick.frame.size.height/2);
+    [closeButton_enlargeClick addTarget:self action:@selector(closeSelf) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:closeButton_enlargeClick];
+    
+    UISwipeGestureRecognizer *swipeGes = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(closeSelf)];
+    swipeGes.direction = UISwipeGestureRecognizerDirectionDown;
+    [closeButton_enlargeClick addGestureRecognizer: swipeGes];
+    
+
+}
+
+#pragma mark 关闭 操作
+
+-(void)closeSelf{
+
+    [self blockManager];
     
 }
+
 #pragma mark
 #pragma mark 平仓__1__请求平仓时间
 - (void)saleRequestSystemWithSaleOrderArray:(NSArray*)saleOrderArray saleButton:(UIButton *)button

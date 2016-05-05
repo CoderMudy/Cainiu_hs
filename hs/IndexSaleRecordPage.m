@@ -149,16 +149,16 @@
     {
         case 0:
         {
-//            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
-//            return;
-            urlStr = K_Index_futuresOrderEntrustList;//委托记录列表
+            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
+            return;
+//            urlStr = K_Index_futuresOrderEntrustList;//委托记录列表
         }
             break;
         case 1:
         {
-//            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
-//            return;
-            urlStr = K_Index_conditionOrderList;//条件单列表
+            [UIEngine showXianHuoPromptMesg:@"更多功能暂未开放，敬请期待"];
+            return;
+//            urlStr = K_Index_conditionOrderList;//条件单列表
         }
             break;
         case 2:
