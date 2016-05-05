@@ -28,6 +28,7 @@
 #import "TradeRulesView.h"
 #import "RegViewController.h"
 #import "RegistRedBagView.h"
+#import "IndexBottomSwitchView.h"
 
 #define KEY @"cainiu_luckin"
 
@@ -684,9 +685,9 @@
         spPercent = 4.0;
     }
     
-    _indexScrollView                = [[UIScrollView alloc]initWithFrame:CGRectMake(0, ScreenHeigth/spPercent, ScreenWidth, ScreenHeigth-ScreenHeigth/spPercent)];
+    _indexScrollView                = [[UIScrollView alloc]initWithFrame:CGRectMake(0, ScreenHeigth/spPercent, ScreenWidth, ScreenHeigth-ScreenHeigth/spPercent - 40)];
     _indexScrollView.pagingEnabled  = YES;
-    _indexScrollView.contentSize    = CGSizeMake(ScreenWidth*2, ScreenHeigth-ScreenHeigth/spPercent);
+    _indexScrollView.contentSize    = CGSizeMake(ScreenWidth*2, ScreenHeigth-ScreenHeigth/spPercent - 40);
     _indexScrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     _indexScrollView.showsHorizontalScrollIndicator     = NO;
     _indexScrollView.showsVerticalScrollIndicator       = NO;
@@ -784,6 +785,8 @@
         };
         [self.view addSubview:_indexPositionV];
     }
+    
+    [self loadBottomSwitchView];
 }
 
 #pragma mark 玩法
@@ -801,6 +804,18 @@
     }
 }
 
+#pragma mark BottomView
+
+-(void)loadBottomSwitchView{
+    IndexBottomSwitchView *indexBottomSwitchView = [[IndexBottomSwitchView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_indexScrollView.frame), ScreenWidth, 40)];
+    [self.view addSubview:indexBottomSwitchView];
+    indexBottomSwitchView.financeNewsBlock = ^(BOOL selected){
+        
+    };
+    indexBottomSwitchView.positionBlock = ^(BOOL    selected){
+        
+    };
+}
 
 #pragma mark - positionView请求持仓数据
 - (void)requestPositionData

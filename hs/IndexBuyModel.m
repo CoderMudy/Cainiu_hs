@@ -165,7 +165,6 @@
     aDataDic[@"lowerLimitPrice"]  = [NSString stringWithFormat:@"%@",aDataDic[@"lowerLimitPrice"]];
     aDataDic[@"upperLimitPrice"]  = [NSString stringWithFormat:@"%@",aDataDic[@"upperLimitPrice"]];
     aDataDic[@"openInterest"]     = [NSString stringWithFormat:@"%@",aDataDic[@"openInterest"]];
-    NSLog(@"%@",aDataDic);
     if([aDataDic[@"instrumentID"] length] >= 2 && aInstrumentCode.length >= 2){
         if (![[[aDataDic[@"instrumentID"] substringToIndex:2] uppercaseString] isEqualToString:[[aInstrumentCode substringToIndex:2] uppercaseString]]) {
             return;

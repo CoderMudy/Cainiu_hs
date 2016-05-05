@@ -653,6 +653,10 @@
 		B5D79AB81C47A9D2007AF5E7 /* TradeRulesView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D79AB71C47A9D2007AF5E7 /* TradeRulesView.m */; };
 		B5D79ABA1C47A9D2007AF5E7 /* TradeRulesView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D79AB71C47A9D2007AF5E7 /* TradeRulesView.m */; };
 		B5D8C7331BDDD0590058F71E /* IndexBuyTacticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D8C7321BDDD0590058F71E /* IndexBuyTacticsModel.m */; };
+		B5D976491CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D976481CDAE89500F6AB8B /* IndexBottomSwitchView.m */; };
+		B5D9764A1CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D976481CDAE89500F6AB8B /* IndexBottomSwitchView.m */; };
+		B5D9764B1CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D976481CDAE89500F6AB8B /* IndexBottomSwitchView.m */; };
+		B5D9764C1CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D976481CDAE89500F6AB8B /* IndexBottomSwitchView.m */; };
 		B5D9E0571BFDB81B006903A5 /* MAView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D9E0561BFDB81B006903A5 /* MAView.m */; };
 		B5D9E43E1B6F0CE400EC866E /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D9E4391B6F0CE400EC866E /* Utility.m */; };
 		B5D9E4421B6F0CE400EC866E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D9E43C1B6F0CE400EC866E /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -2829,6 +2833,8 @@
 		B5D79AB71C47A9D2007AF5E7 /* TradeRulesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeRulesView.m; sourceTree = "<group>"; };
 		B5D8C7311BDDD0590058F71E /* IndexBuyTacticsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexBuyTacticsModel.h; sourceTree = "<group>"; };
 		B5D8C7321BDDD0590058F71E /* IndexBuyTacticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexBuyTacticsModel.m; sourceTree = "<group>"; };
+		B5D976471CDAE89500F6AB8B /* IndexBottomSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexBottomSwitchView.h; sourceTree = "<group>"; };
+		B5D976481CDAE89500F6AB8B /* IndexBottomSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexBottomSwitchView.m; sourceTree = "<group>"; };
 		B5D9E0551BFDB81B006903A5 /* MAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAView.h; sourceTree = "<group>"; };
 		B5D9E0561BFDB81B006903A5 /* MAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAView.m; sourceTree = "<group>"; };
 		B5D9E4381B6F0CE400EC866E /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
@@ -5087,6 +5093,15 @@
 			name = "银行卡支付";
 			sourceTree = "<group>";
 		};
+		B5D976461CDAE86400F6AB8B /* BottomSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				B5D976471CDAE89500F6AB8B /* IndexBottomSwitchView.h */,
+				B5D976481CDAE89500F6AB8B /* IndexBottomSwitchView.m */,
+			);
+			name = BottomSwitch;
+			sourceTree = "<group>";
+		};
 		B5D9E4371B6F0CE400EC866E /* security */ = {
 			isa = PBXGroup;
 			children = (
@@ -5340,6 +5355,7 @@
 		B5DD2EFB1C8D2491009FB96B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B5D976461CDAE86400F6AB8B /* BottomSwitch */,
 				B5E2899F1C8E6FE000DF7B70 /* 切换下拉选项 */,
 				B5E2899E1C8E6FCD00DF7B70 /* 激活下拉选项 */,
 			);
@@ -7789,6 +7805,7 @@
 				C9140C8F1C868F3800023DE0 /* MJRefreshBackGifFooter.m in Sources */,
 				C9140C901C868F3800023DE0 /* SSNavView.m in Sources */,
 				C9140C911C868F3800023DE0 /* FiveMarketCell.m in Sources */,
+				B5D9764A1CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */,
 				C9140C921C868F3800023DE0 /* RegistRedBagView.m in Sources */,
 				C9140C931C868F3800023DE0 /* DataUsedEngine.m in Sources */,
 				C9140C941C868F3800023DE0 /* HolidayCacheModel.m in Sources */,
@@ -8200,6 +8217,7 @@
 				C983007C1CC0CA2000A8F049 /* TacticPageCell.m in Sources */,
 				C983007D1CC0CA2000A8F049 /* MJRefreshBackGifFooter.m in Sources */,
 				C983007E1CC0CA2000A8F049 /* SSNavView.m in Sources */,
+				B5D9764C1CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */,
 				C983007F1CC0CA2000A8F049 /* FiveMarketCell.m in Sources */,
 				C98300801CC0CA2000A8F049 /* RegistRedBagView.m in Sources */,
 				C98300811CC0CA2000A8F049 /* DataUsedEngine.m in Sources */,
@@ -8611,6 +8629,7 @@
 				C9EC8DCB1C968A8E005882C8 /* MJRefreshBackGifFooter.m in Sources */,
 				C9EC8DCC1C968A8E005882C8 /* SSNavView.m in Sources */,
 				C9EC8DCD1C968A8E005882C8 /* FiveMarketCell.m in Sources */,
+				B5D9764B1CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */,
 				C9EC8DCE1C968A8E005882C8 /* RegistRedBagView.m in Sources */,
 				C9EC8DCF1C968A8E005882C8 /* DataUsedEngine.m in Sources */,
 				C9EC8DD01C968A8E005882C8 /* HolidayCacheModel.m in Sources */,
@@ -9022,6 +9041,7 @@
 				B5D29D731B3CEA7700980890 /* MJRefreshBackGifFooter.m in Sources */,
 				C958A19B1B296A1A00ED8256 /* SSNavView.m in Sources */,
 				45D236C11C0BD9CA0047D9C8 /* FiveMarketCell.m in Sources */,
+				B5D976491CDAE89500F6AB8B /* IndexBottomSwitchView.m in Sources */,
 				C918E2921C80476F00FC046C /* RegistRedBagView.m in Sources */,
 				C9F7E9661BE0A917006FB60F /* DataUsedEngine.m in Sources */,
 				C9DB28F51C4DE3D700602F09 /* HolidayCacheModel.m in Sources */,

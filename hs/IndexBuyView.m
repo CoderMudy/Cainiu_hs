@@ -1696,7 +1696,7 @@
 
 -(void)loadBottomView{
     //下个交易时间高度+持仓直播高度+买多买空高度
-    float adapterHeight =self.frame.size.height - (30.0/667*ScreenHeigth + 36.0/568*ScreenHeigth + 36.0/568.0*ScreenHeigth + 5);
+    float adapterHeight =self.frame.size.height - (30.0/667*ScreenHeigth + 36.0/568*ScreenHeigth+5);
     
     //看多
     bullishBtn           = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1982,64 +1982,6 @@
     if (self.productModel.isXH != 1) {
         [self getAfternoonIsClear];
     }
-    
-    /**
-     *  加载底部Bar  我的队伍、持仓直播、我的私聊
-     */
-    [self loadTabBar];
-}
-
--(void)loadTabBar{
-    
-    self.bottomBgView = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height - 36.0/568*ScreenHeigth, ScreenWidth, 36.0/568*ScreenHeigth)];
-    self.bottomBgView.backgroundColor = Color_grayDeep;
-    [self addSubview:self.bottomBgView];
-    
-    UIView  *hlineView = [[UIView alloc]init];
-    hlineView.frame = CGRectMake(0, 0, ScreenWidth, 1.5);
-    hlineView.backgroundColor = Color_line;
-    [self.bottomBgView addSubview:hlineView];
-    
-    NSArray *tabBarTitle = @[@" 金十财经",@"持仓直播"];
-    NSArray *tabBarImg   = @[@"jinshicaijing_off",@"chicangzhibo_off"];
-    
-    for (int i = 0; i < 2; i++) {
-        if (i == 0) {
-            UIButton    *tabBarBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
-            tabBarBtn.frame = CGRectMake(i * (ScreenWidth/2), hlineView.frame.origin.y+hlineView.frame.size.height, ScreenWidth/2, self.bottomBgView.frame.size.height - hlineView.frame.origin.y);
-            [tabBarBtn setImage:[UIImage imageNamed:tabBarImg[i]] forState:UIControlStateNormal];
-            [tabBarBtn setTitle:tabBarTitle[i] forState:UIControlStateNormal];
-            tabBarBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
-            [tabBarBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-            [tabBarBtn addTarget:self action:@selector(goldenFinancialClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.bottomBgView addSubview:tabBarBtn];
-//            tabBarBtn.enabled = NO;
-            
-            /**
-             *  竖线
-             */
-            UIView  *vlineView = [[UIView alloc]initWithFrame:CGRectMake(tabBarBtn.frame.origin.x + tabBarBtn.frame.size.width - 0.5,hlineView.frame.origin.y + 5, 1, tabBarBtn.frame.size.height - 10)];
-            vlineView.backgroundColor = Color_line;
-            [self.bottomBgView addSubview:vlineView];
-        }
-        
-        /**
-         *  持仓直播         *
-         */
-        
-        if (i == 1) {
-            _indexBuyTacticsButton          = [[IndexBuyTacticsButton alloc]initWithFrame:CGRectMake(i * (ScreenWidth/2), hlineView.frame.origin.y+hlineView.frame.size.height, ScreenWidth/2, self.bottomBgView.frame.size.height - hlineView.frame.origin.y)
-                                                                             ProductModel:self.productModel
-                                                                             CurrentPrice:_indexBuyModel.currentPrice];
-            [self.bottomBgView addSubview:_indexBuyTacticsButton];
-        }
-    }
-}
-
-#pragma mark 金十财经
--(void)goldenFinancialClick{
-    [[UIEngine sharedInstance] showAlertWithTitle:@"敬请期待" ButtonNumber:1 FirstButtonTitle:@"确定" SecondButtonTitle:nil];
-    [UIEngine sharedInstance].alertClick = ^(int aIndex){};
 }
 
 #pragma mark backgroundChange
