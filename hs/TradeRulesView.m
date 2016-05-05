@@ -32,18 +32,18 @@
 }
 
 -(void)loadUI{
-    CGSize labelSize = [DataUsedEngine getStringRectWithString:@"交易规则" Font:12 Width:MAXFLOAT Height:20/667.0*ScreenHeigth];
+    CGSize labelSize = [DataUsedEngine getStringRectWithString:@"玩法说明" Font:9 Width:MAXFLOAT Height:20/667.0*ScreenHeigth];
     float labelWidth = labelSize.width;
     UILabel *tradeRuleLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width/2 - labelWidth/2, timeLabelHeight, labelWidth, self.frame.size.height - timeLabelHeight)];
-    tradeRuleLabel.text = @"交易规则";
+    tradeRuleLabel.text = @"玩法说明";
     tradeRuleLabel.textColor = Color_Gold;
-    tradeRuleLabel.font = [UIFont systemFontOfSize:12];
-    tradeRuleLabel.center = CGPointMake(tradeRuleLabel.center.x-10, tradeRuleLabel.center.y);
+    tradeRuleLabel.font = [UIFont systemFontOfSize:9];
+    tradeRuleLabel.center = CGPointMake(tradeRuleLabel.center.x-5, tradeRuleLabel.center.y);
     [self addSubview:tradeRuleLabel];
     
-    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(tradeRuleLabel.frame.origin.x + tradeRuleLabel.frame.size.width+5, 0, 12, 12)];
+    _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(tradeRuleLabel.frame.origin.x + tradeRuleLabel.frame.size.width+2, 0, 10, 10)];
     _imageView.center = CGPointMake(_imageView.center.x, tradeRuleLabel.center.y);
-    _imageView.layer.cornerRadius = 12/2.0;
+    _imageView.layer.cornerRadius = 10/2.0;
     _imageView.clipsToBounds = YES;
     _imageView.image = [UIImage imageNamed:@"trade_rules_off.jpg"];
     _imageView.animationImages = @[[UIImage imageNamed:@"trade_rules_off.jpg"],

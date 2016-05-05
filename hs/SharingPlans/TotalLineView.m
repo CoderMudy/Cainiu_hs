@@ -41,7 +41,10 @@
         self.backgroundColor = [UIColor clearColor];
         
         _imageView = [[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 3, 3)];
-        _imageView.image = [UIImage imageNamed:@"dian_table"];
+        _imageView.backgroundColor = [UIColor blackColor];
+        _imageView.clipsToBounds = YES;
+        _imageView.layer.cornerRadius = 1.5;
+        _imageView.hidden = YES;
         [self addSubview:_imageView];
         
         //点数
@@ -53,7 +56,7 @@
         else{
             self.pointArray = [NSMutableArray arrayWithArray:aLineArray];
         }
-        _lineColor = [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1];
+        _lineColor = Color_Gold;
         
         self.contentSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
         self.userInteractionEnabled = YES;
@@ -71,21 +74,21 @@
 
 //小红点动画
 -(void)animationStart{
-    [UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        _imageView.bounds = CGRectMake(0, 0, 6, 6);
-    } completion:^(BOOL finished) {
-        [self animationEnd];
-    }];
+//    [UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//        _imageView.bounds = CGRectMake(0, 0, 6, 6);
+//    } completion:^(BOOL finished) {
+//        [self animationEnd];
+//    }];
 }
 
 -(void)animationEnd{
-    [UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        _imageView.bounds = CGRectMake(0, 0, 5, 5);
-    } completion:^(BOOL finished) {
-        if (animationEnd == NO) {
-            [self animationStart];
-        }
-    }];
+//    [UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        _imageView.bounds = CGRectMake(0, 0, 5, 5);
+//    } completion:^(BOOL finished) {
+//        if (animationEnd == NO) {
+//            [self animationStart];
+//        }
+//    }];
 }
 
 -(void)setUpperAndLowerLimitsWithUpper:(float)aUpper Middle:(float)aMiddle Lower:(float)aLower{

@@ -24,13 +24,13 @@
 }
 
 -(void)loadNav{
-    self.view.backgroundColor = Color_black;
+    self.view.backgroundColor = [UIColor blackColor];
     
     UILabel *titleLabel         = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
     titleLabel.font             = [UIFont systemFontOfSize:15];
     titleLabel.text             = [NSString stringWithFormat:@"%@交易规则",self.name];
     titleLabel.center           = CGPointMake(self.view.center.x, 20+22);
-    titleLabel.textColor        = Color_Gold;
+    titleLabel.textColor        = Color_black;
     titleLabel.textAlignment    = NSTextAlignmentCenter;
     titleLabel.userInteractionEnabled = YES;
     [self.view addSubview:titleLabel];

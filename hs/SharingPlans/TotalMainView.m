@@ -530,7 +530,7 @@
     
     for (int i = 0; i<_timeArray.count; i++) {
         UILabel *newLabelOne = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 30, 15)];
-        newLabelOne.textColor = Color_Gold;
+        newLabelOne.textColor = [UIColor blackColor];
         newLabelOne.textAlignment = NSTextAlignmentCenter;
         newLabelOne.font = [UIFont systemFontOfSize:9];
         newLabelOne.tag = label_tag + i;
@@ -546,7 +546,7 @@
     [pointArray addObject:NSStringFromCGPoint(CGPointMake(_lineV.frame.size.width-8-10, self.frame.size.height+5))];
     
     UILabel *newLabelOne = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 45, 15)];
-    newLabelOne.textColor = Color_Gold;
+    newLabelOne.textColor = [UIColor blackColor];
     newLabelOne.textAlignment = NSTextAlignmentCenter;
     newLabelOne.font = [UIFont systemFontOfSize:9];
     newLabelOne.tag = label_tag + 1;

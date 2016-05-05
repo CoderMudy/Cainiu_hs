@@ -42,15 +42,15 @@
         self.backgroundColor = [UIColor clearColor];
         
         _imageUpperView = [[UIImageView alloc]initWithFrame:CGRectMake(-10, 0, 5, 5)];
-        _imageUpperView.layer.cornerRadius = 5/2;
+        _imageUpperView.layer.cornerRadius = 5/2.0;
         _imageUpperView.clipsToBounds = YES;
-        _imageUpperView.backgroundColor = Color_Gold;
+        _imageUpperView.backgroundColor = [UIColor blackColor];
         [self addSubview:_imageUpperView];
         
         _imageLowerView = [[UIImageView alloc]initWithFrame:CGRectMake(-10, 0, 5, 5)];
-        _imageLowerView.layer.cornerRadius = 5/2;
+        _imageLowerView.layer.cornerRadius = 5/2.0;
         _imageLowerView.clipsToBounds = YES;
-        _imageLowerView.backgroundColor = Color_Gold;
+        _imageLowerView.backgroundColor = [UIColor blackColor];
         [self addSubview:_imageLowerView];
         
         if(aUpperArray == nil){

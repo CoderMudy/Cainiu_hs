@@ -16,10 +16,10 @@
 #define Color_Gold K_COLOR_CUSTEM(8, 129, 198, 1)
 
 //黑色
-#define Color_black [UIColor colorWithRed:22/255.0 green:22/255.0 blue:24/255.0 alpha:1]
+#define Color_black [UIColor whiteColor]
 
 //深空灰
-#define Color_grayDeep [UIColor colorWithRed:38/255.0 green:37/255.0 blue:42/255.0 alpha:1]
+#define Color_grayDeep [UIColor whiteColor]
 
 //绿色
 #define Color_green [UIColor colorWithRed:0/255.0 green:166/255.0 blue:120/255.0 alpha:1]

@@ -246,6 +246,10 @@
 #pragma mark Nav
 
 -(void)loadNav{
+    UIView  *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+    navView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:navView];
+    
     UIImage *leftButtonImage = [UIImage imageNamed:@"return_1.png"];
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
     [leftButton addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
@@ -258,12 +262,12 @@
     imageView.image = [UIImage imageNamed:@"return_1"];
     imageView.center = leftButton.center;
     imageView.userInteractionEnabled = YES;
-    [self.view addSubview:imageView];
+    [navView addSubview:imageView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(backClick)];
     [imageView addGestureRecognizer:tap];
     
-    [self.view addSubview:leftButton];
+    [navView addSubview:leftButton];
     
     
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
@@ -274,7 +278,7 @@
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.attributedText = [Helper multiplicityText:self.titleLabel.text from:0 to:(int)[_indexBuyModel.name length] font:15];
-    [self.view addSubview:self.titleLabel];
+    [navView addSubview:self.titleLabel];
 }
 //返回
 -(void)backClick{

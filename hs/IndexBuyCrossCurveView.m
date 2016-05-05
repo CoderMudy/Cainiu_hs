@@ -93,23 +93,23 @@
     }
     
     _horizontalLineView = [[UIView alloc]initWithFrame:CGRectMake(0, currentPoint.y, self.frame.size.width, 0.5)];
-    _horizontalLineView.backgroundColor = [UIColor whiteColor];
+    _horizontalLineView.backgroundColor = [UIColor blackColor];
     
     _verticalLineView = [[UIView alloc]initWithFrame:CGRectMake(currentPoint.x, 10, 0.5, self.frame.size.height-20)];
-    _verticalLineView.backgroundColor = [UIColor whiteColor];
+    _verticalLineView.backgroundColor = [UIColor blackColor];
     
     _horizontalLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 33, 10)];
     _horizontalLabel.text = _currentPrice;
     _horizontalLabel.backgroundColor = Color_Gold;
     _horizontalLabel.textAlignment = NSTextAlignmentCenter;
-    _horizontalLabel.textColor = [UIColor blackColor];
+    _horizontalLabel.textColor = [UIColor whiteColor];
     _horizontalLabel.font = [UIFont systemFontOfSize:7];
     
     _verticalLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 28, 10)];
     _verticalLabel.text = _currentTime;
     _verticalLabel.backgroundColor = Color_Gold;
     _verticalLabel.textAlignment = NSTextAlignmentCenter;
-    _verticalLabel.textColor = [UIColor blackColor];
+    _verticalLabel.textColor = [UIColor whiteColor];
     _verticalLabel.font = [UIFont systemFontOfSize:8];
     
     [self addSubview:_horizontalLineView];

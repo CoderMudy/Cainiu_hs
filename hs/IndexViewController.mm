@@ -33,10 +33,6 @@
 
 @interface IndexViewController ()
 {
-    /**
-     *  Title
-     */
-    UILabel             *_titleLab;
     
     UIScrollView        *_indexScrollView;
     AsyncSocket         *_socket;
@@ -475,12 +471,12 @@
     
     self.view.backgroundColor = Color_black;
     
-    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, 44)];
-    
+    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 00, ScreenWidth, 64)];
+    navView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:navView];
     //Left Button
     UIImage *leftButtonImage = [UIImage imageNamed:@"return_1.png"];
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 59, 44)];
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 59, 44)];
     [leftButton addTarget:self action:@selector(leftButtonClick) forControlEvents:UIControlEventTouchDown];
     [leftButton.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
     leftButton.titleLabel.shadowColor = RGBACOLOR(117,38,0,1.0f);
@@ -500,21 +496,47 @@
     //Right Button
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(ScreenWidth-60, 0, 60, 44);
+    rightButton.frame = CGRectMake(ScreenWidth-60, 20, 60, 44);
     [rightButton setTitle:@"订单" forState:UIControlStateNormal];
     rightButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightNavClick) forControlEvents:UIControlEventTouchUpInside];
     [navView addSubview:rightButton];
     
-    UIImageView *rightImgView = [[UIImageView alloc]initWithFrame:CGRectMake(rightButton.frame.origin.x + 5 , 17, 10, 10)];
+    UIImageView *rightImgView = [[UIImageView alloc]initWithFrame:CGRectMake(rightButton.frame.origin.x + 5 , 17+20, 10, 10)];
     rightImgView.image = [UIImage imageNamed:@"orderlogo_index"];
     rightImgView.userInteractionEnabled = YES;
     [navView addSubview:rightImgView];
     
+    
+    UIView  *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth/5*3, 44)];
+    titleView.center = CGPointMake(ScreenWidth/2, titleView.center.y);
+    [navView addSubview:titleView];
+    
     NSString    *str = [NSString stringWithFormat:@"%@  %@",self.name,self.code];
-    Self_AddNavTitle(str);
-    _titleLab = titleLab;
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, titleView.frame.size.width, 30)];
+    titleLab.textColor = [UIColor whiteColor];
+    titleLab.font = [UIFont systemFontOfSize:15];
+    titleLab.textAlignment = NSTextAlignmentCenter;
+    titleLab.text = str;
+    [titleView addSubview:titleLab];
+    
+    _tradeRulesView = [[TradeRulesView alloc]initWithFrame:CGRectMake(0, 30, titleView.frame.size.width, 12) TimeLabelHeight:0];
+    if (![self.productModel.instrumentCode isEqualToString:@"IF"]) {
+        [titleView addSubview:_tradeRulesView];
+        UITapGestureRecognizer *tradeRulesGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tradeRulesTap)];
+        [titleView addGestureRecognizer:tradeRulesGes];
+    }
+}
+
+#pragma mark 交易规则Tap
+/**
+ *  交易规则Tap
+ */
+-(void)tradeRulesTap{
+    [_tradeRulesView stopAnimation];
+    [CacheEngine tradeRulsShow];
+    [self playDescription];
 }
 
 -(void)leftButtonClick{
@@ -1148,9 +1170,7 @@
     
     [self loadDefaultData];//支持账户
     
-    [self loadIncomeData];//持仓收益数据
-    
-    [self loadTradeRules];//交易规则
+    [self loadIncomeData];//持仓收益数据    
 }
 
 -(void)loadIncomeData{
@@ -1273,39 +1293,13 @@
             }
         }
     }
-    NSLog(@"%d,%d,%d",self.cainiuStatus,self.scoreStatus,self.nanjsStatus);
-}
-
-#pragma mark 交易规则
-/**
- *  交易规则
- */
--(void)loadTradeRules{
-    _tradeRulesView = [[TradeRulesView alloc]initWithFrame:CGRectMake(0, 55, 80, 20.0/667.0*ScreenHeigth) TimeLabelHeight:0];
-    _tradeRulesView.center = CGPointMake(ScreenWidth/2, _tradeRulesView.center.y);
-    if (![self.productModel.instrumentCode isEqualToString:@"IF"]) {
-        [self.view addSubview:_tradeRulesView];
-        UITapGestureRecognizer *tradeRulesGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tradeRulesTap)];
-        [_tradeRulesView addGestureRecognizer:tradeRulesGes];
-    }
-}
-
-#pragma mark 交易规则Tap
-/**
- *  交易规则Tap
- */
--(void)tradeRulesTap{
-    [_tradeRulesView stopAnimation];
-    [CacheEngine tradeRulsShow];
-    [self playDescription];
 }
 
 -(void)loadSubUI{
     
-    NSLog(@"123-------");
     
     if (_topSubView == nil) {
-        _topSubView = [[UIView   alloc]initWithFrame:CGRectMake(0, _tradeRulesView.frame.origin.y + _tradeRulesView.frame.size.height+5, ScreenWidth, _indexScrollView.frame.origin.y - (_tradeRulesView.frame.origin.y + _tradeRulesView.frame.size.height+5))];
+        _topSubView = [[UIView   alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, _indexScrollView.frame.origin.y - (64+5))];
         [self.view addSubview:_topSubView];
         
         _topSubLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
@@ -1446,7 +1440,7 @@
  *  加载登录UI
  */
 -(void)loadSub_Login{
-    _tradeRulesView.hidden = NO;//显示交易规则
+//    _tradeRulesView.hidden = NO;//显示交易规则
     
     UIButton    *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     loginButton.frame = CGRectMake(ScreenWidth/2 - 5 - ScreenWidth/3.5, _topSubView.frame.size.height - 28.0/667*ScreenHeigth - 10, ScreenWidth/3.5 , 28.0/667*ScreenHeigth);
@@ -1487,7 +1481,7 @@
  */
 -(void)loadSub_Activate{
     
-    _tradeRulesView.hidden = NO;//显示交易规则
+//    _tradeRulesView.hidden = NO;//显示交易规则
     IndexViewController *selfView = self;
     _optionButton = [[IndexOptionButton alloc]initWithFrame:CGRectMake(ScreenWidth/4*0.5, _topSubView.frame.size.height - 28.0/667*ScreenHeigth - 10, ScreenWidth/4*3 , 28.0/667*ScreenHeigth)];
     _optionButton.optionBlock = ^(NSMutableArray *titleArray,NSMutableArray *imgArray,NSMutableArray *statusArray){
@@ -1506,10 +1500,10 @@
  *  加载资金UI
  */
 -(void)loadSub_Capital{
-    _tradeRulesView.hidden = NO;//显示交易规则
+//    _tradeRulesView.hidden = NO;//显示交易规则
     
     IndexViewController *selfView = self;
-    _switchView = [[IndexSwitchView alloc]initWithFrame:CGRectMake(ScreenWidth/4*0.5, 0, ScreenWidth/4*3 , _topSubView.frame.size.height - 10)];
+    _switchView = [[IndexSwitchView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth , _topSubView.frame.size.height - 10)];
     _switchView.switchRightBlock = ^(void){//点击充值模块
         [selfView recharge];
     };
@@ -1526,7 +1520,7 @@
             [_switchView setCenterPro:[NSString stringWithFormat:@"南方稀贵金属交易所可用资金（元）"]];
         }
         else{
-            [_switchView setCenterPro:[NSString stringWithFormat:@"%@账户可用资金（元）",App_appShortName]];
+            [_switchView setCenterPro:[NSString stringWithFormat:@"可用资金（元）"]];
         }
         
     }
@@ -1625,19 +1619,19 @@
 -(void)loadSub_Income{
     if (self.isSecondJump == NO && _incomeView == nil) {
         
-        _tradeRulesView.hidden = YES;//隐藏交易规则
+//        _tradeRulesView.hidden = YES;//隐藏交易规则
         
-        _incomeView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/3*0.5, -10/667.0*ScreenHeigth, ScreenWidth/3*2 , _topSubView.frame.size.height)];
+        _incomeView = [[UIView alloc]initWithFrame:CGRectMake(ScreenWidth/3*0.5, 0, ScreenWidth/3*2 , _topSubView.frame.size.height-10)];
         _incomeView.backgroundColor = [UIColor clearColor];
         [_topSubView addSubview:_incomeView];
         
-        UILabel *proLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, _incomeView.frame.size.width, 10)];
+        UILabel *proLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, _incomeView.frame.size.width, 10)];
         proLabel.text = [NSString stringWithFormat:@"持仓总收益（%@）",self.productModel.currencyUnit];
         if ([self.productModel.loddyType isEqualToString:@"2"]||[self.productModel.loddyType isEqualToString:@"3"]) {
             proLabel.text = [NSString stringWithFormat:@"持仓总收益（积分）"];
         }
         
-        proLabel.textColor = Color_white;
+        proLabel.textColor = [UIColor blackColor];
         proLabel.textAlignment = NSTextAlignmentCenter;
         [_incomeView addSubview:proLabel];
         
@@ -1649,7 +1643,7 @@
         
         UILabel *lookDetailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _incomeMoneyLabel.frame.origin.y + _incomeMoneyLabel.frame.size.height, _incomeMoneyLabel.frame.size.width, 10)];
         lookDetailLabel.text = @"点击查看详情";
-        lookDetailLabel.textColor = [UIColor whiteColor];
+        lookDetailLabel.textColor = [UIColor blackColor];
         lookDetailLabel.textAlignment = NSTextAlignmentCenter;
         [_incomeView addSubview:lookDetailLabel];
         
@@ -1658,7 +1652,7 @@
          */
         _saleButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _saleButton.frame = CGRectMake(ScreenWidth - 20 - _topSubView.frame.size.height/3*2, 0, _topSubView.frame.size.height/3*2, _topSubView.frame.size.height/3*2);
-        _saleButton.center = CGPointMake(_saleButton.center.x, _topSubView.center.y - 10);
+        _saleButton.center = CGPointMake(_saleButton.center.x, _topSubView.center.y );
         [_saleButton setImage:[UIImage imageNamed:@"CashPosition_8"] forState:UIControlStateNormal];
         [_saleButton addTarget:self action:@selector(salePosition) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_saleButton];

@@ -172,7 +172,8 @@
     UIColor *maskColor;
     switch (self.maskType) {
         case DXPopoverMaskTypeBlack:
-            maskColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+//            maskColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+            maskColor = [UIColor clearColor];
             break;
         case DXPopoverMaskTypeNone: {
             maskColor = [UIColor clearColor];

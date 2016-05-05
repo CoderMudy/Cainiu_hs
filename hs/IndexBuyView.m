@@ -167,7 +167,7 @@
     
     //切换到k线图
     UITableView *blueView       = [[UITableView alloc] init];
-    blueView.frame              = CGRectMake(0, 0, _popoverWidth, 220);
+    blueView.frame              = CGRectMake(0, 0, _popoverWidth, 150);
     blueView.dataSource         = self;
     blueView.delegate           = self;
     blueView.backgroundColor    = Color_Gold;
@@ -346,14 +346,6 @@
 #pragma mark UI
 
 -(void)loadUI{
-    
-    /**
-     *  Top Line View
-     */
-    UIView  *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
-    lineView.backgroundColor = Color_line;
-    [self addSubview:lineView];
-    
     /**
      *  闪电图、分时图、K线图
      */
@@ -445,7 +437,7 @@
         isChooseMinute = NO;
         for (int i = 666; i<670; i++) {
             UIButton    *btnChange = (UIButton *)[self viewWithTag:i];
-            [btnChange setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btnChange setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
             /**
              *  按钮背景方框
@@ -471,7 +463,7 @@
         }
         
         //所选bug处理
-        [btn setTitleColor:Color_Gold forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         /**
          *  按钮背景方框
@@ -524,82 +516,7 @@
 
 -(void)loadSharingView:(float)aPointY{
     
-    NSArray *titleArray = @[@"闪电图",@"分时图",@"K线图",@"盘口"];
-    
-    UIButton    *defaultButton = nil;
-    
-    for (int i = 0 ; i < 4; i++) {
-        UIButton    *changeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        changeBtn.frame = CGRectMake(20+i*(ScreenWidth-40)/4, aPointY, (ScreenWidth-40)/4, 30);
-        changeBtn.tag = 666+i;
-        [changeBtn setTitle:titleArray[i] forState:UIControlStateNormal];
-        if (i== 0) {
-            [changeBtn setTitleColor:Color_Gold forState:UIControlStateNormal];
-        }
-        else{
-            [changeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        }
-        if(i == 2){
-            [changeBtn setTitle:_kLineTitle forState:UIControlStateSelected];
-        }
-        changeBtn.titleLabel.font = [UIFont boldSystemFontOfSize:10];
-        [changeBtn addTarget:self action:@selector(changeClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        /**
-         *  背景方块
-         */
-        UIButton    *bgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        bgBtn.bounds = CGRectMake(0, 0, changeBtn.frame.size.width/5*4, changeBtn.frame.size.height/3*2);
-        bgBtn.center = changeBtn.center;
-        bgBtn.clipsToBounds = YES;
-        bgBtn.tag = 666+i+10;
-        bgBtn.layer.cornerRadius = 2;
-        bgBtn.layer.borderWidth = 1;
-        bgBtn.layer.borderColor = Color_Gold.CGColor;
-        [self addSubview:bgBtn];
-        
-        [self addSubview:changeBtn];
-        if (i == 0) {
-            _recordButton = changeBtn;
-        }
-        //现货K线不可点
-        if (i == 2) {
-            if(!isXH){
-                UIImage *image = [UIImage imageNamed:@"klineboult_white"];
-                [changeBtn setImage:image forState:UIControlStateNormal];
-                [changeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width, 0, image.size.width)];
-                [changeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 35, 0, -35)];
-            }
-            else{
-                changeBtn.enabled = NO;
-                [changeBtn setTitleColor:Color_gray forState:UIControlStateNormal];
-            }
-        }
-        
-        //现货去除盘口
-        if (i == 3) {
-            if (isXH) {
-                changeBtn.enabled = NO;
-                [changeBtn setTitleColor:Color_gray forState:UIControlStateNormal];
-            }
-        }
-        
-        //假日盘K线盘口不可点
-        if (i == 2 || i == 3) {
-            if ([self.productModel.loddyType isEqualToString:@"3"]) {
-                changeBtn.enabled = NO;
-                [changeBtn setTitleColor:Color_gray forState:UIControlStateNormal];
-            }
-        }
-        
-        //默认选中分时图
-        if (i == 1) {
-            defaultButton = changeBtn;
-        }
-        
-    }
-    
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, aPointY+30.0/568*ScreenHeigth, ScreenWidth, 268.0/568*ScreenHeigth)];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 268.0/568*ScreenHeigth)];
     if (ScreenHeigth == 480) {
         _scrollView.frame = CGRectMake(0, aPointY+30.0/568*ScreenHeigth, ScreenWidth, 268.0/568*ScreenHeigth);
     }
@@ -663,6 +580,8 @@
                                              Middle:lowerPrice + (upperPrice-lowerPrice)/2
                                               Lower:lowerPrice];
     
+    UIButton    *defaultButton = [self loadSharingView];
+    
     [self loadLongGesture];
     
     [self loadKLineView];
@@ -680,6 +599,84 @@
     //默认显示分时图
     [self changeClick:defaultButton];
     
+}
+
+-(UIButton *)loadSharingView{
+    NSArray *titleArray = @[@"闪电图",@"分时图",@"K线图",@"盘口"];
+    UIButton    *defaultButton = nil;
+    for (int i = 0 ; i < 4; i++) {
+        UIButton    *changeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        changeBtn.frame = CGRectMake(20+i*(ScreenWidth-40)/4, CGRectGetMaxY(_scrollView.frame), (ScreenWidth-40)/4, 30);
+        changeBtn.tag = 666+i;
+        [changeBtn setTitle:titleArray[i] forState:UIControlStateNormal];
+        if (i== 0) {
+            [changeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+        else{
+            [changeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }
+        if(i == 2){
+            [changeBtn setTitle:_kLineTitle forState:UIControlStateSelected];
+        }
+        changeBtn.titleLabel.font = [UIFont boldSystemFontOfSize:10];
+        [changeBtn addTarget:self action:@selector(changeClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        /**
+         *  背景方块
+         */
+        UIButton    *bgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        bgBtn.bounds = CGRectMake(0, 0, changeBtn.frame.size.width/5*4, changeBtn.frame.size.height/3*2);
+        bgBtn.center = changeBtn.center;
+        bgBtn.clipsToBounds = YES;
+        bgBtn.tag = 666+i+10;
+        bgBtn.layer.cornerRadius = 2;
+        //        bgBtn.layer.borderWidth = 1;
+        //        bgBtn.layer.borderColor = Color_Gold.CGColor;
+        bgBtn.backgroundColor = [UIColor colorWithRed:60/255.0 green:59/255.0 blue:60/255.0 alpha:1];
+        [self addSubview:bgBtn];
+        
+        [self addSubview:changeBtn];
+        if (i == 0) {
+            _recordButton = changeBtn;
+        }
+        //现货K线不可点
+        if (i == 2) {
+            if(!isXH){
+                UIImage *image = [UIImage imageNamed:@"klineboult_white"];
+                [changeBtn setImage:image forState:UIControlStateNormal];
+                [changeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width, 0, image.size.width)];
+                [changeBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 35, 0, -35)];
+            }
+            else{
+                changeBtn.enabled = NO;
+                [changeBtn setTitleColor:Color_gray forState:UIControlStateNormal];
+            }
+        }
+        
+        //现货去除盘口
+        if (i == 3) {
+            if (isXH) {
+                changeBtn.enabled = NO;
+                [changeBtn setTitleColor:Color_gray forState:UIControlStateNormal];
+            }
+        }
+        
+        //假日盘K线盘口不可点
+        if (i == 2 || i == 3) {
+            if ([self.productModel.loddyType isEqualToString:@"3"]) {
+                changeBtn.enabled = NO;
+                [changeBtn setTitleColor:Color_gray forState:UIControlStateNormal];
+            }
+        }
+        
+        //默认选中分时图
+        if (i == 1) {
+            defaultButton = changeBtn;
+        }
+        
+    }
+    
+    return defaultButton;
 }
 
 #pragma mark -
@@ -1301,8 +1298,8 @@
 -(void)beginChangeTitle:(KLineDataModel *)klineModel{
     if (_kLineTitleView == nil) {
         
-        _kLineTitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 55, ScreenWidth, self.superScrollView.frame.origin.y-55)];
-        _kLineTitleView.backgroundColor = Color_black;
+        _kLineTitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, ScreenWidth, self.superScrollView.frame.origin.y-64)];
+        _kLineTitleView.backgroundColor = [UIColor blackColor];
         [self.superview.superview addSubview:_kLineTitleView];
         
         _kLineTitleTimeLabel                 = [[UILabel alloc]initWithFrame:CGRectMake(0, _kLineTitleView.frame.size.height/2 - 20/667.0*ScreenHeigth, ScreenWidth, 20/667.0*ScreenHeigth)];
@@ -1310,7 +1307,7 @@
         _kLineTitleTimeLabel.font            = [UIFont systemFontOfSize:11];
         _kLineTitleTimeLabel.textColor       = [UIColor whiteColor];
         _kLineTitleTimeLabel.numberOfLines   = 0;
-        _kLineTitleTimeLabel.backgroundColor = Color_black;
+//        _kLineTitleTimeLabel.backgroundColor = Color_black;
         [_kLineTitleView addSubview:_kLineTitleTimeLabel];
         
         _kLineTitlePriceLabel                   = [[UILabel alloc]initWithFrame:CGRectMake(0,
@@ -1321,7 +1318,7 @@
         _kLineTitlePriceLabel.font              = [UIFont systemFontOfSize:11];
         _kLineTitlePriceLabel.textColor         = [UIColor whiteColor];
         _kLineTitlePriceLabel.numberOfLines     = 0;
-        _kLineTitlePriceLabel.backgroundColor   = Color_black;
+//        _kLineTitlePriceLabel.backgroundColor   = Color_black;
         [_kLineTitleView addSubview:_kLineTitlePriceLabel];
     }
     
@@ -1432,6 +1429,10 @@
     return self.configs.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 30;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cellIdentifier";
@@ -1449,6 +1450,8 @@
     }
     cell.textLabel.text = self.configs[indexPath.row];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
     cell.backgroundColor = Color_Gold;
     
     return cell;
@@ -1875,7 +1878,7 @@
     buyAndSaleLabel.text            = [NSString stringWithFormat:@"买卖量"];
     buyAndSaleLabel.font            = [UIFont boldSystemFontOfSize:10];
     buyAndSaleLabel.textAlignment   = NSTextAlignmentCenter;
-    buyAndSaleLabel.textColor       = Color_Gold;
+    buyAndSaleLabel.textColor       = [UIColor blackColor];
     buyAndSaleLabel.center          = CGPointMake(ScreenWidth/2, bullishBtn.frame.origin.y-30.0/568.0*ScreenHeigth + (30.0/568.0*ScreenHeigth)/2);
     [self addSubview:buyAndSaleLabel];
     
@@ -1954,7 +1957,7 @@
                                                                            ScreenWidth,
                                                                            30)];
     _changeLabel.textAlignment  = NSTextAlignmentCenter;
-    _changeLabel.textColor      = Color_Gold;
+    _changeLabel.textColor      = [UIColor blackColor];
     _changeLabel.font           = [UIFont systemFontOfSize:15];
     //判断是涨还是跌
     

@@ -102,7 +102,7 @@
     titleLabel.text = aTitle;
     titleLabel.font = [UIFont systemFontOfSize:font];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = Color_white;
+    titleLabel.textColor = [UIColor blackColor];
     [view addSubview:titleLabel];
     
     UILabel *detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width, 0, view.frame.size.width/3*2-5, view.frame.size.height - 1 )];
@@ -111,7 +111,7 @@
     detailLabel.numberOfLines = 0;
     detailLabel.font = [UIFont systemFontOfSize:font];
     detailLabel.textAlignment = NSTextAlignmentRight;
-    detailLabel.textColor = Color_white;
+    detailLabel.textColor = [UIColor blackColor];
     [view addSubview:detailLabel];
     
     UIView  *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, view.frame.size.height-1, view.frame.size.width, 1)];

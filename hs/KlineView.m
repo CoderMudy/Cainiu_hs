@@ -452,11 +452,11 @@
     [self removeCrossView];
     
     _topHorLineView = [[UIView alloc]initWithFrame:CGRectMake(self.contentOffset.x, top_top_Y, self.frame.size.width-CrossCurveLabelWidth, 0.5)];
-    _topHorLineView.backgroundColor = [UIColor whiteColor];
+    _topHorLineView.backgroundColor = Color_Gold;
     [self addSubview:_topHorLineView];
     
     _topVerLineView = [[UIView alloc]initWithFrame:CGRectMake(self.contentOffset.x, top_top_Y, 0.5, top_low_Y - top_top_Y)];
-    _topVerLineView.backgroundColor = [UIColor whiteColor];
+    _topVerLineView.backgroundColor = Color_Gold;
     [self addSubview:_topVerLineView];
     
     _topPriceLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width+self.contentOffset.x - CrossCurveLabelWidth, 0, CrossCurveLabelWidth, 13)];
@@ -470,11 +470,11 @@
     [self addSubview:_topPriceLabel];
     
     _botHorLineView = [[UIView alloc]initWithFrame:CGRectMake(self.contentOffset.x, low_top_Y, self.frame.size.width-CrossCurveLabelWidth, 0.5)];
-    _botHorLineView.backgroundColor = [UIColor whiteColor];
+    _botHorLineView.backgroundColor = Color_Gold;
     [self addSubview:_botHorLineView];
     
     _botVerLineView = [[UIView alloc]initWithFrame:CGRectMake(self.contentOffset.x, low_top_Y, 0.5, low_low_Y - low_top_Y)];
-    _botVerLineView.backgroundColor = [UIColor whiteColor];
+    _botVerLineView.backgroundColor = Color_Gold;
     [self addSubview:_botVerLineView];
     
     _botPriceLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width+self.contentOffset.x - CrossCurveLabelWidth, low_top_Y, CrossCurveLabelWidth, 13)];
