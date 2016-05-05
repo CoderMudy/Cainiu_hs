@@ -606,7 +606,7 @@
     UIButton    *defaultButton = nil;
     for (int i = 0 ; i < 4; i++) {
         UIButton    *changeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        changeBtn.frame = CGRectMake(20+i*(ScreenWidth-40)/4, CGRectGetMaxY(_scrollView.frame), (ScreenWidth-40)/4, 30);
+        changeBtn.frame = CGRectMake(20+i*(ScreenWidth-40)/4, _scrollView.frame.origin.y + CGRectGetMaxY(_totalMainView.frame) + 15/667.0*ScreenHeigth, (ScreenWidth-40)/4, 30);
         changeBtn.tag = 666+i;
         [changeBtn setTitle:titleArray[i] forState:UIControlStateNormal];
         if (i== 0) {

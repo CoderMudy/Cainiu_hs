@@ -708,7 +708,7 @@ DEF_SINGLETON(UIEngine)
         [button setTitleColor:Color_gray forState:UIControlStateNormal];
     }
     
-    btn.backgroundColor = CanSelectButBackColor;
+    btn.backgroundColor = AlertColor;
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     selectMoneyIndex = (int)btn.tag - 10088;
