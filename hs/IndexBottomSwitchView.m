@@ -30,7 +30,7 @@
 
 -(void)loadUI{
     
-    UIView  *bgView = [[UIView alloc]initWithFrame:CGRectMake(20, 0, self.frame.size.width-40, 30)];
+    UIView  *bgView = [[UIView alloc]initWithFrame:CGRectMake(20, 0, self.frame.size.width-40, 30/667.0*ScreenHeigth)];
     bgView.backgroundColor = [UIColor whiteColor];
     bgView.clipsToBounds = YES;
     bgView.layer.cornerRadius = 4;

@@ -91,12 +91,12 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:3/255.0 green:0 blue:20/255.0 alpha:1];
     
-    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, 44)];
-    
+    UIView *navView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+    navView.backgroundColor = K_color_NavColor;
     [self.view addSubview:navView];
     //Left Button
     UIImage *leftButtonImage = [UIImage imageNamed:@"return_1.png"];
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 59, 44)];
+    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 59, 44)];
     [leftButton addTarget:self action:@selector(leftButtonClick) forControlEvents:UIControlEventTouchDown];
     [leftButton.titleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
     leftButton.titleLabel.shadowColor = RGBACOLOR(117,38,0,1.0f);
@@ -113,7 +113,7 @@
     [navView addSubview:leftButton];
     
     
-    UILabel  *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)];
+    UILabel  *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, ScreenWidth, 44)];
     nameLabel.text = [NSString stringWithFormat:@"%@ \n %@",self.name,self.code];
     nameLabel.font = [UIFont systemFontOfSize:10];
     nameLabel.textColor = [UIColor whiteColor];
@@ -292,7 +292,7 @@
     typeLabel.text = [NSString stringWithFormat:@"持仓收益(%@)",typeStr];
     typeLabel.font = [UIFont systemFontOfSize:10];
     typeLabel.textAlignment = NSTextAlignmentCenter;
-    typeLabel.backgroundColor = [UIColor grayColor];
+    typeLabel.backgroundColor = K_color_NavColor;
     typeLabel.center = CGPointMake(_scrollView.center.x, typeLabel.center.y);
     typeLabel.textColor = Color_black;
     typeLabel.clipsToBounds = YES;
@@ -325,7 +325,7 @@
     _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _lucreLabel.frame.size.height+_lucreLabel.frame.origin.y+8, ScreenWidth, 12)];
     _priceLabel.font = [UIFont systemFontOfSize:13];
     _priceLabel.textAlignment = NSTextAlignmentCenter;
-    _priceLabel.textColor = [UIColor grayColor];
+    _priceLabel.textColor = K_color_NavColor;
     [_scrollView addSubview:_priceLabel];
     
     //买入价 --》当前价
@@ -373,8 +373,8 @@
     UIButton    *btnChange2 = (UIButton *)[_scrollView viewWithTag:667];
     UIView      *lineView   = (UIView   *)[_scrollView viewWithTag:668];
     
-    [btnChange1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnChange2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnChange1 setTitleColor:K_color_NavColor forState:UIControlStateNormal];
+    [btnChange2 setTitleColor:K_color_NavColor forState:UIControlStateNormal];
     
     [btn setTitleColor:Color_Gold forState:UIControlStateNormal];
     lineView.center = CGPointMake(btn.center.x, lineView.center.y);
@@ -401,7 +401,7 @@
         }
         else if (i == 1){
             [changeBtn setTitle:@"分时图" forState:UIControlStateNormal];
-            [changeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [changeBtn setTitleColor:K_color_NavColor forState:UIControlStateNormal];
         }
         changeBtn.titleLabel.font = [UIFont boldSystemFontOfSize:10];
         [changeBtn addTarget:self action:@selector(changeClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -1031,13 +1031,13 @@
 -(void)loadBottomView:(float)aPointY{
     UILabel *proLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, aPointY+42.0/568.0*ScreenHeigth, ScreenWidth, 12)];
     proLabel.text = @"订单信息";
-    proLabel.textColor = [UIColor whiteColor];
+    proLabel.textColor = K_color_NavColor;
     proLabel.font = [UIFont systemFontOfSize:10];
     proLabel.textAlignment = NSTextAlignmentCenter;
     [_scrollView addSubview:proLabel];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(20, proLabel.frame.size.height+proLabel.frame.origin.y+4, ScreenWidth-40, 1)];
-    lineView.backgroundColor = [UIColor grayColor];
+    lineView.backgroundColor = K_color_NavColor;
     [_scrollView addSubview:lineView];
     
     NSArray *titleArray = @[@"交易方向",@"交易数量",@"买入价",@"成交时间",@"触发止损",@"触发止盈"];
@@ -1047,7 +1047,7 @@
             UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20+(ScreenWidth-40)/2*j, 1.0/568.0*ScreenHeigth+lineView.frame.size.height+lineView.frame.origin.y+28*i, (ScreenWidth-40)/2/3, 28)];
             label.text = titleArray[i*2+j];
             label.font = [UIFont boldSystemFontOfSize:10];
-            label.textColor = K_color_gray;
+            label.textColor = K_color_NavColor;
             [_scrollView addSubview:label];
             
             UILabel *labelDetail = [[UILabel alloc]initWithFrame:CGRectMake(20+(ScreenWidth-40)/2*j, 1.0/568.0*ScreenHeigth+lineView.frame.size.height+lineView.frame.origin.y+28*i, (ScreenWidth-40)/2-18, 28)];
@@ -1055,7 +1055,7 @@
             labelDetail.backgroundColor = [UIColor clearColor];
             labelDetail.font = [UIFont systemFontOfSize:15];
             labelDetail.textAlignment = NSTextAlignmentRight;
-            labelDetail.textColor = [UIColor whiteColor];
+            labelDetail.textColor = K_color_NavColor;
             [_scrollView addSubview:labelDetail];
         }
     }

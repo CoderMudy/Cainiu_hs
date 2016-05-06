@@ -518,7 +518,7 @@
     
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 268.0/568*ScreenHeigth)];
     if (ScreenHeigth == 480) {
-        _scrollView.frame = CGRectMake(0, aPointY+30.0/568*ScreenHeigth, ScreenWidth, 268.0/568*ScreenHeigth);
+        _scrollView.frame = CGRectMake(0, 0, ScreenWidth, 268.0/568*ScreenHeigth);
     }
     _scrollView.indicatorStyle  = UIScrollViewIndicatorStyleDefault;
     _scrollView.pagingEnabled   = YES;

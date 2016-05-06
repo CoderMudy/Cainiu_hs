@@ -1377,7 +1377,7 @@
 
 -(void)loadCurrentPriceLabel{
     
-    UILabel *proLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (64+40)/568.0*ScreenHeigth, ScreenWidth, 14)];
+    UILabel *proLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, (64+40+5)/568.0*ScreenHeigth, ScreenWidth, 12)];
     if (self.buyState == 0) {
         proLabel.text  = @"看多价";
     }
@@ -2972,7 +2972,7 @@
 -(void)loadSeg{
     _seg = [[UISegmentedControl alloc]initWithItems:@[@"市价",@"条件单"]];
     if (ScreenHeigth <= 480) {
-        _seg.frame = CGRectMake(ScreenWidth/2-ScreenWidth/5*2/2-10, 60, ScreenWidth/5*2+20, 32.0/667*ScreenHeigth);
+        _seg.frame = CGRectMake(ScreenWidth/2-ScreenWidth/5*2/2-10, 64+5, ScreenWidth/5*2+20, 32.0/667*ScreenHeigth);
     }
     else{
         _seg.frame = CGRectMake(ScreenWidth/2-ScreenWidth/5*2/2-10, 64+5, ScreenWidth/5*2+20, 32.0/667*ScreenHeigth);

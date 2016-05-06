@@ -687,9 +687,9 @@
         spPercent = 4.0;
     }
     
-    _indexScrollView                = [[UIScrollView alloc]initWithFrame:CGRectMake(0, ScreenHeigth/spPercent, ScreenWidth, ScreenHeigth-ScreenHeigth/spPercent - 40)];
+    _indexScrollView                = [[UIScrollView alloc]initWithFrame:CGRectMake(0, ScreenHeigth/spPercent, ScreenWidth, ScreenHeigth-ScreenHeigth/spPercent - 40/667.0*ScreenHeigth)];
     _indexScrollView.pagingEnabled  = YES;
-    _indexScrollView.contentSize    = CGSizeMake(ScreenWidth*2, ScreenHeigth-ScreenHeigth/spPercent - 40);
+    _indexScrollView.contentSize    = CGSizeMake(ScreenWidth*2, ScreenHeigth-ScreenHeigth/spPercent - 40/667.0*ScreenHeigth);
     _indexScrollView.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     _indexScrollView.showsHorizontalScrollIndicator     = NO;
     _indexScrollView.showsVerticalScrollIndicator       = NO;
@@ -786,7 +786,7 @@
         _indexPositionV.superVC = self;
         _indexPositionV.block = ^(){
             [indexVC popPositionView:NO];
-            [_indexBottomSwitchView reSetSelected];
+            [indexVC bottomSwitchViewReSetSelected];
             
         };
         [self.view addSubview:_indexPositionV];
@@ -797,12 +797,13 @@
     
     _indexFinanceNewsV.close= ^(){
         [indexVC popFinanceNewsView:NO];
-        [_indexBottomSwitchView reSetSelected];
-
+        [indexVC bottomSwitchViewReSetSelected];
     };
     [self.view addSubview:_indexFinanceNewsV];
-    
-    
+}
+
+-(void)bottomSwitchViewReSetSelected{
+    [_indexBottomSwitchView reSetSelected];
 }
 
 #pragma mark 玩法
@@ -826,7 +827,7 @@
     
     IndexViewController *indexVC = self;
 
-    _indexBottomSwitchView = [[IndexBottomSwitchView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_indexScrollView.frame), ScreenWidth, 40)];
+    _indexBottomSwitchView = [[IndexBottomSwitchView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_indexScrollView.frame), ScreenWidth, 40/667.0*ScreenHeigth)];
     [self.view addSubview:_indexBottomSwitchView];
     _indexBottomSwitchView.financeNewsBlock = ^(BOOL selected){
         [indexVC popFinanceNewsView:selected];
@@ -842,7 +843,7 @@
         [self closeTactics];
         _indexFinanceNewsV.hidden = NO;
         [_indexFinanceNewsV.webView reload];
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             float  spPercent = 5;
             if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
                 spPercent = 4.5;
@@ -852,12 +853,12 @@
             }
             float startHeight = ScreenHeigth/spPercent ;
             
-            _indexFinanceNewsV.frame = CGRectMake(0, startHeight, _indexFinanceNewsV.frame.size.width, ScreenHeigth-startHeight-40);
+            _indexFinanceNewsV.frame = CGRectMake(0, startHeight, _indexFinanceNewsV.frame.size.width, ScreenHeigth-startHeight-40/667.0*ScreenHeigth);
             [self.view bringSubviewToFront:_indexFinanceNewsV];
 
         }];
     }else{
-        _indexFinanceNewsV.frame = CGRectMake(0, ScreenHeigth-40, ScreenWidth, 0);
+        _indexFinanceNewsV.frame = CGRectMake(0, ScreenHeigth-40/667.0*ScreenHeigth, ScreenWidth, 0);
         _indexFinanceNewsV.hidden = YES;
         
     }
@@ -877,7 +878,7 @@
         [self closeTactics];
         _indexPositionV.hidden = NO;
 
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
 //            [self goPosition];
             float  spPercent = 5;
             if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
@@ -888,14 +889,14 @@
             }
             float startHeight = ScreenHeigth/spPercent ;
             
-            _indexPositionV.frame = CGRectMake(0, startHeight, _indexPositionV.frame.size.width, ScreenHeigth-startHeight-40);
+            _indexPositionV.frame = CGRectMake(0, startHeight, _indexPositionV.frame.size.width, ScreenHeigth-startHeight-40/667.0*ScreenHeigth);
             [self.view bringSubviewToFront:_indexPositionV];
 
         }];
     }else{
         self.isSecondJump = NO;//持仓页显示
 
-        _indexPositionV.frame = CGRectMake(0, ScreenHeigth-40, ScreenWidth, 1);
+        _indexPositionV.frame = CGRectMake(0, ScreenHeigth-40/667.0*ScreenHeigth, ScreenWidth, 1);
         _indexPositionV.hidden = YES;
 
     }
@@ -1640,7 +1641,7 @@
         
     };
     _switchView.switchCenterBlock = ^(void){//点击资金模块
-        [selfView centerClick];
+//        [selfView centerClick];
     };
     [_topSubView addSubview:_switchView];
     
@@ -1764,17 +1765,11 @@
         proLabel.textAlignment = NSTextAlignmentCenter;
         [_incomeView addSubview:proLabel];
         
-        _incomeMoneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, proLabel.frame.origin.y + proLabel.frame.size.height, proLabel.frame.size.width - 10, _incomeView.frame.size.height - proLabel.frame.origin.y - proLabel.frame.size.height - 10 )];
+        _incomeMoneyLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, proLabel.frame.origin.y + proLabel.frame.size.height, proLabel.frame.size.width - 10, _incomeView.frame.size.height - proLabel.frame.origin.y - proLabel.frame.size.height )];
         _incomeMoneyLabel.textAlignment = NSTextAlignmentCenter;
         _incomeMoneyLabel.textColor = [UIColor whiteColor];
         _incomeMoneyLabel.text = @"+0.00";
         [_incomeView addSubview:_incomeMoneyLabel];
-        
-        UILabel *lookDetailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _incomeMoneyLabel.frame.origin.y + _incomeMoneyLabel.frame.size.height, _incomeMoneyLabel.frame.size.width, 10)];
-        lookDetailLabel.text = @"点击查看详情";
-        lookDetailLabel.textColor = [UIColor blackColor];
-        lookDetailLabel.textAlignment = NSTextAlignmentCenter;
-        [_incomeView addSubview:lookDetailLabel];
         
         /**
          *  闪电平仓
@@ -1788,22 +1783,17 @@
         
         if (ScreenHeigth <= 480) {
             _incomeMoneyLabel.font = [UIFont boldSystemFontOfSize:18];
-            lookDetailLabel.font = [UIFont boldSystemFontOfSize:8];
             proLabel.font = [UIFont systemFontOfSize:8];
         }
         else if (ScreenHeigth > 480 && ScreenHeigth <= 667){
             _incomeMoneyLabel.font = [UIFont boldSystemFontOfSize:26];
-            lookDetailLabel.font = [UIFont boldSystemFontOfSize:9];
             proLabel.font = [UIFont systemFontOfSize:9];
         }
         else{
             _incomeMoneyLabel.font = [UIFont boldSystemFontOfSize:36];
-            lookDetailLabel.font = [UIFont boldSystemFontOfSize:10];
             proLabel.font = [UIFont systemFontOfSize:10];
         }
-        
-        UITapGestureRecognizer  *centerTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goPosition)];
-        [_incomeView addGestureRecognizer:centerTap];
+
     }
     
     if (_userProfit != nil) {//刷新收益

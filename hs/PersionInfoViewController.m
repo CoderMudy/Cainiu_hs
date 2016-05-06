@@ -25,6 +25,7 @@
 #import "NJImageCropperViewController.h"
 #import "UIImageView+WebCache.h"
 #import "AccountViewController.h"
+#import "AccountH5Page.h"
 
 //结束加载
 #define IsEndLoading \
@@ -111,7 +112,11 @@ if (_loadStatusNum==3) {\
         }else if ([_privateUserInfo.statusRealName floatValue] == 1 && [_privateUserInfo.statusBankCardBind floatValue] == 1 ){
             _safeState = 3;
         }
-        [_tableView reloadData];
+        //验证实名认证
+        [self authRealName];
+        //验证银行卡
+        [self authBankCard];
+        
     }
     
 }
@@ -365,6 +370,10 @@ if (_loadStatusNum==3) {\
                 [UIEngine showShadowPrompt:status];
             }
         }
+        if (_tableView != nil) {
+            [_tableView reloadData];
+        }
+        
         IsEndLoading
     }];
 }
@@ -407,6 +416,11 @@ if (_loadStatusNum==3) {\
                 [UIEngine showShadowPrompt:status];
             }
         }
+        
+        if (_tableView != nil) {
+            [_tableView reloadData];
+        }
+        
         IsEndLoading
     }];
 }
@@ -886,49 +900,22 @@ if (_loadStatusNum==3) {\
     }
     
     if ([cell.titleLabel.text isEqualToString:@"实名认证"]) {
-        RealNameViewController *realVC=[[RealNameViewController alloc]init];
-        //                realVC.isRenZheng = YES;
-        if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-            realVC.isAuth=NO;
-        }
-        else
-        {
-            realVC.isAuth=YES;
-        }
-        realVC.privateUserInfo=_privateUserInfo;
-        realVC.block=^(PrivateUserInfo *privateUserInfo)
-        {
-            _privateUserInfo=privateUserInfo;
-            [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-            NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-            NSArray *array=@[indexPath,indexPath3];
-            [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-        };
-        [self.navigationController pushViewController:realVC animated:YES];
+        
+        AccountH5Page *h5Page = [[AccountH5Page alloc]init];
+        h5Page.isNeedNav = YES;
+        h5Page.url = [NSString stringWithFormat:@"http://%@/account/realName.html",HTTP_IP];
+        
+        [self.navigationController pushViewController:h5Page animated:YES];
     }
     
     if ([cell.titleLabel.text isEqualToString:@"银行卡"]) {
         if (![_privateUserInfo.statusRealName isEqualToString:@"0"]) {
             BackButtonHeader
-            BankCardViewController *bankVC=[[BankCardViewController alloc]init];
-            if (![_privateUserInfo.statusBankCardBind isEqualToString:@"1"]) {
-                bankVC.isBinding=NO;
-            }
-            else
-            {
-                bankVC.isBinding=YES;
-            }
-            bankVC.privateUserInfo=_privateUserInfo;
-            bankVC.block=^(PrivateUserInfo *privateUserInfo)
-            {
-                [_detailArray replaceObjectAtIndex:6 withObject:@"已填写"];
-                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:6 inSection:0];
-                NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                NSArray *array=@[indexPath,indexPath3];
-                [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-            };
-            [self.navigationController pushViewController:bankVC animated:YES];
+            AccountH5Page *h5Page = [[AccountH5Page alloc]init];
+            h5Page.isNeedNav = YES;
+            h5Page.url = [NSString stringWithFormat:@"http://%@/account/bindBank.html",HTTP_IP];
+            
+            [self.navigationController pushViewController:h5Page animated:YES];
         }
         else
         {
@@ -937,25 +924,11 @@ if (_loadStatusNum==3) {\
             {
                 if (aIndex==10087) {
                     BackButtonHeader
-                    RealNameViewController *realVC=[[RealNameViewController alloc]init];
-                    if (![_privateUserInfo.statusRealName isEqualToString:@"1"]) {
-                        realVC.isAuth=NO;
-                    }
-                    else
-                    {
-                        realVC.isAuth=YES;
-                    }
-                    realVC.privateUserInfo=_privateUserInfo;
-                    realVC.block=^(PrivateUserInfo *privateUserInfo)
-                    {
-                        _privateUserInfo=privateUserInfo;
-                        [_detailArray replaceObjectAtIndex:5 withObject:@"已填写"];
-                        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:5 inSection:0];
-                        NSIndexPath *indexPath3=[NSIndexPath indexPathForRow:3 inSection:0];
-                        NSArray *array=@[indexPath,indexPath3];
-                        [self.tableView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationFade];
-                    };
-                    [self.navigationController pushViewController:realVC animated:YES];
+                    AccountH5Page *h5Page = [[AccountH5Page alloc]init];
+                    h5Page.isNeedNav = YES;
+                    h5Page.url = [NSString stringWithFormat:@"http://%@/account/realName.html",HTTP_IP];
+                    
+                    [self.navigationController pushViewController:h5Page animated:YES];
                 }
             };
         }
