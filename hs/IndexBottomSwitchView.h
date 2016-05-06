@@ -23,4 +23,6 @@ typedef void(^PositionBlock)(BOOL);
 
 -(void)reSetSelected;
 
+-(void)isHavePostion:(BOOL)isHavePosition;
+
 @end

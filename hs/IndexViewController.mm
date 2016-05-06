@@ -1280,6 +1280,8 @@
     [self loadDefaultData];
     
     [self loadSubUI];
+    
+    
 }
 
 -(void)loadLoginUI{
@@ -1527,6 +1529,10 @@
                
             }
         }
+    }
+    
+    if (_indexBottomSwitchView != nil) {
+        [_indexBottomSwitchView isHavePostion:indexIsPosition];
     }
     
     [self saleUp];

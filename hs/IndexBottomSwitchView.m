@@ -9,7 +9,9 @@
 #import "IndexBottomSwitchView.h"
 
 @implementation IndexBottomSwitchView
-
+{
+    UIView  *_redPointView;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -67,6 +69,13 @@
     [self.positionButton addTarget:self action:@selector(positionClick:) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:self.positionButton];
     
+    _redPointView = [[UIView alloc]initWithFrame:CGRectMake(self.positionButton.frame.size.width/4*3, self.positionButton.frame.size.height/5, 5, 5)];
+    _redPointView.backgroundColor = [UIColor redColor];
+    _redPointView.clipsToBounds = YES;
+    _redPointView.layer.cornerRadius = 5/2.0;
+    [self.positionButton addSubview:_redPointView];
+    _redPointView.hidden = YES;
+    
     [self.financeNewsButton addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionNew context:nil];
     [self.positionButton addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionNew context:nil];
     
@@ -113,6 +122,10 @@
     
     self.financeNewsButton.selected = NO;
     self.financeNewsButton.backgroundColor = [UIColor clearColor];
+}
+
+-(void)isHavePostion:(BOOL)isHavePosition{
+    _redPointView.hidden = !isHavePosition;
 }
 
 @end
