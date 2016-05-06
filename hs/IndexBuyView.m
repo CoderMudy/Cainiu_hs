@@ -167,7 +167,7 @@
     
     //切换到k线图
     UITableView *blueView       = [[UITableView alloc] init];
-    blueView.frame              = CGRectMake(0, 0, _popoverWidth, 120/667.0*ScreenHeigth);
+    blueView.frame              = CGRectMake(0, 0, _popoverWidth, 180/667.0*ScreenHeigth);
     blueView.dataSource         = self;
     blueView.delegate           = self;
     blueView.backgroundColor    = Color_Gold;
@@ -438,7 +438,7 @@
         for (int i = 666; i<670; i++) {
             UIButton    *btnChange = (UIButton *)[self viewWithTag:i];
             [btnChange setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
+            btnChange.selected = NO;
             /**
              *  按钮背景方框
              */
@@ -1388,7 +1388,7 @@
 #pragma mark K线图下拉列表选择
 - (void)resetPopover {
     self.popover = [DXPopover new];
-    _popoverWidth = 70;
+    _popoverWidth = 100;
 }
 
 - (void)showPopover {
@@ -1397,9 +1397,9 @@
     UIButton   *btn = (UIButton *)[self viewWithTag:668];
     
     CGPoint startPoint =
-    CGPointMake(CGRectGetMidX(btn.frame), CGRectGetMaxY(btn.frame) + 5);
+    CGPointMake(CGRectGetMidX(btn.frame), CGRectGetMinY(btn.frame) - 5);
     [self.popover showAtPoint:startPoint
-               popoverPostion:DXPopoverPositionDown
+               popoverPostion:DXPopoverPositionUp
               withContentView:self.tableView
                        inView:self];
     
