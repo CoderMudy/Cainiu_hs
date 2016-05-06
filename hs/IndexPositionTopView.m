@@ -41,6 +41,16 @@
 - (void)initPositionViewState:(NSString *)commodityName
 {
     
+    float  spPercent = 5;
+    if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
+        spPercent = 4.5;
+    }
+    else if (ScreenHeigth <= 480){
+        spPercent = 4.0;
+    }
+    float startHeight = ScreenHeigth/spPercent ;
+    float unPosiHeight = ScreenHeigth-startHeight-40;
+
 
     _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, newHeight-1, ScreenWidth, 1)];
     _lineView.backgroundColor  = K_color_line;
@@ -48,7 +58,7 @@
     [self addSubview:_lineView];
 
     _goBuyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _goBuyBtn.frame = CGRectMake(0, newHeight, ScreenWidth, ScreenHeigth-64-newHeight);
+    _goBuyBtn.frame = CGRectMake(0, newHeight, ScreenWidth,unPosiHeight-newHeight);
     [_goBuyBtn addTarget:self action:@selector(buyIndex) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_goBuyBtn];
     

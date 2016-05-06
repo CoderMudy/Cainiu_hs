@@ -125,9 +125,18 @@
 }
 - (void)initTableView
 {
+    float  spPercent = 5;
+    if (ScreenHeigth <= 568 && ScreenHeigth > 480) {
+        spPercent = 4.5;
+    }
+    else if (ScreenHeigth <= 480){
+        spPercent = 4.0;
+    }
+    float startHeight = ScreenHeigth/spPercent ;
     
+    float tabHeight = ScreenHeigth- startHeight-40;
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeigth-64)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,tabHeight)];
     _tableView.backgroundColor = k_color_whiteBack;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -633,7 +642,7 @@
     if (_positionListArray.count>0) {
         UILabel * marketLab = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, ScreenWidth-40, 40)];
         marketLab.text = _marketStatus;
-        marketLab.textColor = K_color_gray;
+        marketLab.textColor = K_color_red;
         marketLab.font = [UIFont systemFontOfSize:12];
         marketLab.textAlignment = NSTextAlignmentCenter;
         [footView addSubview:marketLab];

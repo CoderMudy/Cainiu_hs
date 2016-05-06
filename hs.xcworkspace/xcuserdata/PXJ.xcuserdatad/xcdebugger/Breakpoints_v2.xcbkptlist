@@ -186,7 +186,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "484134822.583183"
+                  timestampString = "484191104.259731"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "487"
@@ -201,7 +201,7 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "484134822.583499"
+                  timestampString = "484191104.260241"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "487"
@@ -272,6 +272,70 @@
             startingLineNumber = "499"
             endingLineNumber = "499"
             landmarkName = "-showOrderAlertWithTitle:DataArray:isMoney:DefaultSelect:Unit:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/IndexPositionView.m"
+            timestampString = "484191818.502428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "623"
+            endingLineNumber = "623"
+            landmarkName = "-loadSelfView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/IndexPositionView.m"
+            timestampString = "484191818.502428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
+            landmarkName = "-requestListData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/IndexPositionView.m"
+            timestampString = "484191818.502428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
+            landmarkName = "-requestListData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/IndexPositionView.m"
+            timestampString = "484191818.502428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
+            landmarkName = "-requestListData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
