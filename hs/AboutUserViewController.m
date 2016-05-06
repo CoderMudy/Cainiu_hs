@@ -56,6 +56,7 @@
 
 - (void)initWithTableView
 {
+    
 #if defined (YQB)
     _aboutArray = [@[
 
@@ -88,14 +89,8 @@
                      ]mutableCopy];
 #endif
 
-    
-    
-//    _scrollView = [[UIScrollView alloc]init];
-//    _scrollView.frame = CGRectMake(0, 64, ScreenWidth, ScreenHeigth - 64 - 19*ScreenWidth/320 - 20);
-//    [self.view addSubview:_scrollView];
-    
     _aboutTableView = [[UITableView alloc]init];
-    _aboutTableView.frame = CGRectMake(0, 64, ScreenWidth,ScreenHeigth - 64 - 19*ScreenWidth/320 - 20);//50*6 + [self drawHeadView].frame.size.height
+    _aboutTableView.frame = CGRectMake(0, 64, ScreenWidth,ScreenHeigth-64);
     _aboutTableView.delegate = self;
     _aboutTableView.dataSource = self;
     _aboutTableView.backgroundColor =[UIColor whiteColor];

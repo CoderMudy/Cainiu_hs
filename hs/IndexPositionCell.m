@@ -93,7 +93,7 @@
     [self addSubview:_priceLab];
  
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(20, cellHeight-1, ScreenWidth-40, 0.6)];
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight-1, ScreenWidth, 0.6)];
     lineView.backgroundColor = K_color_line;
     [self addSubview:lineView];
     

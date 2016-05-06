@@ -839,8 +839,6 @@
 - (void)popFinanceNewsView:(BOOL)isPop
 {
     if (isPop) {
-        //关闭实时策略
-        [self closeTactics];
         _indexFinanceNewsV.hidden = NO;
         [_indexFinanceNewsV.webView reload];
         [UIView animateWithDuration:0.2 animations:^{
@@ -865,17 +863,15 @@
 }
 - (void)popPositionView:(BOOL)isPop
 {
+    self.isSecondJump = isPop;
+    [self requestPositionData];
+
     if (isPop) {
         if (![[CMStoreManager sharedInstance] isLogin])
         {
             [self login];
             return;
         }
-        self.isSecondJump = YES;//持仓页显示
-
-        [self requestPositionData];
-        //关闭实时策略
-        [self closeTactics];
         _indexPositionV.hidden = NO;
 
         [UIView animateWithDuration:0.2 animations:^{
@@ -894,8 +890,6 @@
 
         }];
     }else{
-        self.isSecondJump = NO;//持仓页显示
-
         _indexPositionV.frame = CGRectMake(0, ScreenHeigth-40/667.0*ScreenHeigth, ScreenWidth, 1);
         _indexPositionV.hidden = YES;
 

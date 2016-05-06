@@ -114,7 +114,7 @@
 
 //重写当前价方法
 -(void)loadCurrentPriceLabel{
-    UILabel *titleNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 65*ScreenHeigth/568, ScreenWidth, 20)];
+    UILabel *titleNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 75*ScreenHeigth/568, ScreenWidth, 20)];
     titleNameLabel.text = @"VIP快速通道设置";
     titleNameLabel.font = [UIFont systemFontOfSize:17*ScreenWidth/375];
     titleNameLabel.numberOfLines = 0;
@@ -127,11 +127,14 @@
 
 -(void)explain{
     
+    CGFloat explainHeight = ScreenHeigth-80.0/667*ScreenHeigth-5.0/568.0*ScreenHeigth - 50.0/568*ScreenHeigth;
     UILabel  *explainLabel = [[UILabel alloc]init];
-    explainLabel.frame = CGRectMake(20, self.otherMoneyFrontHeight + (130.0/568*ScreenHeigth) + 40.0/568*ScreenHeigth, ScreenWidth, 60);
-    explainLabel.text  = @"说明 \n1.一旦开启，点击即买 \n2.关闭以后才可重新设置，开启生效";
+    explainLabel.frame = CGRectMake(20,explainHeight, ScreenWidth-40, 30);
+    explainLabel.text  = @"一旦开启，点击即买。关闭以后才可重新设置，开启生效";
+    explainLabel.adjustsFontSizeToFitWidth = YES;
     explainLabel.font = [UIFont systemFontOfSize:11];
     explainLabel.textColor = SALERECORE_TEXTCOLOR_GRAY;
+    explainLabel.textAlignment = NSTextAlignmentCenter;
     explainLabel.backgroundColor = [UIColor clearColor];
     explainLabel.numberOfLines = 0;
     [self.view addSubview:explainLabel];

@@ -134,9 +134,9 @@
     }
     float startHeight = ScreenHeigth/spPercent ;
     
-    float tabHeight = ScreenHeigth- startHeight-40;
+    float tabHeight = ScreenHeigth- startHeight-40-20;
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,tabHeight)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth,tabHeight)];
     _tableView.backgroundColor = k_color_whiteBack;
     _tableView.delegate = self;
     _tableView.dataSource = self;

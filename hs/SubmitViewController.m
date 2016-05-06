@@ -41,6 +41,7 @@
     // Do any additional setup after loading the view.
     [self setNaviTitle:@"账户提现"];
     self.navigationController.navigationBarHidden = YES;
+    self.rdv_tabBarController.tabBarHidden  =YES;
     [self setNavibarBackGroundColor:K_color_NavColor];
     [self setBackButton];
     [self setRightBtnWithTitle:@"提现列表"];
