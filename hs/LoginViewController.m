@@ -360,8 +360,8 @@
 
     //给视图添加一个背景图片
     backImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeigth)];
-    backImg.image = [UIImage imageNamed:@"log_backGroud"];
     backImg.userInteractionEnabled = YES;
+    backImg.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:backImg];
     
     
@@ -444,8 +444,11 @@
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelBtn.tag = 10004;
     cancelBtn.frame = CGRectMake(0 ,10, 50, 44);
-    [cancelBtn setImage:[UIImage imageNamed:@"return_1"] forState:UIControlStateNormal];
+//    [cancelBtn setImage:[UIImage imageNamed:@"return_1"] forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn setTitle:@"关闭" forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [backImg addSubview:cancelBtn];
 
     //返回按钮
@@ -457,7 +460,7 @@
     }
     
     iconImg = [[UIImageView alloc]init];
-    iconImg.image = [UIImage imageNamed:@"regist_log"];
+    iconImg.image = [UIImage imageNamed:@"log_password"];
     iconImg.frame = CGRectMake(ScreenWidth/2 - 105/2, 85*ScreenHeigth/667, 105, 105);
     [backImg addSubview:iconImg];
     
@@ -469,7 +472,7 @@
     phoneTextFiled = [[UITextField alloc]init];
     phoneTextFiled.keyboardType = UIKeyboardTypeNumberPad;
     phoneTextFiled.delegate = self;
-    phoneTextFiled.textColor = [UIColor whiteColor];
+    phoneTextFiled.textColor = [UIColor blackColor];
     phoneTextFiled.frame = CGRectMake(CGRectGetMaxX(phoneImg.frame) + 15, CGRectGetMinY(phoneImg.frame), ScreenWidth - CGRectGetMaxX(phoneImg.frame) - 70, 35);
     [phoneTextFiled addTarget:self action:@selector(textFieldValueChange) forControlEvents:UIControlEventValueChanged];
     [phoneTextFiled addTarget:self action:@selector(textFieldShouldBegin) forControlEvents:UIControlEventEditingDidBegin];
@@ -508,7 +511,7 @@
     passWordText = [[UITextField alloc]init];
     passWordText.delegate = self;
     passWordText.secureTextEntry = YES;
-    passWordText.textColor = [UIColor whiteColor];
+    passWordText.textColor = [UIColor blackColor];
     passWordText.frame = CGRectMake(CGRectGetMaxX(passWordImg.frame) + 15, CGRectGetMinY(passWordImg.frame), ScreenWidth - CGRectGetMaxX(phoneImg.frame) - 70, 30);
     [passWordText addTarget:self action:@selector(textFieldValueChange) forControlEvents:UIControlEventValueChanged];
     [passWordText addTarget:self action:@selector(textFieldPWordShouldBegin) forControlEvents:UIControlEventEditingDidBegin];
@@ -541,7 +544,9 @@
     
     loginImageV = [[UIImageView alloc] init];
     loginImageV.userInteractionEnabled =YES;
-    loginImageV.image = [UIImage imageNamed:@"log_btn"];
+    loginImageV.backgroundColor = Color_Gold;
+    loginImageV.clipsToBounds = YES;
+    loginImageV.layer.cornerRadius = 5;
     loginImageV.frame =CGRectMake(15, CGRectGetMaxY(passWordLineView.frame) + 33, ScreenWidth - 15*2, 40*ScreenWidth/320);
     [backImg addSubview:loginImageV];
     
@@ -549,6 +554,7 @@
     loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     loginBtn.tag = 10001;
     loginBtn.frame = CGRectMake(15, CGRectGetMaxY(passWordLineView.frame) + 33, ScreenWidth - 15*2, 44*ScreenWidth/320);
+    [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
     [loginBtn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [backImg addSubview:loginBtn];
     
@@ -560,6 +566,7 @@
     registBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     registBtn.frame = CGRectMake(5, ScreenHeigth - 40 - 10, 80, 44);
     [registBtn setTitle:@"注册账户" forState:UIControlStateNormal];
+    [registBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [registBtn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [backImg addSubview:registBtn];
     
@@ -570,6 +577,7 @@
     forgetPwordBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     forgetPwordBtn.frame = CGRectMake(ScreenWidth - 80 - 5, ScreenHeigth - 40 - 10, 80, 44);
     [forgetPwordBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
+    [forgetPwordBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [forgetPwordBtn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     [backImg addSubview:forgetPwordBtn];
     
@@ -586,7 +594,7 @@
         else{
             phoneLabel.text =  [NSString stringWithFormat:@"%@****%@",[[[CMStoreManager sharedInstance] getUserName] substringToIndex:3],[[[CMStoreManager sharedInstance] getUserName] substringFromIndex:[[CMStoreManager sharedInstance] getUserName].length-4]];
         }
-        phoneLabel.textColor=[UIColor whiteColor];
+        phoneLabel.textColor=[UIColor blackColor];
         phoneLabel.tag = 101;
         [backImg addSubview:phoneLabel];
         
@@ -844,7 +852,7 @@
                     //去掉动画效果
 //                    [self transitionWithType:@"suckEffect" WithSubtype:kCATransitionFromTop ForView:self.view];
                     
-                    iconImg.image = [UIImage imageNamed:@"regist_log"];
+                    iconImg.image = [UIImage imageNamed:@"log_password"];
                     //把手机号码相关的视图都隐藏掉
                     phoneImg.hidden = NO;
                     phoneLab.hidden = NO;
