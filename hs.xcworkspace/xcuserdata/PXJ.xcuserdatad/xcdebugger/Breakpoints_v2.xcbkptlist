@@ -97,6 +97,38 @@
             endingLineNumber = "525"
             landmarkName = "+requestFuturesRevokeOrderFundType:conditionId:successBlock:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[RequestDataModel requestFuturesRevokeOrderFundType:conditionId:successBlock:]"
+                  moduleName = "hs cainiu apphomes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PXJ/Cainiu_hs/hs/RequestDataModel.m"
+                  timestampString = "484466855.993855"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "525"
+                  endingLineNumber = "525"
+                  offsetFromSymbolStart = "378">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__79+[RequestDataModel requestFuturesRevokeOrderFundType:conditionId:successBlock:]_block_invoke"
+                  moduleName = "hs cainiu apphomes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PXJ/Cainiu_hs/hs/RequestDataModel.m"
+                  timestampString = "484466855.994357"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "527"
+                  endingLineNumber = "527"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,12 +186,12 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "484210829.682045"
+                  timestampString = "484466855.998394"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "487"
                   endingLineNumber = "487"
-                  offsetFromSymbolStart = "618">
+                  offsetFromSymbolStart = "504">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -169,12 +201,12 @@
                   moduleName = "hs cainiu apphomes"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/PXJ/Cainiu_hs/hs/IndexRecordView.m"
-                  timestampString = "484210829.68257"
+                  timestampString = "484466855.999098"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "487"
-                  endingLineNumber = "487"
-                  offsetFromSymbolStart = "32">
+                  startingLineNumber = "488"
+                  endingLineNumber = "488"
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -202,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hs/IndexOrderController.m"
-            timestampString = "484127645.194716"
+            timestampString = "484466165.904196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2225"
-            endingLineNumber = "2225"
+            startingLineNumber = "2226"
+            endingLineNumber = "2226"
             landmarkName = "-chooseNum:"
             landmarkType = "5">
          </BreakpointContent>
@@ -225,6 +257,70 @@
             endingLineNumber = "60"
             landmarkName = "-initWithTableView"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/IndexOrderController.m"
+            timestampString = "484466855.694971"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "989"
+            endingLineNumber = "989"
+            landmarkName = "-integralDataConfigerWithThreeLabel:FourLabel:TwoLabelPrice:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hs/SetKeyViewController.m"
+            timestampString = "484467198.160724"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-registBtnClick:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SetKeyViewController registBtnClick:]"
+                  moduleName = "hs cainiu apphomes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PXJ/Cainiu_hs/hs/SetKeyViewController.m"
+                  timestampString = "484467198.193403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "1814">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__39-[SetKeyViewController registBtnClick:]_block_invoke"
+                  moduleName = "hs cainiu apphomes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PXJ/Cainiu_hs/hs/SetKeyViewController.m"
+                  timestampString = "484467198.19419"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

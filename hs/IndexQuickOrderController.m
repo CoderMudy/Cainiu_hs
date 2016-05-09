@@ -174,6 +174,7 @@
         viewColor = Color_Gold;
         self.couPonBtn.enabled = YES;
     }
+    self.zoreLabel.superview.backgroundColor = viewColor;
     self.oneLabel.superview.backgroundColor = viewColor;
     self.twoLabel.superview.backgroundColor = viewColor;
     UILabel * lab = (UILabel *)[self.tradeNumView viewWithTag:777+self.selectNum];

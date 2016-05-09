@@ -1636,7 +1636,7 @@
                     _couPonLab.tag = 1001010;
                     _couPonLab.frame = moneyLabel.frame;
                     _couPonLab.text = @"自动抵扣";
-                    _couPonLab.textColor = [UIColor redColor];
+                    _couPonLab.textColor = Color_Gold;
                     [_couPonView addSubview:_couPonLab];
                     
                     CGSize moneSize = [Helper sizeWithText:moneyLabel.text font:[UIFont  systemFontOfSize:15.0] maxSize:CGSizeMake(ScreenWidth - 60 - 40, label.frame.size.height)];
@@ -1654,7 +1654,7 @@
                 _couPonLab.tag = 1001010;
                 _couPonLab.frame = moneyLabel.frame;
                 _couPonLab.text = @"使用1张";
-                _couPonLab.textColor = [UIColor redColor];
+                _couPonLab.textColor = Color_Gold;
                 [_couPonView addSubview:_couPonLab];
 
                 CGSize moneSize = [Helper sizeWithText:moneyLabel.text font:[UIFont  systemFontOfSize:15.0] maxSize:CGSizeMake(ScreenWidth - 60 - 40, label.frame.size.height)];
@@ -1683,7 +1683,8 @@
         if (i==1) {
             _preferentialLabel = [[UILabel alloc]initWithFrame:CGRectMake(112, label.frame.origin.y, 40, 16)];
             _preferentialLabel.center = CGPointMake(_preferentialLabel.center.x, label.center.y);
-            _preferentialLabel.backgroundColor = CanSelectButBackColor;
+            _preferentialLabel.backgroundColor = Color_Gold;
+            ;
             _preferentialLabel.font = [UIFont systemFontOfSize:10];
             _preferentialLabel.textAlignment = NSTextAlignmentCenter;
             _preferentialLabel.layer.cornerRadius = 2;
