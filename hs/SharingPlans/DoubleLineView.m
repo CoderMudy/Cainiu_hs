@@ -14,11 +14,6 @@
 //线显示的部分占屏幕的百分比，超过后开始推线
 #define LineWidthPercent 0.75
 
-//金色
-#define Color_Gold [UIColor colorWithRed:234/255.0 green:194/255.0 blue:129/255.0 alpha:1]
-
-//黑色
-#define Color_black [UIColor colorWithRed:3/255.0 green:0/255.0 blue:20/255.0 alpha:1]
 
 @implementation DoubleLineView
 {
@@ -44,13 +39,13 @@
         _imageUpperView = [[UIImageView alloc]initWithFrame:CGRectMake(-10, 0, 5, 5)];
         _imageUpperView.layer.cornerRadius = 5/2.0;
         _imageUpperView.clipsToBounds = YES;
-        _imageUpperView.backgroundColor = [UIColor blackColor];
+        _imageUpperView.backgroundColor = Color_Gold;
         [self addSubview:_imageUpperView];
         
         _imageLowerView = [[UIImageView alloc]initWithFrame:CGRectMake(-10, 0, 5, 5)];
         _imageLowerView.layer.cornerRadius = 5/2.0;
         _imageLowerView.clipsToBounds = YES;
-        _imageLowerView.backgroundColor = [UIColor blackColor];
+        _imageLowerView.backgroundColor = Color_Gold;
         [self addSubview:_imageLowerView];
         
         if(aUpperArray == nil){

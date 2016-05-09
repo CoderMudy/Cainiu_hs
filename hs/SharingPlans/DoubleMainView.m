@@ -131,7 +131,7 @@
     rightLabel.font = [UIFont systemFontOfSize:12];
     rightLabel.tag = aTag;
     rightLabel.textAlignment = NSTextAlignmentCenter;
-    rightLabel.textColor = [UIColor whiteColor];
+    rightLabel.textColor = [UIColor blackColor];
     [self addSubview:rightLabel];
 }
 

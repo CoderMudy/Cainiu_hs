@@ -1572,19 +1572,23 @@
     
     UIButton    *loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     loginButton.frame = CGRectMake(ScreenWidth/2 - 5 - ScreenWidth/3.5, _topSubView.frame.size.height - 28.0/667*ScreenHeigth - 10, ScreenWidth/3.5 , 28.0/667*ScreenHeigth);
-    loginButton.backgroundColor = Color_loginYellow;
+    loginButton.backgroundColor = [UIColor whiteColor];
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
     loginButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    [loginButton setTitleColor:Color_Gold forState:UIControlStateNormal];
     loginButton.clipsToBounds = YES;
     loginButton.layer.cornerRadius = 3;
+    loginButton.layer.borderWidth = 1;
+    loginButton.layer.borderColor = Color_Gold.CGColor;
     loginButton.tag = 720;
     [loginButton addTarget:self action:@selector(goLogin) forControlEvents:UIControlEventTouchUpInside];
     [_topSubView addSubview:loginButton];
     
     UIButton    *registeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     registeButton.frame = CGRectMake(ScreenWidth/2 + 5, loginButton.frame.origin.y , ScreenWidth/3.5, 28.0/667*ScreenHeigth);
-    registeButton.backgroundColor = Color_registeRed;
+    registeButton.backgroundColor = Color_Gold;
     [registeButton setTitle:@"注册" forState:UIControlStateNormal];
+    [registeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     registeButton.titleLabel.font = [UIFont systemFontOfSize:13];
     registeButton.clipsToBounds = YES;
     registeButton.layer.cornerRadius = 3;
